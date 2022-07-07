@@ -6,7 +6,6 @@ import { UserRoutingModule } from './user-routing.module';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { CustomerAccountComponent } from './customer-account/customer-account.component';
 import { StockManagementComponent } from './stock-management/stock-management.component';
-import { InvoiceComponent } from './invoice/invoice.component';
 import { DeliveryComponent } from './delivery/delivery.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CompsModule } from './comps/comps.module';
@@ -17,7 +16,6 @@ import { DriverListComponent } from './driver-list/driver-list.component';
 import { ScheduleListComponent } from './schedule-list/schedule-list.component';
 import { SupplyInvoiceComponent } from './supply-invoice/supply-invoice.component';
 import { SupplyerListComponent } from './supplyer-list/supplyer-list.component';
-import { EditInvoiceComponent } from './edit-invoice/edit-invoice.component';
 import { MakeInvoiceComponent } from './make-invoice/make-invoice.component';
 
 
@@ -29,7 +27,6 @@ import { MakeInvoiceComponent } from './make-invoice/make-invoice.component';
     CustomerListComponent,
     CustomerAccountComponent,
     StockManagementComponent,
-    InvoiceComponent,
     DeliveryComponent,
     ListInvoicesComponent,
     ScheduleDeliveryComponent,
@@ -37,7 +34,6 @@ import { MakeInvoiceComponent } from './make-invoice/make-invoice.component';
     ScheduleListComponent,
     SupplyInvoiceComponent,
     SupplyerListComponent,
-    EditInvoiceComponent,
     MakeInvoiceComponent
   ],
   imports: [
