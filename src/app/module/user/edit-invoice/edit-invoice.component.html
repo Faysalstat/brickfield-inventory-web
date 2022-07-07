@@ -1,0 +1,196 @@
+<div class="container mt-3">
+  <h2>This is Invoice page</h2>
+  <form [formGroup]="invoiceIssueForm">
+    <mat-card>
+      <h2>Customer Details:</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field class="input-field" appearance="fill">
+            <mat-label>Contact No:</mat-label>
+            <input  pInputText [ngModelOptions]="{standalone:true}" disabled="true"
+              [(ngModel)]="person.contactNo" placeholder="Customer Name" matInput>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="input-field" appearance="fill">
+            <mat-label>Customer Name :</mat-label>
+            <input [ngModelOptions]="{standalone:true}" [(ngModel)]="person.personName" placeholder="Customer Name"
+              matInput>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="input-field" appearance="fill">
+            <mat-label>Balance:</mat-label>
+            <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="account.balance" matInput>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="input-field" appearance="fill">
+            <mat-label>Due:</mat-label>
+            <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="account.due" matInput>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="input-field" appearance="fill">
+            <mat-label>Amount to Pay:</mat-label>
+            <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="account.amountToPay"
+              matInput>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="input-field" appearance="fill">
+            <mat-label>Address:</mat-label>
+            <textarea type="text" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="person.personAddress"
+              matInput></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card>
+    <mat-card class="mt-5">
+      <h2>Order Details:</h2>
+      <div class="row">
+        <div class="col-md-2">
+          <mat-form-field appearance="fill" class="input-field">
+            <mat-label>Select Brick Type</mat-label>
+            <mat-select [ngModelOptions]="{standalone:true}"  (selectionChange)="onChnageBrick()" [(ngModel)]="selectedBrick">
+              <mat-option *ngFor="let brick of bricks" [value]= "brick" >{{brick?.category}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="input-field" appearance="fill">
+            <mat-label>Price Rate:</mat-label>
+            <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedBrick.pricePerPiece" disabled="true" matInput>
+          </mat-form-field>
+        </div>
+        <div class="col-md-2">
+          <mat-form-field class="input-field" appearance="fill">
+            <mat-label>Quantity:</mat-label>
+            <input type="number" (change)="calculateTotalPrice()" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="orderItem.quantity" matInput>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="input-field" appearance="fill">
+            <mat-label>Total Price:</mat-label>
+            <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="orderItem.totalPrice"  matInput>
+          </mat-form-field>
+        </div>
+        <div class="col-md-2">
+          <button style="margin-top: 10px;"  (click)="addOrder()"  mat-raised-button color="primary">Add</button>
+        </div>
+      </div>
+      <mat-card>
+        <div class="row">
+          <div class="col-md-12" style="border:1px solid blacknn ;border-radius:2px ;">
+            <h2>Adjust Orders</h2>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>SN</th>
+                  <th>Brick Name</th>
+                  <th>Quantity</th>
+                  <th>Total Price</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let order of orders; index as i">
+                  <td>{{i+1}}</td>
+                  <td>{{order?.brick?.category}}</td>
+                  <td>{{order?.quantity}}</td>
+                  <td>{{order?.totalPrice}}</td>
+                  <td>
+                      <button mat-icon-button color="primary"  (click)="editOrder(i)">
+                        <mat-icon>open_in_new</mat-icon>
+                      </button>
+                      <button mat-icon-button color="warn" (click)="deleteOrder(i)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card class="mt-5">
+        <div class="row">
+          <div class="col-md-12" style="border:1px solid blacknn ;border-radius:2px ;">
+            <h2>Adjust Schedule</h2>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>SN</th>
+                  <th>Quantity</th>
+                  <th>Trip Needed</th>
+                  <th>Transport Cost</th>
+                  <th>Driver</th>
+                  <th>Schedule Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let delivery of schedules; index as i">
+                  <td>{{i+1}}</td>
+                  <td>{{delivery?.deliverableQuantity}}</td>
+                  <td>{{delivery?.tripNeeded}}</td>
+                  <td>{{delivery?.transportCost}}</td>
+                  <td>{{delivery?.driver?.person?.personName}}</td>
+                  <td>{{applyFilter(delivery?.scheduledDate)}}</td>
+                  <td>
+                      <button mat-icon-button color="primary"  (click)="editOrder(i)">
+                        <mat-icon>open_in_new</mat-icon>
+                      </button>
+                      <button mat-icon-button color="warn" (click)="deleteOrder(delivery)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card class="mt-5">
+        <div class="row">
+          <h2>Summary</h2>
+            <div class="col-md-3">
+              <mat-form-field class="input-field" appearance="fill">
+                <mat-label>Total Quantity:</mat-label>
+                <input type="number" pInputText formControlName="totalQuantity" matInput>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field class="input-field" appearance="fill">
+                <mat-label>Scheduled Quantity:</mat-label>
+                <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="orderItem.totalPrice" matInput>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field class="input-field" appearance="fill">
+                <mat-label>Total Price:</mat-label>
+                <input type="number" pInputText formControlName="totalPrice" matInput>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field class="input-field" appearance="fill">
+                <mat-label>Advance:</mat-label>
+                <input type="number" pInputText formControlName="advancePayment" matInput>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field class="input-field" appearance="fill">
+                <mat-label>Due:</mat-label>
+                <input type="number" pInputText formControlName="duePament" [disabled]="true" matInput>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <button  mat-raised-button color="primary" (click)="submitInvoice()">Submit</button>
+            </div>
+            
+          </div>
+      </mat-card>
+        
+    </mat-card>
+  </form>
+</div>

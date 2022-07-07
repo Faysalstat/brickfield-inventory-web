@@ -1,0 +1,11 @@
+.box {
+/* margin-top: 400px; */
+width: 50%;
+margin: 100px auto;
+}
+
+.login-form{
+    margin: 15px;
+    padding: 20px;
+    background-color: #eee;
+}

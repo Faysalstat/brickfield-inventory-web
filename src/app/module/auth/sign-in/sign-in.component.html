@@ -1,0 +1,23 @@
+<div class="container">
+   <div class="box">
+      <div class="mt-4 p-5 bg-light rounded" style="border:1px solid black">
+         <form [formGroup]="loginForm">
+            <div class="row">
+               <div class="mb-3 mt-3">
+                  <label for="username" class="form-label">User Name:</label>
+                  <input type="text" class="form-control" id="username" placeholder="Enter username" pInputText
+                     formControlName="username">
+               </div>
+               <div class="mb-3 mt-3">
+                  <label for="psw" class="form-label">Password:</label>
+                  <input type="password" id="psw" class="form-control" pInputText formControlName="password">
+               </div>
+               <div class="form-group">
+                  <button type="submit" (click)="signIn()" class="btn btn-primary "
+                     style="margin-top: 10px;">Login</button>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>

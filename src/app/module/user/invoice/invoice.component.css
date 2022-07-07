@@ -1,0 +1,26 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .input-field{
+    width: 100%;
+}
+.input-field input{
+    color: black;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    width: 100px;
+  }
+
+  ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: #fff;
+    color: #080707;
+  }
+  ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    border-radius: 4px;
+    padding: 0.75em 0.75em 0 0.75em;
+    /* border: 1px solid #080707; */
+  }

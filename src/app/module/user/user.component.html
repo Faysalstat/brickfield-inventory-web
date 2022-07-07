@@ -1,0 +1,73 @@
+<nav class="navbar .fixed-top navbar-expand-sm navbar-dark bg-primary">
+    <div class="container-fluid menu-body">
+      <a class="navbar-brand" href="javascript:void(0)">ABC Brickfield Ltd</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mynavbar">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="home" style="color:#FFF ;">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" style="color:#FFF ;">Invoice</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="invoice" >Make Invoice</a></li>
+              <li><a class="dropdown-item" routerLink="invoice-list" >Invoice List</a></li>
+              <li><a class="dropdown-item" routerLink="invoicelist" >Schedule Order</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" 
+            role="button" data-bs-toggle="dropdown" style="color:#FFF ;">Cash</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="cash-receive" >Cash Receive</a></li>
+              <li><a class="dropdown-item" routerLink="cash-payment" >Cash Payment</a></li>
+            </ul>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" routerLink="invoice" style="color:#FFF ;">Make Invoice</a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" routerLink="schedule-list" style="color:#FFF ;">Schedules</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" style="color:#FFF ;">Customer</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="customer">Customer</a></li>
+              <li><a class="dropdown-item" routerLink="account">Customer Account</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" style="color:#FFF ;">Supply</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="supply-invoice">Create Invoice</a></li>
+              <li><a class="dropdown-item" routerLink="supply-list">Supply History</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" style="color:#FFF ;">Person Management</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="customer">Customer</a></li>
+              <li><a class="dropdown-item" routerLink="account">Customer Account</a></li>
+              <li><a class="dropdown-item" routerLink="driver-management">Driver Management</a></li>
+              <li><a class="dropdown-item" routerLink="supplyer-management">Supplyer Management</a></li>
+            </ul>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" routerLink="driver-management" style="color:#FFF ;">Drivers</a>
+          </li> -->
+        </ul>
+        <!-- <form class="d-flex">
+          <input class="form-control me-2" type="text" placeholder="Search">
+          <button class="btn btn-primary" type="button">Search</button>
+        </form> -->
+      </div>
+    </div>
+  </nav>
+  
+<div class="content" role="main">
+
+    <router-outlet></router-outlet>
+  
+</div>

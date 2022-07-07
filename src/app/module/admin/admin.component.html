@@ -1,0 +1,27 @@
+<div class="container-fluid">
+
+    <div class="row" style="margin:10px ;">
+        <nav class="navbar">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Logo</a>
+            </div>
+        </nav>
+        <div class="col-md-3" style="min-height:700px ;background-color: #eee;">
+            <div class="menu-list">
+                <div class="list-group">
+                    <a href="admin" class="list-group-item list-group-item-action">Home</a>
+                    <a routerLink="approval-list" class="list-group-item list-group-item-action">Approval List</a>
+                    <a routerLink="pending-task" class="list-group-item list-group-item-action">Pending Delivery</a>
+                    <a routerLink="reports" class="list-group-item list-group-item-action">Report</a>
+                    <a routerLink="users" class="list-group-item list-group-item-action">Add User</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9" style="min-height:700px ;">
+            <mat-card>
+                <router-outlet></router-outlet>
+            </mat-card>
+        </div>
+
+    </div>
+</div>

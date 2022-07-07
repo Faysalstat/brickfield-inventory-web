@@ -1,0 +1,16 @@
+.menu-list{
+    margin: 50px auto;
+    width: 80%;
+    text-align: center;
+}
+.list-group-item{
+    font-size: 1.3em;
+    background-color: #039dfc;
+    /* font-weight: bold; */
+    color: #fff;
+    padding: 15px;
+
+}
+.navbar{
+    background-color:#03cefc ;
+}

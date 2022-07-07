@@ -1,0 +1,156 @@
+<mat-card>
+    <div class="row">
+        <div class="col-md-6">
+            <mat-card>
+                <h2>Customer Information</h2>
+                <hr>
+                <table class="table table-striped table-hover">
+                <tr>
+                    <td class="prop">Name:</td>
+                    <td class="obj-value">{{invoice?.customer?.person?.personName}}</td>
+                </tr>
+                <tr>
+                    <td class="prop">Contact No::</td>
+                    <td class="obj-value">{{invoice?.customer?.person?.contactNo}}</td>
+                </tr>
+                <tr>
+                    <td class="prop">Address:</td>
+                    <td class="obj-value">{{invoice?.customer?.person?.personAddress}}</td>
+                </tr>
+                </table>
+            </mat-card>
+           
+        </div>
+        <div class="col-md-6">
+            <mat-card>
+                <h2>Account Information</h2>
+                <hr>
+                <table class="table table-striped table-hover">
+                <tr>
+                    <td class="prop">Balance:</td>
+                    <td class="obj-value">{{invoice?.customer?.account?.balance}} BDT</td>
+                </tr>
+                <tr>
+                    <td class="prop">Due:</td>
+                    <td class="obj-value">{{invoice?.customer?.account?.due}} BDT</td>
+                </tr>
+                <tr>
+                    <td class="prop">Amount To Pay:</td>
+                    <td class="obj-value">{{invoice?.customer?.account?.amountToPay}} BDT</td>
+                </tr>
+                </table>
+            </mat-card>
+        </div>
+        <div class="col-md-6 mt-5">
+            <mat-card>
+                <h2>Invoice Information</h2>
+                <hr>
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <td class="prop">Invoice ID:</td>
+                        <td class="obj-value">{{invoice?.id}}</td>
+                    </tr>
+                    <tr>
+                        <td class="prop">Total Quantity</td>
+                        <td class="obj-value">{{invoice?.totalQuantity}}</td>
+                    </tr>
+                    <tr>
+                        <td class="prop">Total Price:</td>
+                        <td class="obj-value">{{invoice?.totalPrice}} BDT</td>
+                    </tr>
+                    <tr>
+                        <td class="prop">Advance Payment:</td>
+                        <td class="obj-value">{{invoice?.advancePayment}} BDT</td>
+                    </tr>
+                    <tr>
+                        <td class="prop">Payment Due:</td>
+                        <td class="obj-value">{{invoice?.duePament}} BDT</td>
+                    </tr>
+                    </table>
+            </mat-card>
+        </div>
+    </div>
+</mat-card>
+<mat-card>
+    <mat-card>
+        <div class="row">
+            <h2>Schedule Delivery</h2>
+            <div class="col-md-2">
+                <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Delivarable Quantity :</mat-label>
+                    <input type="number" pInputText [ngModelOptions]="{standalone:true}"
+                        [(ngModel)]="delivery.deliverableQuantity" placeholder="Delivarable Quantity" matInput>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Trip Needed :</mat-label>
+                    <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="delivery.tripNeeded"
+                        placeholder="Trip Needed" matInput>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Transport Cost</mat-label>
+                    <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="delivery.transportCost"
+                        placeholder="00" matInput>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field appearance="fill">
+                    <mat-label>Schedule Date</mat-label>
+                    <input matInput [matDatepicker]="picker" [ngModelOptions]="{standalone:true}"
+                    [(ngModel)]="delivery.scheduledDate" >
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-2">
+                <mat-form-field appearance="fill" class="input-field">
+                  <mat-label>Select Driver</mat-label>
+                  <mat-select [ngModelOptions]="{standalone:true}"  (selectionChange)="onChnageDriver()" [(ngModel)]="selectedDriver">
+                    <mat-option *ngFor="let driver of drivers" [value]= "driver" >{{driver?.person?.personName}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+            <div class="col-md-2">
+                <button mat-raised-button (click)="addSchedule()" color="accent">Add</button>
+            </div>
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>SN</th>
+                        <th>Quantity</th>
+                        <th>Trip Needed</th>
+                        <th>Transport Cost</th>
+                        <th>Driver</th>
+                        <th>Schedule Date</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let delivery of invoice?.scheduleOrders; index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{delivery?.deliverableQuantity}}</td>
+                        <td>{{delivery?.tripNeeded}}</td>
+                        <td>{{delivery?.transportCost}}</td>
+                        <td>{{delivery?.driver?.person?.personName}}</td>
+                        <td>{{applyFilter(delivery?.scheduledDate)}}</td>
+                        <td>
+                            <button mat-icon-button color="primary"  (click)="editOrder(i)">
+                              <mat-icon>open_in_new</mat-icon>
+                            </button>
+                            <button mat-icon-button color="warn" (click)="deleteOrder(delivery)">
+                              <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </mat-card>
+</mat-card>
+

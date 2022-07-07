@@ -1,0 +1,53 @@
+<div class="container">
+    <mat-card class="mt-5">
+        <h2>Pay Cash To {{personTitle}}</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Contact No:</mat-label>
+                    <input (change)="searchCustomer()" pInputText [ngModelOptions]="{standalone:true}"
+                        [(ngModel)]="person.contactNo" placeholder="Contact No" matInput>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Customer Name :</mat-label>
+                    <input [ngModelOptions]="{standalone:true}" [(ngModel)]="person.personName" [disabled]="true"
+                        placeholder="Customer Name" matInput>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Balance:</mat-label>
+                    <input type="number" pInputText [ngModelOptions]="{standalone:true}" [disabled]="true"
+                        [(ngModel)]="account.balance" matInput>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Address:</mat-label>
+                    <textarea pInputText [ngModelOptions]="{standalone:true}" [disabled]="true"
+                        [(ngModel)]="person.personAddress" matInput></textarea>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Receive Amount:</mat-label>
+                    <input type="number" (change)="onAmountAdded()" pInputText 
+                    [ngModelOptions]="{standalone:true}" 
+                        [(ngModel)]="cashReceivedAmount" matInput>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" (click)="receiveCash()" style="width:100%;margin-top:30px"  mat-raised-button color="warn">Receive</button>
+            </div>
+            <div class="col-md-4" *ngIf="updated">
+                <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>New Balance</mat-label>
+                    <input [ngModelOptions]="{standalone:true}" 
+                    [(ngModel)]="updatedBalance" [disabled]="true" matInput>
+                </mat-form-field>
+            </div>
+        </div>
+    </mat-card>
+</div>

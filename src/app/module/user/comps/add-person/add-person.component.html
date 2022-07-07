@@ -1,0 +1,33 @@
+<div class="mt-4 p-5 bg-light rounded">
+    <h1>Add Customer</h1>
+    <form [formGroup]="customerForm">
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field class="input-field" appearance="fill" >
+                    <mat-label>Contact No:</mat-label>
+                    <input   (change)="searchCustomer()" pInputText formControlName="contactNo" placeholder="Customer Name" matInput>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Customer Name :</mat-label>
+                    <input  formControlName="name" placeholder="Customer Name" matInput>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Advance:</mat-label>
+                    <input  id="contact"  pInputText formControlName="balance" matInput>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Address:</mat-label>
+                    <textarea type="text"  pInputText formControlName="address" matInput></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+        <button type="submit" (click)="submit()"  mat-raised-button color="primary">Submit</button>
+        <p style="color: red;font-size:medium;margin-top:10px;">{{message}}</p>
+    </form>
+</div>

@@ -1,0 +1,31 @@
+/* .menu-body{
+    width: 60%;
+    margin: auto;
+} */
+.navbar-band{
+    margin-right: 20px;
+    padding: 5px 20px
+}
+.nav-item{
+    padding: 5px 20px;
+    
+}
+.dropdown-item{
+    padding: 10px;
+}
+nav{
+    background-color: #6365A2;
+    font-size: large;
+}
+.dropdown-item{
+    font-size: large;
+}
+.content{
+    font-size: larger;
+}
+input{
+    font-size: 16px;
+}
+::ng-deep .mat-input-element{
+    font-size: 20px;
+}
