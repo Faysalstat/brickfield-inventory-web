@@ -8,6 +8,7 @@ import { ApprovalListComponent } from './approval-list/approval-list.component';
 import { PendingDeliveryComponent } from './pending-delivery/pending-delivery.component';
 import { ReportsComponent } from './reports/reports.component';
 import { UsersComponent } from './users/users.component';
+import { InvoiceDetailComponent } from './invoice-detail/invoice-detail.component';
 
 
 
@@ -18,7 +19,8 @@ import { UsersComponent } from './users/users.component';
     ApprovalListComponent,
     PendingDeliveryComponent,
     ReportsComponent,
-    UsersComponent
+    UsersComponent,
+    InvoiceDetailComponent
   ],
   imports: [
     CommonModule,

@@ -49,6 +49,9 @@ export class UserService {
   public fetchAllSupplyers(): Observable<any>{
     return this.http.get(Urls.FETCH_ALL_SUPPLYER);
   }
+  public fetchAllPendingInvoice(): Observable<any>{
+    return this.http.get(Urls.FETCH_ALL_PENDING_INVOICE);
+  }
   
   public fetchAllInvoice(): Observable<any>{
     return this.http.get(Urls.FETCH_ALL_INVOICE);
@@ -95,6 +98,10 @@ export class UserService {
 public deleteCustomer(queryParams: Map<string,any>): Observable<any>{
   console.log(queryParams.get("customer"))
   return this.http.post(Urls.DELETE_CUSTOMER,queryParams.get("customer"));
+}
+public deleteDriver(queryParams: Map<string,any>): Observable<any>{
+  console.log(queryParams.get("driver"))
+  return this.http.post(Urls.DELETE_CUSTOMER,queryParams.get("driver"));
 }
 public deleteOrder(queryParams: Map<string,any>): Observable<any>{
   console.log(queryParams.get("order"))

@@ -21,6 +21,7 @@ const routes: Routes = [{
         {path: '', component: HomeComponent},
         {path:'stock',component:StockManagementComponent},
         {path:'invoice',component:MakeInvoiceComponent},
+        {path:'edit-invoice/:id',component:MakeInvoiceComponent},
         {path:'delivery',component:DeliveryComponent},
         {path:'customer',component:CustomerListComponent},
         {path:'account',component:CustomerAccountComponent},

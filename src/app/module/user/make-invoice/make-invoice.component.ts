@@ -12,6 +12,7 @@ import { UserService } from '../user.service';
 export class MakeInvoiceComponent implements OnInit {
   
   invoiceIssueForm!: FormGroup;
+  invoiceId!:number;
   customer!: Customer;
   account!: Account;
   person!: Person;
@@ -26,11 +27,17 @@ export class MakeInvoiceComponent implements OnInit {
   selectedVehicle!:any;
   drivers!: Driver[];
   vehicles!: VehicleCategory[];
+  customerBalance!: number;
+  paidAmount!:number;
   // invoice!: Invoice;
   delivery!:ScheduleDeliveryModel;
   date!:Date;
   scheduleOrders!:ScheduleDeliveryModel[];
   isEdit:boolean = false;
+  isReceiving: boolean =false;
+  status!: string;
+  isNeg!:boolean;
+  isDue!:boolean;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -57,6 +64,7 @@ export class MakeInvoiceComponent implements OnInit {
       console.log(parameter);
       if(id){
         this.isEdit = true;
+        this.invoiceId = id;
         this.fetchInvoiceById(id);
       }else{
         this.isEdit = false;
@@ -87,9 +95,17 @@ export class MakeInvoiceComponent implements OnInit {
       orders: [formData.orders],
       scheduleOrders:[formData.scheduleOrders],
       scheduledQuantity:[formData.scheduledQuantity],
-      totalBill: [formData.totalBill]
+      totalBill: [formData.totalBill],
+      newPayment: [formData.newPayment],
 
     });
+    this.invoiceIssueForm.get('duePayment')?.valueChanges.subscribe((data) => {
+      if(data>0){
+        this.isDue = true;
+      }else{
+        this.isDue = false;
+      }
+    })
 
     this.invoiceIssueForm.get('advancePayment')?.valueChanges.subscribe((data) => {
         this.invoiceIssueForm
@@ -111,6 +127,11 @@ export class MakeInvoiceComponent implements OnInit {
           this.invoiceIssueForm.get('transportCost')?.value + data
           );
       });
+      this.invoiceIssueForm.get('newPayment')?.valueChanges.subscribe((data) => {
+        this.invoiceIssueForm
+          .get('advancePayment')
+          ?.setValue(this.paidAmount + data);
+      });
     
   }
   searchCustomer() {
@@ -119,6 +140,13 @@ export class MakeInvoiceComponent implements OnInit {
         if (res.body) {
           this.person = res.body;
           this.account = res.body.customer.account;
+          if(this.account.balance>=0){
+            this.isNeg = false;
+            this.customerBalance = this.account.balance;
+          }else{
+            this.isNeg = true;
+            this.customerBalance = Math.abs(this.account.balance);
+          }
           this.customer = res.body.customer;
         } else {
           return;
@@ -257,8 +285,17 @@ export class MakeInvoiceComponent implements OnInit {
             this.invoiceIssueForm.get('id')?.setValue(res.body.id);
             this.person = res.body.customer.person;
             this.account = res.body.customer.account;
+            if(this.account.balance>=0){
+              this.isNeg = false;
+              this.customerBalance = this.account.balance;
+            }else{
+              this.isNeg = true;
+              this.customerBalance = Math.abs(this.account.balance);
+            }
             this.orders = res.body.orders;
             this.schedules = res.body.scheduleOrders;
+            this.paidAmount = res.body.advancePayment;
+            this.status = res.body.approvalStatus;
             this.invoiceIssueForm.get("totalQuantity")?.setValue(res.body.totalQuantity);
             this.invoiceIssueForm.get("totalPrice")?.setValue(res.body.totalPrice);
             this.invoiceIssueForm.get("advancePayment")?.setValue(res.body.advancePayment);
@@ -266,15 +303,16 @@ export class MakeInvoiceComponent implements OnInit {
             this.invoiceIssueForm.get("totalBill")?.setValue(res.body.totalBill);
             this.calculateScheduleTotal();
             this.calculateOrderTotal();
+
+
+            this.invoiceIssueForm.get("totalQuantity")?.disable();
+            this.invoiceIssueForm.get("totalPrice")?.disable();
+            this.invoiceIssueForm.get("advancePayment")?.disable();
+            this.invoiceIssueForm.get("duePayment")?.disable();
+            this.invoiceIssueForm.get("totalBill")?.disable();
           }
           
-          // this.invoice =res.body;
-          // if(!this.invoice.scheduleOrders){
-          //   this.invoice.scheduleOrders = [];
-          // }
-          // // this.customer = 
-          // console.log(res);
-          // this.fetchDrivers();
+
         }
 
       })
@@ -335,12 +373,7 @@ export class MakeInvoiceComponent implements OnInit {
     invoice.issuedBy = 'manager';
     params.set('invoice', invoice);
     console.log(invoice);
-    if(this.isEdit){
-      // this.updateInvoice(params);
-    }else{
-      this.createInvoice(params);
-    }
-    
+    this.createInvoice(params);
   }
 
   createInvoice(params:any){
@@ -360,9 +393,12 @@ export class MakeInvoiceComponent implements OnInit {
       totalPrice: this.invoiceIssueForm.get('totalPrice')?.value,
       totalBill: this.invoiceIssueForm.get('totalBill')?.value,
       totalQuantity: this.invoiceIssueForm.get('totalQuantity')?.value,
+      transportCost: this.invoiceIssueForm.get('transportCost')?.value,
       scheduledQuantity:this.invoiceIssueForm.get('scheduledQuantity')?.value,
       advancePayment: this.invoiceIssueForm.get('advancePayment')?.value,
       duePayment : this.invoiceIssueForm.get('duePayment')?.value,
+      newPayment: this.invoiceIssueForm.get("newPayment")?.value,
+      account: this.account,
     }
     params.set("invoice",invoiceUpdateModel);
     this.userService.updateInvoice(params).subscribe({
@@ -373,6 +409,9 @@ export class MakeInvoiceComponent implements OnInit {
       error: (err) => {},
       complete: () => {},
     });
+  }
+  showreceive(){
+    this.isReceiving = true;
   }
   
 }

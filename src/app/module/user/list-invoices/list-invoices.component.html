@@ -31,11 +31,11 @@
               <td>{{invoice.customer.account.due}}</td> -->
               <td>{{invoice.deliveryStatus}}</td>
               <td>
-                <button mat-button (click)="openInvoice(invoice)" color="warn" >
+                <!-- <button mat-button (click)="openInvoice(invoice)" color="warn" >
                   Add Schedule
-                </button>
+                </button> -->
                   <button mat-mini-fab (click)="editInvoice(invoice)" color="primary" >
-                   Edit
+                    <mat-icon>menu</mat-icon>
                   </button>
               </td>
             </tr>
