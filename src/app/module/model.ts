@@ -87,6 +87,7 @@ export class InvoiceDomain{
   customer!: Customer;
   deliveryStatus!: string;
   duePayment!: number;
+  transportCost!:number;
   issuedAt!: Date;
   issuedBy!: string;
   orders!: OrderModel[];
@@ -148,6 +149,7 @@ export class ScheduleDeliveryModel {
   transportCost!: number;
   vehicleCategory!:VehicleCategory;
   vehicleCategoryId!: number;
+  deliveryStatus!:string;
 }
 
 export class Invoice {

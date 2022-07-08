@@ -51,6 +51,7 @@ export class AddDriverComponent implements OnInit {
       next:(res)=>{
         console.log(res);
         this.driverAddedEvent.emit("Hello from parent");
+        this.driverForm.reset();
       },
       error:(err)=>{},
       complete: ()=>{}

@@ -1,7 +1,9 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Account, Customer, Person } from '../../model';
 import { UserService } from '../../user/user.service';
+import { AdminService } from '../admin.service';
 
 @Component({
   selector: 'app-invoice-detail',
@@ -10,6 +12,7 @@ import { UserService } from '../../user/user.service';
 })
 export class InvoiceDetailComponent implements OnInit {
   invoice!:any;
+
   person!: Person;
   account!: Account;
   customer!: Customer;
@@ -17,7 +20,10 @@ export class InvoiceDetailComponent implements OnInit {
   // orders!
   constructor(
     private activatedRoute: ActivatedRoute,
-    private userService: UserService) { }
+    private userService: UserService,
+    private adminService: AdminService,
+    private router:Router
+    ) { }
 
     ngOnInit(): void {
       this.fetchInvoiceById();
@@ -38,5 +44,25 @@ export class InvoiceDetailComponent implements OnInit {
         })
        })
     }
+    applyFilter(date:any) {
+      let newDate = new Date(date);
+      return newDate.getDate()+"/"+newDate.getMonth()+"/"+newDate.getFullYear()
+    }
+    approveInvoice(event:any){
+      console.log(event);
+      const params:Map<string,any> = new Map();
+      this.invoice.approvalStatus = event;
+      params.set("invoice",this.invoice);
+      this.adminService.approveInvoice(params).subscribe({
+        next:(data)=>{
+          console.log(data)
+          this.router.navigate(['/admin/approval-list']);
+        },
+        error:(err)=> console.log(err)
+      })
+      
+    }
+
+  
 
 }

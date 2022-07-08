@@ -34,5 +34,16 @@ export class DriverListComponent implements OnInit {
     console.log("Driver added. List updated");
     this.fetchDriversList();
   }
+  deleteDriver(driver: any) {
+    const params = new Map<string, any>();
+    params.set('customer', driver);
+    this.userService.deleteCustomer(params).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {},
+      complete: () => {},
+    });
+  }
 
 }

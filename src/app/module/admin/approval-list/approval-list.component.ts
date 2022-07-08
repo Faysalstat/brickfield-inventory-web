@@ -9,6 +9,7 @@ import { UserService } from '../../user/user.service';
 })
 export class ApprovalListComponent implements OnInit {
   invoiceList!:any;
+  invoice!:any;
   constructor(
     private route: Router,
     private userService:UserService) {
@@ -22,7 +23,7 @@ export class ApprovalListComponent implements OnInit {
   
 
   fetchAllInvoices(){
-    this.userService.fetchAllInvoice().subscribe({
+    this.userService.fetchAllPendingInvoice().subscribe({
       next:(res)=>{
         console.log(res);
         this.invoiceList = res.body;

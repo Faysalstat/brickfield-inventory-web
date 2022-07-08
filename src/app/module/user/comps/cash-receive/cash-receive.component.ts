@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Account, Customer, Person } from 'src/app/module/model';
 import { UserService } from '../../user.service';
 
@@ -8,6 +8,7 @@ import { UserService } from '../../user.service';
   styleUrls: ['./cash-receive.component.css']
 })
 export class CashReceiveComponent implements OnInit {
+  @Input() invoiceId!:number;
   cashReceivedAmount!: number;
   updatedDueAmount: number = 0;
   dueAmount!:number;
@@ -26,6 +27,7 @@ export class CashReceiveComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.invoiceId);
   }
   onAmountAdded(){
     this.updated = true;

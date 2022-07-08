@@ -1,47 +1,44 @@
-<div class="mt-4 p-5 text-white rounded">
-    <h1>Approval List</h1>
-    <mat-card>
-        <div class="row">
-          <div class="md-col-12">
-      
-          </div>
-          <div class="md-col-12">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Invoice No</th>
-                  <th scope="col">Customer</th>
-                  <th scope="col">Address</th>
-                  <th scope="col">Quantity</th>
-                  <th scope="col">Price</th>
-                  <!-- <th scope="col">Advance</th>
-                  <th scope="col">Due</th> -->
-                  <th scope="col">Delivery Status</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let invoice of invoiceList; index as i">
-                  <th scope="row">{{i+1}}</th>
-                  <td>{{invoice.id}}</td>
-                  <td>{{invoice.customer.person.personName}}</td>
-                  <td>{{invoice.customer.person.personAddress}}</td>
-                  <td>{{invoice.totalQuantity}}</td>
-                  <td>{{invoice.totalBill}}</td>
-                  <!-- <td>{{invoice.customer.account.balance}}</td>
-                  <td>{{invoice.customer.account.due}}</td> -->
-                  <td>{{invoice.deliveryStatus}}</td>
-                  <td>
-                    <button mat-raised-button (click)="openInvoice(invoice)" color="warn" >
-                      Open
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </mat-card>
-    
- </div>
+<div class="row">
+  <h1>Approval List</h1>
+  <hr>
+    <div class="md-col-12">
+  
+    </div>
+    <div class="md-col-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" >Invoice No</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Address</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col">Advance</th>
+            <!-- <th scope="col">Due</th> -->
+            <th scope="col">Delivery Status</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let invoice of invoiceList; index as i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{invoice.id}}</td>
+            <td>{{invoice.customer.person.personName}}</td>
+            <td>{{invoice.customer.person.personAddress}}</td>
+            <td>{{invoice.totalQuantity}}</td>
+            <td>{{invoice.totalBill}}</td>
+            <td>{{invoice.advancePayment}}</td>
+            <!-- <td>{{invoice.customer.account.balance}}</td>
+                    <td>{{invoice.customer.account.due}}</td> -->
+            <td>{{invoice.deliveryStatus}}</td>
+            <td>
+              <button mat-raised-button (click)="openInvoice(invoice)" color="warn">
+                Open
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

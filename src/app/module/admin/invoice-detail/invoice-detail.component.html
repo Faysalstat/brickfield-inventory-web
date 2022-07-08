@@ -1,74 +1,120 @@
-<div class="mt-4 p-5 text-white rounded">
-    <h1>Approval List</h1>
-    <div class="row">
-        <div class="col-md-6">
-            <table class="table table-striped">
-                <tbody>
-                  <tr>
-                    <td>ID</td>
-                    <td>{{invoice.id}}</td>
-                  </tr>
-                  <tr>
-                    <td>Customer Name</td>
-                    <td>{{person.personName}}</td>
-                  </tr>
-                  <tr>
-                    <td>Contact No:</td>
-                    <td>{{person.contactNo}}</td>
-                  </tr>
-                  <tr>
-                    <td>Address:</td>
-                    <td>{{person.personAddress}}</td>
-                  </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-6">
-            <table class="table table-striped">
-                <tbody>
-                  <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                  </tr>
-                  <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                  </tr>
-                  <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                  </tr>
-                </tbody>
-            </table>
-        </div>
-            <div class="col-md-12 mt-5" style="border:1px solid blacknn ;border-radius:2px ;">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>SN</th>
-                            <th>Brick Name</th>
-                            <th>Quantity</th>
-                            <th>Total Price</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let order of invoice.orders; index as i">
-                            <td>{{i+1}}</td>
-                            <td>{{order?.brick?.category}}</td>
-                            <td>{{order?.quantity}}</td>
-                            <td>{{order?.totalPrice}}</td>
-                            <td>
-                                <!-- <button mat-icon-button color="primary" (click)="editOrder(i)">
-                                    <mat-icon>open_in_new</mat-icon>
-                                </button> -->
-                                <!-- <button mat-icon-button color="warn" (click)="deleteOrder(i)">
-                                    <mat-icon>delete</mat-icon>
-                                </button> -->
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+<div class="p-5 rounded">
+  <h2>Approval List</h2>
+  <hr style="background-color:black ;">
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table table-striped">
+        <tbody>
+          <tr>
+            <td colspan="2" style="text-align:center;font-weight: bolder">Customer Details</td>
+          </tr>
+          <tr>
+            <td style="width:50% ;">ID</td>
+            <td>{{invoice?.id}}</td>
+          </tr>
+          <tr>
+            <td>Customer Name</td>
+            <td>{{person?.personName}}</td>
+          </tr>
+          <tr>
+            <td>Contact No:</td>
+            <td>{{person?.contactNo}}</td>
+          </tr>
+          <tr>
+            <td>Address:</td>
+            <td>{{person?.personAddress}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
- </div>
+    <div class="col-md-6">
+      <table class="table table-striped" >
+        <tbody>
+          <tr>
+            <td colspan="2" style="text-align:center;font-weight: bolder">Invoice Details</td>
+          </tr>
+          <tr>
+            <td>Total Quantity</td>
+            <td  style="text-align:right ;">{{invoice?.totalQuantity}}</td>
+          </tr>
+          <tr>
+            <td>Total price</td>
+            <td  style="text-align:right ;">{{invoice?.totalPrice}} BDT</td>
+          </tr>
+          <tr>
+            <td>Transport Cost</td>
+            <td  style="text-align:right ;">{{invoice?.transportCost}} BDT</td>
+          </tr>
+          <tr>
+            <td>Total Bill</td>
+            <td  style="text-align:right ;">{{invoice?.totalBill}} BDT</td>
+          </tr>
+          <tr>
+            <td>Paid</td>
+            <td  style="text-align:right ;">{{invoice?.advancePayment}} BDT</td>
+          </tr>
+          <tr>
+            <td>Due Payment</td>
+            <td  style="text-align:right ;">{{invoice?.duePament}} BDT</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-12 mt-5" style="border:1px solid blacknn ;border-radius:2px ;">
+      <h2>Order Details</h2>
+      <hr style="background-color:black ;">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>SN</th>
+            <th>Brick Name</th>
+            <th>Price Rate</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of invoice?.orders; index as i">
+            <td>{{i+1}}</td>
+            <td>{{order?.brick?.category}}</td>
+            <td>{{order?.brick?.pricePerPiece}}</td>
+            <td>{{order?.quantity}}</td>
+            <td>{{order?.totalPrice}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>Delivery Schedules</h2>
+      <hr style="background-color:black ;">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>SN</th>
+            <th>Quantity</th>
+            <th>Trip Needed</th>
+            <th>Transport Cost</th>
+            <th>Driver</th>
+            <th>Vehicle Type</th>
+            <th>Schedule Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let delivery of invoice?.scheduleOrders; index as i">
+            <td>{{i+1}}</td>
+            <td>{{delivery?.deliverableQuantity}}</td>
+            <td>{{delivery?.tripNeeded}}</td>
+            <td>{{delivery?.transportCost}}</td>
+            <td>
+              {{delivery?.driver?.person?.personName}} (Mob: {{delivery?.driver?.person?.contactNo}})
+            </td>
+            <td>{{delivery?.vehicleCategory?.categoryName}}</td>
+            <td>{{applyFilter(delivery?.scheduledDate)}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-12">
+      <button style="margin: 10px; float: right;"  mat-raised-button color="warn" (click)="approveInvoice('DECLINE')">Decline</button>
+      <button style="margin: 10px; float: right;"  mat-raised-button color="primary" (click)="approveInvoice('APPROVED')">Approve</button>
+    </div>
+  </div>
+</div>
