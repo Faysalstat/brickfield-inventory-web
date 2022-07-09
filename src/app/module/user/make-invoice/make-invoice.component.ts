@@ -179,6 +179,12 @@ export class MakeInvoiceComponent implements OnInit {
           this.selectedBrick = new Brick();
           this.orderItem = new OrderModel();
           this.calculateOrderTotal();
+        },
+        error:(err)=>{
+          console.log(err);
+        },
+        complete:()=>{
+          this.updateInvoice();
         }
       })
     }else{
@@ -211,6 +217,12 @@ export class MakeInvoiceComponent implements OnInit {
         window.alert("Order deleted");
         this.orders.splice(index, 1);
         this.calculateOrderTotal();
+        },
+        error:(err)=>{
+          console.log(err);
+        },
+        complete:()=>{
+          this.updateInvoice();
         }
       })
     }else{
@@ -252,6 +264,12 @@ export class MakeInvoiceComponent implements OnInit {
         console.log(data);
         this.schedules.push(data.body);
         window.alert("Schedule created");
+        },
+        error:(err)=>{
+          console.log(err);
+        },
+        complete:()=>{
+          this.updateInvoice();
         }
       })
     }else{
@@ -330,6 +348,12 @@ export class MakeInvoiceComponent implements OnInit {
         window.alert("Schedule deleted");
         this.schedules.splice(index, 1);
         this.calculateScheduleTotal();
+        },
+        error:(err)=>{
+          console.log(err);
+        },
+        complete:()=>{
+          this.updateInvoice();
         }
       })
     }else{

@@ -1,5 +1,4 @@
-<div class="mt-4 p-5 bg-light rounded">
-    <h1>Add Customer</h1>
+    <h1>কাস্টমার</h1>
     <form [formGroup]="customerForm">
         <div class="row">
             <div class="col-md-4">
@@ -16,7 +15,7 @@
             </div>
             <div class="col-md-4">
                 <mat-form-field class="input-field" appearance="fill">
-                    <mat-label>Advance:</mat-label>
+                    <mat-label>Balance:</mat-label>
                     <input  id="contact"  pInputText formControlName="balance" matInput>
                 </mat-form-field>
             </div>
@@ -27,7 +26,7 @@
                 </mat-form-field>
             </div>
         </div>
-        <button type="submit" (click)="submit()"  mat-raised-button color="primary">Submit</button>
+        <button type="submit" (click)="submit()"  mat-raised-button color="primary">কাস্টমার তৈরী করুন</button>
         <p style="color: red;font-size:medium;margin-top:10px;">{{message}}</p>
     </form>
-</div>
+

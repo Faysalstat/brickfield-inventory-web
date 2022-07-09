@@ -1,11 +1,9 @@
 <div class="container mt-3">
-    <h2>This is customer-list page</h2>
-    <mat-card>
-      <app-add-person (customerAddedEvent)="updateList($event)" ></app-add-person>
-    </mat-card>
-    <div class="mt-4 p-5 bg-light rounded">
+    <mat-card class="mt-5">
+      <div class="mt-4 p-5 bg-light rounded">
+        <app-add-person (customerAddedEvent)="updateList($event)" ></app-add-person>
         <h1>Customer List</h1>
-        <table class="table table-striped">
+        <table class="table table-striped " style="text-align:center ;">
             <thead>
               <tr>
                 <th>ID</th>
@@ -14,7 +12,7 @@
                 <th>Address</th>
                 <th>Balance</th>
                 <th>Due</th>
-                <th>Delivery Pending</th>
+                <!-- <th>Delivery Pending</th> -->
                 <!-- <th>Action</th> -->
               </tr>
             </thead>
@@ -26,7 +24,7 @@
                 <td>{{customer?.person?.personAddress}}</td>
                 <td>{{customer?.account?.balance}}</td>
                 <td>{{customer?.account?.due}}</td>
-                <td>NO</td>
+                <!-- <td>NO</td> -->
                 <!-- <td>
                   <button mat-mini-fab (click)="edit(customer)" color="primary" >
                     <mat-icon>menu</mat-icon>
@@ -41,4 +39,5 @@
             </tbody>
           </table>
     </div>
+    </mat-card>
 </div>

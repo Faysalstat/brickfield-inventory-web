@@ -1,4 +1,54 @@
-<div class="mt-4 p-5 bg-primary text-white rounded">
-    <h1>User Managements</h1>
-    <p>Lorem ipsum...</p>
+<div class="mt-4 p-5 bg-light rounded">
+    <h1>Users</h1>
+    <hr>
+    <mat-card>
+        <h2>Add User</h2>
+        <form [formGroup]="userForm">
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field class="input-field" appearance="fill" >
+                        <mat-label>Contact No:</mat-label>
+                        <input   (change)="searchCustomer()" pInputText formControlName="contactNo" placeholder="Contact No." matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field class="input-field" appearance="fill">
+                        <mat-label>Persons Name :</mat-label>
+                        <input  formControlName="name" placeholder="Customer Name" matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field class="input-field" appearance="fill">
+                        <mat-label>Address:</mat-label>
+                        <textarea type="text"  pInputText formControlName="address" matInput></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <h2>User Login Information</h2>
+                <div class="col-md-4">
+                    <mat-form-field class="input-field" appearance="fill">
+                        <mat-label>Login ID (username / Email) :</mat-label>
+                        <input  formControlName="username" placeholder="User Name" matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field class="input-field" appearance="fill">
+                        <mat-label>Password:</mat-label>
+                        <input type="password" formControlName="password" placeholder="password" matInput>
+                    </mat-form-field>
+                </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="fill" class="input-field">
+                            <mat-label>User Role</mat-label>
+                            <mat-select formControlName = "userRole">
+                                <mat-option *ngFor="let role of roles" [value]="role.roleName">{{role.roleName}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+            </div>
+            <button type="submit" (click)="submit()"  mat-raised-button color="primary">Add User</button>
+            <p style="color: red;font-size:medium;margin-top:10px;">{{message}}</p>
+        </form>
+    </mat-card>
 </div>
