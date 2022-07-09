@@ -10,7 +10,7 @@ export class UserService {
 
   constructor( private http:HttpClient) { }
 
-
+ 
   public addCustomer(queryParams: Map<string,any>): Observable<any>{
     console.log(queryParams.get("customer"))
     return this.http.post(Urls.CREATE_CUSTOMER,queryParams.get("customer"));
@@ -61,6 +61,11 @@ export class UserService {
     params = params.append("id",id);
     return this.http.get(Urls.FETCH_INVOICE_BY_ID,{params:params});
   }
+  public fetchCustomerById(id:any): Observable<any>{
+    let params = new HttpParams();
+    params = params.append("id",id);
+    return this.http.get(Urls.FETCH_CUSTOMER_BY_ID,{params:params});
+  }
   public getCustomerByContactNo(contactNo:string): Observable<any>{
     let params = new HttpParams();
     params = params.append("contactNo",contactNo);
@@ -87,6 +92,11 @@ export class UserService {
     console.log(queryParams.get("orders"))
     return this.http.post(Urls.CREATE_ORDER,queryParams.get("orders"));
   }
+  public createApproval(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("approval"))
+    return this.http.post(Urls.SEND_TO_APPROVAL,queryParams.get("approval"));
+  }
+
   public fetchBricks(): Observable<any>{
     return this.http.get(Urls.FETCH_ALL_BRICK);
   }

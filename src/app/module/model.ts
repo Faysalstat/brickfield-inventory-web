@@ -178,7 +178,12 @@ export class VehicleCategory{
   id!: number;
   categoryName!: string;
 }
-
+export class ApprovalModel {
+  id!: number;
+  payload!: string;
+  createdBy!: string;
+  taskType!: string;
+}
 // export class Supplyer{
 
 // }

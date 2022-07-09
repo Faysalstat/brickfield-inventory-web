@@ -6,12 +6,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { InvoiceDetailComponent } from './invoice-detail/invoice-detail.component';
 import { PendingDeliveryComponent } from './pending-delivery/pending-delivery.component';
 import { ReportsComponent } from './reports/reports.component';
+import { TaskListComponent } from './task-list/task-list.component';
 import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [{
     path: '', component: AdminComponent, children: [
         {path: '', component: DashboardComponent},
         {path: 'approval-list', component: ApprovalListComponent},
+        {path: 'task-list', component: TaskListComponent},
         {path: 'pending-task', component: PendingDeliveryComponent},
         {path: 'reports', component: ReportsComponent},
         {path: 'users', component: UsersComponent},

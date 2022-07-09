@@ -10,6 +10,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { UsersComponent } from './users/users.component';
 import { InvoiceDetailComponent } from './invoice-detail/invoice-detail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TaskListComponent } from './task-list/task-list.component';
 
 
 
@@ -21,7 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PendingDeliveryComponent,
     ReportsComponent,
     UsersComponent,
-    InvoiceDetailComponent
+    InvoiceDetailComponent,
+    TaskListComponent
   ],
   imports: [
     CommonModule,
