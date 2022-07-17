@@ -37,8 +37,8 @@ export class ScheduleListComponent implements OnInit {
       complete: ()=>{}
     });
   }
-  setDelivery(invoice:any){
-    this.route.navigate(["/home/schedule-delivery",invoice.id]);
+  setDelivery(schedule:any){
+    this.route.navigate(["/home/schedule-delivery",schedule.id]);
   }
   formatStattus(status:string){
     if(status=="PENDING"){

@@ -19,6 +19,7 @@ export const Urls = {
     // CREATE 
     CREATE_INVOICE : BASE_URL + "/invoice/create",
     CREATE_SCHEDULE_DELIVERY: BASE_URL + "/schedule/create",
+    SET_DELIVERY: BASE_URL + "/schedule/setdelivery",
     CREATE_ORDER : BASE_URL + "/order/create",
     SEND_TO_APPROVAL : BASE_URL + "/approval/create",
     CREATE_CUSTOMER: BASE_URL + "/customer/addcustomer",
@@ -33,6 +34,7 @@ export const Urls = {
     FETCH_ALL_INVOICE: BASE_URL + "/invoice/getall",
     FETCH_ALL_TASK: BASE_URL + "/approval/getall",
     FETCH_TASK_BY_ID: BASE_URL + "/approval/getbyid",
+    FETCH_SCHEDULE_BY_ID: BASE_URL + "/schedule/getbyid", 
     FETCH_ALL_PENDING_INVOICE: BASE_URL + "/invoice/getallpending",
     FETCH_ALL_SCHEDULES_BY_STATUS: BASE_URL + "/schedule/getallbystatus",
     FETCH_ALL_SCHEDULES_BY_DATE: BASE_URL + "/schedule/getbydate",

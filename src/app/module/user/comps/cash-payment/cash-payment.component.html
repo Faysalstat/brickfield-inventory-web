@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-4">
                 <mat-form-field class="input-field" appearance="fill">
-                    <mat-label>Amount Paid:</mat-label>
+                    <mat-label>Amount To Pay:</mat-label>
                     <input type="number" pInputText [ngModelOptions]="{standalone:true}" [disabled]="true"
                         [(ngModel)]="account.amountToPay" matInput>
                 </mat-form-field>
@@ -43,7 +43,7 @@
             </div>
             <div class="col-md-4" *ngIf="updated">
                 <mat-form-field class="input-field" appearance="fill">
-                    <mat-label>New Balance</mat-label>
+                    <mat-label>Due</mat-label>
                     <input [ngModelOptions]="{standalone:true}" 
                     [(ngModel)]="updatedPayment" [disabled]="true" matInput>
                 </mat-form-field>

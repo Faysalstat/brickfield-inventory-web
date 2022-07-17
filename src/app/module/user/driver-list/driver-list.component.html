@@ -12,8 +12,8 @@
                 <th>Name</th>
                 <th>Contact No</th>
                 <th>Address</th>
-                <th>Balance</th>
-                <th>Due</th>
+                <!-- <th>Balance</th> -->
+                <th>Amount To Pay</th>
                 <th>Delivery Pending</th>
                 <!-- <th>Action</th> -->
               </tr>
@@ -24,8 +24,8 @@
                 <td>{{driver?.person?.personName}}</td>
                 <td>{{driver?.person?.contactNo}}</td>
                 <td>{{driver?.person?.personAddress}}</td>
-                <td>{{driver?.account?.balance}}</td>
-                <td>{{driver?.account?.due}}</td>
+                <!-- <td>{{driver?.account?.balance}}</td> -->
+                <td style="color:crimson ;">{{driver?.account?.amountToPay}}</td>
                 <td>NO</td>
                 <!-- <td>
                   <span style="margin-right: 5px;"> </span>

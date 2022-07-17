@@ -39,11 +39,15 @@ export class UserService {
     return this.http.get(Urls.FETCH_ALL_SCHEDULES_BY_STATUS);
   }
   public fetchAllSchedulesByDate(): Observable<any>{
-    return this.http.get(Urls.FETCH_ALL_SCHEDULES_BY_STATUS);
+    return this.http.get(Urls.FETCH_ALL_SCHEDULES_BY_DATE);
   }
   public addSupplyer(queryParams: Map<string,any>): Observable<any>{
     console.log(queryParams.get("supplyer"))
     return this.http.post(Urls.CREATE_SUPPLYER,queryParams.get("supplyer"));
+  }
+  public setDelivery(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("schedule"))
+    return this.http.post(Urls.SET_DELIVERY,queryParams.get("schedule"));
   }
   
   public fetchAllCustomer(): Observable<any>{
@@ -63,6 +67,11 @@ export class UserService {
     let params = new HttpParams();
     params = params.append("id",id);
     return this.http.get(Urls.FETCH_INVOICE_BY_ID,{params:params});
+  }
+  public fetchScheduleById(id:any): Observable<any>{
+    let params = new HttpParams();
+    params = params.append("id",id);
+    return this.http.get(Urls.FETCH_SCHEDULE_BY_ID,{params:params});
   }
   public fetchCustomerById(id:any): Observable<any>{
     let params = new HttpParams();

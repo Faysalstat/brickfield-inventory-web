@@ -12,8 +12,8 @@
                 <th>Name</th>
                 <th>Contact No</th>
                 <th>Address</th>
-                <th>Balance</th>
-                <th>Due</th>
+                <!-- <th>Balance</th> -->
+                <th>Amount To Pay</th>
                 <th>Product</th>
                 <th>Action</th>
               </tr>
@@ -24,8 +24,8 @@
                 <td>{{supplyer?.person?.personName}}</td>
                 <td>{{supplyer?.person?.contactNo}}</td>
                 <td>{{supplyer?.person?.personAddress}}</td>
-                <td>{{supplyer?.account?.balance}}</td>
-                <td>{{supplyer?.account?.due}}</td>
+                <!-- <td>{{supplyer?.account?.balance}}</td> -->
+                <td style="color:crimson ;">{{supplyer?.account?.amountToPay}}</td>
                 <td>{{supplyer?.product?.productName}}</td>
                 <td>
                   <button mat-mini-fab (click)="edit(supplyer)" color="primary" >

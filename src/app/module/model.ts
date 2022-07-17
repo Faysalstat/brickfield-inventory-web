@@ -141,6 +141,7 @@ export interface PeriodicInvoiceElement {
 export class ScheduleDeliveryModel {
   id!: number;
   invoiceId!: number;
+  invoice!: Invoice;
   driver!: Driver;
   driverId!: number;
   deliverableQuantity!: number;

@@ -29,7 +29,7 @@ export class CashPaymentComponent implements OnInit {
   }
   onAmountAdded(){
     this.updated = true;
-    this.updatedPayment = this.account.balance + this.cashReceivedAmount;
+    this.updatedPayment = this.account.amountToPay - this.cashReceivedAmount;
   }
   searchCustomer() {
     this.userService.getCustomerByContactNo(this.person.contactNo).subscribe({

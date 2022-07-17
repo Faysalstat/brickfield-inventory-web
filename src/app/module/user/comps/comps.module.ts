@@ -10,9 +10,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { StockListComponent } from './stock-list/stock-list.component';
 import { CashPaymentComponent } from './cash-payment/cash-payment.component';
 import { CashReceiveComponent } from './cash-receive/cash-receive.component';
+import { DeliveryDetailsComponent } from './delivery-details/delivery-details.component';
 const components = [
   AddPersonComponent,AddDriverComponent,AddScheduleComponent,AddSupplyerComponent,StockListComponent,
-  CashPaymentComponent,CashReceiveComponent
+  CashPaymentComponent,CashReceiveComponent,DeliveryDetailsComponent
 ]
 
 

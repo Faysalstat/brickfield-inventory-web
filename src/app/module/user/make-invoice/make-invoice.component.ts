@@ -303,7 +303,7 @@ export class MakeInvoiceComponent implements OnInit {
       // if(schedule.transportCostCustomerPayable==1){
 
       // }
-      totalTransportCost = totalTransportCost + schedule.transportCost;
+      totalTransportCost = totalTransportCost + schedule?.transportCost;
     });
     this.invoiceIssueForm.get('scheduledQuantity')?.setValue(scheduledQuantity);
     this.invoiceIssueForm.get('transportCost')?.setValue(totalTransportCost);
@@ -488,6 +488,7 @@ export class MakeInvoiceComponent implements OnInit {
     this.isReceiving = true;
   }
   calculateBill(){
-
+    this.calculateScheduleTotal();
+    this.checkScheduledQuantity();
   }
 }
