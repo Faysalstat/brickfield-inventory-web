@@ -150,6 +150,7 @@ export class ScheduleDeliveryModel {
   vehicleCategory!:VehicleCategory;
   vehicleCategoryId!: number;
   deliveryStatus!:string;
+  transportCostCustomerPayable!:number;
 }
 
 export class Invoice {
@@ -183,6 +184,12 @@ export class ApprovalModel {
   payload!: string;
   createdBy!: string;
   taskType!: string;
+}
+export enum Tasks{
+  CREATE_INVOICE="CREATE_INVOICE",
+  UPDATE_INVOICE= "UPDATE_INVOICE",
+  CREATE_SUPPLY= "CREATE_SUPPLY",
+  UPDATE_SUPPLY= "UPDATE_SUPPLY"
 }
 // export class Supplyer{
 

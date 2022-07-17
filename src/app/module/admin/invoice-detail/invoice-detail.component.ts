@@ -1,7 +1,7 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Account, Customer, Person } from '../../model';
+import { Account, Customer, Person, Tasks } from '../../model';
 import { UserService } from '../../user/user.service';
 import { AdminService } from '../admin.service';
 
@@ -17,6 +17,7 @@ export class InvoiceDetailComponent implements OnInit {
   account!: Account;
   customer!: Customer;
   driverPerson!: Person;
+  isEdit: boolean = false;
   // orders!
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -36,6 +37,11 @@ export class InvoiceDetailComponent implements OnInit {
       this.adminService.fetchTaskById(id).subscribe({
         next: (res) => {
           this.invoice = res.body;
+          if(res.body.taskType==Tasks.UPDATE_INVOICE){
+            this.isEdit = true;
+          }else{
+            this.isEdit = false;
+          }
           this.fetchCustomerById(this.invoice.customerId);
           // this.person = this.invoice.customer.person;
           // if(!this.invoice.scheduleOrders){
@@ -57,19 +63,19 @@ export class InvoiceDetailComponent implements OnInit {
   }
   applyFilter(date: any) {
     let newDate = new Date(date);
-    return (
-      newDate.getDate() + '/' + newDate.getMonth() + '/' + newDate.getFullYear()
-    );
+    return (newDate.getDate()) +"/"+(newDate.getMonth()+1) + '/' + newDate.getFullYear();
   }
   approveInvoice(event: any) {
     console.log(event);
     const params: Map<string, any> = new Map();
     this.invoice.approvalStatus = event;
+    this.invoice.taskId = this.taskId;
+    this.invoice.isEdit = this.isEdit;
     params.set('invoice', this.invoice);
     this.adminService.approveInvoice(params).subscribe({
       next: (data) => {
         console.log(data);
-        this.router.navigate(['/admin/approval-list']);
+        this.router.navigate(['/admin/task-list']);
       },
       error: (err) => console.log(err),
     });

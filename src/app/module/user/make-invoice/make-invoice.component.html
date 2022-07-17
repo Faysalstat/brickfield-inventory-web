@@ -1,10 +1,10 @@
 <div class="container">
     <form [formGroup]="invoiceIssueForm" (keydown.enter)="$event.preventDefault()">
-        <mat-card>
+        <mat-card class="mt-5">
             <div class="row">
-                    <h2>কাস্টমার বিবরন :</h2>
-                    <h3 *ngIf="isEdit" style="color:red ; font-weight:bolder ;">Status : {{status}}</h3>
-                    <h4 *ngIf="isDue" style="color:red ; font-weight:bolder ;">Payment Due</h4>
+                <h2>কাস্টমার বিবরন :</h2>
+                <h3 *ngIf="isEdit" style="color:red ; font-weight:bolder ;">Status : {{status}}</h3>
+                <h4 *ngIf="isDue" style="color:red ; font-weight:bolder ;">Payment Due</h4>
                 <div class="col-md-4">
                     <mat-form-field class="input-field" appearance="fill">
                         <mat-label>মোবাইল নাম্বার</mat-label>
@@ -26,10 +26,10 @@
                             [(ngModel)]="customerBalance" matInput>
                     </mat-form-field>
                 </div>
-                <div *ngIf="isNeg" class="col-md-3">
-                    <mat-form-field class="input-field" appearance="fill">
-                        <mat-label>বাকি:</mat-label>
-                        <input type="number" pInputText [ngModelOptions]="{standalone:true}" [disabled]="true"
+                <div *ngIf="isNeg" class="col-md-3" >
+                    <mat-form-field class="input-field" appearance="outline">
+                        <mat-label style="color:red;font-weight: bolder;">বাকি:</mat-label>
+                        <input type="number" style="color:red;font-weight: bolder;" pInputText [ngModelOptions]="{standalone:true}" [disabled]="true"
                             [(ngModel)]="customerBalance" matInput>
                     </mat-form-field>
                 </div>
@@ -41,7 +41,7 @@
                     </mat-form-field>
                 </div>
             </div>
-        </mat-card>
+        </mat-card >
         <mat-card class="mt-5">
             <h2>অর্ডারের বিবরণ:</h2>
             <div class="row">
@@ -75,9 +75,10 @@
                             [(ngModel)]="orderItem.totalPrice" matInput>
                     </mat-form-field>
                 </div>
+
                 <div class="col-md-12">
-                    <button style="margin: 10px; float: left;" (click)="addOrder()" mat-raised-button
-                        color="warn">যোগ করুন:</button>
+                    <button style="margin: 10px; float: left;" (click)="addOrder()" mat-raised-button color="warn">যোগ
+                        করুন:</button>
                 </div>
             </div>
             <div class="row">
@@ -157,18 +158,24 @@
                 </div>
                 <!-- vehicle  -->
                 <div class="col-md-3">
-                  <mat-form-field appearance="fill" class="input-field">
-                      <mat-label>গাড়ির ধরন</mat-label>
-                      <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageVehicle()"
-                          [(ngModel)]="scheduleItem.vehicleCategory">
-                          <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle">{{vehicle?.categoryName}}
-                          </mat-option>
-                      </mat-select>
-                  </mat-form-field>
-              </div>
+                    <mat-form-field appearance="fill" class="input-field">
+                        <mat-label>গাড়ির ধরন</mat-label>
+                        <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageVehicle()"
+                            [(ngModel)]="scheduleItem.vehicleCategory">
+                            <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle">{{vehicle?.categoryName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-checkbox class="mt-5" [(ngModel)]="transportCostCustomerPayable">
+                        পরিবহন খরচ কাস্টমার পরিশোধ করবে
+                    </mat-checkbox>
 
+                </div>
                 <div class="col-md-12">
-                    <button  style="float:left ; margin-top: 10px;" mat-raised-button (click)="addSchedule()" color="accent">Add</button>
+                    <button style="float:left ; margin-top: 10px;" mat-raised-button (click)="addSchedule()"
+                        color="accent">Add</button>
                 </div>
                 <div class="col-md-12 mt-5">
                     <table class="table table-striped">
@@ -192,12 +199,13 @@
                                 <td>{{delivery?.tripNeeded}}</td>
                                 <td>{{delivery?.transportCost}}</td>
                                 <td>
-                                  {{delivery?.driver?.person?.personName}} (Mob: {{delivery?.driver?.person?.contactNo}})
+                                    {{delivery?.driver?.person?.personName}} (Mob:
+                                    {{delivery?.driver?.person?.contactNo}})
                                 </td>
                                 <td>{{delivery?.vehicleCategory?.categoryName}}</td>
                                 <td>{{applyFilter(delivery?.scheduledDate)}}</td>
                                 <td>{{delivery?.deliveryStatus}}</td>
-                                
+
                                 <td>
                                     <!-- <button mat-icon-button color="primary" (click)="editDelivery(i)">
                                         <mat-icon>open_in_new</mat-icon>
@@ -213,66 +221,67 @@
             </div>
         </mat-card>
         <mat-card class="mt-5">
-          <div class="row">
-            <h2>Invoice Summary</h2>
-              <div class="col-md-3">
-                <!-- <h3>Total Quantity</h3> -->
-                <mat-form-field class="input-field" appearance="fill">
-                  <mat-label>মোট পরিমান:</mat-label>
-                  <input type="number" pInputText formControlName="totalQuantity" matInput>
-                </mat-form-field>
-              </div>
-              <div class="col-md-3">
-                <!-- <h3>Total Price</h3> -->
-                <mat-form-field class="input-field"  appearance="fill">
-                  <mat-label>ইটের মূল্য:</mat-label>
-                  <input type="number" pInputText [disabled]="isEdit" formControlName="totalPrice" matInput>
-                </mat-form-field>
-              </div>
-              <div class="col-md-3">
-                <!-- <h3>Transport Cost:</h3> -->
-                <mat-form-field class="input-field" appearance="fill">
-                  <mat-label>মোট পরিবহন খরচ:</mat-label>
-                  <input type="number" pInputText formControlName="transportCost" matInput>
-                </mat-form-field>
-              </div>
-              <div class="col-md-3">
-                <!-- <h3>Total Billing:</h3> -->
-                <mat-form-field class="input-field" appearance="fill">
-                  <mat-label>মোট বিল:</mat-label>
-                  <input type="number" pInputText formControlName="totalBill" matInput>
-                </mat-form-field>
-              </div>
-              <div class="col-md-3">
-                <!-- <h3>Payment:</h3> -->
-                <mat-form-field class="input-field" appearance="fill">
-                  <mat-label>পরিশোধ:</mat-label>
-                  <input type="number" pInputText formControlName="advancePayment"  matInput>
-                </mat-form-field>
-              </div>
-              <div class="col-md-3">
-                <!-- <h3>Due Payment:</h3> -->
-                <mat-form-field class="input-field" appearance="fill">
-                  <mat-label>বাকি</mat-label>
-                  <input type="number" pInputText formControlName="duePayment"  [disabled]="true" matInput>
-                </mat-form-field>
-              </div>
-              <div class="col-md-3">
-                <!-- <h3>Receive Cash:</h3> -->
-                <mat-form-field class="input-field" appearance="fill">
-                  <mat-label>ক্যাশ জমা:</mat-label>
-                  <input type="number" pInputText formControlName="newPayment"  matInput>
-                </mat-form-field>
-              </div>
-              <div *ngIf="!isEdit" class="col-md-12">
-                <button style="margin: 10px; float: right;"  mat-raised-button color="primary" (click)="submitInvoice()">Submit</button>
-              </div>
-              <div *ngIf="isEdit" class="col-md-12">
-                <button style="margin: 10px; float: right;"  mat-raised-button color="primary" (click)="updateInvoice()">Submit</button>
-              </div>
+            <div class="row">
+                <h2>Invoice Summary</h2>
+                <div class="col-md-3">
+                    <!-- <h3>Total Quantity</h3> -->
+                    <mat-form-field class="input-field" appearance="fill">
+                        <mat-label>মোট পরিমান:</mat-label>
+                        <input type="number" pInputText formControlName="totalQuantity" matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <!-- <h3>Total Price</h3> -->
+                    <mat-form-field class="input-field" appearance="fill">
+                        <mat-label>ইটের মূল্য:</mat-label>
+                        <input type="number" pInputText [disabled]="isEdit" formControlName="totalPrice" matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <!-- <h3>Transport Cost:</h3> -->
+                    <mat-form-field class="input-field" appearance="fill">
+                        <mat-label>মোট পরিবহন খরচ:</mat-label>
+                        <input type="number" pInputText formControlName="transportCost" matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <!-- <h3>Total Billing:</h3> -->
+                    <mat-form-field class="input-field" appearance="fill">
+                        <mat-label>মোট বিল:</mat-label>
+                        <input type="number" pInputText formControlName="totalBill" matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <!-- <h3>Payment:</h3> -->
+                    <mat-form-field class="input-field" appearance="fill">
+                        <mat-label>পরিশোধ:</mat-label>
+                        <input type="number" pInputText formControlName="advancePayment" matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <!-- <h3>Due Payment:</h3> -->
+                    <mat-form-field class="input-field" appearance="fill">
+                        <mat-label>বাকি</mat-label>
+                        <input type="number" pInputText formControlName="duePayment" [disabled]="true" matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <!-- <h3>Receive Cash:</h3> -->
+                    <mat-form-field *ngIf="isEdit" class="input-field" appearance="fill">
+                        <mat-label>ক্যাশ জমা:</mat-label>
+                        <input type="number" pInputText formControlName="newPayment" matInput>
+                    </mat-form-field>
+                </div>
+                <div *ngIf="!isEdit" class="col-md-12">
+                    <button style="margin: 10px; float: right;" mat-raised-button color="primary"
+                        (click)="submitInvoice()">Submit</button>
+                </div>
+                <div *ngIf="isEdit" class="col-md-12">
+                    <button style="margin: 10px; float: right;" mat-raised-button color="primary"
+                        (click)="updateInvoice()">Submit</button>
+                </div>
             </div>
             <!-- <app-cash-receive [hidden]="isReceiving" [invoiceId]= invoiceId ></app-cash-receive> -->
         </mat-card>
     </form>
 </div>
-

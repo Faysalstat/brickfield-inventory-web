@@ -38,6 +38,9 @@ export class UserService {
   public fetchAllSchedulesByStatus(): Observable<any>{
     return this.http.get(Urls.FETCH_ALL_SCHEDULES_BY_STATUS);
   }
+  public fetchAllSchedulesByDate(): Observable<any>{
+    return this.http.get(Urls.FETCH_ALL_SCHEDULES_BY_STATUS);
+  }
   public addSupplyer(queryParams: Map<string,any>): Observable<any>{
     console.log(queryParams.get("supplyer"))
     return this.http.post(Urls.CREATE_SUPPLYER,queryParams.get("supplyer"));

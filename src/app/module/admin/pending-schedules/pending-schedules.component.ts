@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { UserService } from '../../user/user.service';
 
 @Component({
-  selector: 'app-pending-delivery',
-  templateUrl: './pending-delivery.component.html',
-  styleUrls: ['./pending-delivery.component.css'],
+  selector: 'app-pending-schedules',
+  templateUrl: './pending-schedules.component.html',
+  styleUrls: ['./pending-schedules.component.css']
 })
-export class PendingDeliveryComponent implements OnInit {
+export class PendingSchedulesComponent implements OnInit {
   scheduleList!: any;
   statusColor!: string;
   constructor(
@@ -28,7 +28,7 @@ export class PendingDeliveryComponent implements OnInit {
   }
 
   fetchAllSchedules() {
-    this.userService.fetchAllSchedulesByStatus().subscribe({
+    this.userService.fetchAllSchedulesByDate().subscribe({
       next: (res) => {
         console.log(res);
         this.scheduleList = res.body;
@@ -50,4 +50,5 @@ export class PendingDeliveryComponent implements OnInit {
     }
     return status;
   }
+
 }

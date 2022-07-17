@@ -35,6 +35,7 @@ export const Urls = {
     FETCH_TASK_BY_ID: BASE_URL + "/approval/getbyid",
     FETCH_ALL_PENDING_INVOICE: BASE_URL + "/invoice/getallpending",
     FETCH_ALL_SCHEDULES_BY_STATUS: BASE_URL + "/schedule/getallbystatus",
+    FETCH_ALL_SCHEDULES_BY_DATE: BASE_URL + "/schedule/getbydate",
     FETCH_ALL_BRICK: BASE_URL + "/brick/getall",
     FETCH_ALL_DRIVERS: BASE_URL + "/driver/getall",
     FETCH_ALL_SORDARS : BASE_URL + "/sordar/getall",

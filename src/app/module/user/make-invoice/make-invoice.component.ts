@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Account, ApprovalModel, Brick, Customer, CustomerDomain, Driver, Invoice, InvoiceDomain, InvoiceIssueModel, OrderModel, Person, ScheduleDeliveryModel, VehicleCategory } from '../../model';
+import { Account, ApprovalModel, Brick, Customer, CustomerDomain, Driver, Invoice, InvoiceDomain, InvoiceIssueModel, OrderModel, Person, ScheduleDeliveryModel, Tasks, VehicleCategory } from '../../model';
 import { UserService } from '../user.service';
 
 @Component({
@@ -39,6 +39,7 @@ export class MakeInvoiceComponent implements OnInit {
   status!: string;
   isNeg!: boolean;
   isDue!: boolean;
+  transportCostCustomerPayable:boolean = true;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -121,14 +122,18 @@ export class MakeInvoiceComponent implements OnInit {
     this.invoiceIssueForm
       .get('transportCost')
       ?.valueChanges.subscribe((data) => {
-        this.invoiceIssueForm
+          this.invoiceIssueForm
           .get('totalBill')
           ?.setValue(this.invoiceIssueForm.get('totalPrice')?.value + data);
+        
       });
     this.invoiceIssueForm.get('totalPrice')?.valueChanges.subscribe((data) => {
-      this.invoiceIssueForm
+      
+        this.invoiceIssueForm
         .get('totalBill')
         ?.setValue(this.invoiceIssueForm.get('transportCost')?.value + data);
+      
+      
     });
     this.invoiceIssueForm.get('newPayment')?.valueChanges.subscribe((data) => {
       this.invoiceIssueForm
@@ -190,12 +195,10 @@ export class MakeInvoiceComponent implements OnInit {
       //     this.updateInvoice();
       //   },
       // });
-    } else {
-      
-      this.selectedBrick = new Brick();
-      this.orderItem = new OrderModel();
     }
     this.orders.push(this.orderItem);
+    this.selectedBrick = new Brick();
+    this.orderItem = new OrderModel();
     this.calculateOrderTotal();
   }
   fetchBricks() {
@@ -260,6 +263,11 @@ export class MakeInvoiceComponent implements OnInit {
       this.scheduleItem.invoiceId = this.invoiceIssueForm.get('id')?.value;
       this.scheduleItem.vehicleCategoryId =
         this.scheduleItem.vehicleCategory.id;
+      if (this.transportCostCustomerPayable) {
+        this.scheduleItem.transportCostCustomerPayable = 1;
+      } else {
+        this.scheduleItem.transportCostCustomerPayable = 0;
+      }
       params.set('schedules', this.scheduleItem);
       this.newSchedules.push(this.scheduleItem);
       // this.userService.createScheduleOrder(params).subscribe({
@@ -275,13 +283,15 @@ export class MakeInvoiceComponent implements OnInit {
       //     this.updateInvoice();
       //   },
       // });
-    } else {
+    } 
+    // else {
+    //   this.schedules.push(this.scheduleItem);
       
-      this.selectedVehicle = new VehicleCategory();
-      this.selectedDriver = new Driver();
-      this.scheduleItem = new ScheduleDeliveryModel();
-    }
+    // }
     this.schedules.push(this.scheduleItem);
+    this.selectedVehicle = new VehicleCategory();
+    this.selectedDriver = new Driver();
+    this.scheduleItem = new ScheduleDeliveryModel();
     this.calculateScheduleTotal();
     this.checkScheduledQuantity();
   }
@@ -290,6 +300,9 @@ export class MakeInvoiceComponent implements OnInit {
     let totalTransportCost = 0;
     this.schedules.forEach((schedule) => {
       scheduledQuantity = scheduledQuantity + schedule.deliverableQuantity;
+      // if(schedule.transportCostCustomerPayable==1){
+
+      // }
       totalTransportCost = totalTransportCost + schedule.transportCost;
     });
     this.invoiceIssueForm.get('scheduledQuantity')?.setValue(scheduledQuantity);
@@ -298,7 +311,7 @@ export class MakeInvoiceComponent implements OnInit {
   applyFilter(date: any) {
     let newDate = new Date(date);
     return (
-      newDate.getFullYear() + '/' + newDate.getMonth() + '/' + newDate.getDate()
+      (newDate.getDate()) +"/"+(newDate.getMonth()+1) + '/' + newDate.getFullYear()
     );
   }
   fetchInvoiceById(id: any) {
@@ -307,6 +320,7 @@ export class MakeInvoiceComponent implements OnInit {
         if (res.body) {
           console.log(res);
           this.invoiceIssueForm.get('id')?.setValue(res.body.id);
+          this.customer = res.body.customer;
           this.person = res.body.customer.person;
           this.account = res.body.customer.account;
           if (this.account.balance >= 0) {
@@ -402,11 +416,15 @@ export class MakeInvoiceComponent implements OnInit {
     invoice.scheduleOrders = this.schedules;
     invoice.approvalStatus = 'PENDING';
     invoice.issuedBy = 'manager';
+
+    // 1 = true, 0 = false 
+ 
+    
     let approvalModel: ApprovalModel = new ApprovalModel();
     approvalModel.payload = JSON.stringify(invoice);
     // todo add user
     approvalModel.createdBy = 'Manager';
-    approvalModel.taskType = 'CREATE INVOICE';
+    approvalModel.taskType = Tasks.CREATE_INVOICE;
     params.set('approval', approvalModel);
     console.log(invoice);
     this.sendToApproval(params);
@@ -443,21 +461,33 @@ export class MakeInvoiceComponent implements OnInit {
       advancePayment: this.invoiceIssueForm.get('advancePayment')?.value,
       duePayment: this.invoiceIssueForm.get('duePayment')?.value,
       newPayment: this.invoiceIssueForm.get('newPayment')?.value,
+      customerId:this.customer.id,
       account: this.account,
+      approvalStatus: "PENDING",
       orders : this.newOrders,
       scheduleOrders : this.newSchedules,
     };
-    params.set('invoice', invoiceUpdateModel);
-    this.userService.updateInvoice(params).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.router.navigate(['/home/invoice-list']);
-      },
-      error: (err) => {},
-      complete: () => {},
-    });
+    let approvalModel: ApprovalModel = new ApprovalModel();
+    approvalModel.payload = JSON.stringify(invoiceUpdateModel);
+    // todo add user
+    approvalModel.createdBy = 'Manager';
+    approvalModel.taskType = Tasks.UPDATE_INVOICE;
+    params.set('approval', approvalModel);
+    this.sendToApproval(params);
+    // params.set('invoice', invoiceUpdateModel);
+    // this.userService.updateInvoice(params).subscribe({
+    //   next: (res) => {
+    //     console.log(res);
+    //     this.router.navigate(['/home/invoice-list']);
+    //   },
+    //   error: (err) => {},
+    //   complete: () => {},
+    // });
   }
   showreceive() {
     this.isReceiving = true;
+  }
+  calculateBill(){
+
   }
 }

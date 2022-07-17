@@ -15,6 +15,7 @@ export class ScheduleListComponent implements OnInit {
     private route: Router,
     private userService:UserService) {
     this.scheduleList = [];
+    this.statusColor = "#02c22f";
    }
   ngOnInit(): void {
     this.fetchAllSchedules();
@@ -23,7 +24,7 @@ export class ScheduleListComponent implements OnInit {
   applyFilter(date:Date) {
     let newDate = new Date(date);
 
-    return newDate.getDate()+"/"+newDate.getMonth()+"/"+newDate.getFullYear()
+    return (newDate.getDate()) +"/"+(newDate.getMonth()+1) + '/' + newDate.getFullYear()
   }
 
   fetchAllSchedules(){

@@ -53,9 +53,13 @@
             <td>Paid</td>
             <td  style="text-align:right ;">{{invoice?.advancePayment}} BDT</td>
           </tr>
+          <tr *ngIf="isEdit">
+            <td>New Payment</td>
+            <td  style="text-align:right ;">{{invoice?.newPayment}} BDT</td>
+          </tr>
           <tr>
             <td>Due Payment</td>
-            <td  style="text-align:right ;">{{invoice?.duePayment}} BDT</td>
+            <td  style="text-align:right ;color: crimson;">{{invoice?.duePayment}} BDT</td>
           </tr>
         </tbody>
       </table>

@@ -79,7 +79,7 @@ export class ScheduleDeliveryComponent implements OnInit {
   }
   applyFilter(date:any) {
     let newDate = new Date(date);
-    return newDate.getFullYear()+"/"+newDate.getMonth()+"/"+newDate.getDate()
+    return (newDate.getDate()) +"/"+(newDate.getMonth()+1) + '/' + newDate.getFullYear()
   }
   editOrder(i:any){
     this.delivery = this.invoice.scheduleOrders[i];
