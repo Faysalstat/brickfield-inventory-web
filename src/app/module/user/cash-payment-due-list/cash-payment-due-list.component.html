@@ -1,32 +1,4 @@
 <div class="container mt-3">
     <h2>This is Cash payment Due list page</h2>
-    <mat-card>
-        <div class="mt-4 p-5 bg-light rounded">
-            <h1>Supplyer List</h1>
-            <hr style="width:60% ;"/>
-            <table class="table table-striped">
-                <thead>
-                    <th>Sn</th>
-                    <th>Client Name</th>
-                    <th>Contact No</th>
-                    <th>Amount to Pay</th>
-                    <th>Action</th>
-                    <!-- <th>Contact No</th> -->
-                </thead>
-                <tbody>
-                    <tr *ngFor="let client of clientList; index as i">
-                        <td> {{i+1}} </td>
-                        <td> {{client.driver.person.personName}} </td>
-                        <td> {{client.driver.person.contactNo}} </td>
-                        <td>{{client.amountToPay}}</td>
-                        <td>
-                            <button mat-mini-fab (click)="payCash(client)" color="primary" >
-                                <mat-icon>menu</mat-icon>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </mat-card>
+    <app-due-payment-list></app-due-payment-list>
 </div>

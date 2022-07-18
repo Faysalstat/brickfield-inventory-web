@@ -41,13 +41,13 @@
             <div class="col-md-3">
                 <button type="submit" (click)="payCash()" style="width:100%;margin-top:30px"  mat-raised-button color="warn">Pay Cash</button>
             </div>
-            <div class="col-md-4" *ngIf="updated">
+            <!-- <div class="col-md-4" *ngIf="updated">
                 <mat-form-field class="input-field" appearance="fill">
                     <mat-label>Due</mat-label>
                     <input [ngModelOptions]="{standalone:true}" 
                     [(ngModel)]="updatedPayment" [disabled]="true" matInput>
                 </mat-form-field>
-            </div>
+            </div> -->
         </div>
     </mat-card>
 </div>

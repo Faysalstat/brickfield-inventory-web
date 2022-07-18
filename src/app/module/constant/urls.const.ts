@@ -48,6 +48,8 @@ export const Urls = {
     FETCH_CUSTOMER_BY_ID: BASE_URL+"/customer/getbyid",
     FETCH_USER_BY_NAME : BASE_URL+ "/user/checkexistinguser",
     FETCH_ALL_DUE_PAYMENT_ACCOUNTS: BASE_URL+ "/person/getallDue",
+    FETCH_ALL_DUE_INVOICE: BASE_URL+ "/invoice/getallDue",
+    FETCH_REGISTER_SUMMARY: BASE_URL+ "/transaction/getsummary",
 
 
 }

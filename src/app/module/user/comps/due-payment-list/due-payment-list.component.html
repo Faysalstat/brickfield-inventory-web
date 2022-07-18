@@ -1,0 +1,35 @@
+<mat-card class="mt-5">
+    <div class="row">
+        <h2>Client of Due Payments</h2>
+        <div class="md-col-12">
+            <table class="table table-striped">
+                <thead>
+                    <th>Sn</th>
+                    <th>Client Name</th>
+                    <th>Contact No</th>
+                    <th>Amount to Pay</th>
+                    <!-- <th>Action</th> -->
+                    <!-- <th>Contact No</th> -->
+                </thead>
+                <tbody>
+                    <tr *ngIf="!isListExist" >
+                        <td colspan="4" style="font-weight:bold ; ">
+                            No Due Payment Pending!!
+                        </td>
+                    </tr>
+                    <tr class="row-hover" *ngFor="let client of clientList; index as i" (click)="payCash(client)">
+                        <td> {{i+1}} </td>
+                        <td> {{client.driver.person.personName}} </td>
+                        <td> {{client.driver.person.contactNo}} </td>
+                        <td>{{client.amountToPay}}</td>
+                        <!-- <td>
+                            <button mat-mini-fab  color="primary">
+                                <mat-icon>launch</mat-icon>
+                            </button>
+                        </td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</mat-card>

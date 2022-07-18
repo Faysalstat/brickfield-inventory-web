@@ -10,25 +10,12 @@ import { UserService } from '../user.service';
 export class CashPaymentDueListComponent implements OnInit {
   clientList!:any[];
   constructor(
-    private userService:UserService,
-    private route: Router,
+    
     
   ) {
-    this.clientList=[];
    }
 
   ngOnInit(): void {
-    this.fetchCashPaymentDueList();
   }
 
-  fetchCashPaymentDueList(){
-    this.userService.fetchPaymentDueList().subscribe({
-      next:(res)=>{
-        this.clientList = res.body;
-      }
-    })
-  }
-  payCash(client:any){
-    this.route.navigate(["/home/cash-payment",client.id]);
-  }
 }

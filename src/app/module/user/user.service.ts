@@ -142,4 +142,12 @@ public deleteSchedule(queryParams: Map<string,any>): Observable<any>{
   return this.http.post(Urls.DELETE_SCHEDULE,queryParams.get("schedule"));
 }
 
+public fetchDueAmountInvoiceList(): Observable<any>{
+  return this.http.get(Urls.FETCH_ALL_DUE_INVOICE);
+}
+
+public getRegistryReport():Observable<any>{
+  return this.http.get(Urls.FETCH_REGISTER_SUMMARY);
+}
+
 }

@@ -11,9 +11,13 @@ import { StockListComponent } from './stock-list/stock-list.component';
 import { CashPaymentComponent } from './cash-payment/cash-payment.component';
 import { CashReceiveComponent } from './cash-receive/cash-receive.component';
 import { DeliveryDetailsComponent } from './delivery-details/delivery-details.component';
+import { DueInvoiceListComponent } from './due-invoice-list/due-invoice-list.component';
+import { DuePaymentListComponent } from './due-payment-list/due-payment-list.component';
+import { RegisterSummaryComponent } from './register-summary/register-summary.component';
 const components = [
   AddPersonComponent,AddDriverComponent,AddScheduleComponent,AddSupplyerComponent,StockListComponent,
-  CashPaymentComponent,CashReceiveComponent,DeliveryDetailsComponent
+  CashPaymentComponent,CashReceiveComponent,DeliveryDetailsComponent,DueInvoiceListComponent,DuePaymentListComponent,
+  RegisterSummaryComponent
 ]
 
 

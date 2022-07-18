@@ -1,24 +1,24 @@
     <h1>কাস্টমার</h1>
     <form [formGroup]="customerForm">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <mat-form-field class="input-field" appearance="fill" >
                     <mat-label>Contact No:</mat-label>
                     <input   (change)="searchCustomer()" pInputText formControlName="contactNo" placeholder="Contact No." matInput>
                 </mat-form-field>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <mat-form-field class="input-field" appearance="fill">
                     <mat-label>Customer Name :</mat-label>
                     <input  formControlName="name" placeholder="Customer Name" matInput>
                 </mat-form-field>
             </div>
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
                 <mat-form-field class="input-field" appearance="fill">
                     <mat-label>Balance:</mat-label>
                     <input  id="contact"  pInputText formControlName="balance" matInput>
                 </mat-form-field>
-            </div>
+            </div> -->
             <div class="col-md-6">
                 <mat-form-field class="input-field" appearance="fill">
                     <mat-label>Address:</mat-label>

@@ -192,6 +192,9 @@ export enum Tasks{
   CREATE_SUPPLY= "CREATE_SUPPLY",
   UPDATE_SUPPLY= "UPDATE_SUPPLY"
 }
-// export class Supplyer{
-
-// }
+export class TransactionSummary{
+  totalSale:number = 0;
+  totalExpense:number = 0;
+  totalIncome:number = 0;
+  balance:number = 0;
+}
