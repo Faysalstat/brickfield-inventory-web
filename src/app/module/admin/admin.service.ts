@@ -29,4 +29,9 @@ export class AdminService {
     params = params.append("id",id);
     return this.http.get(Urls.FETCH_TASK_BY_ID,{params:params});
   }
+  public checkExistingUser(username:string):Observable<any>{
+    let params = new HttpParams();
+    params = params.append("username",username);
+    return this.http.get(Urls.FETCH_USER_BY_NAME,{params:params});
+  }
 }

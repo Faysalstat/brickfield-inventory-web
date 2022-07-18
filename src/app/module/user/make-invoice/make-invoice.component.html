@@ -167,12 +167,11 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
-                <div class="col-md-4">
+                <!-- <div class="col-md-4">
                     <mat-checkbox class="mt-5" [(ngModel)]="transportCostCustomerPayable">
                         পরিবহন খরচ কাস্টমার পরিশোধ করবে
                     </mat-checkbox>
-
-                </div>
+                </div> -->
                 <div class="col-md-12">
                     <button style="float:left ; margin-top: 10px;" mat-raised-button (click)="addSchedule()"
                         color="accent">Add</button>
@@ -223,6 +222,17 @@
         <mat-card class="mt-5">
             <div class="row">
                 <h2>Invoice Summary</h2>
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <mat-checkbox class="mt-5" [(ngModel)]="transportCostCustomerPayable">
+                            পরিবহন খরচ কাস্টমার পরিশোধ করবে
+                        </mat-checkbox>
+                    </div>
+                    <div class="col-md-4">
+                        <button style="float:left ; margin-top: 10px;" mat-raised-button (click)="calculateBill()"
+                        color="accent">Calculate Summary</button>
+                </div>
+                </div>
                 <div class="col-md-3">
                     <!-- <h3>Total Quantity</h3> -->
                     <mat-form-field class="input-field" appearance="fill">

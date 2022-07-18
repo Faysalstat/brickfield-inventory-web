@@ -15,6 +15,7 @@ export class UsersComponent implements OnInit {
   message:string = "";
   selectedRole!:string;
   roles!:any[];
+  isExist:boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private adminService:AdminService,
@@ -72,6 +73,19 @@ export class UsersComponent implements OnInit {
   }
   onChangeRole(){
 
+  }
+  checkUser(){
+    let userName = this.userForm.get('username')?.value;
+    this.adminService.checkExistingUser(userName).subscribe({
+      next:(res)=>{
+        this.isExist = res.body;
+        this.message = res.message;
+      },
+      error:(err)=>{
+        console.log(err);
+        window.alert(err);
+      }
+    })
   }
   submit() {
     const params:Map<string,any> = new Map();

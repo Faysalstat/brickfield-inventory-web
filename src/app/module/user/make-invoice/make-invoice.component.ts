@@ -39,7 +39,7 @@ export class MakeInvoiceComponent implements OnInit {
   status!: string;
   isNeg!: boolean;
   isDue!: boolean;
-  transportCostCustomerPayable:boolean = true;
+  transportCostCustomerPayable:boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -122,16 +122,27 @@ export class MakeInvoiceComponent implements OnInit {
     this.invoiceIssueForm
       .get('transportCost')
       ?.valueChanges.subscribe((data) => {
+        if(this.transportCostCustomerPayable){
           this.invoiceIssueForm
           .get('totalBill')
           ?.setValue(this.invoiceIssueForm.get('totalPrice')?.value + data);
-        
+        }else{
+          this.invoiceIssueForm
+          .get('totalBill')
+          ?.setValue(this.invoiceIssueForm.get('totalPrice')?.value);
+        }
       });
     this.invoiceIssueForm.get('totalPrice')?.valueChanges.subscribe((data) => {
-      
+      if(this.transportCostCustomerPayable){
         this.invoiceIssueForm
         .get('totalBill')
         ?.setValue(this.invoiceIssueForm.get('transportCost')?.value + data);
+      }else{
+        this.invoiceIssueForm
+        .get('totalBill')
+        ?.setValue(data);
+      }
+        
       
       
     });
@@ -263,11 +274,11 @@ export class MakeInvoiceComponent implements OnInit {
       this.scheduleItem.invoiceId = this.invoiceIssueForm.get('id')?.value;
       this.scheduleItem.vehicleCategoryId =
         this.scheduleItem.vehicleCategory.id;
-      if (this.transportCostCustomerPayable) {
-        this.scheduleItem.transportCostCustomerPayable = 1;
-      } else {
-        this.scheduleItem.transportCostCustomerPayable = 0;
-      }
+      // if (this.transportCostCustomerPayable) {
+      //   this.scheduleItem.transportCostCustomerPayable = 1;
+      // } else {
+      //   this.scheduleItem.transportCostCustomerPayable = 0;
+      // }
       params.set('schedules', this.scheduleItem);
       this.newSchedules.push(this.scheduleItem);
       // this.userService.createScheduleOrder(params).subscribe({
@@ -300,9 +311,6 @@ export class MakeInvoiceComponent implements OnInit {
     let totalTransportCost = 0;
     this.schedules.forEach((schedule) => {
       scheduledQuantity = scheduledQuantity + schedule.deliverableQuantity;
-      // if(schedule.transportCostCustomerPayable==1){
-
-      // }
       totalTransportCost = totalTransportCost + schedule?.transportCost;
     });
     this.invoiceIssueForm.get('scheduledQuantity')?.setValue(scheduledQuantity);
@@ -488,7 +496,8 @@ export class MakeInvoiceComponent implements OnInit {
     this.isReceiving = true;
   }
   calculateBill(){
-    this.calculateScheduleTotal();
-    this.checkScheduledQuantity();
+    this.invoiceIssueForm
+          .get('totalBill')
+          ?.setValue(this.invoiceIssueForm.get('totalPrice')?.value);
   }
 }

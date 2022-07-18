@@ -53,6 +53,9 @@ export class UserService {
   public fetchAllCustomer(): Observable<any>{
     return this.http.get(Urls.FETCH_ALL_CUSTOMER);
   }
+  public fetchPaymentDueList(): Observable<any>{
+    return this.http.get(Urls.FETCH_ALL_DUE_PAYMENT_ACCOUNTS);
+  }
   public fetchAllSupplyers(): Observable<any>{
     return this.http.get(Urls.FETCH_ALL_SUPPLYER);
   }
@@ -82,6 +85,11 @@ export class UserService {
     let params = new HttpParams();
     params = params.append("contactNo",contactNo);
     return this.http.get(Urls.FETCH_CUSTOMER_BY_CONTACTNO,{params:params});
+  }
+  public getAccountById(id:string): Observable<any>{
+    let params = new HttpParams();
+    params = params.append("id",id);
+    return this.http.get(Urls.FETCH_ACCOUNT_BY_ID,{params:params});
   }
 
   public createInvoice(queryParams: Map<string,any>): Observable<any>{

@@ -17,6 +17,7 @@ import { ScheduleListComponent } from './schedule-list/schedule-list.component';
 import { SupplyInvoiceComponent } from './supply-invoice/supply-invoice.component';
 import { SupplyerListComponent } from './supplyer-list/supplyer-list.component';
 import { MakeInvoiceComponent } from './make-invoice/make-invoice.component';
+import { CashPaymentDueListComponent } from './cash-payment-due-list/cash-payment-due-list.component';
 
 
 
@@ -34,7 +35,8 @@ import { MakeInvoiceComponent } from './make-invoice/make-invoice.component';
     ScheduleListComponent,
     SupplyInvoiceComponent,
     SupplyerListComponent,
-    MakeInvoiceComponent
+    MakeInvoiceComponent,
+    CashPaymentDueListComponent
   ],
   imports: [
     CommonModule,

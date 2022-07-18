@@ -31,6 +31,7 @@ export const Urls = {
     FETCH_ALL_CUSTOMER: BASE_URL+ "/customer/getall",
     FETCH_ALL_SUPPLYER: BASE_URL+ "/supplyer/getall",
     FETCH_CUSTOMER_BY_CONTACTNO :BASE_URL+ "/customer/getbycontactno",
+    FETCH_ACCOUNT_BY_ID :BASE_URL+ "/customer/getbyaccountid",
     FETCH_ALL_INVOICE: BASE_URL + "/invoice/getall",
     FETCH_ALL_TASK: BASE_URL + "/approval/getall",
     FETCH_TASK_BY_ID: BASE_URL + "/approval/getbyid",
@@ -45,6 +46,8 @@ export const Urls = {
     FETCH_ALL_TRANSPORT_CATEGORY : BASE_URL + "/schedule/getallvehicle",
     FETCH_INVOICE_BY_ID: BASE_URL+"/invoice/get",
     FETCH_CUSTOMER_BY_ID: BASE_URL+"/customer/getbyid",
+    FETCH_USER_BY_NAME : BASE_URL+ "/user/checkexistinguser",
+    FETCH_ALL_DUE_PAYMENT_ACCOUNTS: BASE_URL+ "/person/getallDue",
 
 
 }

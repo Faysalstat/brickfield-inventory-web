@@ -29,7 +29,10 @@
                 <div class="col-md-4">
                     <mat-form-field class="input-field" appearance="fill">
                         <mat-label>Login ID (username / Email) :</mat-label>
-                        <input  formControlName="username" placeholder="User Name" matInput>
+                        <input (change)="checkUser()"  formControlName="username" placeholder="User Name" matInput>
+                        <!-- <div *ngIf="isExist" style="color:crimson;">
+                            {{message}}
+                        </div> -->
                     </mat-form-field>
                 </div>
                 <div class="col-md-4">
@@ -48,7 +51,7 @@
                     </div>
             </div>
             <button type="submit" (click)="submit()"  mat-raised-button color="primary">Add User</button>
-            <p style="color: red;font-size:medium;margin-top:10px;">{{message}}</p>
+            <p style="color: crimson;font-size:medium;margin-top:10px;">{{message}}</p>
         </form>
     </mat-card>
 </div>
