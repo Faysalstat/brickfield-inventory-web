@@ -52,4 +52,8 @@ export const Urls = {
     FETCH_REGISTER_SUMMARY: BASE_URL+ "/transaction/getsummary",
 
 
+    // CHHECKING 
+    CHECK_IS_LOGGEDIN: BASE_URL + "/auth/islogedin"
+
+
 }

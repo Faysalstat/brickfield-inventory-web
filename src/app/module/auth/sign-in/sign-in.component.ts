@@ -40,7 +40,13 @@ export class SignInComponent implements OnInit {
     this.authService.signIn(params).subscribe({
       next:(res)=>{
         console.log(res);
-        this.router.navigate(["/home"]);
+        localStorage.setItem('token', res.body.token);
+        if(res.body.userRole== "MANAGER"){
+          this.router.navigate(["/home"]);
+        }else if(res.body.userRole== "ADMIN"){
+          this.router.navigate(["/admin"]);
+        }
+        
       },
       error:(err)=>{},
       complete: ()=>{}
