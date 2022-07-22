@@ -61,7 +61,7 @@ export class AddSupplyerComponent implements OnInit {
       balance:this.supplyerForm.get('balance')?.value||0,
       due:0,
       amountToPay:0,
-      productId:this.selectedProduct.id
+      // productId:this.selectedProduct.id
     }
     params.set("supplyer",supplyer);
     this.userService.addSupplyer(params).subscribe({

@@ -119,24 +119,24 @@ export class MakeInvoiceComponent implements OnInit {
         .get('duePayment')
         ?.setValue(data - this.invoiceIssueForm.get('advancePayment')?.value);
     });
-    this.invoiceIssueForm
-      .get('transportCost')
-      ?.valueChanges.subscribe((data) => {
-        if(this.transportCostCustomerPayable){
-          this.invoiceIssueForm
-          .get('totalBill')
-          ?.setValue(this.invoiceIssueForm.get('totalPrice')?.value + data);
-        }else{
-          this.invoiceIssueForm
-          .get('totalBill')
-          ?.setValue(this.invoiceIssueForm.get('totalPrice')?.value);
-        }
-      });
+    // this.invoiceIssueForm
+    //   .get('transportCost')
+    //   ?.valueChanges.subscribe((data) => {
+    //     if(this.transportCostCustomerPayable){
+    //       this.invoiceIssueForm
+    //       .get('totalBill')
+    //       ?.setValue(this.invoiceIssueForm.get('totalPrice')?.value + data);
+    //     }else{
+    //       this.invoiceIssueForm
+    //       .get('totalBill')
+    //       ?.setValue(this.invoiceIssueForm.get('totalPrice')?.value);
+    //     }
+    //   });
     this.invoiceIssueForm.get('totalPrice')?.valueChanges.subscribe((data) => {
       if(this.transportCostCustomerPayable){
         this.invoiceIssueForm
         .get('totalBill')
-        ?.setValue(this.invoiceIssueForm.get('transportCost')?.value + data);
+        ?.setValue(data);
       }else{
         this.invoiceIssueForm
         .get('totalBill')
@@ -471,7 +471,6 @@ export class MakeInvoiceComponent implements OnInit {
       newPayment: this.invoiceIssueForm.get('newPayment')?.value,
       customerId:this.customer.id,
       account: this.account,
-      approvalStatus: "PENDING",
       orders : this.newOrders,
       scheduleOrders : this.newSchedules,
     };
@@ -480,17 +479,9 @@ export class MakeInvoiceComponent implements OnInit {
     // todo add user
     approvalModel.createdBy = 'Manager';
     approvalModel.taskType = Tasks.UPDATE_INVOICE;
+    approvalModel.invoiceId = invoiceUpdateModel.id;
     params.set('approval', approvalModel);
     this.sendToApproval(params);
-    // params.set('invoice', invoiceUpdateModel);
-    // this.userService.updateInvoice(params).subscribe({
-    //   next: (res) => {
-    //     console.log(res);
-    //     this.router.navigate(['/home/invoice-list']);
-    //   },
-    //   error: (err) => {},
-    //   complete: () => {},
-    // });
   }
   showreceive() {
     this.isReceiving = true;

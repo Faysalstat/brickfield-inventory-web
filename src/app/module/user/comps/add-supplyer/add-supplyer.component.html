@@ -2,19 +2,19 @@
     <h1>Add Supplyer</h1>
     <form [formGroup]="supplyerForm">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <mat-form-field class="input-field" appearance="fill" >
                     <mat-label>Contact No:</mat-label>
                     <input   (change)="searchSupplyer()" pInputText formControlName="contactNo" placeholder="Customer Name" matInput>
                 </mat-form-field>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <mat-form-field class="input-field" appearance="fill">
                     <mat-label>Customer Name :</mat-label>
                     <input  formControlName="name" placeholder="Customer Name" matInput>
                 </mat-form-field>
             </div>
-            <div class="col-md-3">
+            <!-- <div class="col-md-3">
                 <mat-form-field class="input-field" appearance="fill">
                     <mat-label>Advance:</mat-label>
                     <input  id="contact"  pInputText formControlName="balance" matInput>
@@ -27,7 +27,7 @@
                       <mat-option *ngFor="let product of products" [value]= "product" >{{product?.productName}}</mat-option>
                     </mat-select>
                   </mat-form-field>
-            </div>
+            </div> -->
             <div class="col-md-6">
                 <mat-form-field class="input-field" appearance="fill">
                     <mat-label>Address:</mat-label>

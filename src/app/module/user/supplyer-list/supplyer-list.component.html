@@ -14,7 +14,6 @@
             <th>Address</th>
             <!-- <th>Balance</th> -->
             <th>Amount To Pay</th>
-            <th>Product</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -26,13 +25,12 @@
             <td>{{supplyer?.person?.personAddress}}</td>
             <!-- <td>{{supplyer?.account?.balance}}</td> -->
             <td style="color:crimson ;">{{supplyer?.account?.amountToPay}}</td>
-            <td>{{supplyer?.product?.productName}}</td>
             <td>
               <button mat-mini-fab (click)="edit(supplyer)" color="primary">
                 <mat-icon>menu</mat-icon>
               </button>
               <span style="margin-right: 5px;"> </span>
-              <button mat-mini-fab (click)="deletecustomer(supplyer)" color="primary">
+              <button mat-mini-fab (click)="deletecustomer(supplyer)" color="warn">
                 <mat-icon>delete</mat-icon>
               </button>
             </td>

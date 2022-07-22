@@ -124,6 +124,10 @@ export class UserService {
     return this.http.get(Urls.FETCH_ALL_TRANSPORT_CATEGORY);
   }
 
+  public fetchExpenseCategories(): Observable<any>{
+    return this.http.get(Urls.FETCH_EXPENSE_CATEGROY);
+  }
+
 // Delete 
 public deleteCustomer(queryParams: Map<string,any>): Observable<any>{
   console.log(queryParams.get("customer"))

@@ -6,7 +6,6 @@ import { UserRoutingModule } from './user-routing.module';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { CustomerAccountComponent } from './customer-account/customer-account.component';
 import { StockManagementComponent } from './stock-management/stock-management.component';
-import { DeliveryComponent } from './delivery/delivery.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CompsModule } from './comps/comps.module';
 import { MaterialModule } from 'src/material.module';
@@ -18,6 +17,7 @@ import { SupplyInvoiceComponent } from './supply-invoice/supply-invoice.componen
 import { SupplyerListComponent } from './supplyer-list/supplyer-list.component';
 import { MakeInvoiceComponent } from './make-invoice/make-invoice.component';
 import { CashPaymentDueListComponent } from './cash-payment-due-list/cash-payment-due-list.component';
+import { InvoiceFormComponent } from './supply/invoice-form/invoice-form.component';
 
 
 
@@ -28,7 +28,6 @@ import { CashPaymentDueListComponent } from './cash-payment-due-list/cash-paymen
     CustomerListComponent,
     CustomerAccountComponent,
     StockManagementComponent,
-    DeliveryComponent,
     ListInvoicesComponent,
     ScheduleDeliveryComponent,
     DriverListComponent,
@@ -36,7 +35,8 @@ import { CashPaymentDueListComponent } from './cash-payment-due-list/cash-paymen
     SupplyInvoiceComponent,
     SupplyerListComponent,
     MakeInvoiceComponent,
-    CashPaymentDueListComponent
+    CashPaymentDueListComponent,
+    InvoiceFormComponent
   ],
   imports: [
     CommonModule,

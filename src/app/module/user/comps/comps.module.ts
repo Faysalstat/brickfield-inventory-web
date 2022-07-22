@@ -14,10 +14,11 @@ import { DeliveryDetailsComponent } from './delivery-details/delivery-details.co
 import { DueInvoiceListComponent } from './due-invoice-list/due-invoice-list.component';
 import { DuePaymentListComponent } from './due-payment-list/due-payment-list.component';
 import { RegisterSummaryComponent } from './register-summary/register-summary.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 const components = [
   AddPersonComponent,AddDriverComponent,AddScheduleComponent,AddSupplyerComponent,StockListComponent,
   CashPaymentComponent,CashReceiveComponent,DeliveryDetailsComponent,DueInvoiceListComponent,DuePaymentListComponent,
-  RegisterSummaryComponent
+  RegisterSummaryComponent,NavBarComponent
 ]
 
 

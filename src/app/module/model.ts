@@ -103,22 +103,29 @@ export class InvoiceDomain{
 export class SupplyInvoiceIssueModel {
     supplyerId!: number;
     productName!:string;
+
+    // garichukti
+    numberOfTrips!:number;
+    billPerTrip!:number;
+    vehicleCategoryName!:string;
+
     totalPrice!: number;
-    actualPrice!: number;
     totalQuantity!: number;
     actualQuantity!: number;
     quantityType!:string;
 
     advancePayment: number = 0;
     duePament: number = 0;
-    isCFT: boolean = false;
-    vehicleCategoryName!:string;
+    
+    
     pricePerTrip!:number;
 
     deliveryStatus!: string;
     approvalStatus!: string;
     issuedBy!: string;
   }
+
+
 export class OrderModel {
   invoiceId!:number;
   quantity!: number;
@@ -185,6 +192,7 @@ export class ApprovalModel {
   payload!: string;
   createdBy!: string;
   taskType!: string;
+  invoiceId!:string;
 }
 export enum Tasks{
   CREATE_INVOICE="CREATE_INVOICE",

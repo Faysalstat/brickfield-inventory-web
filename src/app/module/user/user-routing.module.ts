@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AppAuthGuard } from 'src/app/app-auth.guard';
 import { AuthenticationGuard } from '../authentication.guard';
 import { CashPaymentDueListComponent } from './cash-payment-due-list/cash-payment-due-list.component';
 import { CashPaymentComponent } from './comps/cash-payment/cash-payment.component';
 import { CashReceiveComponent } from './comps/cash-receive/cash-receive.component';
 import { CustomerAccountComponent } from './customer-account/customer-account.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
-import { DeliveryComponent } from './delivery/delivery.component';
 import { DriverListComponent } from './driver-list/driver-list.component';
 import { HomeComponent } from './home/home.component';
 import { ListInvoicesComponent } from './list-invoices/list-invoices.component';
@@ -19,23 +19,23 @@ import { SupplyerListComponent } from './supplyer-list/supplyer-list.component';
 import { UserComponent } from './user.component';
 
 const routes: Routes = [{
-    path: '', component: UserComponent, children: [
+    path: '', component: UserComponent,canActivate:[AppAuthGuard],
+    children: [
         {path: '', component: HomeComponent},
-        {path:'stock',component:StockManagementComponent,canActivate:[AuthenticationGuard]},
-        {path:'invoice',component:MakeInvoiceComponent, canActivate:[AuthenticationGuard]},
-        {path:'edit-invoice/:id',component:MakeInvoiceComponent,canActivate:[AuthenticationGuard]},
-        {path:'delivery',component:DeliveryComponent,canActivate:[AuthenticationGuard]},
+        {path:'stock',component:StockManagementComponent},
+        {path:'invoice',component:MakeInvoiceComponent},
+        {path:'edit-invoice/:id',component:MakeInvoiceComponent},
         {path:'customer',component:CustomerListComponent},
         {path:'account',component:CustomerAccountComponent},
-        {path:'invoice-list',component:ListInvoicesComponent,canActivate:[AuthenticationGuard]},
-        {path:'schedule-list',component:ScheduleListComponent,canActivate:[AuthenticationGuard]},
-        {path:'schedule-delivery/:id', component:ScheduleDeliveryComponent,canActivate:[AuthenticationGuard]},
-        {path:'driver-management', component:DriverListComponent,canActivate:[AuthenticationGuard]},
-        {path:'supplyer-management', component:SupplyerListComponent,canActivate:[AuthenticationGuard]},
-        {path:'supply-invoice', component:SupplyInvoiceComponent,canActivate:[AuthenticationGuard]},
-        {path:'cash-receive', component:CashReceiveComponent,canActivate:[AuthenticationGuard]},
-        {path:'cash-payment-due-list', component:CashPaymentDueListComponent,canActivate:[AuthenticationGuard]},
-        {path:'cash-payment/:id', component:CashPaymentComponent,canActivate:[AuthenticationGuard]},
+        {path:'invoice-list',component:ListInvoicesComponent},
+        {path:'schedule-list',component:ScheduleListComponent},
+        {path:'schedule-delivery/:id', component:ScheduleDeliveryComponent},
+        {path:'driver-management', component:DriverListComponent},
+        {path:'supplyer-management', component:SupplyerListComponent},
+        {path:'supply-invoice', component:SupplyInvoiceComponent},
+        {path:'cash-receive', component:CashReceiveComponent},
+        {path:'cash-payment-due-list', component:CashPaymentDueListComponent},
+        {path:'cash-payment/:id', component:CashPaymentComponent},
       ]
 }];
 

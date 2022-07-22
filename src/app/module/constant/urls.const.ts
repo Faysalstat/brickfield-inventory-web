@@ -50,7 +50,7 @@ export const Urls = {
     FETCH_ALL_DUE_PAYMENT_ACCOUNTS: BASE_URL+ "/person/getallDue",
     FETCH_ALL_DUE_INVOICE: BASE_URL+ "/invoice/getallDue",
     FETCH_REGISTER_SUMMARY: BASE_URL+ "/transaction/getsummary",
-
+    FETCH_EXPENSE_CATEGROY: BASE_URL+ "/expense/getallcategory",
 
     // CHHECKING 
     CHECK_IS_LOGGEDIN: BASE_URL + "/auth/islogedin"
