@@ -16,6 +16,7 @@ export const Urls = {
     APPROVE_INVOICE : BASE_URL + "/invoice/approve",
     UPDATE_BALANCE : BASE_URL + "/person/updatebalance",
     GET_USER_BY_ID: BASE_URL + "/updateUserStatus",
+
     // CREATE 
     CREATE_INVOICE : BASE_URL + "/invoice/create",
     CREATE_SCHEDULE_DELIVERY: BASE_URL + "/schedule/create",
@@ -27,6 +28,8 @@ export const Urls = {
     CREATE_DRIVER: BASE_URL + "/driver/create",
     CREATE_SUPPLYER: BASE_URL + "/supplyer/create",
     CREATE_SORDAR: BASE_URL + "/user/addsordar",
+    CREATE_NEW_EXPENSE: BASE_URL + "/",
+
     // FETCH 
     FETCH_ALL_CUSTOMER: BASE_URL+ "/customer/getall",
     FETCH_ALL_SUPPLYER: BASE_URL+ "/supplyer/getall",
@@ -51,7 +54,7 @@ export const Urls = {
     FETCH_ALL_DUE_INVOICE: BASE_URL+ "/invoice/getallDue",
     FETCH_REGISTER_SUMMARY: BASE_URL+ "/transaction/getsummary",
     FETCH_EXPENSE_CATEGROY: BASE_URL+ "/expense/getallcategory",
-
+    
     // CHHECKING 
     CHECK_IS_LOGGEDIN: BASE_URL + "/auth/islogedin"
 

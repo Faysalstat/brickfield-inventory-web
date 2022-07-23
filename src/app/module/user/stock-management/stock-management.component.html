@@ -1,1 +1,96 @@
-<p>stock-management works!</p>
+<mat-card class="mt-4">
+    <h2>দৈনিক কাচা ইট তৈরী</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <mat-form-field appearance="fill" class="input-field">
+                <mat-label>নাম</mat-label>
+                <mat-select [ngModelOptions]="{standalone:true}" 
+                  [(ngModel)]="selectedBrickProduction.categoryName">
+                  <mat-option *ngFor="let mill of mills" [value]="mill.value">{{mill?.label}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field class="input-field" appearance="fill">
+                <mat-label>পরিমান:</mat-label>
+                <input type="number" pInputText [ngModelOptions]="{standalone:true}" 
+                [(ngModel)]="selectedBrickProduction.quantity" matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <button style="float:left ; margin-top: 10px;" mat-raised-button color="accent" (click)="addRawProduction()" >যোগ করুন</button>
+        </div>
+    </div>
+    <div class="col-md-8 mt-5" style="overflow-x:auto;">
+        <mat-card>
+            <table class="table table-striped" >
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>নাম</th>
+                        <th>পরিমান</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let production of dailyProductionList; index as i">
+                        <td>{{i+1}}</td>
+                        <th>{{production.categoryName}}</th>
+                        <th>{{production.quantity}}</th>
+                        <th>
+                            <button mat-icon-button color="warn" (click)="deleteRawProduction(i)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </th>
+                    </tr>
+                </tbody>
+                <tfoot style="font-weight:bold ;">
+                    <tr>
+                        <td colspan="2">Total Production</td>
+                        <td>{{totalRawProduction}}</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </mat-card>
+
+    </div>
+</mat-card>
+
+<mat-card class="mt-4">
+    <h2>দৈনিক কাচা ইট লোড</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <mat-form-field class="input-field" appearance="fill">
+                <mat-label>সাবেক লোড:</mat-label>
+                <input type="number" pInputText [ngModelOptions]="{standalone:true}" 
+                [(ngModel)]="previousLoadQuantity" matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field class="input-field" appearance="fill">
+                <mat-label>আদ্যই লোড:</mat-label>
+                <input type="number" pInputText [ngModelOptions]="{standalone:true}" 
+                [(ngModel)]="latestLoadQuantity" matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field class="input-field" appearance="fill">
+                <mat-label>মোট লোড:</mat-label>
+                <input type="number" pInputText [ngModelOptions]="{standalone:true}" 
+                [(ngModel)]="totalLoadQuantity" matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field class="input-field" appearance="fill">
+                <mat-label>মন্তব্য :</mat-label>
+                <textarea pInputText [ngModelOptions]="{standalone:true}" 
+                    [(ngModel)]="loadComment" matInput></textarea>
+            </mat-form-field>
+        </div>
+        <!-- <div class="col-md-3">
+            <button style="float:left ; margin-top: 10px;" mat-raised-button color="accent" (click)="addRawProduction()" >যোগ করুন</button>
+        </div> -->
+    </div>
+</mat-card>

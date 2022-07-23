@@ -206,3 +206,9 @@ export class TransactionSummary{
   totalIncome:number = 0;
   balance:number = 0;
 }
+
+export class RawBrickProduction{
+  categoryName!:number;
+  quantity!:number;
+  productionDate!:Date;
+}
