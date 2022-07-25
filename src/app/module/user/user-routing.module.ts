@@ -13,6 +13,7 @@ import { ListInvoicesComponent } from './list-invoices/list-invoices.component';
 import { MakeInvoiceComponent } from './make-invoice/make-invoice.component';
 import { ScheduleDeliveryComponent } from './schedule-delivery/schedule-delivery.component';
 import { ScheduleListComponent } from './schedule-list/schedule-list.component';
+import { SordarListComponent } from './sordar-list/sordar-list.component';
 import { StockManagementComponent } from './stock-management/stock-management.component';
 import { SupplyInvoiceComponent } from './supply-invoice/supply-invoice.component';
 import { SupplyerListComponent } from './supplyer-list/supplyer-list.component';
@@ -31,6 +32,7 @@ const routes: Routes = [{
         {path:'schedule-list',component:ScheduleListComponent},
         {path:'schedule-delivery/:id', component:ScheduleDeliveryComponent},
         {path:'driver-management', component:DriverListComponent},
+        {path:'sordar-management', component:SordarListComponent},
         {path:'supplyer-management', component:SupplyerListComponent},
         {path:'supply-invoice', component:SupplyInvoiceComponent},
         {path:'cash-receive', component:CashReceiveComponent},

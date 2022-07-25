@@ -8,17 +8,17 @@
                <thead>
                   <tr>
                      <th>Brick Type</th>
-                     <th>Piece Sold</th>
-                     <th>Amount In Taka</th>
+                     <th>Stock</th>
+                     <!-- <th>Amount In Taka</th> -->
                   </tr>
                </thead>
                <tbody>
-                 <tr>
-                     <td>পাকা ইট</td>
-                     <td>159000</td>
-                     <td>2000000 BDT</td>
+                 <tr *ngFor="let brick of bricks">
+                     <td>{{brick?.category}}</td>
+                     <td>{{brick?.quantity}}</td>
+                     <!-- <td>2000000 BDT</td> -->
                  </tr>
-                  <tr>
+                  <!-- <tr>
                      <td>পিকিট</td>
                      <td>200000</td>
                      <td>2000000 BDT</td>
@@ -27,7 +27,7 @@
                      <td>কাঁচা ইট</td>
                      <td>203754</td>
                      <td>2000000 BDT</td>
-                  </tr>
+                  </tr> -->
                </tbody>
             </table>
          </div>

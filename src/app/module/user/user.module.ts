@@ -18,6 +18,7 @@ import { SupplyerListComponent } from './supplyer-list/supplyer-list.component';
 import { MakeInvoiceComponent } from './make-invoice/make-invoice.component';
 import { CashPaymentDueListComponent } from './cash-payment-due-list/cash-payment-due-list.component';
 import { InvoiceFormComponent } from './supply/invoice-form/invoice-form.component';
+import { SordarListComponent } from './sordar-list/sordar-list.component';
 
 
 
@@ -36,7 +37,8 @@ import { InvoiceFormComponent } from './supply/invoice-form/invoice-form.compone
     SupplyerListComponent,
     MakeInvoiceComponent,
     CashPaymentDueListComponent,
-    InvoiceFormComponent
+    InvoiceFormComponent,
+    SordarListComponent
   ],
   imports: [
     CommonModule,

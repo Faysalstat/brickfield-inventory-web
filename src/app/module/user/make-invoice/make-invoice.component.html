@@ -116,7 +116,16 @@
         <mat-card class="mt-5">
             <div class="row">
                 <h2>ডেলিভারি শিডিউল</h2>
-                <div class="col-md-4">
+                <div class="col-md-3">
+                    <mat-form-field appearance="fill" class="input-field">
+                        <mat-label>অর্ডার</mat-label>
+                        <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageOrder()"
+                            [(ngModel)]="selectedOrder">
+                            <mat-option *ngFor="let order of ordersForDeliveryList" [value]="order">{{order?.brick?.category}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
                     <mat-form-field class="input-field" appearance="fill">
                         <mat-label>ডেলিভারি পরিমান :</mat-label>
                         <input type="number" pInputText [ngModelOptions]="{standalone:true}"

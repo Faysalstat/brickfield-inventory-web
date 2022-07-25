@@ -15,10 +15,11 @@ import { DueInvoiceListComponent } from './due-invoice-list/due-invoice-list.com
 import { DuePaymentListComponent } from './due-payment-list/due-payment-list.component';
 import { RegisterSummaryComponent } from './register-summary/register-summary.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { AddSordarComponent } from './add-sordar/add-sordar.component';
 const components = [
   AddPersonComponent,AddDriverComponent,AddScheduleComponent,AddSupplyerComponent,StockListComponent,
   CashPaymentComponent,CashReceiveComponent,DeliveryDetailsComponent,DueInvoiceListComponent,DuePaymentListComponent,
-  RegisterSummaryComponent,NavBarComponent
+  RegisterSummaryComponent,NavBarComponent,AddSordarComponent
 ]
 
 

@@ -35,11 +35,20 @@ export class Driver {
   account!: Account;
   person!: Person;
 }
+
+export class Sordar {
+  id!: number;
+  account!: Account;
+  person!: Person;
+  category!:string;
+}
 export class Brick {
   id!: number;
   category!: string;
   pricePerPiece: number = 0;
   quantity: number = 0;
+  unloadQuantity: number = 0;
+  updatedTotalQuantity:number = 0;
 }
 
 export class CustomerDomain {
@@ -147,6 +156,7 @@ export interface PeriodicInvoiceElement {
 }
 export class ScheduleDeliveryModel {
   id!: number;
+  order!:OrderModel;
   invoiceId!: number;
   invoice!: Invoice;
   driver!: Driver;
@@ -159,6 +169,7 @@ export class ScheduleDeliveryModel {
   vehicleCategoryId!: number;
   deliveryStatus!:string;
   transportCostCustomerPayable!:number;
+  brickId!:number;
 }
 
 export class Invoice {
@@ -211,4 +222,5 @@ export class RawBrickProduction{
   categoryName!:number;
   quantity!:number;
   productionDate!:Date;
+  sordarName!:string;
 }

@@ -1,18 +1,27 @@
 <div class="mt-4 p-5 bg-light rounded">
-    <h1>Add Driver</h1>
-    <form [formGroup]="driverForm">
+    <h1>Add Sordar</h1>
+    <form [formGroup]="sordarForm">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <mat-form-field class="input-field" appearance="fill">
                     <mat-label>Contact No:</mat-label>
-                    <input  (change)="searchDriver()" pInputText formControlName="contactNo" placeholder="Contact No." matInput>
+                    <input  (change)="searchsordar()" pInputText formControlName="contactNo" placeholder="Contact No." matInput>
                 </mat-form-field>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <mat-form-field class="input-field" appearance="fill">
-                    <mat-label>Driver Name :</mat-label>
+                    <mat-label>sordar Name :</mat-label>
                     <input  formControlName="name" placeholder="Customer Name" matInput>
                 </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field appearance="fill" class="input-field">
+                    <mat-label>Sordar Category</mat-label>
+                    <mat-select formControlName="category">
+                      <mat-option *ngFor="let mill of mills" [value]="mill.value">{{mill?.label}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
             </div>
             <div class="col-md-6">
                 <mat-form-field class="input-field" appearance="fill">
@@ -21,7 +30,7 @@
                 </mat-form-field>
             </div>
         </div>
-        <button *ngIf="!disable" type="submit" (click)="submit()"  mat-raised-button color="primary">Submit</button>
+        <button type="submit" (click)="submit()"  mat-raised-button color="primary">Submit</button>
         <p style="color: red;font-size:medium;margin-top:10px;">{{message}}</p>
     </form>
 </div>

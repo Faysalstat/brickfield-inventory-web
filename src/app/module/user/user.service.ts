@@ -20,14 +20,45 @@ export class UserService {
     console.log(queryParams.get("driver"))
     return this.http.post(Urls.CREATE_DRIVER,queryParams.get("driver"));
   }
-  public fetchAllDrivers(): Observable<any>{
-    return this.http.get(Urls.FETCH_ALL_DRIVERS);
+  public addSordar(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("sordar"))
+    return this.http.post(Urls.CREATE_SORDAR,queryParams.get("sordar"));
+  }
+  public addRawStock(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("rawbrick"))
+    return this.http.post(Urls.CREATE_RAW_STOCK,queryParams.get("rawbrick"));
+  }
+  public addSupplyer(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("supplyer"))
+    return this.http.post(Urls.CREATE_SUPPLYER,queryParams.get("supplyer"));
+  }
+  public setDelivery(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("schedule"))
+    return this.http.post(Urls.SET_DELIVERY,queryParams.get("schedule"));
+  }
+  public createInvoice(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("invoice"))
+    return this.http.post(Urls.CREATE_INVOICE,queryParams.get("invoice"));
+  }
+  public createScheduleOrder(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("schedules"))
+    return this.http.post(Urls.CREATE_SCHEDULE_DELIVERY,queryParams.get("schedules"));
+  }
+  public createOrder(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("orders"))
+    return this.http.post(Urls.CREATE_ORDER,queryParams.get("orders"));
+  }
+  public createApproval(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("approval"))
+    return this.http.post(Urls.SEND_TO_APPROVAL,queryParams.get("approval"));
   }
 
+  
 
-  public addSordar(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("sorder"))
-    return this.http.post(Urls.CREATE_DRIVER,queryParams.get("sorder"));
+
+  // FETCING DATA API 
+  public fetchAllDrivers(): Observable<any>{
+    return this.http.get(Urls.FETCH_ALL_DRIVERS);
   }
   public fetchAllSordars(): Observable<any>{
     return this.http.get(Urls.FETCH_ALL_SORDARS);
@@ -41,15 +72,7 @@ export class UserService {
   public fetchAllSchedulesByDate(): Observable<any>{
     return this.http.get(Urls.FETCH_ALL_SCHEDULES_BY_DATE);
   }
-  public addSupplyer(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("supplyer"))
-    return this.http.post(Urls.CREATE_SUPPLYER,queryParams.get("supplyer"));
-  }
-  public setDelivery(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("schedule"))
-    return this.http.post(Urls.SET_DELIVERY,queryParams.get("schedule"));
-  }
-  
+
   public fetchAllCustomer(): Observable<any>{
     return this.http.get(Urls.FETCH_ALL_CUSTOMER);
   }
@@ -91,34 +114,15 @@ export class UserService {
     params = params.append("id",id);
     return this.http.get(Urls.FETCH_ACCOUNT_BY_ID,{params:params});
   }
-
-  public createInvoice(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("invoice"))
-    return this.http.post(Urls.CREATE_INVOICE,queryParams.get("invoice"));
-  }
-  public updateInvoice(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("invoice"))
-    return this.http.post(Urls.UPDATE_INVOICE,queryParams.get("invoice"));
-  }
-  public updateAccount(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("account"))
-    return this.http.post(Urls.UPDATE_BALANCE,queryParams.get("account"));
-  }
-  public createScheduleOrder(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("schedules"))
-    return this.http.post(Urls.CREATE_SCHEDULE_DELIVERY,queryParams.get("schedules"));
-  }
-  public createOrder(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("orders"))
-    return this.http.post(Urls.CREATE_ORDER,queryParams.get("orders"));
-  }
-  public createApproval(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("approval"))
-    return this.http.post(Urls.SEND_TO_APPROVAL,queryParams.get("approval"));
-  }
-
   public fetchBricks(): Observable<any>{
     return this.http.get(Urls.FETCH_ALL_BRICK);
+  }
+  public fetchRawBricks(): Observable<any>{
+    return this.http.get(Urls.FETCH_ALL_RAW_BRICK);
+  }
+
+  public fetchRawStockReport(): Observable<any>{
+    return this.http.get(Urls.FETCH_ALL_RAW_PRODUCTION_REPORT);
   }
   public fetchTransportCategories(): Observable<any>{
     return this.http.get(Urls.FETCH_ALL_TRANSPORT_CATEGORY);
@@ -127,6 +131,19 @@ export class UserService {
   public fetchExpenseCategories(): Observable<any>{
     return this.http.get(Urls.FETCH_EXPENSE_CATEGROY);
   }
+
+
+  // UPDATE 
+  public updateInvoice(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("invoice"))
+    return this.http.post(Urls.UPDATE_INVOICE,queryParams.get("invoice"));
+  }
+  public updateAccount(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("account"))
+    return this.http.post(Urls.UPDATE_BALANCE,queryParams.get("account"));
+  }
+  
+  
 
 // Delete 
 public deleteCustomer(queryParams: Map<string,any>): Observable<any>{

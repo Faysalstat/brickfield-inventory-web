@@ -18,6 +18,7 @@ export class MakeInvoiceComponent implements OnInit {
   bricks!: Brick[];
   selectedBrick!: Brick;
   orders: OrderModel[] = new Array();
+  ordersForDeliveryList: OrderModel[] = new Array();
   newOrders: OrderModel[] = new Array();
   schedules: ScheduleDeliveryModel[] = new Array();
   newSchedules: ScheduleDeliveryModel[] = new Array();
@@ -40,6 +41,7 @@ export class MakeInvoiceComponent implements OnInit {
   isNeg!: boolean;
   isDue!: boolean;
   transportCostCustomerPayable:boolean = false;
+  selectedOrder!: OrderModel;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -191,23 +193,10 @@ export class MakeInvoiceComponent implements OnInit {
       this.orderItem.invoiceId = this.invoiceIssueForm.get('id')?.value;
       params.set('orders', this.orderItem);
       this.newOrders.push(this.orderItem);
-      // this.userService.createOrder(params).subscribe({
-      //   next: (data) => {
-      //     console.log(data.body);
-      //     this.orders.push(data.body);
-      //     this.selectedBrick = new Brick();
-      //     this.orderItem = new OrderModel();
-      //     this.calculateOrderTotal();
-      //   },
-      //   error: (err) => {
-      //     console.log(err);
-      //   },
-      //   complete: () => {
-      //     this.updateInvoice();
-      //   },
-      // });
+      
     }
     this.orders.push(this.orderItem);
+    this.ordersForDeliveryList.push(this.orderItem);
     this.selectedBrick = new Brick();
     this.orderItem = new OrderModel();
     this.calculateOrderTotal();
@@ -273,32 +262,10 @@ export class MakeInvoiceComponent implements OnInit {
       const params: Map<string, any> = new Map();
       this.scheduleItem.invoiceId = this.invoiceIssueForm.get('id')?.value;
       this.scheduleItem.vehicleCategoryId =
-        this.scheduleItem.vehicleCategory.id;
-      // if (this.transportCostCustomerPayable) {
-      //   this.scheduleItem.transportCostCustomerPayable = 1;
-      // } else {
-      //   this.scheduleItem.transportCostCustomerPayable = 0;
-      // }
+      this.scheduleItem.vehicleCategory.id;
       params.set('schedules', this.scheduleItem);
       this.newSchedules.push(this.scheduleItem);
-      // this.userService.createScheduleOrder(params).subscribe({
-      //   next: (data) => {
-      //     console.log(data);
-      //     this.schedules.push(data.body);
-      //     window.alert('Schedule created');
-      //   },
-      //   error: (err) => {
-      //     console.log(err);
-      //   },
-      //   complete: () => {
-      //     this.updateInvoice();
-      //   },
-      // });
     } 
-    // else {
-    //   this.schedules.push(this.scheduleItem);
-      
-    // }
     this.schedules.push(this.scheduleItem);
     this.selectedVehicle = new VehicleCategory();
     this.selectedDriver = new Driver();
@@ -339,7 +306,9 @@ export class MakeInvoiceComponent implements OnInit {
             this.customerBalance = Math.abs(this.account.balance);
           }
           this.orders = res.body.orders;
+          
           this.schedules = res.body.scheduleOrders;
+          this.ordersForDeliveryList= this.orders;
           this.paidAmount = res.body.advancePayment;
           this.status = res.body.approvalStatus;
           this.invoiceIssueForm
@@ -472,6 +441,7 @@ export class MakeInvoiceComponent implements OnInit {
       customerId:this.customer.id,
       account: this.account,
       orders : this.newOrders,
+      
       scheduleOrders : this.newSchedules,
     };
     let approvalModel: ApprovalModel = new ApprovalModel();
@@ -490,5 +460,9 @@ export class MakeInvoiceComponent implements OnInit {
     this.invoiceIssueForm
           .get('totalBill')
           ?.setValue(this.invoiceIssueForm.get('totalPrice')?.value);
+  }
+  onChnageOrder(){
+    this.scheduleItem.deliverableQuantity = this.selectedOrder.quantity;
+    this.scheduleItem.brickId = this.selectedOrder.brick.id;
   }
 }

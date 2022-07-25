@@ -11,7 +11,7 @@ import { UserService } from '../../user.service';
 export class AddDriverComponent implements OnInit {
   @Output() driverAddedEvent = new EventEmitter<string>();
   driverForm!: FormGroup;
-  disable!:true;
+  disable:boolean = true;
   message:string = "";
   constructor(
     private formBuilder: FormBuilder,
@@ -68,8 +68,13 @@ export class AddDriverComponent implements OnInit {
           this.driverForm.get('name')?.disable();
           this.driverForm.get('address')?.disable();
           this.driverForm.get('amountToPay')?.disable();
-
-          this.message = "* This Driver already exists in database!"
+          if(res.body.driver){
+            this.disable = true;
+            this.message = "* This Driver already exists in database!"
+          }else{
+           this.disable = false;
+          }
+          
 
         }else{
           return;
