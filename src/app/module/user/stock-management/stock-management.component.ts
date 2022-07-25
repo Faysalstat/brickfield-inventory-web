@@ -114,8 +114,27 @@ export class StockManagementComponent implements OnInit {
   onChnageBrick(){
 
   }
-  addUnloadBricks(){
+  addUnloadBricks(i:number){
     console.log(this.bricks);
+    let unloadModel = this.bricks[i];
+    unloadModel.type = "UNLOAD";
+    console.log(unloadModel);
+    const params: Map<string, any> = new Map();
+    params.set("unload",unloadModel);
+
+    this.userService.UnloadProduction(params).subscribe({
+      next:(res)=>{
+        console.log(res);
+      },
+      error:(err)=>{
+        console.log(err);
+        window.alert(err);
+      },
+      complete:()=>{
+        this.fetchBricks();
+      }
+    })
+
   }
   editStock(i:number){
 

@@ -49,6 +49,7 @@ export class Brick {
   quantity: number = 0;
   unloadQuantity: number = 0;
   updatedTotalQuantity:number = 0;
+  type!:string;
 }
 
 export class CustomerDomain {

@@ -133,7 +133,7 @@
 <mat-card class="mt-4">
     <h2>দৈনিক আনলোডের হিসাব</h2>
     <div class="row">
-        <div class="col-md-4">
+        <!-- <div class="col-md-4">
             <mat-form-field appearance="fill" class="input-field">
                 <mat-label>ইটের ধরন</mat-label>
                 <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageBrick()"
@@ -144,8 +144,15 @@
         </div>
         <div class="col-md-4">
             <mat-form-field class="input-field" appearance="fill">
-                <mat-label>পরিমান:</mat-label>
-                <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="unloadQuantity"
+                <mat-label>Stock:</mat-label>
+                <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedBrick.quantity" disabled="true"
+                    matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field class="input-field" appearance="fill">
+                <mat-label>Stock:</mat-label>
+                <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedBrick.unloadQuantity"
                     matInput>
             </mat-form-field>
         </div>
@@ -162,11 +169,11 @@
                 <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="unloadQuantity"
                     matInput>
             </mat-form-field>
-        </div>
-        <div class="col-md-4">
+        </div> -->
+        <!-- <div class="col-md-4">
             <button style="float:left ; margin-top: 10px;" mat-raised-button color="accent"
                 (click)="addUnloadBricks()">যোগ করুন</button>
-        </div>
+        </div> -->
         <div class="row">
             <div class="col-md-12 mt-5" style="overflow-x:auto;">
                 <table class="table ">
@@ -177,6 +184,7 @@
                             <th style="width:30px ;">Price Per Piece</th>
                             <th style="width:30px ;">New Unload</th>
                             <th>Total Quantity</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -192,10 +200,15 @@
                             <td>
                                 <mat-form-field style="width:60%;text-align: left;" class="input-field">
                                     <input type="number" pInputText [ngModelOptions]="{standalone:true}"
-                                        (change)="onUnloadQuantityAdded(i)" [(ngModel)]="brick.unloadQuantity" matInput>
+                                        (input)="onUnloadQuantityAdded(i)" [(ngModel)]="brick.unloadQuantity" matInput>
                                 </mat-form-field>
                             </td>
                             <td>{{(brick?.updatedTotalQuantity)}}</td>
+                            <td>
+                                <button mat-icon-button color="warn" (click)="addUnloadBricks(i)">
+                                    <mat-icon>autorenew</mat-icon>
+                                </button>
+                            </td>
 
                         </tr>
                     </tbody>
@@ -203,9 +216,9 @@
             </div>
         </div>
 
-        <div class="col-md-12">
+        <!-- <div class="col-md-12">
             <button style="float:right ; margin-top: 10px;font-size:20px;padding: 5px;" mat-raised-button color="accent"
                 (click)="addUnloadBricks()">যোগ করুন</button>
-        </div>
+        </div> -->
     </div>
 </mat-card>

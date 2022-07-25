@@ -144,7 +144,10 @@ export class UserService {
   }
   
   
-
+  public UnloadProduction(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("unload"))
+    return this.http.post(Urls.UNLOAD_PRODUCTION,queryParams.get("unload"));
+  }
 // Delete 
 public deleteCustomer(queryParams: Map<string,any>): Observable<any>{
   console.log(queryParams.get("customer"))
