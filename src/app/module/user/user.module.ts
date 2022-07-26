@@ -19,6 +19,8 @@ import { MakeInvoiceComponent } from './make-invoice/make-invoice.component';
 import { CashPaymentDueListComponent } from './cash-payment-due-list/cash-payment-due-list.component';
 import { InvoiceFormComponent } from './supply/invoice-form/invoice-form.component';
 import { SordarListComponent } from './sordar-list/sordar-list.component';
+import { UserReportsComponent } from './user-reports/reports.component';
+import { ReportModule } from '../report/report.module';
 
 
 
@@ -38,7 +40,8 @@ import { SordarListComponent } from './sordar-list/sordar-list.component';
     MakeInvoiceComponent,
     CashPaymentDueListComponent,
     InvoiceFormComponent,
-    SordarListComponent
+    SordarListComponent,
+    UserReportsComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +49,8 @@ import { SordarListComponent } from './sordar-list/sordar-list.component';
     FormsModule,
     ReactiveFormsModule,
     CompsModule,
-    MaterialModule
+    MaterialModule,
+    ReportModule
   ]
 })
 export class UserModule { }

@@ -1,0 +1,73 @@
+<mat-card class="mt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <button style="float:left ; margin-top: 10px;" mat-raised-button (click)="downloadAsPDF()"
+                color="accent">Download</button>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="pdfTable" #pdfTable>
+        <div class="row">
+            <div class="col-md-12 left-sec">
+                <h1>Income</h1>
+                <h2 style="font-weight:bold ;">On the day {{applyFilter(today)}}</h2>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Factory Balance</th>
+                            <td>100000 BDT</td>
+                        </tr>
+                        <tr>
+                            <th>Transfer to Owner</th>
+                            <td>80000 BDT</td>
+                        </tr>
+                       
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">--------</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h1>Expense</h1>
+
+                <ul>
+                    <li>1. Some example list item</li>
+                    <br>
+                    <li>1. Some example list item</li>
+                    <br>
+                    <li>1. Some example list item</li>
+                    <br>
+                    <li>1. Some example list item</li>
+                    <br>
+                    <li>1. Some example list item</li>
+                    <br>
+                    <li>1. Some example list item</li>
+                    <br>
+
+                    <li>1. Some example list item</li>
+                    <br><li>1. Some example list item</li>
+                    <br><li>1. Some example list item</li>
+                    <br><li>1. Some example list item</li>
+                    <br><li>1. Some example list item</li>
+                    <br><li>1. Some example list item</li>
+                    <br><li>1. Some example list item</li>
+                    <br><li>1. Some example list item</li>
+                    <br><li>1. Some example list item</li>
+                    <br><li>1. Some example list item</li>
+                    <br><li>1. Some example list item</li>
+                    <br><li>1. Some example list item</li>
+                    <br><li>1. Some example list item</li>
+                    <br><li>1. Some example list item</li>
+                    <br><li>1. Some example list item</li>
+                    <br><li>1. Some example list item</li>
+                    <br><li>1. Some example list item</li>
+                    <br>
+                </ul>
+            </div>
+        </div>
+    </div>
+</mat-card>

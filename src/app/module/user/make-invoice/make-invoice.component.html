@@ -121,7 +121,7 @@
                         <mat-label>অর্ডার</mat-label>
                         <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageOrder()"
                             [(ngModel)]="selectedOrder">
-                            <mat-option *ngFor="let order of ordersForDeliveryList" [value]="order">{{order?.brick?.category}}</mat-option>
+                            <mat-option *ngFor="let order of orders" [value]="order">{{order?.brick?.category}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>

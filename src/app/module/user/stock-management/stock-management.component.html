@@ -27,10 +27,10 @@
         <div class="col-md-3">
             <mat-form-field appearance="fill">
                 <mat-label>তারিখ:</mat-label>
-                <input matInput [matDatepicker]="picker" [ngModelOptions]="{standalone:true}"
+                <input matInput [matDatepicker]="rawpicker" [ngModelOptions]="{standalone:true}"
                     [(ngModel)]="selectedBrickProduction.productionDate">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                <mat-datepicker-toggle matSuffix [for]="rawpicker"></mat-datepicker-toggle>
+                <mat-datepicker #rawpicker></mat-datepicker>
             </mat-form-field>
         </div>
         <div class="col-md-12">
@@ -77,11 +77,11 @@
             <table class="table table-striped" style="font-size:20px;">
                 <tbody>
                     <tr>
-                        <th>Total Reserve</th>
+                        <th>Total Raw Production</th>
                         <td>{{rawProductionReport?.reserve}}</td>
                     </tr>
                     <tr>
-                        <th>Todays Reserve</th>
+                        <th>Todays Total Raw Production</th>
                         <td>{{rawProductionReport?.todaysProduction}}</td>
                     </tr>
                     <tr>
@@ -99,34 +99,23 @@
     <div class="row">
         <div class="col-md-4">
             <mat-form-field class="input-field" appearance="fill">
-                <mat-label>সাবেক লোড:</mat-label>
-                <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="previousLoadQuantity"
-                    matInput>
-            </mat-form-field>
-        </div>
-        <div class="col-md-4">
-            <mat-form-field class="input-field" appearance="fill">
-                <mat-label>আদ্যই লোড:</mat-label>
+                <mat-label>দৈনিক লোড:</mat-label>
                 <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="latestLoadQuantity"
                     matInput>
             </mat-form-field>
         </div>
         <div class="col-md-4">
-            <mat-form-field class="input-field" appearance="fill">
-                <mat-label>মোট লোড:</mat-label>
-                <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="totalLoadQuantity"
-                    matInput>
+            <mat-form-field appearance="fill">
+                <mat-label>তারিখ:</mat-label>
+                <input matInput [matDatepicker]="picker" [ngModelOptions]="{standalone:true}"
+                    [(ngModel)]="loadingDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
         </div>
-        <div class="col-md-6">
-            <mat-form-field class="input-field" appearance="fill">
-                <mat-label>মন্তব্য :</mat-label>
-                <textarea pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="loadComment" matInput></textarea>
-            </mat-form-field>
+        <div class="col-md-4">
+            <button style="float:left ; margin-top: 10px;" mat-raised-button color="accent" (click)="loadRawProduction()" >যোগ করুন</button>
         </div>
-        <!-- <div class="col-md-3">
-            <button style="float:left ; margin-top: 10px;" mat-raised-button color="accent" (click)="addRawProduction()" >যোগ করুন</button>
-        </div> -->
     </div>
 </mat-card>
 
@@ -205,8 +194,8 @@
                             </td>
                             <td>{{(brick?.updatedTotalQuantity)}}</td>
                             <td>
-                                <button mat-icon-button color="warn" (click)="addUnloadBricks(i)">
-                                    <mat-icon>autorenew</mat-icon>
+                                <button  mat-icon-button color="primary" (click)="addUnloadBricks(i)">
+                                    <mat-icon style="font-size:25px ;">backup</mat-icon>
                                 </button>
                             </td>
 

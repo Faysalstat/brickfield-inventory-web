@@ -1,0 +1,36 @@
+<mat-card>
+    <div class="row">
+        <div class="col-md-3">
+            <a routerLink="income-expense">
+                <div class="box-div">
+                    Income Expense
+                </div>
+            </a>
+
+        </div>
+        <div class="col-md-3">
+            <a routerLink="production-report">
+                <div class="box-div">
+                    Production
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a routerLink="transaction-report">
+                <div class="box-div">
+                    Transaction
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <div class="box-div">
+
+            </div>
+        </div>
+        <!-- <div class="col-md-12">
+            <button style="float:left ; margin-top: 10px;" mat-raised-button (click)="downloadAsPDF()"
+            color="accent">Download</button>
+        </div> -->
+    </div>
+</mat-card>
+<router-outlet id="pdfTable" #pdfTable></router-outlet>

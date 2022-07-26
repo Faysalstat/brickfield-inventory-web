@@ -196,7 +196,7 @@ export class MakeInvoiceComponent implements OnInit {
       
     }
     this.orders.push(this.orderItem);
-    this.ordersForDeliveryList.push(this.orderItem);
+    // this.ordersForDeliveryList.push(this.orderItem);
     this.selectedBrick = new Brick();
     this.orderItem = new OrderModel();
     this.calculateOrderTotal();

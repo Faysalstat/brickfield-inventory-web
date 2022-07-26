@@ -13,6 +13,7 @@ export const Urls = {
     DELETE_SCHEDULE : BASE_URL+ "/schedule/delete",
     UPDATE_USER: BASE_URL+"/user/updateuser",
     UNLOAD_PRODUCTION: BASE_URL+"/stock/unloadproduction",
+    LOAD_PRODUCTION: BASE_URL+"/stock/loadproduction",
     UPDATE_INVOICE : BASE_URL + "/invoice/update",
     APPROVE_INVOICE : BASE_URL + "/invoice/approve",
     UPDATE_BALANCE : BASE_URL + "/person/updatebalance",
@@ -59,6 +60,8 @@ export const Urls = {
     FETCH_REGISTER_SUMMARY: BASE_URL+ "/transaction/getsummary",
     FETCH_EXPENSE_CATEGROY: BASE_URL+ "/expense/getallcategory",
     FETCH_ALL_RAW_PRODUCTION_REPORT: BASE_URL + "/stock/getrawproductionreport",
+    FETCH_ALL_TRANSACTION: BASE_URL+ "/transaction/getalltransaction",
+
     
     // CHHECKING 
     CHECK_IS_LOGGEDIN: BASE_URL + "/auth/islogedin",

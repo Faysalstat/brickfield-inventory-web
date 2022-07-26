@@ -225,3 +225,18 @@ export class RawBrickProduction{
   productionDate!:Date;
   sordarName!:string;
 }
+
+export class PaginatorModel{
+  length = 100;
+  pageSize = 10;
+}
+
+export class InvoiceQueryBody{
+  offset:number = 0;
+  createdFrom!:Date;
+  createdTo!:Date;
+  invoiceId:number = 0;
+  deliveryStatus:string = "";
+  customerId:number=0;
+
+}

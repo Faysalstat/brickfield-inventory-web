@@ -1,0 +1,16 @@
+.box-div{
+    width: 200px;
+    height: 100px;
+    background-color: crimson;
+    border-radius: 15px;
+    padding:25px 10px;
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+    font-size: 1.2em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+a:link{
+text-decoration: none;
+}

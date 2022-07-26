@@ -18,6 +18,7 @@ export class StockManagementComponent implements OnInit {
   previousLoadQuantity: number = 0;
   latestLoadQuantity: number = 0;
   totalLoadQuantity: number = 0;
+  loadingDate!: Date;
   unloadQuantity: number = 0;
   loadComment!: string;
   bricks!: Brick[];
@@ -100,6 +101,26 @@ export class StockManagementComponent implements OnInit {
     })
     this.selectedBrickProduction = new RawBrickProduction();
     this.calculateTotalRawProduction();
+  }
+
+  loadRawProduction(){
+    let rawLoadModel = {
+      category : "RAW_BRICK",
+      quantity : this.latestLoadQuantity,
+      comment: this.loadComment,
+      productionDate: this.loadingDate,
+      type: "LOAD"
+    }
+    console.log(rawLoadModel);
+    const params: Map<string, any> = new Map();
+    params.set("load",rawLoadModel);
+
+    this.userService.LoadProduction(params).subscribe({
+      next:(loadRes)=>{
+        console.log(loadRes);
+      }
+    })
+    
   }
 
   deleteRawProduction(i: number) {
