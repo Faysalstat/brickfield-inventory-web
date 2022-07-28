@@ -13,13 +13,21 @@ export class ListInvoicesComponent implements OnInit {
   invoiceList!:any;
   customer!:Customer;
   offset:number = 0;
+  limit = 5;
   queryBody!:InvoiceQueryBody;
   contactNo!:string;
+  statusList!:any[];
   constructor(
     private route: Router,
     private userService:UserService) {
     this.invoiceList = [];
     this.queryBody = new InvoiceQueryBody();
+    this.statusList = [
+      {label:"Select Delivery Status", value:null},
+      {label:"Delivered", value:"DELIVERED"},
+      {label:"Pending", value:"PENDING"}
+      
+    ]
    }
   ngOnInit(): void {
     this.fetchAllInvoices();
@@ -47,6 +55,7 @@ export class ListInvoicesComponent implements OnInit {
 
   fetchAllInvoices(){
     const params: Map<string, any> = new Map();
+    this.queryBody.offset = this.offset;
     params.set('query', this.queryBody);
     this.userService.fetchAllInvoice(params).subscribe({
       next:(res)=>{
@@ -63,4 +72,22 @@ export class ListInvoicesComponent implements OnInit {
   editInvoice(invoice:any){
     this.route.navigate(["/home/edit-invoice",invoice.id]);
   }
+  nextPage() {
+    // this.tnxIndex+=
+    this.offset += 5;
+    this.fetchAllInvoices();
+  }
+  previousPage() {
+    if (this.offset > 5) {
+      this.offset = this.limit + 5;
+      
+    } else if((this.offset-5)>=0) {
+      this.offset = this.limit - 5;
+    }
+    else{
+      return
+    }
+    this.fetchAllInvoices();
+  }
+ 
 }

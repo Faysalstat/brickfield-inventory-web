@@ -112,6 +112,7 @@ export class InvoiceDomain{
 
 export class SupplyInvoiceIssueModel {
     supplyerId!: number;
+    driverId!:number;
     productName!:string;
 
     // garichukti
@@ -222,7 +223,7 @@ export class TransactionSummary{
 export class RawBrickProduction{
   categoryName!:number;
   quantity!:number;
-  productionDate!:Date;
+  productionDate:Date = new Date();
   sordarName!:string;
 }
 

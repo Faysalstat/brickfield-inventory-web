@@ -127,10 +127,13 @@ export class UserService {
   public fetchRawStockReport(): Observable<any> {
     return this.http.get(Urls.FETCH_ALL_RAW_PRODUCTION_REPORT);
   }
+  public fetchLoadUnloadReport(): Observable<any> {
+    return this.http.get(Urls.FETCH_ALL_LOAD_UNLOAD_REPORT);
+  }
   public fetchTransportCategories(): Observable<any> {
     return this.http.get(Urls.FETCH_ALL_TRANSPORT_CATEGORY);
   }
-
+  
   public fetchExpenseCategories(): Observable<any> {
     return this.http.get(Urls.FETCH_EXPENSE_CATEGROY);
   }

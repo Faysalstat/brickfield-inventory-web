@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { ReportService } from 'src/app/module/report.service';
 import { UserService } from '../../user.service';
 
 @Component({
@@ -13,7 +14,10 @@ export class TransactionListComponent implements OnInit {
   limit = 10;
   offset = 0;
   tnxIndex:number = 0;
-  constructor(private userService: UserService) {
+  constructor(
+    private userService: UserService,
+    private reportService: ReportService
+    ) {
     this.tnxList = [];
   }
 
@@ -45,5 +49,8 @@ export class TransactionListComponent implements OnInit {
     } else {
       return;
     }
+  }
+  export(){
+this.reportService.exportAsExcelFile(this.tnxList, 'sample')
   }
 }

@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Urls } from '../constant/urls.const';
+import * as fs from 'file-saver';
 
 @Injectable({
   providedIn: 'root'

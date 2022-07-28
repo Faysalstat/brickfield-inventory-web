@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as fs from 'file-saver';
-import * as XLSX from "xlsx";
+import * as XLSX from 'xlsx';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
@@ -8,7 +8,7 @@ const EXCEL_EXTENSION = '.xlsx';
 @Injectable({
   providedIn: 'root'
 })
-export class ReportService {
+export class ReportExportService {
 
   constructor() { }
   public exportAsExcelFile(json: any[], excelFileName: string): void {

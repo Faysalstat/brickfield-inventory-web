@@ -12,19 +12,20 @@ export class StockManagementComponent implements OnInit {
   selectedMill!: string;
   mills = [{ label: 'Select mill name', value: '' }];
   rawProductionReport!:any;
+  loadUnloadReport!:any;
   selectedBrickProduction: RawBrickProduction = new RawBrickProduction();
   dailyProductionList!: RawBrickProduction[];
   totalRawProduction: number = 0;
   previousLoadQuantity: number = 0;
   latestLoadQuantity: number = 0;
   totalLoadQuantity: number = 0;
-  loadingDate!: Date;
+  loadingDate: Date = new Date();
   unloadQuantity: number = 0;
   loadComment!: string;
   bricks!: Brick[];
   selectedBrick!:Brick;
   rawStockList!:[];
-
+  loadedReserve!:number;
   constructor(
     private userService:UserService,
   ) {
@@ -42,6 +43,7 @@ export class StockManagementComponent implements OnInit {
     this.fetchBricks();
     this.fetchRawStock();
     this.fetchRawStockReport();
+    this.fetchLoadUnloadReport();
   }
   fetchBricks() {
     this.userService.fetchBricks().subscribe({
@@ -75,6 +77,16 @@ export class StockManagementComponent implements OnInit {
       next: (res)=>{
         console.log(res.body);
         this.rawProductionReport = res.body;
+
+      }
+    })
+  }
+  fetchLoadUnloadReport(){
+    this.userService.fetchLoadUnloadReport().subscribe({
+      next: (res)=>{
+        console.log(res.body);
+        this.loadUnloadReport = res.body;
+        this.loadedReserve = this.loadUnloadReport.loadStock - this.loadUnloadReport.unloadStock;
 
       }
     })
@@ -118,6 +130,10 @@ export class StockManagementComponent implements OnInit {
     this.userService.LoadProduction(params).subscribe({
       next:(loadRes)=>{
         console.log(loadRes);
+        this.latestLoadQuantity=0;
+        this.loadingDate= new Date();
+        this.fetchRawStockReport();
+        this.fetchLoadUnloadReport();
       }
     })
     
@@ -153,6 +169,7 @@ export class StockManagementComponent implements OnInit {
       },
       complete:()=>{
         this.fetchBricks();
+        this.fetchLoadUnloadReport();
       }
     })
 

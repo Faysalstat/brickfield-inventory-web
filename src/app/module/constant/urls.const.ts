@@ -60,6 +60,7 @@ export const Urls = {
     FETCH_REGISTER_SUMMARY: BASE_URL+ "/transaction/getsummary",
     FETCH_EXPENSE_CATEGROY: BASE_URL+ "/expense/getallcategory",
     FETCH_ALL_RAW_PRODUCTION_REPORT: BASE_URL + "/stock/getrawproductionreport",
+    FETCH_ALL_LOAD_UNLOAD_REPORT: BASE_URL + "/stock/getloadsumary",
     FETCH_ALL_TRANSACTION: BASE_URL+ "/transaction/getalltransaction",
 
     

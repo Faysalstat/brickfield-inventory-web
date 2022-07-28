@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Account, Customer, Person, Product, Supplyer, SupplyInvoiceIssueModel, VehicleCategory } from '../../model';
+import { Account, Customer, Driver, Person, Product, Supplyer, SupplyInvoiceIssueModel, VehicleCategory } from '../../model';
 import { UserService } from '../user.service';
 
 @Component({
@@ -22,6 +22,7 @@ export class SupplyInvoiceComponent implements OnInit {
   isCC: boolean = true;
   isCFT: boolean = false;
   isEsc: boolean = false;
+  drivers!: Driver[];
   constructor(private userService: UserService) {
     this.supplyer = new Supplyer();
     this.account = new Account();
@@ -40,9 +41,20 @@ export class SupplyInvoiceComponent implements OnInit {
   ngOnInit(): void {
     this.fetchProductList();
     this.fetchVehicles();
+    this.fetchDrivers();
   }
+
+  
   onChnageProduct() {
     // this.supplyerForm.get('productId')?.setValue(this.selectedProduct?.id);
+  }
+  fetchDrivers() {
+    this.userService.fetchAllDrivers().subscribe({
+      next: (data) => {
+        console.log(data.body);
+        this.drivers = data.body;
+      },
+    });
   }
   onChnageDeliveryType() {
     if (this.selectedType == 1) {
@@ -59,6 +71,7 @@ export class SupplyInvoiceComponent implements OnInit {
       this.isEsc = true;
     }
   }
+  
   searchSupplyer() {
     console.log('Change Detected');
     this.userService.getCustomerByContactNo(this.person.contactNo).subscribe({
@@ -100,77 +113,14 @@ export class SupplyInvoiceComponent implements OnInit {
   onChnageVehicle() {
     // this.supplyInvoice.vehicleCategoryId = this.scheduleItem.vehicleCategory.id;
   }
-  // prepareForm(formData: any) {
-  //   if (!formData) {
-  //     formData = new SupplyInvoiceIssueModel();
-  //   }
-  //   this.invoiceIssueForm = this.formBuilder.group({
-  //     id: [formData.id ? formData.id : null],
-  //     customer: [formData.customer],
-  //     totalPrice: [formData.totalPrice, [Validators.required]],
-  //     totalQuantity: [formData.totalQuantity, [Validators.required]],
-  //     advancePayment: [formData.advancePayment],
-  //     transportCost: [formData.transportCost],
-  //     duePayment: [formData.duePayment],
-  //     deliveryStatus: [formData.deliveryStatus],
-  //     approvalStatus: [formData.approvalStatus],
-  //     issuedBy: [formData.issuedBy],
-  //     customerId: [formData.customerId],
-  //     orders: [formData.orders],
-  //     scheduleOrders: [formData.scheduleOrders],
-  //     scheduledQuantity: [formData.scheduledQuantity],
-  //     totalBill: [formData.totalBill],
-  //     newPayment: [formData.newPayment],
-  //   });
-  //   this.invoiceIssueForm.get('duePayment')?.valueChanges.subscribe((data) => {
-  //     if (data > 0) {
-  //       this.isDue = true;
-  //     } else {
-  //       this.isDue = false;
-  //     }
-  //   });
+  onChnageDriver(){
 
-  //   this.invoiceIssueForm
-  //     .get('advancePayment')
-  //     ?.valueChanges.subscribe((data) => {
-  //       this.invoiceIssueForm
-  //         .get('duePayment')
-  //         ?.setValue(this.invoiceIssueForm.get('totalBill')?.value - data);
-  //     });
-  //   this.invoiceIssueForm.get('totalBill')?.valueChanges.subscribe((data) => {
-  //     this.invoiceIssueForm
-  //       .get('duePayment')
-  //       ?.setValue(data - this.invoiceIssueForm.get('advancePayment')?.value);
-  //   });
-  //   this.invoiceIssueForm
-  //     .get('transportCost')
-  //     ?.valueChanges.subscribe((data) => {
-  //       if(this.transportCostCustomerPayable){
-  //         this.invoiceIssueForm
-  //         .get('totalBill')
-  //         ?.setValue(this.invoiceIssueForm.get('totalPrice')?.value + data);
-  //       }else{
-  //         this.invoiceIssueForm
-  //         .get('totalBill')
-  //         ?.setValue(this.invoiceIssueForm.get('totalPrice')?.value);
-  //       }
-  //     });
-  //   this.invoiceIssueForm.get('totalPrice')?.valueChanges.subscribe((data) => {
-  //     if(this.transportCostCustomerPayable){
-  //       this.invoiceIssueForm
-  //       .get('totalBill')
-  //       ?.setValue(this.invoiceIssueForm.get('transportCost')?.value + data);
-  //     }else{
-  //       this.invoiceIssueForm
-  //       .get('totalBill')
-  //       ?.setValue(data);
-  //     }
+  }
 
-  //   });
-  //   this.invoiceIssueForm.get('newPayment')?.valueChanges.subscribe((data) => {
-  //     this.invoiceIssueForm
-  //       .get('advancePayment')
-  //       ?.setValue(this.paidAmount + data);
-  //   });
-  // }
+  submitInvoice(){
+
+  }
+
+
+  
 }
