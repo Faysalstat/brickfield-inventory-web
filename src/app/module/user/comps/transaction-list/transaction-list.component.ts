@@ -10,6 +10,7 @@ import { UserService } from '../../user.service';
 })
 export class TransactionListComponent implements OnInit {
   tnxList!: any[];
+  tnxListForReport!: any[];
   // MatPaginator Inputs
   limit = 10;
   offset = 0;
@@ -19,6 +20,7 @@ export class TransactionListComponent implements OnInit {
     private reportService: ReportService
     ) {
     this.tnxList = [];
+    this.tnxListForReport = [];
   }
 
   ngOnInit(): void {
@@ -34,6 +36,9 @@ export class TransactionListComponent implements OnInit {
       next: (datares) => {
         console.log(datares);
         this.tnxList = datares.body.data;
+        this.tnxList.map((elem)=>{
+          
+        })
       },
     });
   }
@@ -51,6 +56,6 @@ export class TransactionListComponent implements OnInit {
     }
   }
   export(){
-this.reportService.exportAsExcelFile(this.tnxList, 'sample')
+    this.reportService.exportAsExcelFile(this.tnxList, 'Transaction_Summary')
   }
 }

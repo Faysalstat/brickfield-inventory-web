@@ -1,6 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Account, Customer, Driver, Person, Product, Supplyer, SupplyInvoiceIssueModel, VehicleCategory } from '../../model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  Account,
+  Customer,
+  Driver,
+  Person,
+  Product,
+  Supplyer,
+  SupplyInvoiceIssueModel,
+  VehicleCategory,
+} from '../../model';
 import { UserService } from '../user.service';
 
 @Component({
@@ -9,6 +18,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./supply-invoice.component.css'],
 })
 export class SupplyInvoiceComponent implements OnInit {
+  issueSupplyForm!: FormGroup;
   supplyer!: Supplyer;
   account!: Account;
   person!: Person;
@@ -22,8 +32,14 @@ export class SupplyInvoiceComponent implements OnInit {
   isCC: boolean = true;
   isCFT: boolean = false;
   isEsc: boolean = false;
+  needSupplyer: boolean = false;
   drivers!: Driver[];
-  constructor(private userService: UserService) {
+  notFoundMessage!: string;
+  transportCostPerTrip!:number;
+  constructor(
+    private userService: UserService,
+    private formBuilder: FormBuilder
+  ) {
     this.supplyer = new Supplyer();
     this.account = new Account();
     this.person = new Person();
@@ -43,8 +59,18 @@ export class SupplyInvoiceComponent implements OnInit {
     this.fetchVehicles();
     this.fetchDrivers();
   }
+  prepareForm(formData: any) {
+    // formData = new Person();
+    this.issueSupplyForm = this.formBuilder.group({
+      id: [formData.id ? formData.id : null],
+      supplyerName: [formData.personName, [Validators.required]],
+      contactNo: [formData.contactNo, [Validators.required]],
+      address: [formData.personAddress],
+      balance: [formData.balance],
+      productId: [formData.productId],
+    });
+  }
 
-  
   onChnageProduct() {
     // this.supplyerForm.get('productId')?.setValue(this.selectedProduct?.id);
   }
@@ -56,35 +82,17 @@ export class SupplyInvoiceComponent implements OnInit {
       },
     });
   }
-  onChnageDeliveryType() {
-    if (this.selectedType == 1) {
-      this.isCC = true;
-      this.isCFT = false;
-      this.isEsc = false;
-    } else if (this.selectedType == 2) {
-      this.isCC = false;
-      this.isCFT = true;
-      this.isEsc = false;
-    } else if (this.selectedType == 3) {
-      this.isCC = false;
-      this.isCFT = false;
-      this.isEsc = true;
-    }
-  }
-  
+
   searchSupplyer() {
     console.log('Change Detected');
     this.userService.getCustomerByContactNo(this.person.contactNo).subscribe({
       next: (res) => {
         if (res.body) {
-          console.log(res.body);
           this.person = res.body;
-          console.log(this.person);
-          this.account = res.body.supplyer.account;
-          console.log(this.account);
           this.supplyer = res.body.supplyer;
-          console.log(this.supplyer);
         } else {
+          this.needSupplyer = true;
+          this.notFoundMessage = '*Supplyer Not Found. Please Add Suppler';
           return;
         }
       },
@@ -110,17 +118,42 @@ export class SupplyInvoiceComponent implements OnInit {
       },
     });
   }
+  onChnageDeliveryType() {
+    if (this.selectedType == 1) {
+      this.isCC = true;
+      this.isCFT = false;
+      this.isEsc = false;
+    } else if (this.selectedType == 2) {
+      this.isCC = false;
+      this.isCFT = true;
+      this.isEsc = false;
+    } else if (this.selectedType == 3) {
+      this.isCC = false;
+      this.isCFT = false;
+      this.isEsc = true;
+    }
+  }
+  calculateCCTotal() {
+    this.supplyInvoice.totalPrice =
+    this.supplyInvoice.pricePerTrip * this.supplyInvoice.numberOfTrips;
+    this.calculateTransportCost();
+  }
+  calculateTransportCost(){
+    this.supplyInvoice.transportCost = this.supplyInvoice.numberOfTrips * this.transportCostPerTrip;
+  }
   onChnageVehicle() {
     // this.supplyInvoice.vehicleCategoryId = this.scheduleItem.vehicleCategory.id;
   }
-  onChnageDriver(){
+  onChnageDriver() {}
 
+  submitInvoice() {
+    console.log(this.supplyInvoice);
   }
-
-  submitInvoice(){
-
+  uodateContact(data: any) {
+    console.log('suppler added', data);
+    this.person = data.person;
+    this.account = data.account;
+    this.supplyer = data;
+    this.needSupplyer = false;
   }
-
-
-  
 }

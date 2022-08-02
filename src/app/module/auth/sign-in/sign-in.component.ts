@@ -11,6 +11,7 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class SignInComponent implements OnInit {
   loginForm!: FormGroup;
+  message!:string;
   constructor(
     private router: Router, 
     private formBuilder: FormBuilder,
@@ -48,7 +49,10 @@ export class SignInComponent implements OnInit {
         }
         
       },
-      error:(err)=>{},
+      error:(err)=>{
+        this.message = "*Authentiocation Failed";
+        window.alert
+      },
       complete: ()=>{}
     })
   }

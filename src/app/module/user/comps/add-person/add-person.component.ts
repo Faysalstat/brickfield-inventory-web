@@ -13,6 +13,7 @@ export class AddPersonComponent implements OnInit {
   customerForm!: FormGroup;
   disable!:true;
   message:string = "";
+  personId!:number;
   constructor(
     private formBuilder: FormBuilder,
     private userService:UserService) { }
@@ -37,6 +38,7 @@ export class AddPersonComponent implements OnInit {
       return;
     }
     const customer = {
+      personId:this.personId,
       personName:this.customerForm.get('name')?.value,
       contactNo:this.customerForm.get('contactNo')?.value,
       personAddress:this.customerForm.get('address')?.value,
@@ -62,6 +64,7 @@ export class AddPersonComponent implements OnInit {
         console.log(res.body);
         if(res.body){
           this.message= "This person is in our database";
+          this.personId = res.body.id;
           this.customerForm.get('name')?.setValue(res.body?.personName);
           this.customerForm.get('address')?.setValue(res.body?.personAddress);
           this.customerForm.get('name')?.disable();
@@ -72,7 +75,7 @@ export class AddPersonComponent implements OnInit {
             this.customerForm.get('balance')?.disable();
           }
           
-          this.message = "* This Customer already exists!"
+          // this.message = "* This Customer already exists!"
 
         }
         else{

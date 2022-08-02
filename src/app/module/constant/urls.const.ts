@@ -1,5 +1,5 @@
-const BASE_URL = "http://localhost:3000";
-// const BASE_URL = "http://192.168.0.106:3000";
+// const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://vatasolution.me/api";
 // const BASE_URL = "http://192.168.0.2:3000";
 
 export const Urls = {

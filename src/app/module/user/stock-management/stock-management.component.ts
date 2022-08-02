@@ -88,6 +88,9 @@ export class StockManagementComponent implements OnInit {
         this.loadUnloadReport = res.body;
         this.loadedReserve = this.loadUnloadReport.loadStock - this.loadUnloadReport.unloadStock;
 
+      },
+      error:(err)=>{
+        console.log(err);
       }
     })
   }

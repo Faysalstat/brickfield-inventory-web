@@ -77,6 +77,7 @@ export class AddDriverComponent implements OnInit {
           
 
         }else{
+          this.disable = false;
           return;
         }
       },

@@ -130,6 +130,7 @@ export class SupplyInvoiceIssueModel {
     
     
     pricePerTrip!:number;
+    transportCost!:number;
 
     deliveryStatus!: string;
     approvalStatus!: string;
