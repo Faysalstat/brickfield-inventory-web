@@ -1,11 +1,60 @@
 <mat-card class="mt-4">
     <div class="row">
         <div class="col-md-12">
-            <button mat-raised-button (click)="export()" color="warn">Export</button>
-            <table class="table table-stripe">
+            <mat-card>
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline" class="input-field">
+                            <mat-label>Transaction Type</mat-label>
+                            <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageType()"
+                                [(ngModel)]="selectedType">
+                                <mat-option *ngFor="let type of transactionTypes" [value]="type.value">
+                                    {{type?.label}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline" class="input-field">
+                            <mat-label>Transaction Category</mat-label>
+                            <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageCategory()"
+                                [(ngModel)]="selectedCategory">
+                                <mat-option *ngFor="let category of expenseCatgories" [value]="category.value">
+                                    {{category?.label}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline">
+                            <mat-label>From Date</mat-label>
+                            <input matInput [matDatepicker]="fromDatePicker" (dateInput)="onDateChange()" [ngModelOptions]="{standalone:true}"
+                                [(ngModel)]="fromDate">
+                            <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #fromDatePicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline">
+                            <mat-label>To Date</mat-label>
+                            <input matInput [matDatepicker]="toDatePicker" (dateInput)="onDateChange()" [ngModelOptions]="{standalone:true}"
+                                [(ngModel)]="toDate">
+                            <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #toDatePicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-12">
+                        <button mat-raised-button (click)="export()" color="warn">Export</button>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+        <div class="col-md-12">
+
+
+            <table class="table table-stripe mt-4">
                 <thead>
                     <th>SN</th>
-                    <th>Invoice No</th>
                     <th>Transaction Type</th>
                     <th>Transaction Reason</th>
                     <th>Amount</th>
@@ -15,7 +64,6 @@
                 <tbody>
                     <tr *ngFor="let tnx of tnxList; index as i">
                         <td>{{i+offset+1}}</td>
-                        <td>{{tnx.id}}</td>
                         <td>{{tnx.transactionType}}</td>
                         <td>{{tnx.transactionReason}}</td>
                         <td *ngIf="tnx.transactionType=='INCOME'">{{tnx.income}}</td>
@@ -27,11 +75,11 @@
                 <tfoot>
                     <tr>
                         <button mat-icon-button color="primary" (click)="previousPage()">
-                                                                <mat-icon>fast_rewind</mat-icon>
-                                                            </button>
+                            <mat-icon>fast_rewind</mat-icon>
+                        </button>
                         <button mat-icon-button color="primary" (click)="nextPage()">
-                                                                <mat-icon>fast_forward</mat-icon>
-                                                            </button>
+                            <mat-icon>fast_forward</mat-icon>
+                        </button>
                         <!-- <nav aria-label="Page navigation example">
                             <ul class="pagination">
                               <li class="page-item">
@@ -44,6 +92,28 @@
                           </nav> -->
                     </tr>
                 </tfoot>
+            </table>
+            
+        </div>
+        <div class="col-md-6">
+            <table class="table mt-4">
+                <tbody>
+                    <tr>
+                        <td colspan="2">Summary</td>
+                    </tr>
+                    <tr>
+                        <th>Total Income</th>
+                        <th>{{totalIncomeAmount}}</th>
+                    </tr>
+                    <tr>
+                        <th>Total Expense</th>
+                        <th>{{totalExpenseAmount}}</th>
+                    </tr>
+                    <tr>
+                        <th>Total Reveesed</th>
+                        <th>{{totalReversedAmount}}</th>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>

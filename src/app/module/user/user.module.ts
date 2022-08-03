@@ -21,6 +21,7 @@ import { InvoiceFormComponent } from './supply/invoice-form/invoice-form.compone
 import { SordarListComponent } from './sordar-list/sordar-list.component';
 import { UserReportsComponent } from './user-reports/reports.component';
 import { ReportModule } from '../report/report.module';
+import { IssueExpenseComponent } from './issue-expense/issue-expense.component';
 
 
 
@@ -41,7 +42,8 @@ import { ReportModule } from '../report/report.module';
     CashPaymentDueListComponent,
     InvoiceFormComponent,
     SordarListComponent,
-    UserReportsComponent
+    UserReportsComponent,
+    IssueExpenseComponent
   ],
   imports: [
     CommonModule,

@@ -7,21 +7,21 @@
         <h2>Supplyer Details:</h2>
         <div class="row">
           <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
               <mat-label>Contact No:</mat-label>
               <input (change)="searchSupplyer()" pInputText [ngModelOptions]="{standalone:true}"
-                [(ngModel)]="person.contactNo" placeholder="Customer Name" matInput>
+                [(ngModel)]="person.contactNo" placeholder="Contact No" matInput>
             </mat-form-field>
           </div>
           <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
               <mat-label>Supplyer Name :</mat-label>
               <input [ngModelOptions]="{standalone:true}" [(ngModel)]="person.personName" placeholder="Supplyer Name"
                 matInput>
             </mat-form-field>
           </div>
           <div class="col-md-3">
-            <mat-form-field appearance="fill" class="input-field">
+            <mat-form-field appearance="outline" class="input-field">
               <mat-label>Select Delivery Type</mat-label>
               <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageDeliveryType()"
                 [(ngModel)]="selectedType">
@@ -30,17 +30,18 @@
             </mat-form-field>
           </div>
           <div class="col-md-3">
-            <mat-form-field appearance="fill" class="input-field">
+            <mat-form-field appearance="outline" class="input-field">
               <mat-label>Select Supplying Product</mat-label>
               <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageProduct()"
                 [(ngModel)]="selectedProduct">
+                <mat-option >Select Product Type</mat-option>
                 <mat-option *ngFor="let product of productList" [value]="product">{{product?.productName}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
 
           <div class="col-md-6">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
               <mat-label>Address:</mat-label>
               <textarea type="text" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="person.personAddress"
                 matInput></textarea>
@@ -63,7 +64,7 @@
         <h3>গাড়ি চু্ক্তি</h3>
         <div class="row">
           <div class="col-md-3">
-            <mat-form-field appearance="fill" class="input-field">
+            <mat-form-field appearance="outline" class="input-field">
               <mat-label>গাড়ির ধরন</mat-label>
               <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageVehicle()"
                 [(ngModel)]="supplyInvoice.vehicleCategoryName">
@@ -73,23 +74,23 @@
             </mat-form-field>
           </div>
           <div class="col-md-2">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
               <mat-label>ট্রিপ লাগবে:</mat-label>
               <input type="number" pInputText [ngModelOptions]="{standalone:true}" (keyup)="calculateCCTotal()"
                 [(ngModel)]="supplyInvoice.numberOfTrips" placeholder="Trip Needed" matInput>
             </mat-form-field>
           </div>
           <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
               <mat-label>ক্রয় মূল্য/ট্রিপ:</mat-label>
               <input type="number" pInputText [ngModelOptions]="{standalone:true}" (keyup)="calculateCCTotal()"
                 [(ngModel)]="supplyInvoice.pricePerTrip" placeholder="00" matInput>
             </mat-form-field>
           </div>
           <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
               <mat-label>মোট ক্রয় মূল্য </mat-label>
-              <input type="number" pInputText [ngModelOptions]="{standalone:true}"
+              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (change)="calculateSummary()"
                 [(ngModel)]="supplyInvoice.totalPrice" placeholder="00" matInput>
             </mat-form-field>
           </div>
@@ -102,31 +103,48 @@
         <h3>CFT</h3>
         <div class="row">
           <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field appearance="outline" class="input-field">
+              <mat-label>গাড়ির ধরন</mat-label>
+              <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageVehicle()"
+                [(ngModel)]="supplyInvoice.vehicleCategoryName">
+                <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle">{{vehicle?.categoryName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field class="input-field" appearance="outline">
               <mat-label>Quantity in CFT</mat-label>
-              <input type="number" pInputText [ngModelOptions]="{standalone:true}"
-                [(ngModel)]="supplyInvoice.totalPrice" placeholder="00" matInput>
+              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (change)="calculateCFTotal()"
+                [(ngModel)]="supplyInvoice.cftQuantity" placeholder="00" matInput>
             </mat-form-field>
           </div>
           <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="fill">
-              <mat-label>Accual Quantity in CFT</mat-label>
-              <input type="number" pInputText [ngModelOptions]="{standalone:true}"
-                [(ngModel)]="supplyInvoice.totalPrice" placeholder="00" matInput>
+            <mat-form-field class="input-field" appearance="outline">
+              <mat-label>Acctual Quantity in CFT</mat-label>
+              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (change)="calculateCFTotal()"
+                [(ngModel)]="supplyInvoice.actualCftQuantity" placeholder="00" matInput>
             </mat-form-field>
           </div>
           <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="fill">
-              <mat-label>Price</mat-label>
-              <input type="number" pInputText [ngModelOptions]="{standalone:true}"
-                [(ngModel)]="supplyInvoice.totalPrice" placeholder="00" matInput>
+            <mat-form-field class="input-field" appearance="outline">
+              <mat-label>Cost Per CFT</mat-label>
+              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (change)="calculateCFTotal()"
+                [(ngModel)]="supplyInvoice.pricePerCFT" placeholder="00" matInput>
             </mat-form-field>
           </div>
           <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
+              <mat-label>Total Cost:</mat-label>
+              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (change)="calculateCFTotal()"
+                [(ngModel)]="supplyInvoice.totalCFTPrice" placeholder="00" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field class="input-field" appearance="outline">
               <mat-label>Accual Price</mat-label>
-              <input type="number" pInputText [ngModelOptions]="{standalone:true}"
-                [(ngModel)]="supplyInvoice.totalPrice" placeholder="00" matInput>
+              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (change)="calculateCFTotal()"
+                [(ngModel)]="supplyInvoice.actualCFTPrice" placeholder="00" matInput>
             </mat-form-field>
           </div>
         </div>
@@ -137,21 +155,21 @@
         <h3>এসকেভেটর</h3>
         <div class="row">
           <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
               <mat-label>Actual Hour</mat-label>
               <input type="number" pInputText [ngModelOptions]="{standalone:true}"
                 [(ngModel)]="supplyInvoice.totalPrice" placeholder="00" matInput>
             </mat-form-field>
           </div>
           <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
               <mat-label>Rate per Hour</mat-label>
               <input type="number" pInputText [ngModelOptions]="{standalone:true}"
                 [(ngModel)]="supplyInvoice.totalPrice" placeholder="00" matInput>
             </mat-form-field>
           </div>
           <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
               <mat-label>Total Bill</mat-label>
               <input type="number" pInputText [ngModelOptions]="{standalone:true}"
                 [(ngModel)]="supplyInvoice.totalPrice" placeholder="00" matInput>
@@ -165,24 +183,24 @@
       <mat-card class="mt-4">
         <div class="row">
           <div class="col-md-3">
-            <mat-form-field appearance="fill" class="input-field">
+            <mat-form-field appearance="outline" class="input-field">
               <mat-label>ড্রাইভার:</mat-label>
               <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageDriver()"
-                [(ngModel)]="supplyInvoice.driverId">
+                [(ngModel)]="selectedDriver">
                 <mat-option *ngFor="let driver of drivers" [value]="driver">{{driver?.person?.personName}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
               <mat-label>পরিবহন খরচ/ট্রিপ:</mat-label>
               <input type="number" pInputText [ngModelOptions]="{standalone:true}" (keyup)="calculateTransportCost()"
                 [(ngModel)]="transportCostPerTrip" placeholder="00" matInput>
             </mat-form-field>
           </div>
           <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
               <mat-label>মোট পরিবহন খরচ</mat-label>
               <input type="number" pInputText [ngModelOptions]="{standalone:true}"
                 [(ngModel)]="supplyInvoice.transportCost" placeholder="00" matInput>
@@ -220,31 +238,52 @@
           </div>
         </div>
       </mat-card>
-      <!-- <mat-card class="mt-4">
+      <mat-card class="mt-4">
         <div class="row">
           <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
               <mat-label>ক্রয় বাবদ</mat-label>
-              <input type="number" pInputText [ngModelOptions]="{standalone:true}"
-                [(ngModel)]="costAmount" placeholder="00" matInput>
+              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (change)="calculateTotalAmountToPay()"
+                [(ngModel)]="supplyInvoice.totalPrice" placeholder="00" matInput>
             </mat-form-field>
           </div>
           <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
               <mat-label>পরিবহন খরচ</mat-label>
               <input type="number" pInputText [ngModelOptions]="{standalone:true}"
-                [(ngModel)]="transportCost" placeholder="00" matInput>
+                [(ngModel)]="supplyInvoice.transportCost" placeholder="00" matInput>
             </mat-form-field>
           </div>
           <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
               <mat-label>মোট খরচ</mat-label>
               <input type="number" pInputText [ngModelOptions]="{standalone:true}"
-                [(ngModel)]="" placeholder="00" matInput>
+                [(ngModel)]="supplyInvoice.totalAmountToPay" placeholder="00" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field class="input-field" appearance="outline">
+              <mat-label>পরিশোধ</mat-label>
+              <input type="number" pInputText [ngModelOptions]="{standalone:true}"
+                [(ngModel)]="supplyInvoice.advancePayment" placeholder="00" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field class="input-field" appearance="outline">
+              <mat-label>বাকি বাবদ</mat-label>
+              <input type="number" pInputText [ngModelOptions]="{standalone:true}"
+                [(ngModel)]="supplyInvoice.duePayment" placeholder="00" matInput>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="input-field" appearance="outline">
+              <mat-label>Comment</mat-label>
+              <textarea type="text" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="supplyInvoice.comment"
+              matInput></textarea>
             </mat-form-field>
           </div>
         </div>
-      </mat-card> -->
+      </mat-card>
 
     </div>
   </div>

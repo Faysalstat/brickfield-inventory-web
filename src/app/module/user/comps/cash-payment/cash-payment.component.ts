@@ -18,7 +18,7 @@ export class CashPaymentComponent implements OnInit {
   account!:Account;
   updated : boolean = false;
   personTitle: string = "Customer";
-  transactionReason:string = "Payment to Driver";
+  transactionReason:string = "TRANSPORT_COST";
   constructor(
     private userService:UserService,
     private activatedRoute: ActivatedRoute,

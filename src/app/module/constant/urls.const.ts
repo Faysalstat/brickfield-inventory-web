@@ -1,5 +1,5 @@
-// const BASE_URL = "http://localhost:3000";
-const BASE_URL = "https://vatasolution.me/api";
+const BASE_URL = "http://localhost:3000";
+// const BASE_URL = "https://vatasolution.me/api";
 // const BASE_URL = "http://192.168.0.2:3000";
 
 export const Urls = {
@@ -8,6 +8,7 @@ export const Urls = {
     DELETE_CUSTOMER : BASE_URL+ "/customer/deletecustomer",
     DELETE_DRIVER : BASE_URL+ "/user/deletedriver",
     DELETE_ORDER : BASE_URL+ "/order/delete",
+    DELETE_TASK :  BASE_URL + "/approval/delete",
     UPDATE_ORDER : BASE_URL + "/order/update",
     UPDATE_SCHEDULE : BASE_URL+ "/schedule/update",
     DELETE_SCHEDULE : BASE_URL+ "/schedule/delete",
@@ -32,7 +33,7 @@ export const Urls = {
     CREATE_SORDAR: BASE_URL + "/sordar/addsordar",
     CREATE_NEW_EXPENSE: BASE_URL + "/",
     CREATE_RAW_STOCK: BASE_URL + "/stock/create",
-
+    DO_EXPENSE: BASE_URL + "/expense/doexpense",
 
     // FETCH 
     FETCH_ALL_CUSTOMER: BASE_URL+ "/customer/getall",
@@ -54,6 +55,7 @@ export const Urls = {
     FETCH_ALL_TRANSPORT_CATEGORY : BASE_URL + "/schedule/getallvehicle",
     FETCH_INVOICE_BY_ID: BASE_URL+"/invoice/get",
     FETCH_CUSTOMER_BY_ID: BASE_URL+"/customer/getbyid",
+    FETCH_SUPPLYER_BY_ID: BASE_URL+"/supplyer/getbyid",
     FETCH_USER_BY_NAME : BASE_URL+ "/user/checkexistinguser",
     FETCH_ALL_DUE_PAYMENT_ACCOUNTS: BASE_URL+ "/person/getallDue",
     FETCH_ALL_DUE_INVOICE: BASE_URL+ "/invoice/getallDue",

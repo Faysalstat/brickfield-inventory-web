@@ -107,6 +107,11 @@ export class UserService {
     params = params.append('id', id);
     return this.http.get(Urls.FETCH_CUSTOMER_BY_ID, { params: params });
   }
+  public fetchSupplyerById(id: any): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('id', id);
+    return this.http.get(Urls.FETCH_SUPPLYER_BY_ID, { params: params });
+  }
   public getCustomerByContactNo(contactNo: string): Observable<any> {
     let params = new HttpParams();
     params = params.append('contactNo', contactNo);
@@ -139,7 +144,11 @@ export class UserService {
   }
   public fetchAllTransByPage(queryParams: Map<string, any>): Observable<any> {
     let params = new HttpParams();
-    params = params.append('offset',queryParams.get('offset'));
+    params = params.append('offset',queryParams.get('query').offset);
+    params = params.append('category',queryParams.get('query').category);
+    params = params.append('type',queryParams.get('query').type);
+    params = params.append('fromDate',queryParams.get('query').fromDate);
+    params = params.append('toDate',queryParams.get('query').toDate);
     return this.http.get(Urls.FETCH_ALL_TRANSACTION, { params: params });
   }
   public fetchDueAmountInvoiceList(queryParams: Map<string, any>): Observable<any> {
@@ -164,6 +173,11 @@ export class UserService {
   public LoadProduction(queryParams: Map<string, any>): Observable<any> {
     console.log(queryParams.get('load'));
     return this.http.post(Urls.LOAD_PRODUCTION, queryParams.get('load'));
+  }
+
+  public doExpense(queryParams: Map<string, any>): Observable<any> {
+    console.log(queryParams.get('expense'));
+    return this.http.post(Urls.DO_EXPENSE, queryParams.get('expense'));
   }
   // Delete
   public deleteCustomer(queryParams: Map<string, any>): Observable<any> {

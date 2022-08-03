@@ -114,19 +114,31 @@ export class SupplyInvoiceIssueModel {
     supplyerId!: number;
     driverId!:number;
     productName!:string;
+    deliveryType!:number;
 
     // garichukti
     numberOfTrips!:number;
     billPerTrip!:number;
     vehicleCategoryName!:string;
 
+    //CFT
+    cftQuantity!:number;
+    actualCftQuantity!:number;
+    pricePerCFT!:number;
+    totalCFTPrice!:number;
+    actualCFTPrice!:number;
+    
+
     totalPrice!: number;
     totalQuantity!: number;
     actualQuantity!: number;
     quantityType!:string;
 
+
+    costAmountToPay: number = 0;
+    totalAmountToPay: number = 0;
     advancePayment: number = 0;
-    duePament: number = 0;
+    duePayment: number = 0;
     
     
     pricePerTrip!:number;
@@ -134,6 +146,7 @@ export class SupplyInvoiceIssueModel {
 
     deliveryStatus!: string;
     approvalStatus!: string;
+    comment!:string;
     issuedBy!: string;
   }
 
@@ -242,3 +255,14 @@ export class InvoiceQueryBody{
   customerId:number=0;
 
 }
+export class Expense{
+  categoryName!:string;
+  expenseName!:string;
+  expenseAmount!:number;
+  refference!:string;
+  payTo!:string;
+}
+// export class ExpenseCategory{
+//   {label:'ভাড়া',value:"VARA"},
+  
+// }

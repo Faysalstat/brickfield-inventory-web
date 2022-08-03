@@ -6,21 +6,21 @@
                 <h3 *ngIf="isEdit" style="color:red ; font-weight:bolder ;">Status : {{status}}</h3>
                 <h4 *ngIf="isDue" style="color:red ; font-weight:bolder ;">Payment Due</h4>
                 <div class="col-md-4">
-                    <mat-form-field class="input-field" appearance="fill">
+                    <mat-form-field class="input-field" appearance="outline">
                         <mat-label>মোবাইল নাম্বার</mat-label>
                         <input (change)="searchCustomer()" pInputText [ngModelOptions]="{standalone:true}"
                             [(ngModel)]="person.contactNo" placeholder="মোবাইল নাম্বার" matInput>
                     </mat-form-field>
                 </div>
                 <div class="col-md-4">
-                    <mat-form-field class="input-field" appearance="fill">
+                    <mat-form-field class="input-field" appearance="outline">
                         <mat-label>নাম :</mat-label>
                         <input [ngModelOptions]="{standalone:true}" [(ngModel)]="person.personName" [disabled]="true"
                             placeholder="নাম" matInput>
                     </mat-form-field>
                 </div>
                 <div *ngIf="!isNeg" class="col-md-3">
-                    <mat-form-field class="input-field" appearance="fill">
+                    <mat-form-field class="input-field" appearance="outline">
                         <mat-label>জমা:</mat-label>
                         <input type="number" pInputText [ngModelOptions]="{standalone:true}" [disabled]="true"
                             [(ngModel)]="customerBalance" matInput>
@@ -34,7 +34,7 @@
                     </mat-form-field>
                 </div>
                 <div class="col-md-6">
-                    <mat-form-field class="input-field" appearance="fill">
+                    <mat-form-field class="input-field" appearance="outline">
                         <mat-label>ঠিকানা:</mat-label>
                         <textarea pInputText [ngModelOptions]="{standalone:true}" [disabled]="true"
                             [(ngModel)]="person.personAddress" matInput></textarea>
@@ -46,7 +46,7 @@
             <h2>অর্ডারের বিবরণ:</h2>
             <div class="row">
                 <div class="col-md-4">
-                    <mat-form-field appearance="fill" class="input-field">
+                    <mat-form-field appearance="outline" class="input-field">
                         <mat-label>ইটের ধরন</mat-label>
                         <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageBrick()"
                             [(ngModel)]="selectedBrick">
@@ -55,21 +55,21 @@
                     </mat-form-field>
                 </div>
                 <div class="col-md-2">
-                    <mat-form-field class="input-field" appearance="fill">
+                    <mat-form-field class="input-field" appearance="outline">
                         <mat-label>রেট</mat-label>
                         <input type="number" pInputText [ngModelOptions]="{standalone:true}"
                             [(ngModel)]="selectedBrick.pricePerPiece" disabled="true" matInput>
                     </mat-form-field>
                 </div>
                 <div class="col-md-3">
-                    <mat-form-field class="input-field" appearance="fill">
+                    <mat-form-field class="input-field" appearance="outline">
                         <mat-label>পরিমান:</mat-label>
                         <input type="number" (change)="calculateTotalPrice()" pInputText
                             [ngModelOptions]="{standalone:true}" [(ngModel)]="orderItem.quantity" matInput>
                     </mat-form-field>
                 </div>
                 <div class="col-md-3">
-                    <mat-form-field class="input-field" appearance="fill">
+                    <mat-form-field class="input-field" appearance="outline">
                         <mat-label>মূল্য:</mat-label>
                         <input type="number" pInputText [ngModelOptions]="{standalone:true}"
                             [(ngModel)]="orderItem.totalPrice" matInput>
@@ -94,6 +94,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <tr *ngIf="orders.length==0">
+                                <td colspan="9" style="font-weight:bold ; ">
+                                  No Order Created!!
+                                </td>
+                              </tr>
                             <tr *ngFor="let order of orders; index as i">
                                 <td>{{i+1}}</td>
                                 <td>{{order?.brick?.category}}</td>
@@ -117,7 +122,7 @@
             <div class="row">
                 <h2>ডেলিভারি শিডিউল</h2>
                 <div class="col-md-3">
-                    <mat-form-field appearance="fill" class="input-field">
+                    <mat-form-field appearance="outline" class="input-field">
                         <mat-label>অর্ডার</mat-label>
                         <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageOrder()"
                             [(ngModel)]="selectedOrder">
@@ -126,28 +131,28 @@
                     </mat-form-field>
                 </div>
                 <div class="col-md-3">
-                    <mat-form-field class="input-field" appearance="fill">
+                    <mat-form-field class="input-field" appearance="outline">
                         <mat-label>ডেলিভারি পরিমান :</mat-label>
                         <input type="number" pInputText [ngModelOptions]="{standalone:true}"
                             [(ngModel)]="scheduleItem.deliverableQuantity" placeholder="Delivarable Quantity" matInput>
                     </mat-form-field>
                 </div>
                 <div class="col-md-2">
-                    <mat-form-field class="input-field" appearance="fill">
+                    <mat-form-field class="input-field" appearance="outline">
                         <mat-label>ট্রিপ লাগবে:</mat-label>
                         <input type="number" pInputText [ngModelOptions]="{standalone:true}"
                             [(ngModel)]="scheduleItem.tripNeeded" placeholder="Trip Needed" matInput>
                     </mat-form-field>
                 </div>
                 <div class="col-md-3">
-                    <mat-form-field class="input-field" appearance="fill">
+                    <mat-form-field class="input-field" appearance="outline">
                         <mat-label>পরিবহন খরচ:</mat-label>
                         <input type="number" pInputText [ngModelOptions]="{standalone:true}"
                             [(ngModel)]="scheduleItem.transportCost" placeholder="00" matInput>
                     </mat-form-field>
                 </div>
                 <div class="col-md-3">
-                    <mat-form-field appearance="fill">
+                    <mat-form-field appearance="outline">
                         <mat-label>শিডিউল তারিখ:</mat-label>
                         <input matInput [matDatepicker]="picker" [ngModelOptions]="{standalone:true}"
                             [(ngModel)]="scheduleItem.scheduledDate">
@@ -156,7 +161,7 @@
                     </mat-form-field>
                 </div>
                 <div class="col-md-3">
-                    <mat-form-field appearance="fill" class="input-field">
+                    <mat-form-field appearance="outline" class="input-field">
                         <mat-label>ড্রাইভার:</mat-label>
                         <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageDriver()"
                             [(ngModel)]="scheduleItem.driver">
@@ -167,7 +172,7 @@
                 </div>
                 <!-- vehicle  -->
                 <div class="col-md-3">
-                    <mat-form-field appearance="fill" class="input-field">
+                    <mat-form-field appearance="outline" class="input-field">
                         <mat-label>গাড়ির ধরন</mat-label>
                         <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageVehicle()"
                             [(ngModel)]="scheduleItem.vehicleCategory">
@@ -201,6 +206,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <tr *ngIf="schedules.length==0">
+                                <td colspan="9" style="font-weight:bold ; ">
+                                  No Schedule Created!!
+                                </td>
+                              </tr>
                             <tr *ngFor="let delivery of schedules; index as i">
                                 <td>{{i+1}}</td>
                                 <td>{{delivery?.deliverableQuantity}}</td>
@@ -244,49 +254,49 @@
                 <!-- </div> -->
                 <div class="col-md-3">
                     <!-- <h3>Total Quantity</h3> -->
-                    <mat-form-field class="input-field" appearance="fill">
+                    <mat-form-field class="input-field" appearance="outline">
                         <mat-label>মোট পরিমান:</mat-label>
                         <input type="number" pInputText formControlName="totalQuantity" matInput>
                     </mat-form-field>
                 </div>
                 <div class="col-md-3">
                     <!-- <h3>Total Price</h3> -->
-                    <mat-form-field class="input-field" appearance="fill">
+                    <mat-form-field class="input-field" appearance="outline">
                         <mat-label>ইটের মূল্য:</mat-label>
                         <input type="number" pInputText [disabled]="isEdit" formControlName="totalPrice" matInput>
                     </mat-form-field>
                 </div>
                 <div class="col-md-3">
                     <!-- <h3>Transport Cost:</h3> -->
-                    <mat-form-field class="input-field" appearance="fill">
+                    <mat-form-field class="input-field" appearance="outline">
                         <mat-label>মোট পরিবহন খরচ:</mat-label>
                         <input type="number" pInputText formControlName="transportCost" matInput>
                     </mat-form-field>
                 </div>
                 <div class="col-md-3">
                     <!-- <h3>Total Billing:</h3> -->
-                    <mat-form-field class="input-field" appearance="fill">
+                    <mat-form-field class="input-field" appearance="outline">
                         <mat-label>মোট বিল:</mat-label>
                         <input type="number" pInputText formControlName="totalBill" matInput>
                     </mat-form-field>
                 </div>
                 <div class="col-md-3">
                     <!-- <h3>Payment:</h3> -->
-                    <mat-form-field class="input-field" appearance="fill">
+                    <mat-form-field class="input-field" appearance="outline">
                         <mat-label>পরিশোধ:</mat-label>
                         <input type="number" pInputText formControlName="advancePayment" matInput>
                     </mat-form-field>
                 </div>
                 <div class="col-md-3">
                     <!-- <h3>Due Payment:</h3> -->
-                    <mat-form-field class="input-field" appearance="fill">
+                    <mat-form-field class="input-field" appearance="outline">
                         <mat-label>বাকি</mat-label>
                         <input type="number" pInputText formControlName="duePayment" [disabled]="true" matInput>
                     </mat-form-field>
                 </div>
                 <div class="col-md-3">
                     <!-- <h3>Receive Cash:</h3> -->
-                    <mat-form-field *ngIf="isEdit" class="input-field" appearance="fill">
+                    <mat-form-field *ngIf="isEdit" class="input-field" appearance="outline">
                         <mat-label>ক্যাশ জমা:</mat-label>
                         <input type="number" pInputText formControlName="newPayment" matInput>
                     </mat-form-field>

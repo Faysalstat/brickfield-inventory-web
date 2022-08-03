@@ -13,6 +13,7 @@ import { CustomerAccountComponent } from './customer-account/customer-account.co
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { DriverListComponent } from './driver-list/driver-list.component';
 import { HomeComponent } from './home/home.component';
+import { IssueExpenseComponent } from './issue-expense/issue-expense.component';
 import { ListInvoicesComponent } from './list-invoices/list-invoices.component';
 import { MakeInvoiceComponent } from './make-invoice/make-invoice.component';
 import { ScheduleDeliveryComponent } from './schedule-delivery/schedule-delivery.component';
@@ -40,7 +41,7 @@ const routes: Routes = [{
         {path:'sordar-management', component:SordarListComponent},
         {path:'supplyer-management', component:SupplyerListComponent},
         {path:'supply-invoice', component:SupplyInvoiceComponent},
-        {path:'cash-receive', component:CashReceiveComponent},
+        {path:'issue-expense', component:IssueExpenseComponent},
         {path:'cash-payment-due-list', component:CashPaymentDueListComponent},
         {path:'cash-payment/:id', component:CashPaymentComponent},
         {path:'reports',component: UserReportsComponent,children:[
