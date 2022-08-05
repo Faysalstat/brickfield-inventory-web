@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import {
   Account,
@@ -45,7 +46,8 @@ export class SupplyInvoiceComponent implements OnInit {
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
     this.supplyer = new Supplyer();
     this.account = new Account();
@@ -88,6 +90,13 @@ export class SupplyInvoiceComponent implements OnInit {
         console.log(data.body);
         this.drivers = data.body;
       },
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
+      },
     });
   }
 
@@ -105,8 +114,12 @@ export class SupplyInvoiceComponent implements OnInit {
           return;
         }
       },
-      error: (err) => {
-        console.log(err);
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
       },
       complete: () => {},
     });
@@ -117,6 +130,13 @@ export class SupplyInvoiceComponent implements OnInit {
         console.log(data);
         this.productList = data.body;
       },
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
+      },
     });
   }
   fetchVehicles() {
@@ -124,6 +144,13 @@ export class SupplyInvoiceComponent implements OnInit {
       next: (data) => {
         console.log(data.body);
         this.vehicles = data.body;
+      },
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
       },
     });
   }
@@ -196,7 +223,13 @@ export class SupplyInvoiceComponent implements OnInit {
         console.log(res);
         this.router.navigate(['/home/supply-list']);
       },
-      error: (err) => {},
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
+      },
       complete: () => {},
     });
   }

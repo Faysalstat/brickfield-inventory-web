@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApprovalModel, Tasks } from 'src/app/module/model';
 import { UserService } from '../../user.service';
 
@@ -12,7 +13,8 @@ export class CashHandoverComponent implements OnInit {
   remarks!:string;
   balance!:number
   constructor(
-    private userService:UserService
+    private userService:UserService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -22,6 +24,14 @@ export class CashHandoverComponent implements OnInit {
     this.userService.fetchGLAccountBalance("FACTORY_GL").subscribe({
       next:(accRes)=>{
         this.balance = accRes.body.balance;
+        
+      },
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
       }
     })
   }
@@ -40,7 +50,13 @@ export class CashHandoverComponent implements OnInit {
         this.amount = 0;
         this.remarks ="";
       },
-      error: (err) => {},
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
+      },
       complete: () => {},
     });
   }
@@ -49,5 +65,8 @@ export class CashHandoverComponent implements OnInit {
     return (
       (newDate.getDate()) +"/"+(newDate.getMonth()+1) + '/' + newDate.getFullYear()
     );
+  }
+  updateBalance(event:any){
+console.log("Balance Updated By Expense")
   }
 }

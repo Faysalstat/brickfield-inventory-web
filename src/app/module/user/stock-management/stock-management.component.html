@@ -59,7 +59,7 @@
                         <th>{{production.productionDate}}</th>
                         <th>{{production.sordarName}}</th>
                         <th>
-                            <button mat-icon-button color="warn" (click)="deleteRawProduction(i)">
+                            <button mat-icon-button color="warn" (click)="deleteRawProduction(production)">
                                 <mat-icon>delete</mat-icon>
                             </button>
                         </th>
@@ -226,6 +226,12 @@
 
                         </tr>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Total Bricks</th>
+                            <th>{{totalBricks}}</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>

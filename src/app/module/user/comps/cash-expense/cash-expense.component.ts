@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Driver, Expense } from 'src/app/module/model';
 import { UserService } from '../../user.service';
 
@@ -13,7 +14,8 @@ export class CashExpenseComponent implements OnInit {
 
 
   constructor(
-    private userService:UserService
+    private userService:UserService,
+    private snackBar: MatSnackBar
   ) {
     this.selectedExpense = new Expense();
    }
@@ -27,6 +29,13 @@ export class CashExpenseComponent implements OnInit {
         if(data){
           this.expenseCategories = data.body;
         }
+      },
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
       }
     })
   }
@@ -38,9 +47,14 @@ export class CashExpenseComponent implements OnInit {
       next:(data)=>{
         console.log(data);
         this.selectedExpense = new Expense();
+        window.location.reload();
       },
       error:(err)=>{
-        window.alert(err);
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
       }
     })
   }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Driver, EscavatorExpenseModel } from 'src/app/module/model';
 import { UserService } from '../../user.service';
+import { NotificationComponent } from '../notification/notification.component';
 
 @Component({
   selector: 'app-escavator-payment',
@@ -13,12 +15,14 @@ export class EscavatorPaymentComponent implements OnInit {
   excavatorCostModel:EscavatorExpenseModel = new EscavatorExpenseModel();
   productList!:any[];
   constructor(
-    private userService:UserService
+    private userService:UserService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
     this.fetchDrivers();
     this.fetchProductList();
+    
   }
   fetchDrivers() {
     this.userService.fetchAllDrivers().subscribe({
@@ -26,6 +30,13 @@ export class EscavatorPaymentComponent implements OnInit {
         console.log(data.body);
         this.driverList = data.body;
       },
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
+      }
     });
   }
   calculateTotalHourBill(){
@@ -51,10 +62,17 @@ export class EscavatorPaymentComponent implements OnInit {
   this.userService.payEscavatorBill(params).subscribe({
     next:(resData)=>{
       console.log(resData)
+      this.snackBar.openFromComponent(NotificationComponent, {
+        duration: 1000,
+      });
       this.excavatorCostModel = new EscavatorExpenseModel();
     },
     error:(err)=>{
-      console.log(err);
+      this.snackBar.open(err, "Close it", {
+        duration: 10000,
+        horizontalPosition:'right',
+        verticalPosition: 'top'
+      });
     }
   })
   }
@@ -68,6 +86,13 @@ export class EscavatorPaymentComponent implements OnInit {
         this.productList = data.body;
         
       },
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
+      }
     });
   }
 

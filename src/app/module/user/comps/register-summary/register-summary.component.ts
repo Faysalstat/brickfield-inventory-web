@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TransactionSummary } from 'src/app/module/model';
 import { UserService } from '../../user.service';
 
@@ -10,7 +11,8 @@ import { UserService } from '../../user.service';
 export class RegisterSummaryComponent implements OnInit {
   summary!:TransactionSummary;
   constructor(
-    private userService:UserService
+    private userService:UserService,
+    private snackBar: MatSnackBar
   ) { 
     this.summary = new TransactionSummary();
   }
@@ -38,7 +40,14 @@ export class RegisterSummaryComponent implements OnInit {
           this.summary.totalSale = res.body.totalSale;
         }
         
-      }
+      },
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
+      },
     })
   }
 

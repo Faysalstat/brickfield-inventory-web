@@ -8,3 +8,7 @@ input.mat-input-element{
 
 .mat-box{}
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+::ng-deep .mat-snack-bar-container {
+    margin-top: 100px !important;
+}

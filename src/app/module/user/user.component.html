@@ -1,90 +1,68 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <div class="container-fluid menu-body">
-      <a class="navbar-brand" style="color:#FFF ;" href="javascript:void(0)">ABC Brickfield Ltd</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="mynavbar" style="float:right ;" >
-        <ul class="navbar-nav"  >
-          <li class="nav-item">
-            <a class="nav-link" href="home" style="color:#FFF ;">হোম</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" style="color:#FFF ;">সেল</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" routerLink="invoice" > ইনভয়ে‍স তৈরী </a></li>
-              <li><a class="dropdown-item" routerLink="invoice-list" >ইনভয়ে‍স তালিকা</a></li>
-              <!-- <li><a class="dropdown-item" routerLink="invoicelist" >Schedule Order</a></li> -->
-            </ul>
-          </li>
-          <!-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="javascript:void(0)" 
-            role="button" data-bs-toggle="dropdown" style="color:#FFF ;">Cash</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" routerLink="cash-receive" >Cash Receive</a></li>
-              <li><a class="dropdown-item" routerLink="cash-payment" >Cash Payment</a></li>
-            </ul>
-          </li> -->
-          <!-- <li class="nav-item">
-            <a class="nav-link" routerLink="cash-payment-due-list" style="color:#FFF ;">ক্যাশ প্রদান</a>
-          </li> -->
-          <li class="nav-item">
-            <a class="nav-link" routerLink="schedule-list" style="color:#FFF ;">ডেলিভারি শিডিউল</a>
-          </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" routerLink="schedule-list" style="color:#FFF ;">Schedules</a>
-          </li> -->
-          <!-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" style="color:#FFF ;">Customer</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" routerLink="customer">Customer</a></li>
-              <li><a class="dropdown-item" routerLink="account">Customer Account</a></li>
-            </ul>
-          </li> -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" style="color:#FFF ;">সাপ্লাই</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" routerLink="supply-invoice">সাপ্লাই ইনভয়ে‍স তৈরী </a></li>
-              <li><a class="dropdown-item" routerLink="supply-list"> সাপ্লাই ইনভয়ে‍স তালিকা </a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="stock" style="color:#FFF ;">স্টক ম্যানেজমেন্ট</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" style="color:#FFF ;">ক্লায়েন্টস</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" routerLink="customer">কাস্টমার</a></li>
-              <!-- <li><a class="dropdown-item" routerLink="account">Customer Account ম্যানেজমেন্ট</a></li> -->
-              <li><a class="dropdown-item" routerLink="driver-management">ড্রাইভার</a></li>
-              <li><a class="dropdown-item" routerLink="supplyer-management">সাপ্লায়ার</a></li>
-              <li><a class="dropdown-item" routerLink="sordar-management">সর্দার</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="issue-expense" style="color:#FFF ;">Cash</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="reports" style="color:#FFF ;">Reports</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/admin" style="color:#FFF ;">Admin</a>
-          </li>
-          c
-        </ul>
-        <!-- <form class="d-flex">
-          <input class="form-control me-2" type="text" placeholder="Search">
-          <button class="btn btn-primary" type="button">Search</button>
-        </form> -->
-      </div>
-      <div class="nav-item" style="float: right;margin-right: 10px;">
-        <button class="btn btn-danger navbar-btn" (click)="logout()">Logout</button>
-      </div>
+  <div class="container-fluid menu-body">
+    <a class="navbar-brand" style="color:#FFF ;" href="javascript:void(0)">
+      <img src="../../../assets/img/logo.png" style="width: 130px;height:40px ;" alt="logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar" style="float:right ;">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="home" style="color:#FFF ;">হোম</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown"
+            style="color:#FFF ;">সেল</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="invoice"> ইনভয়ে‍স তৈরী </a></li>
+            <li><a class="dropdown-item" routerLink="invoice-list">ইনভয়ে‍স তালিকা</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="schedule-list" style="color:#FFF ;">ডেলিভারি শিডিউল</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown"
+            style="color:#FFF ;">সাপ্লাই</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="supply-invoice">সাপ্লাই ইনভয়ে‍স তৈরী </a></li>
+            <li><a class="dropdown-item" routerLink="supply-list"> সাপ্লাই ইনভয়ে‍স তালিকা </a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="stock" style="color:#FFF ;">স্টক ম্যানেজমেন্ট</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown"
+            style="color:#FFF ;">ক্লায়েন্টস</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="customer">কাস্টমার</a></li>
+            <li><a class="dropdown-item" routerLink="driver-management">ড্রাইভার</a></li>
+            <li><a class="dropdown-item" routerLink="supplyer-management">সাপ্লায়ার</a></li>
+            <li><a class="dropdown-item" routerLink="sordar-management">সর্দার</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="issue-expense" style="color:#FFF ;">Cash</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="reports" style="color:#FFF ;">Reports</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin" style="color:#FFF ;">Admin</a>
+        </li>
+        c
+      </ul>
     </div>
-  </nav>
-  
+    <div class="nav-item" style="float: right;margin-right: 10px;">
+      <button class="btn btn-danger navbar-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+</nav>
+
 <div class="content" role="main">
-  <div class="container" >
+  <div class="container">
     <router-outlet></router-outlet>
   </div>
 </div>

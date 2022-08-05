@@ -15,6 +15,7 @@ export const Urls = {
     UPDATE_USER: BASE_URL+"/user/updateuser",
     UNLOAD_PRODUCTION: BASE_URL+"/stock/unloadproduction",
     LOAD_PRODUCTION: BASE_URL+"/stock/loadproduction",
+    DELETE_LOAD_PRODUCTION: BASE_URL+"/stock/deleteloadproduction",
     UPDATE_INVOICE : BASE_URL + "/invoice/update",
     APPROVE_INVOICE : BASE_URL + "/invoice/approve",
     UPDATE_BALANCE : BASE_URL + "/person/updatebalance",

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sordar } from '../../model';
 import { UserService } from '../user.service';
 
@@ -9,7 +10,9 @@ import { UserService } from '../user.service';
 })
 export class SordarListComponent implements OnInit {
   sordarList!: Sordar[];
-  constructor(private userService: UserService) {
+  constructor(
+    private userService: UserService,
+    private snackBar: MatSnackBar) {
     this.sordarList = [];
   }
 
@@ -23,8 +26,12 @@ export class SordarListComponent implements OnInit {
         console.log(data.body);
         this.sordarList = data.body;
       },
-      error: (err) => {
-        console.log(err);
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
       },
       complete: () => {},
     });
@@ -40,7 +47,13 @@ export class SordarListComponent implements OnInit {
       next: (res) => {
         console.log(res);
       },
-      error: (err) => {},
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
+      },
       complete: () => {},
     });
   }

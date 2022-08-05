@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Account, ApprovalModel, Brick, Customer, CustomerDomain, Driver, Invoice, InvoiceDomain, InvoiceIssueModel, OrderModel, Person, ScheduleDeliveryModel, Tasks, VehicleCategory } from '../../model';
 import { UserService } from '../user.service';
@@ -46,7 +47,8 @@ export class MakeInvoiceComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private snackBar: MatSnackBar
   ) {
     this.customer = new Customer();
     this.account = new Account();
@@ -172,8 +174,12 @@ export class MakeInvoiceComponent implements OnInit {
           return;
         }
       },
-      error: (err) => {
-        console.log(err);
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
       },
       complete: () => {},
     });
@@ -209,6 +215,13 @@ export class MakeInvoiceComponent implements OnInit {
           this.bricks = res.body;
         }
       },
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
+      },
     });
   }
 
@@ -223,8 +236,12 @@ export class MakeInvoiceComponent implements OnInit {
           this.orders.splice(index, 1);
           this.calculateOrderTotal();
         },
-        error: (err) => {
-          console.log(err);
+        error:(err)=>{
+          this.snackBar.open(err, "Close it", {
+            duration: 10000,
+            horizontalPosition:'right',
+            verticalPosition: 'top'
+          });
         },
         complete: () => {
           this.updateInvoice();
@@ -334,6 +351,13 @@ export class MakeInvoiceComponent implements OnInit {
           this.invoiceIssueForm.get('totalBill')?.disable();
         }
       },
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
+      },
     });
   }
   editDelivery(index: any) {}
@@ -348,8 +372,12 @@ export class MakeInvoiceComponent implements OnInit {
           this.schedules.splice(index, 1);
           this.calculateScheduleTotal();
         },
-        error: (err) => {
-          console.log(err);
+        error:(err)=>{
+          this.snackBar.open(err, "Close it", {
+            duration: 10000,
+            horizontalPosition:'right',
+            verticalPosition: 'top'
+          });
         },
         complete: () => {
           this.updateInvoice();
@@ -367,6 +395,13 @@ export class MakeInvoiceComponent implements OnInit {
         console.log(data.body);
         this.vehicles = data.body;
       },
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
+      },
     });
   }
   fetchDrivers() {
@@ -374,6 +409,13 @@ export class MakeInvoiceComponent implements OnInit {
       next: (data) => {
         console.log(data.body);
         this.drivers = data.body;
+      },
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
       },
     });
   }
@@ -412,7 +454,13 @@ export class MakeInvoiceComponent implements OnInit {
         console.log(res);
         this.router.navigate(['/home/invoice-list']);
       },
-      error: (err) => {},
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
+      },
       complete: () => {},
     });
   }

@@ -180,6 +180,10 @@ export class UserService {
     console.log(queryParams.get('load'));
     return this.http.post(Urls.LOAD_PRODUCTION, queryParams.get('load'));
   }
+  public deleteLoadProductionItem(queryParams: Map<string, any>): Observable<any> {
+    console.log(queryParams.get('deleteload'));
+    return this.http.post(Urls.DELETE_LOAD_PRODUCTION, queryParams.get('deleteload'));
+  }
 
   public doExpense(queryParams: Map<string, any>): Observable<any> {
     console.log(queryParams.get('expense'));

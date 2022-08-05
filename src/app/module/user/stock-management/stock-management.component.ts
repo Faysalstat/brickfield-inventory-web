@@ -1,5 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Brick, RawBrickProduction } from '../../model';
 import { UserService } from '../user.service';
 
@@ -26,8 +27,10 @@ export class StockManagementComponent implements OnInit {
   selectedBrick!:Brick;
   rawStockList!:[];
   loadedReserve!:number;
+  totalBricks!:number;
   constructor(
     private userService:UserService,
+    private snackBar: MatSnackBar
   ) {
     this.mills = [
       { label: 'Select mill name', value: '' },
@@ -51,12 +54,21 @@ export class StockManagementComponent implements OnInit {
         console.log(res);
         
         if (res.body) {
+          this.totalBricks = 0;
           this.bricks = res.body;
           this.bricks.map((brick:any)=>{
             brick.unloadQuantity = 0;
             brick.updatedTotalQuantity= 0;
+            this.totalBricks += brick.quantity;
           });
         }
+      },
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
       },
     });
   }
@@ -70,6 +82,13 @@ export class StockManagementComponent implements OnInit {
           this.calculateTotalRawProduction();
         }
       },
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
+      },
     });
   }
   fetchRawStockReport(){
@@ -78,7 +97,14 @@ export class StockManagementComponent implements OnInit {
         console.log(res.body);
         this.rawProductionReport = res.body;
 
-      }
+      },
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
+      },
     })
   }
   fetchLoadUnloadReport(){
@@ -90,8 +116,12 @@ export class StockManagementComponent implements OnInit {
 
       },
       error:(err)=>{
-        console.log(err);
-      }
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
+      },
     })
   }
   addRawProduction() {
@@ -107,7 +137,11 @@ export class StockManagementComponent implements OnInit {
         this.dailyProductionList  = data.body;
       },
       error:(err)=>{
-        console.log(err);
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
       },
       complete:()=>{
         this.fetchRawStock();
@@ -137,13 +171,33 @@ export class StockManagementComponent implements OnInit {
         this.loadingDate= new Date();
         this.fetchRawStockReport();
         this.fetchLoadUnloadReport();
-      }
+      },
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
+      },
     })
     
   }
 
-  deleteRawProduction(i: number) {
-    this.dailyProductionList.slice(i);
+  deleteRawProduction(production:RawBrickProduction ) {
+    const params: Map<string, any> = new Map();
+    params.set('deleteload',production);
+    this.userService.deleteLoadProductionItem(params).subscribe({
+      next:(res)=>{
+        window.alert("item deleted");
+      },
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
+      },
+    })
   }
 
   calculateTotalRawProduction() {
@@ -167,8 +221,11 @@ export class StockManagementComponent implements OnInit {
         console.log(res);
       },
       error:(err)=>{
-        console.log(err);
-        window.alert(err);
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
       },
       complete:()=>{
         this.fetchBricks();

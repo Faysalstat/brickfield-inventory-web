@@ -19,13 +19,13 @@
                             placeholder="নাম" matInput>
                     </mat-form-field>
                 </div>
-                <div *ngIf="!isNeg" class="col-md-3">
+                <!-- <div *ngIf="!isNeg" class="col-md-3">
                     <mat-form-field class="input-field" appearance="outline">
                         <mat-label>জমা:</mat-label>
                         <input type="number" pInputText [ngModelOptions]="{standalone:true}" [disabled]="true"
                             [(ngModel)]="customerBalance" matInput>
                     </mat-form-field>
-                </div>
+                </div> -->
                 <div *ngIf="isNeg" class="col-md-3" >
                     <mat-form-field class="input-field" appearance="outline">
                         <mat-label style="color:red;font-weight: bolder;">বাকি:</mat-label>

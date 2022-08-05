@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   Invoice,
@@ -21,7 +22,8 @@ export class ScheduleDeliveryComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
     this.delivery = new ScheduleDeliveryModel();
   }
@@ -42,6 +44,13 @@ export class ScheduleDeliveryComponent implements OnInit {
           }else{
             this.isPaymentDue = false;
           }
+        },
+        error:(err)=>{
+          this.snackBar.open(err, "Close it", {
+            duration: 10000,
+            horizontalPosition:'right',
+            verticalPosition: 'top'
+          });
         },
       });
     });
@@ -68,7 +77,11 @@ export class ScheduleDeliveryComponent implements OnInit {
         this.router.navigate(['/home/schedule-list']);
       },
       error:(err)=>{
-        console.log(err);
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
       },
       complete:()=>{
         console.log("done");

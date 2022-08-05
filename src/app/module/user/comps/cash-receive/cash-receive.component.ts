@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Account, Customer, Person } from 'src/app/module/model';
 import { UserService } from '../../user.service';
 
@@ -19,7 +20,8 @@ export class CashReceiveComponent implements OnInit {
   updated : boolean = false;
   personTitle: string = "Customer";
   constructor(
-    private userService:UserService
+    private userService:UserService,
+    private snackBar: MatSnackBar
   ) { 
     this.account = new Account();
     this.customer = new Customer();
@@ -45,8 +47,12 @@ export class CashReceiveComponent implements OnInit {
           return;
         }
       },
-      error: (err) => {
-        console.log(err);
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
       },
       complete: () => {},
     });
@@ -69,9 +75,12 @@ export class CashReceiveComponent implements OnInit {
           this.updated = false;
         },
         error:(err)=>{
-          console.log(err);
-          window.alert(err);
-        }
+          this.snackBar.open(err, "Close it", {
+            duration: 10000,
+            horizontalPosition:'right',
+            verticalPosition: 'top'
+          });
+        },
       })
 
     }
