@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Driver } from 'src/app/module/model';
+import { Driver, EscavatorExpenseModel } from 'src/app/module/model';
 import { UserService } from '../../user.service';
 
 @Component({
@@ -10,14 +10,8 @@ import { UserService } from '../../user.service';
 export class EscavatorPaymentComponent implements OnInit {
   selectedDriver!:Driver;
   driverList!:Driver[];
-  totalHour:number=0;
-  hourlyRate:number=0;
-  totalBill:number=0;
-  remark!:string;
-  advancePayment:number=0;
-  duePayment: number=0;
+  excavatorCostModel:EscavatorExpenseModel = new EscavatorExpenseModel();
   productList!:any[];
-  productName!:any;
   constructor(
     private userService:UserService
   ) { }
@@ -35,21 +29,21 @@ export class EscavatorPaymentComponent implements OnInit {
     });
   }
   calculateTotalHourBill(){
-   this.totalBill = this.hourlyRate * this.totalHour;  
+   this.excavatorCostModel.totalBill = this.excavatorCostModel.hourlyRate * this.excavatorCostModel.totalHour;  
   }
   submit(){
     let excavatorModel = {
-      productName:this.productName,
-      driver: this.selectedDriver,
-      totalHour: this.totalHour,
-      totalBill: this.totalBill,
-      hourlyRate: this.hourlyRate,
+      productName:this.excavatorCostModel.productName,
+      driver: this.excavatorCostModel.driver,
+      totalHour: this.excavatorCostModel.totalHour,
+      totalBill: this.excavatorCostModel.totalBill,
+      hourlyRate: this.excavatorCostModel.hourlyRate,
       expenseName: "এসকেভেটের ভাড়া",
       categoryName: "পরিবহন",
-      remark : this.remark,
+      remark : this.excavatorCostModel.remark,
       deliveryType: 3,
-      advancePayment:this.advancePayment,
-      duePayment:this.duePayment,
+      advancePayment:this.excavatorCostModel.advancePayment,
+      duePayment:this.excavatorCostModel.duePayment,
 
     } 
   const params:Map<string,any> = new Map();
@@ -57,7 +51,7 @@ export class EscavatorPaymentComponent implements OnInit {
   this.userService.payEscavatorBill(params).subscribe({
     next:(resData)=>{
       console.log(resData)
-
+      this.excavatorCostModel = new EscavatorExpenseModel();
     },
     error:(err)=>{
       console.log(err);
@@ -65,7 +59,7 @@ export class EscavatorPaymentComponent implements OnInit {
   })
   }
   calculateDue(){
-    this.duePayment = this.totalBill - this.advancePayment;
+    this.excavatorCostModel.duePayment = this.excavatorCostModel.totalBill - this.excavatorCostModel.advancePayment;
   }
   fetchProductList() {
     this.userService.fetchAllProducts().subscribe({

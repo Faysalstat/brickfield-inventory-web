@@ -156,6 +156,12 @@ export class UserService {
     params = params.append('offset',queryParams.get('offset'));
     return this.http.get(Urls.FETCH_ALL_DUE_INVOICE,{ params: params });
   }
+  public fetchGLAccountBalance(type: string): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('type', type);
+    return this.http.get(Urls.FETCH_GL_ACCOUNT_BY_TYPE, { params: params });
+  }
+  
   // UPDATE
   public updateInvoice(queryParams: Map<string, any>): Observable<any> {
     console.log(queryParams.get('invoice'));

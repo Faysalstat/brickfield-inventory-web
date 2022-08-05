@@ -12,6 +12,7 @@ import { InvoiceDetailComponent } from './invoice-detail/invoice-detail.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TaskListComponent } from './task-list/task-list.component';
 import { PendingSchedulesComponent } from './pending-schedules/pending-schedules.component';
+import { HandoverDetailsComponent } from './handover-details/handover-details.component';
 
 
 
@@ -25,7 +26,8 @@ import { PendingSchedulesComponent } from './pending-schedules/pending-schedules
     UsersComponent,
     InvoiceDetailComponent,
     TaskListComponent,
-    PendingSchedulesComponent
+    PendingSchedulesComponent,
+    HandoverDetailsComponent
   ],
   imports: [
     CommonModule,

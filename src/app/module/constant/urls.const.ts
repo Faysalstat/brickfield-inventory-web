@@ -36,6 +36,7 @@ export const Urls = {
     CREATE_RAW_STOCK: BASE_URL + "/stock/create",
     DO_EXPENSE: BASE_URL + "/expense/doexpense",
     PAY_ESCAVATOR : BASE_URL + "/expense/payescavator",
+    PAY_OWNER : BASE_URL + "/expense/payowner",
 
     // FETCH 
     FETCH_ALL_CUSTOMER: BASE_URL+ "/customer/getall",
@@ -66,6 +67,7 @@ export const Urls = {
     FETCH_ALL_RAW_PRODUCTION_REPORT: BASE_URL + "/stock/getrawproductionreport",
     FETCH_ALL_LOAD_UNLOAD_REPORT: BASE_URL + "/stock/getloadsumary",
     FETCH_ALL_TRANSACTION: BASE_URL+ "/transaction/getalltransaction",
+    FETCH_GL_ACCOUNT_BY_TYPE :BASE_URL+ "/expense/getbyglaccounttype",
 
     
     // CHHECKING 

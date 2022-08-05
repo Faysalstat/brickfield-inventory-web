@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApprovalModel } from '../../model';
+import { ApprovalModel, Tasks } from '../../model';
 import { AdminService } from '../admin.service';
 
 @Component({
@@ -30,7 +30,12 @@ export class TaskListComponent implements OnInit {
     })
   }
   openTask(task:any){
-    this.route.navigate(["/admin/invoice-details",task.id]);
+    if(task.taskType == Tasks.CASH_HANDOVER){
+      this.route.navigate(["/admin/handover-details",task.id]);
+    }else{
+      this.route.navigate(["/admin/invoice-details",task.id]);
+    }
+    
   }
 
 }

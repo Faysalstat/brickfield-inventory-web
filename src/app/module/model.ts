@@ -229,7 +229,8 @@ export enum Tasks{
   CREATE_INVOICE="CREATE_INVOICE",
   UPDATE_INVOICE= "UPDATE_INVOICE",
   CREATE_SUPPLY= "CREATE_SUPPLY",
-  UPDATE_SUPPLY= "UPDATE_SUPPLY"
+  UPDATE_SUPPLY= "UPDATE_SUPPLY",
+  CASH_HANDOVER = "CASH_HANDOVER"
 }
 export class TransactionSummary{
   totalSale:number = 0;
@@ -265,6 +266,19 @@ export class Expense{
   expenseAmount!:number;
   refference!:string;
   payTo!:string;
+}
+export class EscavatorExpenseModel{
+  productName!:string;
+  driver!:string;
+  totalHour!:number;
+  totalBill!:number;
+  hourlyRate!:number;
+  expenseName!:string;
+  categoryName!:string;
+  remark !:string;
+  deliveryType!:number;
+  advancePayment!:number;
+  duePayment!:number;
 }
 // export class ExpenseCategory{
 //   {label:'ভাড়া',value:"VARA"},

@@ -16,6 +16,10 @@ export class AdminService {
     console.log(queryParams.get("invoice"))
     return this.http.post(Urls.CREATE_INVOICE,queryParams.get("invoice"));
   }
+  public approveHandOverTask(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("handover"))
+    return this.http.post(Urls.PAY_OWNER,queryParams.get("handover"));
+  }
   public approveSupplyTask(queryParams: Map<string,any>): Observable<any>{
     console.log(queryParams.get("supplyInvoice"))
     return this.http.post(Urls.CREATE_SUPPLY_INVOICE,queryParams.get("supplyInvoice"));

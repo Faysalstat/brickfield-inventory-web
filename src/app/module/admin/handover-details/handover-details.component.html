@@ -1,0 +1,28 @@
+<div class="p-5 rounded">
+    <h2>Approval List</h2>
+    <hr style="background-color:black ;">
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>Date:</th>
+                        <td>{{handoverDetails.tnxDate}}</td>
+                    </tr>
+                    <tr>
+                        <th>Amount:</th>
+                        <td>{{handoverDetails.amount}}</td>
+                    </tr>
+                    <tr>
+                        <th>Remarks:</th>
+                        <td>{{handoverDetails.remarks}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12">
+            <button style="margin: 10px; float: right;"  mat-raised-button color="warn" (click)="approveInvoice('DECLINE')">Decline</button>
+            <button style="margin: 10px; float: right;"  mat-raised-button color="primary" (click)="approveInvoice('APPROVED')">Approve</button>
+        </div>
+    </div>
+</div>
