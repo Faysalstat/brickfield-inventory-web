@@ -22,6 +22,7 @@ import { SordarListComponent } from './sordar-list/sordar-list.component';
 import { UserReportsComponent } from './user-reports/reports.component';
 import { ReportModule } from '../report/report.module';
 import { IssueExpenseComponent } from './issue-expense/issue-expense.component';
+import { ListSupplyInvoiceComponent } from './list-supply-invoice/list-supply-invoice.component';
 
 
 
@@ -43,7 +44,8 @@ import { IssueExpenseComponent } from './issue-expense/issue-expense.component';
     InvoiceFormComponent,
     SordarListComponent,
     UserReportsComponent,
-    IssueExpenseComponent
+    IssueExpenseComponent,
+    ListSupplyInvoiceComponent
   ],
   imports: [
     CommonModule,

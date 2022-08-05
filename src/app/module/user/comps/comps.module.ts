@@ -18,10 +18,11 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { AddSordarComponent } from './add-sordar/add-sordar.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { CashExpenseComponent } from './cash-expense/cash-expense.component';
+import { EscavatorPaymentComponent } from './escavator-payment/escavator-payment.component';
 const components = [
   AddPersonComponent,AddDriverComponent,AddScheduleComponent,AddSupplyerComponent,StockListComponent,
   CashPaymentComponent,CashReceiveComponent,DeliveryDetailsComponent,DueInvoiceListComponent,DuePaymentListComponent,
-  RegisterSummaryComponent,NavBarComponent,AddSordarComponent,TransactionListComponent,CashExpenseComponent
+  RegisterSummaryComponent,NavBarComponent,AddSordarComponent,TransactionListComponent,CashExpenseComponent,EscavatorPaymentComponent
 ]
 
 

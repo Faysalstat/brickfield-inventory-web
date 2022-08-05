@@ -118,7 +118,6 @@ export class SupplyInvoiceIssueModel {
 
     // garichukti
     numberOfTrips!:number;
-    billPerTrip!:number;
     vehicleCategoryName!:string;
 
     //CFT
@@ -127,11 +126,16 @@ export class SupplyInvoiceIssueModel {
     pricePerCFT!:number;
     totalCFTPrice!:number;
     actualCFTPrice!:number;
+
+    // EXcCELETOR 
+    totalHour!:number;
+    costPerHour!:number;
+
     
 
     totalPrice!: number;
     totalQuantity!: number;
-    actualQuantity!: number;
+    // actualQuantity!: number;
     quantityType!:string;
 
 

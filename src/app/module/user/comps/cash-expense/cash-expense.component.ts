@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Expense } from 'src/app/module/model';
+import { Driver, Expense } from 'src/app/module/model';
 import { UserService } from '../../user.service';
 
 @Component({
@@ -10,6 +10,8 @@ import { UserService } from '../../user.service';
 export class CashExpenseComponent implements OnInit {
   expenseCategories!:Expense[];
   selectedExpense!:Expense;
+
+
   constructor(
     private userService:UserService
   ) {
@@ -28,6 +30,7 @@ export class CashExpenseComponent implements OnInit {
       }
     })
   }
+
   submit(){
     const params:Map<string,any> = new Map();
     params.set("expense",this.selectedExpense);

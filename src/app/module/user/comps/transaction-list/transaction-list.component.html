@@ -62,6 +62,11 @@
                     <th>Refferense</th>
                 </thead>
                 <tbody>
+                    <tr *ngIf="tnxList.length==0">
+                        <td style="font-weight:bold ; ">
+                            No Transaction Found!!
+                        </td>
+                    </tr>
                     <tr *ngFor="let tnx of tnxList; index as i">
                         <td>{{i+offset+1}}</td>
                         <td>{{tnx.transactionType}}</td>

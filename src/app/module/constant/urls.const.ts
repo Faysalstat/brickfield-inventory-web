@@ -22,6 +22,7 @@ export const Urls = {
 
     // CREATE 
     CREATE_INVOICE : BASE_URL + "/invoice/create",
+    CREATE_SUPPLY_INVOICE : BASE_URL + "/supply/create",
     CREATE_SCHEDULE_DELIVERY: BASE_URL + "/schedule/create",
     SET_DELIVERY: BASE_URL + "/schedule/setdelivery",
     CREATE_ORDER : BASE_URL + "/order/create",
@@ -34,6 +35,7 @@ export const Urls = {
     CREATE_NEW_EXPENSE: BASE_URL + "/",
     CREATE_RAW_STOCK: BASE_URL + "/stock/create",
     DO_EXPENSE: BASE_URL + "/expense/doexpense",
+    PAY_ESCAVATOR : BASE_URL + "/expense/payescavator",
 
     // FETCH 
     FETCH_ALL_CUSTOMER: BASE_URL+ "/customer/getall",

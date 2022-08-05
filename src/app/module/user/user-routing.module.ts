@@ -15,6 +15,7 @@ import { DriverListComponent } from './driver-list/driver-list.component';
 import { HomeComponent } from './home/home.component';
 import { IssueExpenseComponent } from './issue-expense/issue-expense.component';
 import { ListInvoicesComponent } from './list-invoices/list-invoices.component';
+import { ListSupplyInvoiceComponent } from './list-supply-invoice/list-supply-invoice.component';
 import { MakeInvoiceComponent } from './make-invoice/make-invoice.component';
 import { ScheduleDeliveryComponent } from './schedule-delivery/schedule-delivery.component';
 import { ScheduleListComponent } from './schedule-list/schedule-list.component';
@@ -35,6 +36,7 @@ const routes: Routes = [{
         {path:'customer',component:CustomerListComponent},
         {path:'account',component:CustomerAccountComponent},
         {path:'invoice-list',component:ListInvoicesComponent},
+        {path:'supply-list',component:ListSupplyInvoiceComponent},
         {path:'schedule-list',component:ScheduleListComponent},
         {path:'schedule-delivery/:id', component:ScheduleDeliveryComponent},
         {path:'driver-management', component:DriverListComponent},

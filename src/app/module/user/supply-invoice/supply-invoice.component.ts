@@ -58,7 +58,7 @@ export class SupplyInvoiceComponent implements OnInit {
       { label: 'Select Delivery Types', value: 0 },
       { label: 'গাড়ি চু্ক্তি', value: 1 },
       { label: 'CFT', value: 2 },
-      { label: 'এসকেভেটর', value: 3 },
+      // { label: 'এসকেভেটর', value: 3 },
     ];
   }
 
@@ -98,6 +98,7 @@ export class SupplyInvoiceComponent implements OnInit {
         if (res.body) {
           this.person = res.body;
           this.supplyer = res.body.supplyer;
+          this.needSupplyer = false;
         } else {
           this.needSupplyer = true;
           this.notFoundMessage = '*Supplyer Not Found. Please Add Suppler';
@@ -163,7 +164,13 @@ export class SupplyInvoiceComponent implements OnInit {
   onChnageVehicle() {
     // this.supplyInvoice.vehicleCategoryId = this.scheduleItem.vehicleCategory.id;
   }
-  onChnageDriver() {}
+  calculateHourlyCost() {
+    this.supplyInvoice.totalPrice = this.supplyInvoice.totalHour * this.supplyInvoice.costPerHour;
+    this.supplyInvoice.totalAmountToPay = this.supplyInvoice.totalPrice;
+  }
+  calculateDueAmount(){
+    this.supplyInvoice.duePayment = this.supplyInvoice.totalAmountToPay - this.supplyInvoice.advancePayment; 
+  }
 
   submitInvoice() {
     console.log(this.supplyInvoice);

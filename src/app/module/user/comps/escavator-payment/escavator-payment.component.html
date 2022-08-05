@@ -1,0 +1,67 @@
+<mat-card class="mt-4">
+    <div class="row">
+        <h2>এসকেভেটর ভারা </h2>
+        <div class="col-md-3">
+            <mat-form-field appearance="outline" class="input-field">
+              <mat-label>Select Product</mat-label>
+              <mat-select [ngModelOptions]="{standalone:true}"
+                [(ngModel)]="productName">
+                <mat-option >Select Product Type</mat-option>
+                <mat-option *ngFor="let product of productList" [value]="product?.productName">{{product?.productName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        <div class="col-md-3">
+            <mat-form-field appearance="outline" class="input-field">
+                <mat-label>ড্রাইভার:</mat-label>
+                <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedDriver">
+                    <mat-option *ngFor="let driver of driverList" [value]="driver">{{driver?.person?.personName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field class="input-field" appearance="outline">
+                <mat-label>ঘন্টা প্রতি মূল্য</mat-label>
+                <input [ngModelOptions]="{standalone:true}" [(ngModel)]="hourlyRate" (keyup)="calculateTotalHourBill()"
+                 placeholder="Bill Per Hour" matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field class="input-field" appearance="outline">
+                <mat-label>মোট ঘন্টা</mat-label>
+                <input [ngModelOptions]="{standalone:true}" [(ngModel)]="totalHour"  (keyup)="calculateTotalHourBill()"
+                placeholder="Total Hour" matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field class="input-field" appearance="outline">
+                <mat-label>মোট বিল </mat-label>
+                <input [ngModelOptions]="{standalone:true}" [(ngModel)]="totalBill" placeholder="Total Bill" matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field class="input-field" appearance="outline">
+                <mat-label>পরিশোধ:</mat-label>
+                <input [ngModelOptions]="{standalone:true}" [(ngModel)]="advancePayment" (keyup)="calculateDue()"
+                placeholder="Advance" matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field class="input-field" appearance="outline">
+                <mat-label> বাকি:</mat-label>
+                <input [ngModelOptions]="{standalone:true}" [(ngModel)]="duePayment" placeholder="Advance" matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field class="input-field" appearance="outline">
+                <mat-label>মন্তব্য:</mat-label>
+                <textarea type="text" pInputText [ngModelOptions]="{standalone:true}"
+                    [(ngModel)]="remark" matInput></textarea>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <button type="submit" style="margin-top: 40px; float: left;" (click)="submit()"  mat-raised-button color="primary">Submit</button>
+        </div>
+    </div>
+</mat-card>

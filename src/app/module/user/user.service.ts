@@ -179,6 +179,11 @@ export class UserService {
     console.log(queryParams.get('expense'));
     return this.http.post(Urls.DO_EXPENSE, queryParams.get('expense'));
   }
+  public payEscavatorBill(queryParams: Map<string, any>): Observable<any> {
+    console.log(queryParams.get('escavator'));
+    return this.http.post(Urls.PAY_ESCAVATOR, queryParams.get('escavator'));
+  }
+  
   // Delete
   public deleteCustomer(queryParams: Map<string, any>): Observable<any> {
     console.log(queryParams.get('customer'));

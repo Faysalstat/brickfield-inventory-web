@@ -107,7 +107,35 @@ export class InvoiceDetailComponent implements OnInit {
       this.invoice.taskId = this.taskId;
       this.invoice.isEdit = this.isEdit;
       params.set('invoice', this.invoice);
-      this.adminService.approveTask(params).subscribe({
+      this.adminService.approveSaleTask(params).subscribe({
+        next: (data) => {
+          console.log(data);
+          this.router.navigate(['/admin/task-list']);
+        },
+        error: (err) => console.log(err),
+      });
+    }else{
+      params.set('taskId', this.taskId);
+      this.adminService.declineTask(params).subscribe({
+        next: (data) => {
+          console.log(data);
+          this.router.navigate(['/admin/task-list']);
+        },
+        error: (err) => console.log(err),
+      });
+    }
+    
+  }
+
+  approveSupplyInvoice (event: any) {
+    const params: Map<string, any> = new Map();
+    if(event=="APPROVED"){
+      console.log(event);
+      this.supplyInvoice.approvalStatus = event;
+      this.supplyInvoice.taskId = this.taskId;
+      this.supplyInvoice.isEdit = this.isEdit;
+      params.set('supplyInvoice', this.supplyInvoice);
+      this.adminService.approveSupplyTask(params).subscribe({
         next: (data) => {
           console.log(data);
           this.router.navigate(['/admin/task-list']);

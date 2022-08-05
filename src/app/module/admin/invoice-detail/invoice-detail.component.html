@@ -140,11 +140,11 @@
             <td>সাপ্লাইয়ের ধরন</td>
             <td> {{deliveryType}} </td>
           </tr>
-          <tr>
+          <tr *ngIf="!isECL">
             <td>ড্রাইভার</td>
-            <td> {{supplyInvoice.driver.person.personName}} (Mob: {{supplyInvoice.driver.person.contactNo}})</td>
+            <td> {{supplyInvoice?.driver.person.personName}} (Mob: {{supplyInvoice?.driver.person.contactNo}})</td>
           </tr>
-          <tr>
+          <tr *ngIf="!isECL">
             <td>গাড়ির ধরন</td>
             <td> {{supplyInvoice?.vehicleCategoryName?.categoryName}}</td>
           </tr>
@@ -169,6 +169,10 @@
             <td>গাড়ি প্রতি ক্রয় মূল্য</td>
             <td> {{supplyInvoice.pricePerTrip}} টাকা </td>
           </tr>
+          <tr *ngIf="isCC">
+            <td> মোট ক্রয় মূল্য</td>
+            <td> {{supplyInvoice.totalPrice}} টাকা </td>
+          </tr>
           <tr *ngIf="isCFT">
             <td>পরিমান</td>
             <td> {{supplyInvoice.cftQuantity}} CFT </td>
@@ -177,15 +181,23 @@
             <td>Actual পরিমান</td>
             <td> {{supplyInvoice.actualCftQuantity}} CFT </td>
           </tr>
-          <tr>
+          <tr *ngIf="isCFT">
             <td>{{supplyInvoice.productName}}র ক্রয় মূল্য</td>
             <td> {{supplyInvoice.totalCFTPrice}} টাকা </td>
           </tr>
-          <tr>
+          <tr *ngIf="isCFT">
             <td>{{supplyInvoice.productName}}র Actual ক্রয় মূল্য</td>
-            <td> {{supplyInvoice.actualCftQuantity}} টাকা </td>
+            <td> {{supplyInvoice.actualCFTPrice}} টাকা </td>
           </tr>
-          <tr>
+          <tr *ngIf="isECL">
+            <td>Total Hour</td>
+            <td> {{supplyInvoice.totalHour}} ঘন্টা </td>
+          </tr>
+          <tr *ngIf="isECL">
+            <td>ঘন্টা প্রতি চার্জ</td>
+            <td> {{supplyInvoice.costPerHour}} টাকা </td>
+          </tr>
+          <tr *ngIf="!isECL">
             <td>পরিবহন খরচ</td>
             <td> {{supplyInvoice.transportCost}} টাকা</td>
           </tr>
@@ -207,9 +219,13 @@
   
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div *ngIf="!isSupply" class="col-md-12">
       <button style="margin: 10px; float: right;"  mat-raised-button color="warn" (click)="approveInvoice('DECLINE')">Decline</button>
       <button style="margin: 10px; float: right;"  mat-raised-button color="primary" (click)="approveInvoice('APPROVED')">Approve</button>
+    </div>
+    <div *ngIf="isSupply" class="col-md-12">
+      <button style="margin: 10px; float: right;"  mat-raised-button color="warn" (click)="approveInvoice('DECLINE')">Decline</button>
+      <button style="margin: 10px; float: right;"  mat-raised-button color="primary" (click)="approveSupplyInvoice('APPROVED')">Approve</button>
     </div>
   </div>
 </div>

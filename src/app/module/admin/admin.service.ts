@@ -12,9 +12,13 @@ export class AdminService {
   constructor( private http:HttpClient) { }
 
 
-  public approveTask(queryParams: Map<string,any>): Observable<any>{
+  public approveSaleTask(queryParams: Map<string,any>): Observable<any>{
     console.log(queryParams.get("invoice"))
     return this.http.post(Urls.CREATE_INVOICE,queryParams.get("invoice"));
+  }
+  public approveSupplyTask(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("supplyInvoice"))
+    return this.http.post(Urls.CREATE_SUPPLY_INVOICE,queryParams.get("supplyInvoice"));
   }
 
   public declineTask(queryParams: Map<string,any>): Observable<any>{

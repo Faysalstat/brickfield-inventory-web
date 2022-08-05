@@ -64,7 +64,7 @@
                 <div class="col-md-3">
                     <mat-form-field class="input-field" appearance="outline">
                         <mat-label>পরিমান:</mat-label>
-                        <input type="number" (change)="calculateTotalPrice()" pInputText
+                        <input type="number" (keyup)="calculateTotalPrice()" pInputText
                             [ngModelOptions]="{standalone:true}" [(ngModel)]="orderItem.quantity" matInput>
                     </mat-form-field>
                 </div>

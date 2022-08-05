@@ -79,7 +79,6 @@ export class TransactionListComponent implements OnInit {
       next: (datares) => {
         console.log(datares);
         this.tnxList = datares.body.data;
-        
         this.tnxList.forEach(elem=>{
           let item = {
             TransactionType: elem.transactionType,
@@ -97,6 +96,10 @@ export class TransactionListComponent implements OnInit {
           this.totalReversedAmount += elem.reversedAmount;
         });
       },
+      error:(err)=>{
+        console.log(err);
+        this.tnxList = [];
+      }
     });
   }
   nextPage() {
