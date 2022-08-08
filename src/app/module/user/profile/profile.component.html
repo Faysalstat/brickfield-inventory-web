@@ -1,0 +1,73 @@
+<mat-card>
+    <h1>Profile Management</h1>
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Name:</th>
+                <td>{{userProfile?.person?.personName}}</td>
+            </tr>
+            <tr>
+                <th>Conatct No:</th>
+                <td>{{userProfile?.person?.contactNo}}</td>
+            </tr>
+            <tr>
+                <th>User Name:</th>
+                <td>{{userProfile?.userName}}</td>
+            </tr>
+            <tr>
+                <th>User Role:</th>
+                <td>{{userProfile?.userRole}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="container mt-3">
+        <h3>Change Password</h3>
+        
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+          Change Password
+        </button>
+      </div>
+      
+      <!-- The Modal -->
+      <div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Password Change</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+      
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field class="input-field" appearance="outline">
+                            <mat-label>User Name:</mat-label>
+                            <input pInputText [ngModelOptions]="{standalone:true}" disabled="true"
+                                [(ngModel)]="userProfile.userName" placeholder="User Name" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-12">
+                        <mat-form-field class="input-field" appearance="outline">
+                            <mat-label>Password:</mat-label>
+                            <input type="password" [ngModelOptions]="{standalone:true}"
+                                [(ngModel)]="password" placeholder="Password" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" (click)="changePassword()" style="width:100%;margin-top:30px"  mat-raised-button color="warn">Change Password</button>
+                    </div>
+                </div>
+            </div>
+      
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+      
+          </div>
+        </div>
+      </div>
+</mat-card>

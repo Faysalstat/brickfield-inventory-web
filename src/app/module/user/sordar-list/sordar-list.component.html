@@ -1,41 +1,29 @@
-<div class="mt-4 p-5 bg-light rounded">
-    <mat-card class="mt-5">
-      <h2>This is driver-list page</h2>
-          <app-add-sordar (sordarAddedEvent)="updateList($event)"></app-add-sordar>
-      <div class="mt-4 p-5 bg-light rounded">
-          <h1>Drivers List</h1>
-          <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Contact No</th>
-                  <th>Address</th>
-                  <th>Type</th>
-                  <th>Amount To Pay</th>
-                  <!-- <th>Delivery Pending</th> -->
-                  <!-- <th>Action</th> -->
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let sordar of sordarList; index as i">
-                  <td>{{sordar.id}}</td>
-                  <td>{{sordar?.person?.personName}}</td>
-                  <td>{{sordar?.person?.contactNo}}</td>
-                  <td>{{sordar?.person?.personAddress}}</td>
-                  <td>{{sordar?.category}}</td>
-                  <td style="color:crimson ;">{{sordar?.account?.amountToPay}}</td>
-                  <!-- <td>NO</td> -->
-                  <!-- <td>
-                    <span style="margin-right: 5px;"> </span>
-                    <button mat-mini-fab (click)="deleteDriver(driver)" color="primary" >
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                  </td> -->
-                </tr>
-                
-              </tbody>
-            </table>
-      </div>
-    </mat-card>
+<mat-card class="mt-5">
+  <h2>This is driver-list page</h2>
+  <app-add-sordar (sordarAddedEvent)="updateList($event)"></app-add-sordar>
+  <div class="mt-4 p-5 bg-light rounded">
+    <h1>Drivers List</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Contact No</th>
+          <th>Address</th>
+          <th>Type</th>
+          <th>Amount To Pay</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sordar of sordarList; index as i">
+          <td>{{sordar.id}}</td>
+          <td>{{sordar?.person?.personName}}</td>
+          <td>{{sordar?.person?.contactNo}}</td>
+          <td>{{sordar?.person?.personAddress}}</td>
+          <td>{{sordar?.category}}</td>
+          <td style="color:crimson ;">{{sordar?.account?.amountToPay}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</mat-card>

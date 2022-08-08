@@ -1,4 +1,17 @@
-<div class="mt-4 p-5 bg-primary text-white rounded">
+
     <h1>Reports</h1>
-    <p>Lorem ipsum...</p>
- </div>
+    <div class="row">
+        <div class="col-md-6">  
+            <div class="list-group">
+                <a routerLink="/admin/reports" class="list-group-item list-group-item-action" aria-current="true">
+                    Income Expense
+                </a>
+                <a routerLink="production-report" class="list-group-item list-group-item-action">Production Report</a>
+                <!-- <a routerLink="transaction-report" class="list-group-item list-group-item-action">Transaction Report</a> -->
+                <a routerLink="cash-handover-report" class="list-group-item list-group-item-action">Cash Handover Transaction History</a>
+                <!-- <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+                <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a> -->
+              </div>
+        </div>
+    </div>
+<router-outlet></router-outlet>

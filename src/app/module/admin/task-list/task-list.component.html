@@ -1,4 +1,3 @@
-<div class="mt-4 p-5 bg-light rounded">
     <h1>Approval List</h1>
     <hr>
     <mat-card>
@@ -18,6 +17,9 @@
                 </tr>
               </thead>
               <tbody>
+                <tr *ngIf="taskList?.length==0">
+                  <td colspan="5">No Data Found</td>
+               </tr>
                 <tr *ngFor="let task of taskList; index as i">
                   <th scope="row">{{i+1}}</th>
                   <td>{{task.id}}</td>
@@ -34,5 +36,4 @@
           </div>
       </div>
     </mat-card>
-  </div>
   

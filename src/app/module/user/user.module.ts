@@ -23,6 +23,8 @@ import { UserReportsComponent } from './user-reports/reports.component';
 import { ReportModule } from '../report/report.module';
 import { IssueExpenseComponent } from './issue-expense/issue-expense.component';
 import { ListSupplyInvoiceComponent } from './list-supply-invoice/list-supply-invoice.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 
@@ -45,7 +47,9 @@ import { ListSupplyInvoiceComponent } from './list-supply-invoice/list-supply-in
     SordarListComponent,
     UserReportsComponent,
     IssueExpenseComponent,
-    ListSupplyInvoiceComponent
+    ListSupplyInvoiceComponent,
+    ProfileComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,

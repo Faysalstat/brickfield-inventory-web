@@ -108,6 +108,7 @@ export class InvoiceDomain{
   totalPrice!: number;
   totalBill!:number;
   totalQuantity!: number;
+  comment!:string;
 }
 
 export class SupplyInvoiceIssueModel {
@@ -258,6 +259,7 @@ export class InvoiceQueryBody{
   invoiceId:number = 0;
   deliveryStatus:string = "";
   customerId:number=0;
+  supplyerId:number=0; 
 
 }
 export class Expense{

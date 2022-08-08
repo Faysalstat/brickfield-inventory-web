@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Brick } from '../../model';
 import { UserService } from '../../user/user.service';
+import { AdminService } from '../admin.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,12 +10,15 @@ import { UserService } from '../../user/user.service';
 })
 export class DashboardComponent implements OnInit {
   bricks!: Brick[];
+  loadUnloadHistoryList!:any[];
   constructor(
-    private userService:UserService
+    private userService:UserService,
+    private adminService:AdminService
   ) { }
 
   ngOnInit(): void {
     this.fetchBricks();
+    this.fetchLoadUnloadHistory();
   }
   fetchBricks() {
     this.userService.fetchBricks().subscribe({
@@ -25,5 +29,16 @@ export class DashboardComponent implements OnInit {
         }
       },
     });
+  }
+  fetchLoadUnloadHistory(){
+    this.adminService.fetchLoadUnloadHistory().subscribe({
+      next:(res)=>{
+        this.loadUnloadHistoryList = res.body;
+        console.log(res);
+      },
+      error:(err)=>{
+        window.alert(err);
+      }
+    })
   }
 }

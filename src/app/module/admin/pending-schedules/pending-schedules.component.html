@@ -1,4 +1,4 @@
-<div class="mt-4 p-5 bg-light rounded">
+
     <h1>Pending Schedules (Next 5 Days)</h1>
     <mat-card>
         <div class="md-col-12" style="overflow-x:auto;">
@@ -15,7 +15,7 @@
                   <!-- <th scope="col">Advance</th>
                   <th scope="col">Due</th> -->
                   <th scope="col">Status</th>
-                  <th scope="col">Action</th>
+                  <!-- <th scope="col">Action</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -30,14 +30,14 @@
                   <!-- <td>{{invoice.customer.account.balance}}</td>
                   <td>{{invoice.customer.account.due}}</td> -->
                   <td [style.color]="statusColor">{{formatStattus(schedule?.deliveryStatus)}}</td>
-                  <td>
+                  <!-- <td>
                       <button mat-mini-fab (click)="setDelivery(schedule)" color="primary" >
                         <mat-icon>menu</mat-icon>
                       </button>
-                  </td>
+                  </td> -->
                 </tr>
               </tbody>
             </table>
           </div>
     </mat-card>
-</div>
+

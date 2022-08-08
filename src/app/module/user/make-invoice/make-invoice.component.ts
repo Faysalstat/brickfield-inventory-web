@@ -102,6 +102,7 @@ export class MakeInvoiceComponent implements OnInit {
       scheduledQuantity: [formData.scheduledQuantity],
       totalBill: [formData.totalBill],
       newPayment: [formData.newPayment],
+      comment:[formData.comment]
     });
     this.invoiceIssueForm.get('duePayment')?.valueChanges.subscribe((data) => {
       if (data > 0) {

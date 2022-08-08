@@ -2,7 +2,7 @@
     <h2>দৈনিক কাচা ইট তৈরী</h2>
     <div class="row">
         <div class="col-md-3">
-            <mat-form-field appearance="fill" class="input-field">
+            <mat-form-field appearance="outline" class="input-field">
                 <mat-label>নাম</mat-label>
                 <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedBrickProduction.categoryName">
                     <mat-option *ngFor="let mill of mills" [value]="mill.value">{{mill?.label}}
@@ -11,21 +11,21 @@
             </mat-form-field>
         </div>
         <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
                 <mat-label>পরিমান:</mat-label>
                 <input type="number" pInputText [ngModelOptions]="{standalone:true}"
                     [(ngModel)]="selectedBrickProduction.quantity" matInput>
             </mat-form-field>
         </div>
         <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
                 <mat-label>সর্দারের নাম :</mat-label>
                 <input pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedBrickProduction.sordarName"
                     matInput>
             </mat-form-field>
         </div>
         <div class="col-md-3">
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
                 <mat-label>তারিখ:</mat-label>
                 <input matInput [matDatepicker]="rawpicker" [ngModelOptions]="{standalone:true}"
                     [(ngModel)]="selectedBrickProduction.productionDate">
@@ -123,14 +123,14 @@
     <h2>দৈনিক কাচা ইট লোড</h2>
     <div class="row">
         <div class="col-md-4">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
                 <mat-label>দৈনিক লোড:</mat-label>
                 <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="latestLoadQuantity"
                     matInput>
             </mat-form-field>
         </div>
         <div class="col-md-4">
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
                 <mat-label>তারিখ:</mat-label>
                 <input matInput [matDatepicker]="picker" [ngModelOptions]="{standalone:true}"
                     [(ngModel)]="loadingDate">
@@ -148,7 +148,7 @@
     <h2>দৈনিক আনলোডের হিসাব</h2>
     <div class="row">
         <!-- <div class="col-md-4">
-            <mat-form-field appearance="fill" class="input-field">
+            <mat-form-field appearance="outline" class="input-field">
                 <mat-label>ইটের ধরন</mat-label>
                 <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageBrick()"
                     [(ngModel)]="selectedBrick">
@@ -157,28 +157,28 @@
             </mat-form-field>
         </div>
         <div class="col-md-4">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
                 <mat-label>Stock:</mat-label>
                 <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedBrick.quantity" disabled="true"
                     matInput>
             </mat-form-field>
         </div>
         <div class="col-md-4">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
                 <mat-label>Stock:</mat-label>
                 <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedBrick.unloadQuantity"
                     matInput>
             </mat-form-field>
         </div>
         <div class="col-md-4">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
                 <mat-label>new পরিমান:</mat-label>
                 <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="unloadQuantity"
                     matInput>
             </mat-form-field>
         </div>
         <div class="col-md-4">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
                 <mat-label>price per piece:</mat-label>
                 <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="unloadQuantity"
                     matInput>

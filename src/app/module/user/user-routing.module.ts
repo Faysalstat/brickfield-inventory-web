@@ -3,9 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppAuthGuard } from 'src/app/app-auth.guard';
 import { ReportsComponent } from '../admin/reports/reports.component';
 import { AuthenticationGuard } from '../authentication.guard';
+import { CashHandoverReportComponent } from '../report/cash-handover-report/cash-handover-report.component';
 import { IncomeExpenseComponent } from '../report/income-expense/income-expense.component';
 import { ProductionReportComponent } from '../report/production-report/production-report.component';
+import { TransactionReportComponent } from '../report/transaction-report/transaction-report.component';
 import { CashPaymentDueListComponent } from './cash-payment-due-list/cash-payment-due-list.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CashPaymentComponent } from './comps/cash-payment/cash-payment.component';
 import { CashReceiveComponent } from './comps/cash-receive/cash-receive.component';
 import { TransactionListComponent } from './comps/transaction-list/transaction-list.component';
@@ -17,6 +20,7 @@ import { IssueExpenseComponent } from './issue-expense/issue-expense.component';
 import { ListInvoicesComponent } from './list-invoices/list-invoices.component';
 import { ListSupplyInvoiceComponent } from './list-supply-invoice/list-supply-invoice.component';
 import { MakeInvoiceComponent } from './make-invoice/make-invoice.component';
+import { ProfileComponent } from './profile/profile.component';
 import { ScheduleDeliveryComponent } from './schedule-delivery/schedule-delivery.component';
 import { ScheduleListComponent } from './schedule-list/schedule-list.component';
 import { SordarListComponent } from './sordar-list/sordar-list.component';
@@ -44,12 +48,15 @@ const routes: Routes = [{
         {path:'supplyer-management', component:SupplyerListComponent},
         {path:'supply-invoice', component:SupplyInvoiceComponent},
         {path:'issue-expense', component:IssueExpenseComponent},
+        {path:'profile', component:ProfileComponent},
+        {path:'change-password', component:ChangePasswordComponent},
         {path:'cash-payment-due-list', component:CashPaymentDueListComponent},
         {path:'cash-payment/:id', component:CashPaymentComponent},
         {path:'reports',component: UserReportsComponent,children:[
-          {path:"income-expense",component: IncomeExpenseComponent},
+          {path:"",component: TransactionReportComponent},
           {path:"production-report", component: ProductionReportComponent},
-          {path:"transaction-report", component: TransactionListComponent},
+          {path:"cash-handover-report",component: CashHandoverReportComponent},
+          // {path:"transaction-report", component: TransactionReportComponent},
         ]}
       ]
 }];

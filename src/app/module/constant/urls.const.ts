@@ -13,6 +13,7 @@ export const Urls = {
     UPDATE_SCHEDULE : BASE_URL+ "/schedule/update",
     DELETE_SCHEDULE : BASE_URL+ "/schedule/delete",
     UPDATE_USER: BASE_URL+"/user/updateuser",
+    // UPDATE_PASSWORD : BASE_URL +"/user/updateuser",
     UNLOAD_PRODUCTION: BASE_URL+"/stock/unloadproduction",
     LOAD_PRODUCTION: BASE_URL+"/stock/loadproduction",
     DELETE_LOAD_PRODUCTION: BASE_URL+"/stock/deleteloadproduction",
@@ -45,6 +46,7 @@ export const Urls = {
     FETCH_CUSTOMER_BY_CONTACTNO :BASE_URL+ "/customer/getbycontactno",
     FETCH_ACCOUNT_BY_ID :BASE_URL+ "/customer/getbyaccountid",
     FETCH_ALL_INVOICE: BASE_URL + "/invoice/getall",
+    FETCH_ALL_SUPPLY_INVOICE: BASE_URL + "/supply/getallinvoice",
     FETCH_ALL_TASK: BASE_URL + "/approval/getall",
     FETCH_TASK_BY_ID: BASE_URL + "/approval/getbyid",
     FETCH_SCHEDULE_BY_ID: BASE_URL + "/schedule/getbyid", 
@@ -61,6 +63,7 @@ export const Urls = {
     FETCH_CUSTOMER_BY_ID: BASE_URL+"/customer/getbyid",
     FETCH_SUPPLYER_BY_ID: BASE_URL+"/supplyer/getbyid",
     FETCH_USER_BY_NAME : BASE_URL+ "/user/checkexistinguser",
+    FETCH_USER_BY_ID: BASE_URL+ "/user/getbyid",
     FETCH_ALL_DUE_PAYMENT_ACCOUNTS: BASE_URL+ "/person/getallDue",
     FETCH_ALL_DUE_INVOICE: BASE_URL+ "/invoice/getallDue",
     FETCH_REGISTER_SUMMARY: BASE_URL+ "/transaction/getsummary",
@@ -76,7 +79,8 @@ export const Urls = {
 
     //REPORT QUERIES
 
-    FETCH_ALL_RAW_STOCK: BASE_URL + "/auth/islogedin"
+    FETCH_ALL_RAW_STOCK: BASE_URL + "/auth/islogedin",
+    FETCH_LOAD_UNLOAD_HISTORY: BASE_URL + "/stock/getloadunloadhistory"
 
 
 }

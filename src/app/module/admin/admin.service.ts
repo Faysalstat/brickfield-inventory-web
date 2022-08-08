@@ -48,4 +48,8 @@ export class AdminService {
     params = params.append("username",username);
     return this.http.get(Urls.FETCH_USER_BY_NAME,{params:params});
   }
+  public fetchLoadUnloadHistory(): Observable<any>{
+    return this.http.get(Urls.FETCH_LOAD_UNLOAD_HISTORY);
+  }
+
 }

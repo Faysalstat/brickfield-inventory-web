@@ -21,6 +21,8 @@ nav{
 .dropdown-item{
     font-size:15px;
     text-align: center;
+}
+.b-border{
     border-bottom: 1px solid #878a8c;
 }
 .content{

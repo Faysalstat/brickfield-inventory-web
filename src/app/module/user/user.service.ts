@@ -92,6 +92,14 @@ export class UserService {
     params = params.append('deliveryStatus',queryParams.get('query').deliveryStatus);
     return this.http.get(Urls.FETCH_ALL_INVOICE,{params:params});
   }
+
+  public fetchAllSupplyInvoice(queryParams: Map<string, any>): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('offset',queryParams.get('query').offset);
+    params = params.append('supplyerId',queryParams.get('query').supplyerId);
+    params = params.append('invoiceId',queryParams.get('query').invoiceId);
+    return this.http.get(Urls.FETCH_ALL_SUPPLY_INVOICE,{params:params});
+  }
   public fetchInvoiceById(id: any): Observable<any> {
     let params = new HttpParams();
     params = params.append('id', id);
@@ -121,6 +129,11 @@ export class UserService {
     let params = new HttpParams();
     params = params.append('id', id);
     return this.http.get(Urls.FETCH_ACCOUNT_BY_ID, { params: params });
+  }
+  public getUserById(id: any): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('id', id);
+    return this.http.get(Urls.FETCH_USER_BY_ID, { params: params });
   }
   public fetchBricks(): Observable<any> {
     return this.http.get(Urls.FETCH_ALL_BRICK);
@@ -170,6 +183,10 @@ export class UserService {
   public updateAccount(queryParams: Map<string, any>): Observable<any> {
     console.log(queryParams.get('account'));
     return this.http.post(Urls.UPDATE_BALANCE, queryParams.get('account'));
+  }
+  public changePassword(queryParams: Map<string, any>): Observable<any> {
+    
+    return this.http.post(Urls.UPDATE_USER,queryParams.get('user'));
   }
 
   public UnloadProduction(queryParams: Map<string, any>): Observable<any> {

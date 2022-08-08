@@ -42,6 +42,7 @@ export class SignInComponent implements OnInit {
       next:(res)=>{
         console.log(res);
         localStorage.setItem('token', res.body.token);
+        localStorage.setItem('userId', res.body.userid);
         if(res.body.userRole== "MANAGER"){
           this.router.navigate(["/home"]);
         }else if(res.body.userRole== "ADMIN"){

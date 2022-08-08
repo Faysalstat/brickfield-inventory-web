@@ -1,36 +1,17 @@
 <mat-card>
     <div class="row">
-        <div class="col-md-3">
-            <a routerLink="income-expense">
-                <div class="box-div">
+        <div class="col-md-6">  
+            <div class="list-group">
+                <a routerLink="/home/reports" class="list-group-item list-group-item-action" aria-current="true">
                     Income Expense
-                </div>
-            </a>
-
+                </a>
+                <a routerLink="production-report" class="list-group-item list-group-item-action">Production Report</a>
+                <!-- <a routerLink="transaction-report" class="list-group-item list-group-item-action">Transaction Report</a> -->
+                <a routerLink="cash-handover-report" class="list-group-item list-group-item-action">Cash Handover Transaction History</a>
+                <!-- <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+                <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a> -->
+              </div>
         </div>
-        <div class="col-md-3">
-            <a routerLink="production-report">
-                <div class="box-div">
-                    Production
-                </div>
-            </a>
-        </div>
-        <div class="col-md-3">
-            <a routerLink="transaction-report">
-                <div class="box-div">
-                    Transaction
-                </div>
-            </a>
-        </div>
-        <div class="col-md-3">
-            <div class="box-div">
-
-            </div>
-        </div>
-        <!-- <div class="col-md-12">
-            <button style="float:left ; margin-top: 10px;" mat-raised-button (click)="downloadAsPDF()"
-            color="accent">Download</button>
-        </div> -->
     </div>
 </mat-card>
-<router-outlet id="pdfTable" #pdfTable></router-outlet>
+<router-outlet></router-outlet>

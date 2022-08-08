@@ -2,45 +2,67 @@
    <h1>Dashboard</h1>
    <!-- <mat-card> -->
       <div class="row">
-         <div class="col-md-3">
-            <h3>Sale</h3>
-            <table class="table table-striped" >
-               <thead>
-                  <tr>
-                     <th>Brick Type</th>
-                     <th>Stock</th>
-                     <!-- <th>Amount In Taka</th> -->
-                  </tr>
-               </thead>
-               <tbody>
-                 <tr *ngFor="let brick of bricks">
-                     <td>{{brick?.category}}</td>
-                     <td>{{brick?.quantity}}</td>
-                     <!-- <td>2000000 BDT</td> -->
-                 </tr>
-                  <!-- <tr>
-                     <td>পিকিট</td>
-                     <td>200000</td>
-                     <td>2000000 BDT</td>
-                  </tr>
-                  <tr>
-                     <td>কাঁচা ইট</td>
-                     <td>203754</td>
-                     <td>2000000 BDT</td>
-                  </tr> -->
-               </tbody>
-            </table>
+         <div class="col-md-4">
+            <mat-card style="max-height:300px ;" style="overflow: scroll;">
+               <h3>Bricks Reserve</h3>
+               <table class="table table-striped" >
+                  <thead>
+                     <tr>
+                        <th>Brick Type</th>
+                        <th>Stock</th>
+                        <!-- <th>Amount In Taka</th> -->
+                     </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let brick of bricks">
+                        <td>{{brick?.category}}</td>
+                        <td>{{brick?.quantity}}</td>
+                        <!-- <td>2000000 BDT</td> -->
+                    </tr>
+                     <!-- <tr>
+                        <td>পিকিট</td>
+                        <td>200000</td>
+                        <td>2000000 BDT</td>
+                     </tr>
+                     <tr>
+                        <td>কাঁচা ইট</td>
+                        <td>203754</td>
+                        <td>2000000 BDT</td>
+                     </tr> -->
+                  </tbody>
+               </table>
+            </mat-card>
          </div>
-         <div class="col-md-3">
-
+         <div class="col-md-8">
+            <mat-card style="max-height:300px ;" style="overflow: scroll;">
+               <h3>Load Unload History</h3>
+               <table class="table table-striped" style="overflow-x:auto;">
+                  <thead>
+                     <tr>
+                        <th>SN</th>
+                        <th>ID</th>
+                        <th>Category Name</th>
+                        <th>Type</th>
+                        <th>Quantity</th>
+                        <th>Production Date</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr *ngIf="loadUnloadHistoryList?.length==0">
+                        <td colspan="6">No History Found</td>
+                     </tr>
+                     <tr *ngFor="let history of loadUnloadHistoryList ; index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{history.id}}</td>
+                        <td>{{history.categoryName}}</td>
+                        <td>{{history.type}}</td>
+                        <td>{{history.quantity}}</td>
+                        <td>{{history.productionDate}}</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </mat-card>
          </div>
-         <div class="col-md-3">
-
-         </div>
-         <div class="col-md-3">
-
-         </div>
-
       </div>
    <!-- </mat-card> -->
 <!-- </div> -->

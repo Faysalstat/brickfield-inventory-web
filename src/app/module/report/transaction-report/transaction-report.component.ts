@@ -1,15 +1,13 @@
-import { Element } from '@angular/compiler/src/render3/r3_ast';
 import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
-import { ReportService } from 'src/app/module/report.service';
-import { UserService } from '../../user.service';
+import { ReportService } from '../../report.service';
+import { UserService } from '../../user/user.service';
 
 @Component({
-  selector: 'app-transaction-list',
-  templateUrl: './transaction-list.component.html',
-  styleUrls: ['./transaction-list.component.css'],
+  selector: 'app-transaction-report',
+  templateUrl: './transaction-report.component.html',
+  styleUrls: ['./transaction-report.component.css']
 })
-export class TransactionListComponent implements OnInit {
+export class TransactionReportComponent implements OnInit {
   tnxList!: any[];
   exportData!:any[];
   tnxListForReport!: any[];
@@ -131,4 +129,5 @@ export class TransactionListComponent implements OnInit {
     this.queryBody.toDate = this.toDate;
     this.fetchAllTransByPage();
   }
+
 }
