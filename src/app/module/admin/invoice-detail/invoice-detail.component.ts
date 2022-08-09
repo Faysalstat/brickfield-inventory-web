@@ -25,6 +25,7 @@ export class InvoiceDetailComponent implements OnInit {
   isCC: boolean = false;
   isCFT: boolean = false;
   isECL: boolean = false;
+  comment!: string;
   // orders!
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -58,6 +59,7 @@ export class InvoiceDetailComponent implements OnInit {
               this.deliveryType = 'এসকেভেটর';
             }
             this.isSupply = true;
+            this.comment = this.supplyInvoice.comment;
             this.fetchSupplyerById(this.supplyInvoice.supplyer.id);
           }else{
             this.isSupply = false;
@@ -67,6 +69,7 @@ export class InvoiceDetailComponent implements OnInit {
             }else{
               this.isEdit = false;
             }
+            this.comment = this.invoice.comment;
             this.fetchCustomerById(this.invoice.customerId);
           }
           console.log(res);
@@ -101,11 +104,12 @@ export class InvoiceDetailComponent implements OnInit {
   }
   approveInvoice(event: any) {
     const params: Map<string, any> = new Map();
-    if(event=="APPROVED"){
+    if(event=="APPROVED" || event== "CORRECTION"){
       console.log(event);
       this.invoice.approvalStatus = event;
       this.invoice.taskId = this.taskId;
       this.invoice.isEdit = this.isEdit;
+      this.invoice.comment = this.comment;
       params.set('invoice', this.invoice);
       this.adminService.approveSaleTask(params).subscribe({
         next: (data) => {
@@ -115,7 +119,12 @@ export class InvoiceDetailComponent implements OnInit {
         error: (err) => console.log(err),
       });
     }else{
-      params.set('taskId', this.taskId);
+      let model = {
+        taskId: this.taskId,
+        invoiceId: this.invoice.id,
+        comment:this.comment
+      }
+      params.set('model', model);
       this.adminService.declineTask(params).subscribe({
         next: (data) => {
           console.log(data);
@@ -134,6 +143,7 @@ export class InvoiceDetailComponent implements OnInit {
       this.supplyInvoice.approvalStatus = event;
       this.supplyInvoice.taskId = this.taskId;
       this.supplyInvoice.isEdit = this.isEdit;
+      this.invoice.comment = this.comment;
       params.set('supplyInvoice', this.supplyInvoice);
       this.adminService.approveSupplyTask(params).subscribe({
         next: (data) => {

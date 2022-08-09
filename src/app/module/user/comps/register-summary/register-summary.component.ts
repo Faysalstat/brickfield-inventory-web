@@ -34,6 +34,11 @@ export class RegisterSummaryComponent implements OnInit {
         }else{
           this.summary.totalExpense = res.body.totalExpense;
         }
+        if(!res.body.balance){
+          this.summary.balance = 0;
+        }else{
+          this.summary.balance = res.body.balance;
+        }
         if(!res.body.totalSale){
           this.summary.totalSale = 0;
         }else{

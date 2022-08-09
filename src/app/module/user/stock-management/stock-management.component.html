@@ -39,8 +39,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 mt-5">
-            <table class="table table-striped">
+        <div class="col-md-12 mt-5" style="overflow-x:auto;">
+            <table class="table table-striped" >
                 <thead>
                     <tr>
                         <th>SN</th>
@@ -76,7 +76,7 @@
         </div>
         <div class="col-md-6 mt-5" style="border-right:1px solid black ;">
             <h2 style="font-weight:400 ;">Raw Production Report</h2>
-            <table class="table table-striped" style="font-size:20px;">
+            <table class="table table-striped" style="font-size:20px;overflow-x: auto;">
                 <tbody>
                     <tr>
                         <th>Previous Raw Production</th>
@@ -99,7 +99,7 @@
         </div>
         <div class="col-md-6 mt-5">
             <h2 style="font-weight:400 ;">Load/Unload Record</h2>
-            <table class="table table-striped" style="font-size:20px;">
+            <table class="table table-striped" style="font-size:20px; overflow-x: auto;">
                 <tbody>
                     <tr>
                         <th>Total Loaded</th>
@@ -204,7 +204,10 @@
                     <tbody>
                         <tr *ngFor="let brick of bricks; index as i">
                             <td>{{brick?.category}}</td>
-                            <td>{{brick?.quantity}}</td>
+                            <td><mat-form-field style="width:60%;text-align: left;" class="input-field">
+                                <input type="number" pInputText [ngModelOptions]="{standalone:true}" disabled="true"
+                                     [(ngModel)]="brick.quantity" matInput>
+                            </mat-form-field></td>
                             <td>
                                 <mat-form-field style="width:50%;text-align: center;" class="input-field">
                                     <input type="number" pInputText [ngModelOptions]="{standalone:true}"
@@ -217,10 +220,15 @@
                                         (input)="onUnloadQuantityAdded(i)" [(ngModel)]="brick.unloadQuantity" matInput>
                                 </mat-form-field>
                             </td>
-                            <td>{{(brick?.updatedTotalQuantity)}}</td>
+                            <td>
+                                <mat-form-field style="width:60%;text-align: left;" class="input-field">
+                                    <input type="number" pInputText [ngModelOptions]="{standalone:true}" disabled="true"
+                                         [(ngModel)]="brick.updatedTotalQuantity" matInput>
+                                </mat-form-field>
+                            </td>
                             <td>
                                 <button  mat-icon-button color="primary" (click)="addUnloadBricks(i)">
-                                    <mat-icon style="font-size:25px ;">backup</mat-icon>
+                                    <mat-icon style="font-size:35px ;">backup</mat-icon>
                                 </button>
                             </td>
 

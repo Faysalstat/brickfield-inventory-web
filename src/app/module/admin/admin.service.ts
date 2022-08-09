@@ -26,8 +26,8 @@ export class AdminService {
   }
 
   public declineTask(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("taskId"))
-    return this.http.post(Urls.DELETE_TASK,queryParams.get("taskId"));
+    console.log(queryParams.get("model"))
+    return this.http.post(Urls.DECLINE_TASK,queryParams.get("model"));
   }
 
   public addUser(queryParams: Map<string,any>): Observable<any>{

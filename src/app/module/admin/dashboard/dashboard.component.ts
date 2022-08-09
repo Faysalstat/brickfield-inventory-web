@@ -11,10 +11,21 @@ import { AdminService } from '../admin.service';
 export class DashboardComponent implements OnInit {
   bricks!: Brick[];
   loadUnloadHistoryList!:any[];
+  totalBrick:number =0;
+  selectedType!:string;
+  loadingTypes!:any[];
+  fromDate!:any;
+  toDate!:any;
   constructor(
     private userService:UserService,
     private adminService:AdminService
-  ) { }
+  ) { 
+    this.loadingTypes = [
+      {label:"Select Loading Type",value:null},
+      {label:"Load", value:"LOAD"},
+      {label:"Unload", value:"UNLOAD"}
+  ]
+  }
 
   ngOnInit(): void {
     this.fetchBricks();
@@ -26,6 +37,9 @@ export class DashboardComponent implements OnInit {
         console.log(res);
         if (res.body) {
           this.bricks = res.body;
+          this.bricks.map((brick)=>{
+            this.totalBrick += brick.quantity;
+          })
         }
       },
     });
@@ -40,5 +54,12 @@ export class DashboardComponent implements OnInit {
         window.alert(err);
       }
     })
+  }
+  onChnageType(){
+
+  }
+
+  onDateChange(){
+
   }
 }

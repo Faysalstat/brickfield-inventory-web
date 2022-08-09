@@ -8,7 +8,7 @@ export const Urls = {
     DELETE_CUSTOMER : BASE_URL+ "/customer/deletecustomer",
     DELETE_DRIVER : BASE_URL+ "/user/deletedriver",
     DELETE_ORDER : BASE_URL+ "/order/delete",
-    DELETE_TASK :  BASE_URL + "/approval/delete",
+    DECLINE_TASK :  BASE_URL + "/approval/decline",
     UPDATE_ORDER : BASE_URL + "/order/update",
     UPDATE_SCHEDULE : BASE_URL+ "/schedule/update",
     DELETE_SCHEDULE : BASE_URL+ "/schedule/delete",

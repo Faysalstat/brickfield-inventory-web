@@ -342,6 +342,7 @@ export class MakeInvoiceComponent implements OnInit {
             .get('duePayment')
             ?.setValue(res.body.duePayment);
           this.invoiceIssueForm.get('totalBill')?.setValue(res.body.totalBill);
+          this.invoiceIssueForm.get('comment')?.setValue(res.body.comment);
           this.calculateScheduleTotal();
           this.calculateOrderTotal();
 
@@ -490,6 +491,7 @@ export class MakeInvoiceComponent implements OnInit {
       customerId:this.customer.id,
       account: this.account,
       orders : this.newOrders,
+      comment: this.invoiceIssueForm.get('comment')?.value,
       
       scheduleOrders : this.newSchedules,
     };
