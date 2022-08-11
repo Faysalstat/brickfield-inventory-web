@@ -74,6 +74,10 @@ export class InvoiceDetailComponent implements OnInit {
           }
           console.log(res);
         },
+        error: (err) => {
+          console.log(err);
+          window.alert("Operation Failed. ERR: "+err);
+        },
       });
     });
   }
@@ -83,6 +87,10 @@ export class InvoiceDetailComponent implements OnInit {
         this.invoice.customer = res.body;
         this.person = this.invoice.customer.person;
         console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+        window.alert("Customer fetching Failed. ERR: "+err);
       },
     });
   }
@@ -116,7 +124,10 @@ export class InvoiceDetailComponent implements OnInit {
           console.log(data);
           this.router.navigate(['/admin/task-list']);
         },
-        error: (err) => console.log(err),
+        error: (err) => {
+          console.log(err)
+          window.alert("Operation Failed. ERR: "+err);
+        },
       });
     }else{
       let model = {
@@ -130,7 +141,10 @@ export class InvoiceDetailComponent implements OnInit {
           console.log(data);
           this.router.navigate(['/admin/task-list']);
         },
-        error: (err) => console.log(err),
+        error: (err) => {
+          console.log(err);
+          window.alert("Operation Failed. ERR: "+err);
+        },
       });
     }
     
@@ -150,7 +164,10 @@ export class InvoiceDetailComponent implements OnInit {
           console.log(data);
           this.router.navigate(['/admin/task-list']);
         },
-        error: (err) => console.log(err),
+        error: (err) => {
+          console.log(err);
+          window.alert("Operation Failed. ERR: "+err);
+        },
       });
     }else{
       params.set('taskId', this.taskId);
@@ -159,7 +176,10 @@ export class InvoiceDetailComponent implements OnInit {
           console.log(data);
           this.router.navigate(['/admin/task-list']);
         },
-        error: (err) => console.log(err),
+        error: (err) => {
+          console.log(err);
+          window.alert("Operation Failed. ERR: "+err);
+        },
       });
     }
     

@@ -36,11 +36,13 @@ export class ProfileComponent implements OnInit {
     this.userService.changePassword(params).subscribe({
       next:(data)=>{
         console.log(data.body);
+        window.location.reload();
 
       },
       error:(err)=>{
         console.log(err);
         window.alert(err);
+        window.location.reload();
       }
     })
 

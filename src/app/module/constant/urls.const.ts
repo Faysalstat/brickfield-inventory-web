@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:3000";
+import { environment } from '../../../environments/environment';
+const BASE_URL = environment.BASE_URL;
 // const BASE_URL = "https://vatasolution.me/api";
 // const BASE_URL = "http://192.168.0.2:3000";
 
@@ -68,10 +69,14 @@ export const Urls = {
     FETCH_ALL_DUE_INVOICE: BASE_URL+ "/invoice/getallDue",
     FETCH_REGISTER_SUMMARY: BASE_URL+ "/transaction/getsummary",
     FETCH_EXPENSE_CATEGROY: BASE_URL+ "/expense/getallcategory",
-    FETCH_ALL_RAW_PRODUCTION_REPORT: BASE_URL + "/stock/getrawproductionreport",
+    FETCH_ALL_RAW_PRODUCTION_REPORT: BASE_URL + "/stock/getrawproductionsummaryreport",
     FETCH_ALL_LOAD_UNLOAD_REPORT: BASE_URL + "/stock/getloadsumary",
     FETCH_ALL_TRANSACTION: BASE_URL+ "/transaction/getalltransaction",
     FETCH_GL_ACCOUNT_BY_TYPE :BASE_URL+ "/expense/getbyglaccounttype",
+    FETCH_LOAD_REPORT : BASE_URL+"/stock/getloadreport",
+    FETCH_UNLOAD_REPORT : BASE_URL+"/stock/getunloadreport",
+    FETCH_RAW_PRODUCTION_REPORT : BASE_URL+"/stock/getrawproductionreport",
+    FETCH_SALE_REPORT : BASE_URL+"/stock/getsalereport",
 
     
     // CHHECKING 
