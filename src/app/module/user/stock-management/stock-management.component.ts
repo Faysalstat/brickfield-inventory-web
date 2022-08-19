@@ -1,7 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Brick, RawBrickProduction } from '../../model';
+import { Brick, RawBrickProduction, Sordar } from '../../model';
 import { UserService } from '../user.service';
 
 @Component({
@@ -24,10 +24,13 @@ export class StockManagementComponent implements OnInit {
   unloadQuantity: number = 0;
   loadComment!: string;
   bricks!: Brick[];
+  sordars!: Sordar[];
   selectedBrick!:Brick;
   rawStockList!:[];
   loadedReserve!:number;
   totalBricks!:number;
+  totalStockValue!:number;
+  selectedSordar!: Sordar;
   constructor(
     private userService:UserService,
     private snackBar: MatSnackBar
@@ -44,6 +47,7 @@ export class StockManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchBricks();
+    this.fetchSordarList();
     this.fetchRawStock();
     this.fetchRawStockReport();
     this.fetchLoadUnloadReport();
@@ -55,11 +59,13 @@ export class StockManagementComponent implements OnInit {
         
         if (res.body) {
           this.totalBricks = 0;
+          this.totalStockValue = 0;
           this.bricks = res.body;
           this.bricks.map((brick:any)=>{
             brick.unloadQuantity = 0;
             brick.updatedTotalQuantity= 0;
             this.totalBricks += brick.quantity;
+            this.totalStockValue += (brick.quantity*brick.pricePerPiece);
           });
         }
       },
@@ -125,11 +131,14 @@ export class StockManagementComponent implements OnInit {
     })
   }
   addRawProduction() {
+    
     // this.dailyProductionList.push(this.selectedBrickProduction);
     console.log(" data submitted ")
     if(!this.selectedBrickProduction){
       return
     }
+    this.selectedBrickProduction.sordarName = this.selectedSordar.person.personName;
+    this.selectedBrickProduction.sordarId = this.selectedSordar.id;
     const params: Map<string, any> = new Map();
     params.set('rawbrick', this.selectedBrickProduction);
     this.userService.addRawStock(params).subscribe({
@@ -149,6 +158,7 @@ export class StockManagementComponent implements OnInit {
       }
     })
     this.selectedBrickProduction = new RawBrickProduction();
+    this.selectedSordar = new Sordar();
     this.calculateTotalRawProduction();
   }
 
@@ -240,5 +250,15 @@ export class StockManagementComponent implements OnInit {
   onUnloadQuantityAdded(i:number){
     this.bricks[i].updatedTotalQuantity = this.bricks[i].unloadQuantity + this.bricks[i].quantity;
   }
-  
+  fetchSordarList(){
+    this.userService.fetchAllSordars().subscribe({
+      next:(res)=>{
+        this.sordars = res.body;
+        console.log(res);
+      },
+      error:(err)=>{
+        window.alert("Sordars Fetching Failed");
+      }
+    })
+  }
 }

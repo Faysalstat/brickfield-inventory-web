@@ -6,6 +6,8 @@ import {
   CustomerDomain,
   ScheduleDeliveryModel,
   Driver,
+  Customer,
+  Brick,
 } from '../../model';
 import { UserService } from '../user.service';
 
@@ -15,7 +17,8 @@ import { UserService } from '../user.service';
   styleUrls: ['./schedule-delivery.component.css'],
 })
 export class ScheduleDeliveryComponent implements OnInit {
-  customer!: CustomerDomain;
+  customer!: Customer;
+  brick!:Brick;
   delivery!: any;
   isPaymentDue: boolean= false;
   transportCostCustomerPayable: boolean = false;
@@ -39,6 +42,8 @@ export class ScheduleDeliveryComponent implements OnInit {
         next: (res) => {
           console.log(res);
           this.delivery = res.body;
+          this.fetchCustomerById(res.body.invoice.customerId);
+          this.fetchBrickById(res.body.brickId);
           if(this.delivery?.invoice?.duePament >0){
             this.isPaymentDue = true;
           }else{
@@ -85,6 +90,20 @@ export class ScheduleDeliveryComponent implements OnInit {
       },
       complete:()=>{
         console.log("done");
+      }
+    })
+  }
+  fetchCustomerById(id:any){
+    this.userService.fetchCustomerById(id).subscribe({
+      next:(res)=>{
+        this.customer = res.body;
+      }
+    })
+  }
+  fetchBrickById(id:any){
+    this.userService.fetchBrickById(id).subscribe({
+      next:(res)=>{
+        this.brick = res.body;
       }
     })
   }

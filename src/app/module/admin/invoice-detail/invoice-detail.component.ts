@@ -157,7 +157,7 @@ export class InvoiceDetailComponent implements OnInit {
       this.supplyInvoice.approvalStatus = event;
       this.supplyInvoice.taskId = this.taskId;
       this.supplyInvoice.isEdit = this.isEdit;
-      this.invoice.comment = this.comment;
+      this.supplyInvoice.comment = this.comment;
       params.set('supplyInvoice', this.supplyInvoice);
       this.adminService.approveSupplyTask(params).subscribe({
         next: (data) => {

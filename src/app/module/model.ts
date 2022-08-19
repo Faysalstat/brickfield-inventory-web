@@ -84,8 +84,10 @@ export class InvoiceIssueModel {
   approvalStatus!: string;
   issuedBy!: string;
   customerId!: number;
+  customer!:Customer;
   orders!: OrderModel[];
   scheduleOrders!: ScheduleDeliveryModel[];
+  isEdit!:boolean;
 }
 
 export class InvoiceDomain{
@@ -118,15 +120,15 @@ export class SupplyInvoiceIssueModel {
     deliveryType!:number;
 
     // garichukti
-    numberOfTrips!:number;
+    numberOfTrips:number = 0;
     vehicleCategoryName!:string;
 
     //CFT
-    cftQuantity!:number;
-    actualCftQuantity!:number;
-    pricePerCFT!:number;
-    totalCFTPrice!:number;
-    actualCFTPrice!:number;
+    cftQuantity:number=0;
+    actualCftQuantity:number=0;
+    pricePerCFT:number = 0;
+    totalCFTPrice:number =0;
+    actualCFTPrice:number=0;
 
     // EXcCELETOR 
     totalHour!:number;
@@ -146,8 +148,8 @@ export class SupplyInvoiceIssueModel {
     duePayment: number = 0;
     
     
-    pricePerTrip!:number;
-    transportCost!:number;
+    pricePerTrip:number = 0;
+    transportCost:number = 0;
 
     deliveryStatus!: string;
     approvalStatus!: string;
@@ -245,6 +247,7 @@ export class RawBrickProduction{
   quantity!:number;
   productionDate:Date = new Date();
   sordarName!:string;
+  sordarId!:number;
 }
 
 export class PaginatorModel{

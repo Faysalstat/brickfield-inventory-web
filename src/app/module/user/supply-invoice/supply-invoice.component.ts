@@ -40,9 +40,9 @@ export class SupplyInvoiceComponent implements OnInit {
   needSupplyer: boolean = false;
   drivers!: Driver[];
   notFoundMessage!: string;
-  transportCostPerTrip!:number;
-  costAmount!:number;
-  totalCostAmount!:number;
+  transportCostPerTrip:number = 0;
+  costAmount:number = 0;
+  totalCostAmount:number = 0;
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
@@ -180,6 +180,7 @@ export class SupplyInvoiceComponent implements OnInit {
     this.supplyInvoice.actualCFTPrice =
     this.supplyInvoice.pricePerCFT * this.supplyInvoice.actualCftQuantity;
     this.supplyInvoice.totalPrice = this.supplyInvoice.actualCFTPrice;
+    this.supplyInvoice.totalAmountToPay = this.supplyInvoice.totalPrice + this.supplyInvoice.transportCost;
   }
   calculateTransportCost(){
     this.supplyInvoice.transportCost = this.supplyInvoice.numberOfTrips * this.transportCostPerTrip;
@@ -215,8 +216,8 @@ export class SupplyInvoiceComponent implements OnInit {
     approvalModel.taskType = Tasks.CREATE_SUPPLY;
     params.set("approval",approvalModel);
     this.sendToApproval(params);
-
   }
+
   sendToApproval(params: any) {
     this.userService.createApproval(params).subscribe({
       next: (res) => {
@@ -233,6 +234,7 @@ export class SupplyInvoiceComponent implements OnInit {
       complete: () => {},
     });
   }
+
   uodateContact(data: any) {
     console.log('suppler added', data);
     this.person = data.person;
@@ -240,6 +242,7 @@ export class SupplyInvoiceComponent implements OnInit {
     this.supplyer = data;
     this.needSupplyer = false;
   }
+
   calculateSummary(){
     this.supplyInvoice.totalAmountToPay = this.supplyInvoice.totalPrice + this.supplyInvoice.transportCost;
   }

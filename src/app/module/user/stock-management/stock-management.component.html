@@ -20,8 +20,9 @@
         <div class="col-md-3">
             <mat-form-field class="input-field" appearance="outline">
                 <mat-label>সর্দারের নাম :</mat-label>
-                <input pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedBrickProduction.sordarName"
-                    matInput>
+                <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedSordar">
+                    <mat-option *ngFor="let sordar of sordars" [value]="sordar">{{sordar.person.personName}}</mat-option>
+                </mat-select>
             </mat-form-field>
         </div>
         <div class="col-md-3">
@@ -238,6 +239,8 @@
                         <tr>
                             <th>Total Bricks</th>
                             <th>{{totalBricks}}</th>
+                            <th>Total Stock Value</th>
+                            <th>{{totalStockValue}} BDT</th>
                         </tr>
                     </tfoot>
                 </table>

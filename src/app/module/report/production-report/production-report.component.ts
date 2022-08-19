@@ -14,7 +14,12 @@ export class ProductionReportComponent implements OnInit {
   constructor(
     private reportService: ReportService,
 
-  ) { }
+  ) {
+    this.loadReportList=[];
+    this.unLoadReportList=[];
+    this.rawProductionReportList=[];
+    this.saleReportList=[];
+  }
 
   ngOnInit(): void {
     this.fetchLoadReport();
@@ -30,6 +35,7 @@ export class ProductionReportComponent implements OnInit {
         this.loadReportList = res.body;
       },
       error:(err)=>{
+        this.loadReportList=[];
         console.log(err);
       }
     })
@@ -41,6 +47,7 @@ export class ProductionReportComponent implements OnInit {
         this.unLoadReportList = res.body;
       },
       error:(err)=>{
+        this.unLoadReportList = [];
         console.log(err);
       }
     })
@@ -52,6 +59,7 @@ export class ProductionReportComponent implements OnInit {
         this.rawProductionReportList = res.body;
       },
       error:(err)=>{
+        this.rawProductionReportList = [];
         console.log(err);
       }
     })
@@ -63,6 +71,7 @@ export class ProductionReportComponent implements OnInit {
         this.saleReportList = res.body;
       },
       error:(err)=>{
+        this.saleReportList = [];
         console.log(err);
       }
     })

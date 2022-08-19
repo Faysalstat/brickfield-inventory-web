@@ -1,7 +1,7 @@
 import { environment } from '../../../environments/environment';
-const BASE_URL = environment.BASE_URL;
+// const BASE_URL = environment.BASE_URL;
 // const BASE_URL = "https://vatasolution.me/api";
-// const BASE_URL = "http://192.168.0.2:3000";
+const BASE_URL = "http://localhost:3000";
 
 export const Urls = {
     USER_SIGN_IN: BASE_URL + "/auth/signin",
@@ -55,6 +55,7 @@ export const Urls = {
     FETCH_ALL_SCHEDULES_BY_STATUS: BASE_URL + "/schedule/getallbystatus",
     FETCH_ALL_SCHEDULES_BY_DATE: BASE_URL + "/schedule/getbydate",
     FETCH_ALL_BRICK: BASE_URL + "/brick/getall",
+    FETCH_BRICK_BY_ID: BASE_URL + "/brick/getbyid",
     FETCH_ALL_RAW_BRICK: BASE_URL + "/stock/getallrawbrick",
     FETCH_ALL_DRIVERS: BASE_URL + "/driver/getall",
     FETCH_ALL_SORDARS : BASE_URL + "/sordar/getall",
@@ -71,6 +72,7 @@ export const Urls = {
     FETCH_EXPENSE_CATEGROY: BASE_URL+ "/expense/getallcategory",
     FETCH_ALL_RAW_PRODUCTION_REPORT: BASE_URL + "/stock/getrawproductionsummaryreport",
     FETCH_ALL_LOAD_UNLOAD_REPORT: BASE_URL + "/stock/getloadsumary",
+    FETCH_ESCAVATOR_DUE_LIST: BASE_URL + "/transaction/getall-escavator-due-payment",
     FETCH_ALL_TRANSACTION: BASE_URL+ "/transaction/getalltransaction",
     FETCH_GL_ACCOUNT_BY_TYPE :BASE_URL+ "/expense/getbyglaccounttype",
     FETCH_LOAD_REPORT : BASE_URL+"/stock/getloadreport",

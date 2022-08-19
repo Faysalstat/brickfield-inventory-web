@@ -138,6 +138,11 @@ export class UserService {
   public fetchBricks(): Observable<any> {
     return this.http.get(Urls.FETCH_ALL_BRICK);
   }
+  public fetchBrickById(id: any): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('id', id);
+    return this.http.get(Urls.FETCH_BRICK_BY_ID, { params: params });
+  }
   public fetchRawBricks(): Observable<any> {
     return this.http.get(Urls.FETCH_ALL_RAW_BRICK);
   }
@@ -173,6 +178,11 @@ export class UserService {
     let params = new HttpParams();
     params = params.append('type', type);
     return this.http.get(Urls.FETCH_GL_ACCOUNT_BY_TYPE, { params: params });
+  }
+  public fetchEscavatorDuePaymentList(queryParams: Map<string, any>): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('offset',queryParams.get('offset'));
+    return this.http.get(Urls.FETCH_ESCAVATOR_DUE_LIST,{ params: params });
   }
   
   // UPDATE

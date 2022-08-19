@@ -43,6 +43,7 @@ export class MakeInvoiceComponent implements OnInit {
   isDue!: boolean;
   transportCostCustomerPayable:boolean = false;
   selectedOrder!: OrderModel;
+  isApprovalNeeded: boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -363,6 +364,7 @@ export class MakeInvoiceComponent implements OnInit {
     });
   }
   editDelivery(index: any) {}
+  // need to activate 
   deleteDelivery(index: any) {
     if (this.isEdit) {
       const params: Map<string, any> = new Map();
@@ -437,18 +439,23 @@ export class MakeInvoiceComponent implements OnInit {
     invoice.scheduleOrders = this.schedules;
     invoice.approvalStatus = 'PENDING';
     invoice.issuedBy = 'manager';
-
-    // 1 = true, 0 = false 
- 
+    if(this.isApprovalNeeded){
+      let approvalModel: ApprovalModel = new ApprovalModel();
+      approvalModel.payload = JSON.stringify(invoice);
+      // todo add user
+      approvalModel.createdBy = 'Manager';
+      approvalModel.taskType = Tasks.CREATE_INVOICE;
+      params.set('approval', approvalModel);
+      console.log(invoice);
+      this.sendToApproval(params);
+    }else{
+      invoice.isEdit = false;
+      invoice.customer = this.customer;
+      invoice.approvalStatus = "APPROVED";
+      params.set('invoice', invoice);
+      this.createInvoice(params);  
+    }
     
-    let approvalModel: ApprovalModel = new ApprovalModel();
-    approvalModel.payload = JSON.stringify(invoice);
-    // todo add user
-    approvalModel.createdBy = 'Manager';
-    approvalModel.taskType = Tasks.CREATE_INVOICE;
-    params.set('approval', approvalModel);
-    console.log(invoice);
-    this.sendToApproval(params);
   }
   sendToApproval(params: any) {
     this.userService.createApproval(params).subscribe({
@@ -466,6 +473,7 @@ export class MakeInvoiceComponent implements OnInit {
       complete: () => {},
     });
   }
+
   createInvoice(params: any) {
     this.userService.createInvoice(params).subscribe({
       next: (res) => {
@@ -492,17 +500,32 @@ export class MakeInvoiceComponent implements OnInit {
       account: this.account,
       orders : this.newOrders,
       comment: this.invoiceIssueForm.get('comment')?.value,
-      
       scheduleOrders : this.newSchedules,
+      isEdit : this.isEdit,
+      customer: this.customer,
+      approvalStatus:"APPROVED"
+
     };
-    let approvalModel: ApprovalModel = new ApprovalModel();
-    approvalModel.payload = JSON.stringify(invoiceUpdateModel);
-    // todo add user
-    approvalModel.createdBy = 'Manager';
-    approvalModel.taskType = Tasks.UPDATE_INVOICE;
-    approvalModel.invoiceId = invoiceUpdateModel.id;
-    params.set('approval', approvalModel);
-    this.sendToApproval(params);
+    if(this.isApprovalNeeded){
+      let approvalModel: ApprovalModel = new ApprovalModel();
+      approvalModel.payload = JSON.stringify(invoiceUpdateModel);
+      // todo add user
+      approvalModel.createdBy = 'Manager';
+      approvalModel.taskType = Tasks.UPDATE_INVOICE;
+      approvalModel.invoiceId = invoiceUpdateModel.id;
+      params.set('approval', approvalModel);
+      this.sendToApproval(params);
+    }else{
+      invoiceUpdateModel.isEdit = true;
+      invoiceUpdateModel.customer = this.customer;
+      invoiceUpdateModel.approvalStatus = "APPROVED";
+      params.set('invoice', invoiceUpdateModel);
+      this.createInvoice(params);  
+    }
+    
+  }
+  processUpdate(){
+    
   }
   showreceive() {
     this.isReceiving = true;

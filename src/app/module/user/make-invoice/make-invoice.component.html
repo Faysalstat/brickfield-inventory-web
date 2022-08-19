@@ -57,8 +57,8 @@
                 <div class="col-md-2">
                     <mat-form-field class="input-field" appearance="outline">
                         <mat-label>রেট</mat-label>
-                        <input type="number" pInputText [ngModelOptions]="{standalone:true}"
-                            [(ngModel)]="selectedBrick.pricePerPiece" disabled="true" matInput>
+                        <input type="number" (keyup)="calculateTotalPrice()" pInputText [ngModelOptions]="{standalone:true}"
+                            [(ngModel)]="selectedBrick.pricePerPiece" matInput>
                     </mat-form-field>
                 </div>
                 <div class="col-md-3">
@@ -87,7 +87,7 @@
                         <thead>
                             <tr>
                                 <th>SN</th>
-                                <th>ইটের দরন</th>
+                                <th>ইটের ধরন</th>
                                 <th>পরিমান</th>
                                 <th>মোট মূল্য</th>
                                 <th>Action</th>
