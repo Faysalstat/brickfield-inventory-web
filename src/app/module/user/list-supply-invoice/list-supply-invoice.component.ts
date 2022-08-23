@@ -37,6 +37,7 @@ export class ListSupplyInvoiceComponent implements OnInit {
     ]
    }
   ngOnInit(): void {
+    
     this.fetchAllInvoices();
   }
   searchInvoice(){
@@ -84,7 +85,7 @@ export class ListSupplyInvoiceComponent implements OnInit {
     this.route.navigate(["/home/schedule-delivery",invoice.id]);
   }
   editInvoice(invoice:any){
-    this.route.navigate(["/home/edit-invoice",invoice.id]);
+    this.route.navigate(["/home/edit-supply-invoice",invoice.id]);
   }
   nextPage() {
     // this.tnxIndex+=

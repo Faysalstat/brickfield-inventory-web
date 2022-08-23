@@ -142,7 +142,7 @@
           </tr>
           <tr *ngIf="!isECL">
             <td>ড্রাইভার</td>
-            <td> {{supplyInvoice?.driver.person.personName}} (Mob: {{supplyInvoice?.driver.person.contactNo}})</td>
+            <td> {{supplyInvoice?.driver?.person?.personName}} (Mob: {{supplyInvoice?.driver?.person?.contactNo}})</td>
           </tr>
           <tr *ngIf="!isECL">
             <td>গাড়ির ধরন</td>
@@ -177,6 +177,14 @@
             <td>পরিমান</td>
             <td> {{supplyInvoice.cftQuantity}} CFT </td>
           </tr>
+          <tr *ngIf="isTON">
+            <td>পরিমান</td>
+            <td> {{supplyInvoice.totalTonQuantity}} TON </td>
+          </tr>
+          <tr *ngIf="isTON">
+            <td>TON প্রতি ক্রয় মূল্য</td>
+            <td> {{supplyInvoice.costPerTon}} টাকা </td>
+          </tr>
           <tr *ngIf="isCFT">
             <td>Actual পরিমান</td>
             <td> {{supplyInvoice.actualCftQuantity}} CFT </td>
@@ -184,6 +192,10 @@
           <tr *ngIf="isCFT">
             <td>{{supplyInvoice.productName}}র ক্রয় মূল্য</td>
             <td> {{supplyInvoice.totalCFTPrice}} টাকা </td>
+          </tr>
+          <tr *ngIf="isTON">
+            <td>{{supplyInvoice.productName}}র ক্রয় মূল্য</td>
+            <td> {{supplyInvoice.totalTonCost}} টাকা </td>
           </tr>
           <tr *ngIf="isCFT">
             <td>{{supplyInvoice.productName}}র Actual ক্রয় মূল্য</td>

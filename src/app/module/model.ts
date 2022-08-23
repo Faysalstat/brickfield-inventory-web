@@ -77,6 +77,7 @@ export class Product{
 }
 export class InvoiceIssueModel {
   totalPrice!: number;
+  doNo!:string;
   totalQuantity!: number;
   advancePayment: number = 0;
   duePament: number = 0;
@@ -92,6 +93,7 @@ export class InvoiceIssueModel {
 
 export class InvoiceDomain{
   id!: number;
+  doNo!:string;
   advancePayment!: number;
   approvalStatus!: string;
   approvedAt!: Date;
@@ -99,6 +101,7 @@ export class InvoiceDomain{
   customer!: Customer;
   deliveryStatus!: string;
   duePayment!: number;
+  rebate:number =0;
   transportCost!:number;
   issuedAt!: Date;
   issuedBy!: string;
@@ -134,6 +137,11 @@ export class SupplyInvoiceIssueModel {
     totalHour!:number;
     costPerHour!:number;
 
+    //TON
+    totalTonQuantity: number = 0;
+    costPerTon: number = 0;
+    totalTonCost: number = 0;
+
     
 
     totalPrice!: number;
@@ -146,6 +154,7 @@ export class SupplyInvoiceIssueModel {
     totalAmountToPay: number = 0;
     advancePayment: number = 0;
     duePayment: number = 0;
+    rebate: number = 0;
     
     
     pricePerTrip:number = 0;
@@ -259,10 +268,11 @@ export class InvoiceQueryBody{
   offset:number = 0;
   createdFrom!:Date;
   createdTo!:Date;
-  invoiceId:number = 0;
+  invoiceNo:string = "";
   deliveryStatus:string = "";
   customerId:number=0;
-  supplyerId:number=0; 
+  supplyerId:number=0;
+  contactNo:string = "";
 
 }
 export class Expense{

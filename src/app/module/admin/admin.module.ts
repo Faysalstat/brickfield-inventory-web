@@ -12,6 +12,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TaskListComponent } from './task-list/task-list.component';
 import { PendingSchedulesComponent } from './pending-schedules/pending-schedules.component';
 import { HandoverDetailsComponent } from './handover-details/handover-details.component';
+import { PayrollComponent } from './payroll/payroll.component';
+import { OfficeExpenseComponent } from './office-expense/office-expense.component';
+import { ExpenseComponent } from './expense/expense.component';
+import { PaySordarComponent } from './pay-sordar/pay-sordar.component';
+import { AddExpenseCategoryComponent } from './add-expense-category/add-expense-category.component';
 
 
 
@@ -25,7 +30,12 @@ import { HandoverDetailsComponent } from './handover-details/handover-details.co
     InvoiceDetailComponent,
     TaskListComponent,
     PendingSchedulesComponent,
-    HandoverDetailsComponent
+    HandoverDetailsComponent,
+    PayrollComponent,
+    OfficeExpenseComponent,
+    ExpenseComponent,
+    PaySordarComponent,
+    AddExpenseCategoryComponent
   ],
   imports: [
     CommonModule,

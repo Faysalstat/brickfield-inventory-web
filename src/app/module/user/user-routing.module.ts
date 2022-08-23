@@ -15,6 +15,7 @@ import { TransactionListComponent } from './comps/transaction-list/transaction-l
 import { CustomerAccountComponent } from './customer-account/customer-account.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { DriverListComponent } from './driver-list/driver-list.component';
+import { EditSupplyInvoiceComponent } from './edit-supply-invoice/edit-supply-invoice.component';
 import { HomeComponent } from './home/home.component';
 import { IssueExpenseComponent } from './issue-expense/issue-expense.component';
 import { ListInvoicesComponent } from './list-invoices/list-invoices.component';
@@ -47,6 +48,7 @@ const routes: Routes = [{
         {path:'sordar-management', component:SordarListComponent},
         {path:'supplyer-management', component:SupplyerListComponent},
         {path:'supply-invoice', component:SupplyInvoiceComponent},
+        {path:'edit-supply-invoice/:id',component:EditSupplyInvoiceComponent},
         {path:'issue-expense', component:IssueExpenseComponent},
         {path:'profile', component:ProfileComponent},
         {path:'change-password', component:ChangePasswordComponent},

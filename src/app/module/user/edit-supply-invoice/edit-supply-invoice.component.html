@@ -1,0 +1,144 @@
+<mat-card>
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td colspan="2" style="text-align:center;font-weight: bolder">Supplyer Details</td>
+                    </tr>
+                    <tr>
+                        <td>সাপ্লায়ার</td>
+                        <td> {{person?.personName}} </td>
+                    </tr>
+                    <tr>
+                        <td>মোবাইল:</td>
+                        <td> {{person?.contactNo}} </td>
+                    </tr>
+                    <tr>
+                        <td>ঠিকানা:</td>
+                        <td> {{person?.personAddress}} </td>
+                    </tr>
+                    <tr>
+                        <td>প্রোডাক্ট:</td>
+                        <td> {{supplyInvoice?.productName}} </td>
+                    </tr>
+                    <tr>
+                        <td>ডেলিভারির ধরন:</td>
+                        <td> {{deliveryType}} </td>
+                    </tr>
+                    <tr>
+                        <td>ড্রাইভার</td>
+                        <td> {{supplyInvoice?.driver?.person?.personName}} (Mob:
+                            {{supplyInvoice?.driver?.person?.contactNo}})</td>
+                    </tr>
+                    <tr>
+                        <td>গাড়ির ধরন</td>
+                        <td> {{supplyInvoice?.vehicleCategoryName?.categoryName}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td colspan="2" style="text-align:center;font-weight: bolder">Transaction Details</td>
+                    </tr>
+                    <tr *ngIf="isCC">
+                        <td>পরিমান</td>
+                        <td> {{supplyInvoice.numberOfTrips}} গাড়ি </td>
+                    </tr>
+                    <tr *ngIf="isCC">
+                        <td>গাড়ি প্রতি ক্রয় মূল্য</td>
+                        <td> {{supplyInvoice.pricePerTrip}} টাকা </td>
+                    </tr>
+                    <tr *ngIf="isCC">
+                        <td> মোট ক্রয় মূল্য</td>
+                        <td> {{supplyInvoice.totalPrice}} টাকা </td>
+                    </tr>
+                    <tr *ngIf="isCFT">
+                        <td>পরিমান</td>
+                        <td> {{supplyInvoice.cftQuantity}} CFT </td>
+                    </tr>
+                    <tr *ngIf="isTON">
+                        <td>পরিমান</td>
+                        <td> {{supplyInvoice.totalQuantity}} TON </td>
+                    </tr>
+                    <tr *ngIf="isTON">
+                        <td>TON প্রতি ক্রয় মূল্য</td>
+                        <td> {{supplyInvoice?.costPerTon}} টাকা </td>
+                    </tr>
+                    <tr *ngIf="isCFT">
+                        <td>Actual পরিমান</td>
+                        <td> {{supplyInvoice?.actualCftQuantity}} CFT </td>
+                    </tr>
+                    <tr *ngIf="isCFT">
+                        <td>{{supplyInvoice?.productName}}র ক্রয় মূল্য</td>
+                        <td> {{supplyInvoice?.totalCFTPrice}} টাকা </td>
+                    </tr>
+                    <tr *ngIf="isTON">
+                        <td>{{supplyInvoice?.productName}}র ক্রয় মূল্য</td>
+                        <td> {{supplyInvoice?.totalPrice}} টাকা </td>
+                    </tr>
+                    <tr *ngIf="isCFT">
+                        <td>{{supplyInvoice?.productName}}র Actual ক্রয় মূল্য</td>
+                        <td> {{supplyInvoice?.actualCFTPrice}} টাকা </td>
+                    </tr>
+                    <tr>
+                        <td>মোট খরচ </td>
+                        <td> {{supplyInvoice?.totalAmountToPay}} টাকা</td>
+                    </tr>
+                    <tr>
+                        <td>পরিশোধ </td>
+                        <td> {{supplyInvoice?.advancePayment}} টাকা</td>
+                    </tr>
+                    <tr>
+                        <td>রিবেট </td>
+                        <td> {{supplyInvoice?.rebate}} টাকা</td>
+                    </tr>
+                    <tr>
+                        <td>বাকি </td>
+                        <td> {{supplyInvoice?.duePayment}} টাকা</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <mat-form-field class="input-field" appearance="outline">
+                <mat-label>নতুন জমা: </mat-label>
+                <input type="number" pInputText [ngModelOptions]="{standalone:true}" (change)="calculateDue()"
+                    [(ngModel)]="newPayment" placeholder="00" matInput>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field class="input-field" appearance="outline">
+                <mat-label>বাকি: </mat-label>
+                <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="newDue"
+                    placeholder="00" matInput>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field class="input-field" appearance="outline">
+                <mat-label>রিবেট: </mat-label>
+                <input type="number" pInputText [ngModelOptions]="{standalone:true}" (change)="calculateDue()"
+                    [(ngModel)]="rebate" placeholder="00" matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-12">
+            <mat-form-field class="input-field" appearance="outline">
+                <mat-label>Comment</mat-label>
+                <textarea type="text" pInputText [ngModelOptions]="{standalone:true}"
+                    [(ngModel)]="supplyInvoice.comment" matInput></textarea>
+            </mat-form-field>
+        </div>
+        <div class="col-md-12">
+            <button style="margin-top:30px; float: right;" mat-raised-button color="primary"
+                (click)="updateSupplyInvoice()">Submit</button>
+        </div>
+    </div>
+</mat-card>

@@ -52,7 +52,7 @@ export class EscavatorPaymentComponent implements OnInit {
       expenseName: "এসকেভেটের ভাড়া",
       categoryName: "পরিবহন",
       remark : this.excavatorCostModel.remark,
-      deliveryType: 3,
+      deliveryType: 4,
       advancePayment:this.excavatorCostModel.advancePayment,
       duePayment:this.excavatorCostModel.duePayment,
 

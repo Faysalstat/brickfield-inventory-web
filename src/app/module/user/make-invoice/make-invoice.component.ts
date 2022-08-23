@@ -44,6 +44,7 @@ export class MakeInvoiceComponent implements OnInit {
   transportCostCustomerPayable:boolean = false;
   selectedOrder!: OrderModel;
   isApprovalNeeded: boolean = false;
+  isCustomerExist:boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -88,10 +89,11 @@ export class MakeInvoiceComponent implements OnInit {
     }
     this.invoiceIssueForm = this.formBuilder.group({
       id: [formData.id ? formData.id : null],
-      customer: [formData.customer],
+      doNo:[formData.doNo,[Validators.required]],
       totalPrice: [formData.totalPrice, [Validators.required]],
       totalQuantity: [formData.totalQuantity, [Validators.required]],
       advancePayment: [formData.advancePayment],
+      rebate:[formData.rebate],
       transportCost: [formData.transportCost],
       duePayment: [formData.duePayment],
       deliveryStatus: [formData.deliveryStatus],
@@ -99,7 +101,6 @@ export class MakeInvoiceComponent implements OnInit {
       issuedBy: [formData.issuedBy],
       customerId: [formData.customerId],
       orders: [formData.orders],
-      scheduleOrders: [formData.scheduleOrders],
       scheduledQuantity: [formData.scheduledQuantity],
       totalBill: [formData.totalBill],
       newPayment: [formData.newPayment],
@@ -112,18 +113,22 @@ export class MakeInvoiceComponent implements OnInit {
         this.isDue = false;
       }
     });
-
+    this.invoiceIssueForm.get('rebate')?.valueChanges.subscribe((data) => {
+      this.invoiceIssueForm
+        .get('duePayment')
+        ?.setValue(this.invoiceIssueForm.get('totalBill')?.value -this.invoiceIssueForm.get('advancePayment')?.value- data);
+    });
     this.invoiceIssueForm
       .get('advancePayment')
       ?.valueChanges.subscribe((data) => {
         this.invoiceIssueForm
           .get('duePayment')
-          ?.setValue(this.invoiceIssueForm.get('totalBill')?.value - data);
+          ?.setValue(this.invoiceIssueForm.get('totalBill')?.value - data - this.invoiceIssueForm.get('rebate')?.value);
       });
     this.invoiceIssueForm.get('totalBill')?.valueChanges.subscribe((data) => {
       this.invoiceIssueForm
         .get('duePayment')
-        ?.setValue(data - this.invoiceIssueForm.get('advancePayment')?.value);
+        ?.setValue(data - this.invoiceIssueForm.get('advancePayment')?.value -this.invoiceIssueForm.get('rebate')?.value );
     });
     // this.invoiceIssueForm
     //   .get('transportCost')
@@ -172,11 +177,14 @@ export class MakeInvoiceComponent implements OnInit {
             this.customerBalance = Math.abs(this.account.balance);
           }
           this.customer = res.body.customer;
+          this.isCustomerExist = true;
         } else {
+          this.isCustomerExist = false;
           return;
         }
       },
       error:(err)=>{
+        this.isCustomerExist = false;
         this.snackBar.open(err, "Close it", {
           duration: 10000,
           horizontalPosition:'right',
@@ -185,6 +193,35 @@ export class MakeInvoiceComponent implements OnInit {
       },
       complete: () => {},
     });
+  }
+  addCustomer(){
+    const params:Map<string,any> = new Map();
+    if(!this.person.contactNo || !this.person.personName || !this.person.personAddress){
+      this.snackBar.open("Invalid Input", "Close it", {
+        duration: 10000,
+        horizontalPosition:'right',
+        verticalPosition: 'top'
+      });
+      return;
+    }
+    let customer = {
+      personName:this.person.personName,
+      contactNo:this.person.contactNo,
+      personAddress:this.person.personAddress,
+      balance: 0,
+      due:0,
+      amountToPay:0
+    }
+    params.set("customer",customer);
+    this.userService.addCustomer(params).subscribe({
+      next:(res)=>{
+        this.customer = res.body;
+        this.isCustomerExist = true;
+
+      },
+      error:(err)=>{},
+      complete: ()=>{}
+    })
   }
   onChnageBrick() {
     console.log(this.selectedBrick);
@@ -343,7 +380,9 @@ export class MakeInvoiceComponent implements OnInit {
             .get('duePayment')
             ?.setValue(res.body.duePayment);
           this.invoiceIssueForm.get('totalBill')?.setValue(res.body.totalBill);
+          this.invoiceIssueForm.get('rebate')?.setValue(res.body.rebate);
           this.invoiceIssueForm.get('comment')?.setValue(res.body.comment);
+          this.invoiceIssueForm.get('doNo')?.setValue(res.body.doNo);
           this.calculateScheduleTotal();
           this.calculateOrderTotal();
 
@@ -496,6 +535,7 @@ export class MakeInvoiceComponent implements OnInit {
       advancePayment: this.invoiceIssueForm.get('advancePayment')?.value,
       duePayment: this.invoiceIssueForm.get('duePayment')?.value,
       newPayment: this.invoiceIssueForm.get('newPayment')?.value,
+      doNo: this.invoiceIssueForm.get('doNo')?.value,
       customerId:this.customer.id,
       account: this.account,
       orders : this.newOrders,

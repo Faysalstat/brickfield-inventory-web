@@ -1,0 +1,21 @@
+<mat-card>
+    <mat-card class="mt-3">
+        <div class="row">
+            <h2>Cash Payment:</h2>
+            <div class="col-md-4">
+                <mat-form-field appearance="outline" class="input-field">
+                    <mat-label>Select Expense Type</mat-label>
+                    <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedType">
+                        <mat-option *ngFor="let type of types" [value]="type.value">{{type?.label}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            
+            <div class="col-md-12">
+                <button type="submit" style="margin-top: 40px; float: left;" (click)="submit()" mat-raised-button
+                    color="primary">Submit</button>
+            </div>
+        </div>
+    </mat-card>
+</mat-card>

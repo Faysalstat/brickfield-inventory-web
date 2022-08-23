@@ -25,6 +25,7 @@ import { IssueExpenseComponent } from './issue-expense/issue-expense.component';
 import { ListSupplyInvoiceComponent } from './list-supply-invoice/list-supply-invoice.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { EditSupplyInvoiceComponent } from './edit-supply-invoice/edit-supply-invoice.component';
 
 
 
@@ -49,7 +50,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     IssueExpenseComponent,
     ListSupplyInvoiceComponent,
     ProfileComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    EditSupplyInvoiceComponent
   ],
   imports: [
     CommonModule,

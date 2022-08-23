@@ -24,7 +24,7 @@ export class CashExpenseComponent implements OnInit {
     this.fetchExpenseCategory();
   }
   fetchExpenseCategory(){
-    this.userService.fetchExpenseCategories().subscribe({
+    this.userService.fetchExpenseCategories("FACTORY").subscribe({
       next:(data)=>{
         if(data){
           this.expenseCategories = data.body;

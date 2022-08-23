@@ -1,28 +1,28 @@
 <div class="container">
   <!-- <mat-card> -->
-  <h2>Make Invoice for Supply</h2>
+  <h2>সাপ্লাই ইনভয়েস তৈরী করুন </h2>
   <div class="row">
     <div class="col-md-12">
       <mat-card>
-        <h2>Supplyer Details:</h2>
+        <h2>সাপ্লায়ারের বিবরণ:</h2>
         <div class="row">
           <div class="col-md-3">
             <mat-form-field class="input-field" appearance="outline">
-              <mat-label>Contact No:</mat-label>
+              <mat-label>মোবাইল নাম্বার:</mat-label>
               <input (change)="searchSupplyer()" pInputText [ngModelOptions]="{standalone:true}"
                 [(ngModel)]="person.contactNo" placeholder="Contact No" matInput>
             </mat-form-field>
           </div>
           <div class="col-md-3">
             <mat-form-field class="input-field" appearance="outline">
-              <mat-label>Supplyer Name :</mat-label>
-              <input [ngModelOptions]="{standalone:true}" [(ngModel)]="person.personName" placeholder="Supplyer Name"
+              <mat-label>নাম ::</mat-label>
+              <input [ngModelOptions]="{standalone:true}" [(ngModel)]="person.personName" placeholder="নাম :"
                 matInput>
             </mat-form-field>
           </div>
           <div class="col-md-3">
             <mat-form-field appearance="outline" class="input-field">
-              <mat-label>Select Delivery Type</mat-label>
+              <mat-label>ডেলিভারির ধরন : </mat-label>
               <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageDeliveryType()"
                 [(ngModel)]="selectedType">
                 <mat-option *ngFor="let type of deliveryTypeList" [value]="type.value">{{type?.label}}</mat-option>
@@ -31,7 +31,7 @@
           </div>
           <div class="col-md-3">
             <mat-form-field appearance="outline" class="input-field">
-              <mat-label>Select Supplying Product</mat-label>
+              <mat-label> সাপ্লাই প্রোডাক্ট : </mat-label>
               <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageProduct()"
                 [(ngModel)]="selectedProduct">
                 <mat-option >Select Product Type</mat-option>
@@ -42,7 +42,7 @@
 
           <div class="col-md-6">
             <mat-form-field class="input-field" appearance="outline">
-              <mat-label>Address:</mat-label>
+              <mat-label>ঠিকানা:</mat-label>
               <textarea type="text" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="person.personAddress"
                 matInput></textarea>
             </mat-form-field>
@@ -150,6 +150,34 @@
         </div>
       </mat-card>
     </div>
+    <div *ngIf="isTON" class="col-md-12 mt-5">
+      <mat-card class="mt-2">
+        <h3>TON</h3>
+        <div class="row">
+          <div class="col-md-3">
+            <mat-form-field class="input-field" appearance="outline">
+              <mat-label>Total Quantity</mat-label>
+              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (change)="calculateTonTotal()"
+                [(ngModel)]="supplyInvoice.totalTonQuantity" placeholder="00" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field class="input-field" appearance="outline">
+              <mat-label>Cost Per Ton</mat-label>
+              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (change)="calculateTonTotal()"
+                [(ngModel)]="supplyInvoice.costPerTon" placeholder="00" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field class="input-field" appearance="outline">
+              <mat-label>Total Cost</mat-label>
+              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (change)="calculateTonTotal()"
+                [(ngModel)]="supplyInvoice.totalTonCost" placeholder="00" matInput>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card>
+    </div>
     <!-- <div *ngIf="isEsc" class="col-md-12 mt-5">
       <mat-card class="mt-2">
         <h3>এসকেভেটর</h3>
@@ -247,6 +275,13 @@
               <mat-label>পরিশোধ</mat-label>
               <input type="number" pInputText [ngModelOptions]="{standalone:true}" (change)="calculateDueAmount()"
                 [(ngModel)]="supplyInvoice.advancePayment" placeholder="00" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field class="input-field" appearance="outline">
+              <mat-label>রিবেট</mat-label>
+              <input type="number" pInputText [ngModelOptions]="{standalone:true}"
+                [(ngModel)]="supplyInvoice.rebate" placeholder="00" matInput>
             </mat-form-field>
           </div>
           <div class="col-md-3">

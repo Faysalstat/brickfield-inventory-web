@@ -25,6 +25,7 @@ export class InvoiceDetailComponent implements OnInit {
   isCC: boolean = false;
   isCFT: boolean = false;
   isECL: boolean = false;
+  isTON:boolean = false;
   comment!: string;
   // orders!
   constructor(
@@ -55,6 +56,10 @@ export class InvoiceDetailComponent implements OnInit {
               this.deliveryType = 'CFT';
             }
             if(this.supplyInvoice.deliveryType == 3){
+              this.isTON = true;
+              this.deliveryType = 'TON';
+            }
+            if(this.supplyInvoice.deliveryType == 4){
               this.isECL = true;
               this.deliveryType = 'এসকেভেটর';
             }
@@ -158,6 +163,9 @@ export class InvoiceDetailComponent implements OnInit {
       this.supplyInvoice.taskId = this.taskId;
       this.supplyInvoice.isEdit = this.isEdit;
       this.supplyInvoice.comment = this.comment;
+      if(this.isTON){
+        this.supplyInvoice.totalQuantity = this.supplyInvoice.totalTonQuantity;
+      }
       params.set('supplyInvoice', this.supplyInvoice);
       this.adminService.approveSupplyTask(params).subscribe({
         next: (data) => {
@@ -166,7 +174,7 @@ export class InvoiceDetailComponent implements OnInit {
         },
         error: (err) => {
           console.log(err);
-          window.alert("Operation Failed. ERR: "+err);
+          window.alert("Operation Failed. ERR: "+err.message);
         },
       });
     }else{
@@ -178,7 +186,7 @@ export class InvoiceDetailComponent implements OnInit {
         },
         error: (err) => {
           console.log(err);
-          window.alert("Operation Failed. ERR: "+err);
+          window.alert("Operation Failed. ERR: "+err.message);
         },
       });
     }

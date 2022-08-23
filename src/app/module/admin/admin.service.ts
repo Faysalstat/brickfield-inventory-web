@@ -16,6 +16,22 @@ export class AdminService {
     console.log(queryParams.get("invoice"))
     return this.http.post(Urls.CREATE_INVOICE,queryParams.get("invoice"));
   }
+  public paySalary(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("salary"))
+    return this.http.post(Urls.PAY_SALARY,queryParams.get("salary"));
+  }
+  public doOfficeExpense(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("expense"))
+    return this.http.post(Urls.OFFICE_EXPENSE,queryParams.get("expense"));
+  }
+  public addExpenseCategory(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("category"))
+    return this.http.post(Urls.ADD_EXPENSE_CATEORY,queryParams.get("category"));
+  }
+  public doSordarPayment(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("payment"))
+    return this.http.post(Urls.SORDAR_PAYMENT,queryParams.get("payment"));
+  }
   public approveHandOverTask(queryParams: Map<string,any>): Observable<any>{
     console.log(queryParams.get("handover"))
     return this.http.post(Urls.PAY_OWNER,queryParams.get("handover"));

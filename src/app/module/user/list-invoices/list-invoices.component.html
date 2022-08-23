@@ -4,13 +4,13 @@
       <mat-form-field class="input-field" appearance="fill">
         <mat-label>Invoice No</mat-label>
         <input placeholder="Invoice No" pInputText [ngModelOptions]="{standalone:true}"
-          [(ngModel)]="queryBody.invoiceId" matInput>
+          [(ngModel)]="queryBody.invoiceNo" matInput>
       </mat-form-field>
     </div>
     <div class="col-md-2">
       <mat-form-field class="input-field" appearance="fill">
         <mat-label>Contact No</mat-label>
-        <input (change)="searchCustomer()" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="contactNo"
+        <input pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="queryBody.contactNo"
           placeholder="Contact" matInput>
       </mat-form-field>
     </div>
@@ -42,6 +42,7 @@
             <th scope="col">Price</th>
             <th scope="col">Advance</th>
             <th scope="col">Due</th>
+            <th scope="col">Rebate</th>
             <th scope="col">Delivery Status</th>
             <th scope="col">Action</th>
           </tr>
@@ -57,6 +58,7 @@
             <td>{{invoice.totalBill}}</td>
             <td>{{invoice.advancePayment}}</td>
             <td>{{invoice.duePament}}</td>
+            <td>{{invoice.rebate}}</td>
             <td>{{invoice.deliveryStatus}}</td>
             <td>
               <!-- <button mat-button (click)="openInvoice(invoice)" color="warn" >

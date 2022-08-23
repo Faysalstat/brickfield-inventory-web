@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   Account,
   ApprovalModel,
@@ -23,6 +23,7 @@ import { UserService } from '../user.service';
 })
 export class SupplyInvoiceComponent implements OnInit {
   issueSupplyForm!: FormGroup;
+  
   supplyer!: Supplyer;
   account!: Account;
   person!: Person;
@@ -37,6 +38,8 @@ export class SupplyInvoiceComponent implements OnInit {
   isCC: boolean = true;
   isCFT: boolean = false;
   isEsc: boolean = false;
+  isTON: boolean = false;
+  
   needSupplyer: boolean = false;
   drivers!: Driver[];
   notFoundMessage!: string;
@@ -44,6 +47,7 @@ export class SupplyInvoiceComponent implements OnInit {
   costAmount:number = 0;
   totalCostAmount:number = 0;
   constructor(
+    
     private userService: UserService,
     private formBuilder: FormBuilder,
     private router: Router,
@@ -60,15 +64,19 @@ export class SupplyInvoiceComponent implements OnInit {
       { label: 'Select Delivery Types', value: 0 },
       { label: 'গাড়ি চু্ক্তি', value: 1 },
       { label: 'CFT', value: 2 },
+      { label: 'TON', value: 3 },
       // { label: 'এসকেভেটর', value: 3 },
-    ];
+    ]; 
+    // miracoff, monas 10
   }
 
   ngOnInit(): void {
+   
     this.fetchProductList();
     this.fetchVehicles();
     this.fetchDrivers();
   }
+  
   prepareForm(formData: any) {
     // formData = new Person();
     this.issueSupplyForm = this.formBuilder.group({
@@ -158,15 +166,15 @@ export class SupplyInvoiceComponent implements OnInit {
     if (this.selectedType == 1) {
       this.isCC = true;
       this.isCFT = false;
-      this.isEsc = false;
+      this.isTON = false;
     } else if (this.selectedType == 2) {
       this.isCC = false;
       this.isCFT = true;
-      this.isEsc = false;
+      this.isTON = false;
     } else if (this.selectedType == 3) {
       this.isCC = false;
       this.isCFT = false;
-      this.isEsc = true;
+      this.isTON = true;
     }
   }
   calculateCCTotal() {
@@ -245,5 +253,13 @@ export class SupplyInvoiceComponent implements OnInit {
 
   calculateSummary(){
     this.supplyInvoice.totalAmountToPay = this.supplyInvoice.totalPrice + this.supplyInvoice.transportCost;
+  }
+  calculateTonTotal(){
+    this.supplyInvoice.totalTonCost =  this.supplyInvoice.totalTonQuantity*this.supplyInvoice.costPerTon;
+    this.supplyInvoice.totalPrice = this.supplyInvoice.totalTonCost;
+    this.supplyInvoice.totalAmountToPay = this.supplyInvoice.totalPrice + this.supplyInvoice.transportCost;
+  }
+  setInvoiceData(){
+
   }
 }

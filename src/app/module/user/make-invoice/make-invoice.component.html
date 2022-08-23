@@ -2,46 +2,69 @@
     <form [formGroup]="invoiceIssueForm" (keydown.enter)="$event.preventDefault()">
         <mat-card class="mt-5">
             <div class="row">
-                <h2>কাস্টমার বিবরন :</h2>
-                <h3 *ngIf="isEdit" style="color:red ; font-weight:bolder ;">Status : {{status}}</h3>
-                <h4 *ngIf="isDue" style="color:red ; font-weight:bolder ;">Payment Due</h4>
                 <div class="col-md-4">
-                    <mat-form-field class="input-field" appearance="outline">
-                        <mat-label>মোবাইল নাম্বার</mat-label>
-                        <input (change)="searchCustomer()" pInputText [ngModelOptions]="{standalone:true}"
-                            [(ngModel)]="person.contactNo" placeholder="মোবাইল নাম্বার" matInput>
-                    </mat-form-field>
+                    <div class="row">
+                        <h2>Issue Sale Invoice:</h2>
+                        <h3 *ngIf="isEdit" style="color:red ; font-weight:bolder ;">Status : {{status}}</h3>
+                        <h4 *ngIf="isDue" style="color:red ; font-weight:bolder ;">Payment Due</h4>
+                        <div class="col-md-12">
+                            <mat-form-field class="input-field" appearance="outline">
+                                <mat-label>D.O No:</mat-label>
+                                <input type="text" formControlName="doNo" matInput>
+                            </mat-form-field>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <mat-form-field class="input-field" appearance="outline">
-                        <mat-label>নাম :</mat-label>
-                        <input [ngModelOptions]="{standalone:true}" [(ngModel)]="person.personName" [disabled]="true"
-                            placeholder="নাম" matInput>
-                    </mat-form-field>
-                </div>
-                <!-- <div *ngIf="!isNeg" class="col-md-3">
-                    <mat-form-field class="input-field" appearance="outline">
-                        <mat-label>জমা:</mat-label>
-                        <input type="number" pInputText [ngModelOptions]="{standalone:true}" [disabled]="true"
-                            [(ngModel)]="customerBalance" matInput>
-                    </mat-form-field>
-                </div> -->
-                <div *ngIf="isNeg" class="col-md-3" >
-                    <mat-form-field class="input-field" appearance="outline">
-                        <mat-label style="color:red;font-weight: bolder;">বাকি:</mat-label>
-                        <input type="number" style="color:red;font-weight: bolder;" pInputText [ngModelOptions]="{standalone:true}" [disabled]="true"
-                            [(ngModel)]="customerBalance" matInput>
-                    </mat-form-field>
-                </div>
-                <div class="col-md-6">
-                    <mat-form-field class="input-field" appearance="outline">
-                        <mat-label>ঠিকানা:</mat-label>
-                        <textarea pInputText [ngModelOptions]="{standalone:true}" [disabled]="true"
-                            [(ngModel)]="person.personAddress" matInput></textarea>
-                    </mat-form-field>
+                <div class="col-md-8">
+                    <div class="row">
+                        <h2>কাস্টমার বিবরন :</h2>
+                        <div class="col-md-6">
+                            <mat-form-field class="input-field" appearance="outline">
+                                <mat-label>মোবাইল নাম্বার</mat-label>
+                                <input (change)="searchCustomer()" pInputText [ngModelOptions]="{standalone:true}"
+                                    [(ngModel)]="person.contactNo" placeholder="মোবাইল নাম্বার" matInput>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="input-field" appearance="outline">
+                                <mat-label>নাম :</mat-label>
+                                <input [ngModelOptions]="{standalone:true}" [(ngModel)]="person.personName"
+                                    [disabled]="isCustomerExist" placeholder="নাম" matInput>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div *ngIf="!isNeg" class="col-md-3">
+                            <mat-form-field class="input-field" appearance="outline">
+                                <mat-label>জমা:</mat-label>
+                                <input type="number" pInputText [ngModelOptions]="{standalone:true}" [disabled]="true"
+                                    [(ngModel)]="customerBalance" matInput>
+                            </mat-form-field>
+                        </div> -->
+                        <!-- <div *ngIf="isNeg" class="col-md-3">
+                            <mat-form-field class="input-field" appearance="outline">
+                                <mat-label style="color:red;font-weight: bolder;">বাকি:</mat-label>
+                                <input type="number" style="color:red;font-weight: bolder;" pInputText
+                                    [ngModelOptions]="{standalone:true}" [disabled]="isCustomerExist"
+                                    [(ngModel)]="customerBalance" matInput>
+                            </mat-form-field>
+                        </div> -->
+                        <div class="col-md-12">
+                            <mat-form-field class="input-field" appearance="outline">
+                                <mat-label>ঠিকানা:</mat-label>
+                                <textarea pInputText [ngModelOptions]="{standalone:true}" [disabled]="isCustomerExist"
+                                    [(ngModel)]="person.personAddress" matInput></textarea>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12">
+                            <button *ngIf="!isCustomerExist" style="float: left;" (click)="addCustomer()"
+                                mat-raised-button color="warn">যোগ
+                                করুন:</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </mat-card >
+
+
+        </mat-card>
         <mat-card class="mt-5">
             <h2>অর্ডারের বিবরণ:</h2>
             <div class="row">
@@ -57,8 +80,8 @@
                 <div class="col-md-2">
                     <mat-form-field class="input-field" appearance="outline">
                         <mat-label>রেট</mat-label>
-                        <input type="number" (keyup)="calculateTotalPrice()" pInputText [ngModelOptions]="{standalone:true}"
-                            [(ngModel)]="selectedBrick.pricePerPiece" matInput>
+                        <input type="number" (keyup)="calculateTotalPrice()" pInputText
+                            [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedBrick.pricePerPiece" matInput>
                     </mat-form-field>
                 </div>
                 <div class="col-md-3">
@@ -96,9 +119,9 @@
                         <tbody>
                             <tr *ngIf="orders.length==0">
                                 <td colspan="9" style="font-weight:bold ; ">
-                                  No Order Created!!
+                                    No Order Created!!
                                 </td>
-                              </tr>
+                            </tr>
                             <tr *ngFor="let order of orders; index as i">
                                 <td>{{i+1}}</td>
                                 <td>{{order?.brick?.category}}</td>
@@ -126,7 +149,8 @@
                         <mat-label>অর্ডার</mat-label>
                         <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageOrder()"
                             [(ngModel)]="selectedOrder">
-                            <mat-option *ngFor="let order of orders" [value]="order">{{order?.brick?.category}}</mat-option>
+                            <mat-option *ngFor="let order of orders" [value]="order">{{order?.brick?.category}}
+                            </mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
@@ -191,7 +215,7 @@
                         color="accent">Add</button>
                 </div>
                 <div class="col-md-12 mt-5" style="overflow-x:auto;">
-                    <table class="table table-striped" >
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>SN</th>
@@ -208,9 +232,9 @@
                         <tbody>
                             <tr *ngIf="schedules.length==0">
                                 <td colspan="9" style="font-weight:bold ; ">
-                                  No Schedule Created!!
+                                    No Schedule Created!!
                                 </td>
-                              </tr>
+                            </tr>
                             <tr *ngFor="let delivery of schedules; index as i">
                                 <td>{{i+1}}</td>
                                 <td>{{delivery?.deliverableQuantity}}</td>
@@ -288,6 +312,13 @@
                     </mat-form-field>
                 </div>
                 <div class="col-md-3">
+                    <!-- <h3>Payment:</h3> -->
+                    <mat-form-field class="input-field" appearance="outline">
+                        <mat-label>Rebate:</mat-label>
+                        <input type="number" pInputText formControlName="rebate" matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
                     <!-- <h3>Due Payment:</h3> -->
                     <mat-form-field class="input-field" appearance="outline">
                         <mat-label>বাকি</mat-label>
@@ -303,18 +334,17 @@
                 </div>
                 <div class="col-md-12">
                     <mat-form-field class="input-field" appearance="outline">
-                      <mat-label>Comment</mat-label>
-                      <textarea type="text" pInputText formControlName="comment"
-                      matInput></textarea>
+                        <mat-label>Comment</mat-label>
+                        <textarea type="text" pInputText formControlName="comment" matInput></textarea>
                     </mat-form-field>
-                  </div>
+                </div>
                 <div *ngIf="!isEdit" class="col-md-12">
                     <button style="margin: 10px; float: right;" mat-raised-button color="primary"
                         (click)="submitInvoice()">Submit</button>
                 </div>
                 <div *ngIf="isEdit" class="col-md-12">
-                    <button style="margin: 10px; float: right;" mat-raised-button color="primary" [disabled]="status=='PENDING'"
-                        (click)="updateInvoice()">Submit</button>
+                    <button style="margin: 10px; float: right;" mat-raised-button color="primary"
+                        [disabled]="status=='PENDING'" (click)="updateInvoice()">Submit</button>
                 </div>
             </div>
             <!-- <app-cash-receive [hidden]="isReceiving" [invoiceId]= invoiceId ></app-cash-receive> -->

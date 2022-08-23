@@ -4,10 +4,10 @@
         <div class="col-md-4">
             <mat-form-field appearance="outline" class="input-field">
                 <mat-label>Select Expense Type</mat-label>
-                <mat-select [ngModelOptions]="{standalone:true}"  [(ngModel)]="selectedExpense">
-                  <mat-option *ngFor="let expense of expenseCategories" [value]= "expense" >{{expense?.expenseName}}</mat-option>
+                <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedExpense">
+                    <mat-option *ngFor="let expense of expenseCategories" [value]="expense">{{expense?.expenseName}}</mat-option>
                 </mat-select>
-              </mat-form-field>
+            </mat-form-field>
         </div>
         <div class="col-md-4">
             <mat-form-field class="input-field" appearance="outline">
@@ -23,7 +23,7 @@
         </div>
        
         <div class="col-md-6">
-            <mat-form-field class="input-field" appearance="fill">
+            <mat-form-field class="input-field" appearance="outline">
                 <mat-label>Remarks:</mat-label>
                     <textarea type="text"  pInputText [ngModelOptions]="{standalone:true}"  [(ngModel)]="selectedExpense.refference" matInput></textarea>
                 </mat-form-field>

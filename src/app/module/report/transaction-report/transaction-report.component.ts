@@ -49,6 +49,7 @@ export class TransactionReportComponent implements OnInit {
       {label:'Select Transaction Type',value:null},
       {label:'Income',value:"INCOME"},
       {label:'Expense',value:"EXPENSE"},
+      {label:'Deposit',value:"DEPOSIT"},
     ]
     this.queryBody = {
       offset:this.offset,
