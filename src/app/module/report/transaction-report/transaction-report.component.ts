@@ -18,13 +18,18 @@ export class TransactionReportComponent implements OnInit {
   queryBody!:any;
   transactionTypes!:any[];
   expenseCatgories!:any[];
+  expenseReasons!:any[];
+  glTypes!:any[];
+  selectedGlType!:any;
   selectedCategory!:any;
+  selectedReason!:any;
   selectedType!:any;
   totalIncomeAmount!:number;
   totalExpenseAmount!:number;
   totalReversedAmount!:number;
   fromDate!:any;
   toDate!:any;
+  isExpense:boolean = false;
   constructor(
     private userService: UserService,
     private reportService: ReportService
@@ -33,7 +38,9 @@ export class TransactionReportComponent implements OnInit {
     this.tnxList = [];
     this.exportData = [];
     this.selectedCategory = null;
+    this.selectedReason = null;
     this.selectedType = null;
+    this.selectedGlType = "FACTORY_GL";
     this.fromDate = null;
     this.toDate = null;
     this.tnxListForReport = [];
@@ -45,16 +52,24 @@ export class TransactionReportComponent implements OnInit {
       {label:'খরচ',value:"খরচ"},
       {label:'বিল',value:"বিল"}
     ];
+    this.expenseReasons = [{label:'Select Category',value:null}];
     this.transactionTypes=[
       {label:'Select Transaction Type',value:null},
       {label:'Income',value:"INCOME"},
       {label:'Expense',value:"EXPENSE"},
       {label:'Deposit',value:"DEPOSIT"},
+    ];
+    this.glTypes=[
+      {label:'Select GL Type',value:null},
+      {label:'Factory GL',value:"FACTORY_GL"},
+      {label:'Office GL',value:"OFFICE_GL"}
     ]
     this.queryBody = {
       offset:this.offset,
+      reason:this.selectedReason,
       category: this.selectedCategory,
       type: this.selectedType,
+      glType:this.selectedGlType,
       fromDate: this.fromDate,
       toDate: this.toDate
     }
@@ -62,6 +77,23 @@ export class TransactionReportComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchAllTransByPage();
+    this.fetchExpenseReasons(null);
+  }
+  fetchExpenseReasons(category:any){
+    this.userService.fetchExpenseReasons(category).subscribe({
+      next:(data)=>{
+        if(data){
+          console.log(data.body);
+          data.body.map((elem:any)=>{
+            this.expenseReasons.push({label:elem.transactionReason,value:elem.transactionReason});
+          })
+          // this.expenseReasons = data.body;
+        }
+      },
+      error:(err)=>{
+        window.alert(err.message);
+      }
+    })
   }
 
   fetchAllTransByPage() {
@@ -76,6 +108,7 @@ export class TransactionReportComponent implements OnInit {
     console.log();
     this.userService.fetchAllTransByPage(params).subscribe({
       next: (datares) => {
+        // this.expenseReasons = [];
         console.log(datares);
         this.tnxList = datares.body.data;
         this.tnxList.forEach(elem=>{
@@ -93,6 +126,11 @@ export class TransactionReportComponent implements OnInit {
           this.totalIncomeAmount += elem.income;
           this.totalExpenseAmount += elem.expense;
           this.totalReversedAmount += elem.reversedAmount;
+          // if(iscatChange){
+          //   this.expenseReasons.push({label:elem.transactionReason,value:elem.transactionReason});
+          //   console.log(this.expenseReasons);
+          // }
+          
         });
       },
       error:(err)=>{
@@ -119,10 +157,31 @@ export class TransactionReportComponent implements OnInit {
   }
   onChnageCategory(){
     this.queryBody.category = this.selectedCategory;
+    this.fetchExpenseReasons(this.selectedCategory);
+    this.fetchAllTransByPage();
+  }
+  onChnageReason(){
+    this.queryBody.reason = this.selectedReason;
+    console.log(this.selectedReason);
     this.fetchAllTransByPage();
   }
   onChnageType(){
     this.queryBody.type = this.selectedType;
+    if(this.selectedType == "EXPENSE"){
+      this.isExpense = true;
+    }else{
+      this.isExpense = false;
+    }
+    
+    this.fetchAllTransByPage();
+  }
+  onChnageGLType(){
+    this.queryBody.glType = this.selectedGlType;
+    if(this.selectedGlType == "OFFICE_GL"){
+
+    }else{
+
+    }
     this.fetchAllTransByPage();
   }
   onDateChange(){

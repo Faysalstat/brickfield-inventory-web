@@ -165,13 +165,20 @@ export class UserService {
   public fetchExpenseCategories(type:any): Observable<any> {
     let params = new HttpParams();
     params = params.append('type',type);
-    return this.http.get(Urls.FETCH_EXPENSE_CATEGROY);
+    return this.http.get(Urls.FETCH_EXPENSE_CATEGROY, { params: params });
+  }
+  public fetchExpenseReasons(category:any): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('category',category);
+    return this.http.get(Urls.FETCH_EXPENSE_REASONS_BY_CATEGROY, { params: params });
   }
   public fetchAllTransByPage(queryParams: Map<string, any>): Observable<any> {
     let params = new HttpParams();
     params = params.append('offset',queryParams.get('query').offset);
     params = params.append('category',queryParams.get('query').category);
+    params = params.append('reason',queryParams.get('query').reason);
     params = params.append('type',queryParams.get('query').type);
+    params = params.append('glType',queryParams.get('query').glType);
     params = params.append('fromDate',queryParams.get('query').fromDate);
     params = params.append('toDate',queryParams.get('query').toDate);
     return this.http.get(Urls.FETCH_ALL_TRANSACTION, { params: params });

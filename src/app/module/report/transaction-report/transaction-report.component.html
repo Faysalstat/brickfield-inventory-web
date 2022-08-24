@@ -1,6 +1,18 @@
 <mat-card class="mt-4">
     <div class="row">
-        <div class="col-md-3 col-sm-4">
+        <h2>Factory Transaction Report</h2>
+        <div class="col-md-3 col-sm-3">
+            <mat-form-field appearance="outline" class="input-field">
+                <mat-label>Transaction Type</mat-label>
+                <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageGLType()"
+                    [(ngModel)]="selectedGlType">
+                    <mat-option *ngFor="let type of glTypes" [value]="type.value">
+                        {{type?.label}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3 col-sm-3">
             <mat-form-field appearance="outline" class="input-field">
                 <mat-label>Transaction Type</mat-label>
                 <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageType()"
@@ -11,7 +23,7 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col-md-3 col-sm-4">
+        <div *ngIf="isExpense" class="col-md-3 col-sm-3">
             <mat-form-field appearance="outline" class="input-field">
                 <mat-label>Transaction Category</mat-label>
                 <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageCategory()"
@@ -22,7 +34,18 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col-md-3 col-sm-4">
+        <div *ngIf="isExpense" class="col-md-3 col-sm-3">
+            <mat-form-field appearance="outline" class="input-field">
+                <mat-label>Transaction Reasons</mat-label>
+                <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageReason()"
+                    [(ngModel)]="selectedReason">
+                    <mat-option *ngFor="let reason of expenseReasons" [value]="reason?.value">
+                        {{reason?.label}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3 col-sm-3">
             <mat-form-field appearance="outline">
                 <mat-label>From Date</mat-label>
                 <input matInput [matDatepicker]="fromDatePicker" (dateInput)="onDateChange()"
@@ -31,7 +54,7 @@
                 <mat-datepicker #fromDatePicker></mat-datepicker>
             </mat-form-field>
         </div>
-        <div class="col-md-3 col-sm-4">
+        <div class="col-md-3 col-sm-3">
             <mat-form-field appearance="outline">
                 <mat-label>To Date</mat-label>
                 <input matInput [matDatepicker]="toDatePicker" (dateInput)="onDateChange()"
@@ -48,12 +71,12 @@
     <div class="col-md-12">
         <table class="table table-stripe mt-4">
             <thead>
-                <th>SN</th>
-                <th>Transaction Type</th>
-                <th>Transaction Reason</th>
-                <th>Amount</th>
-                <th>Tnx Date</th>
-                <th>Refferense</th>
+                <th style="width:10%;">SN</th>
+                <th style="width:20%;">Transaction Type</th>
+                <th style="width:20%;">Transaction Reason</th>
+                <th style="width:10%;">Amount</th>
+                <th style="width:10%;">Tnx Date</th>
+                <th style="width:30%;">Refferense</th>
             </thead>
             <tbody>
                 <tr *ngIf="tnxList.length==0">
@@ -65,7 +88,7 @@
                     <td>{{i+offset+1}}</td>
                     <td>{{tnx.transactionType}}</td>
                     <td>{{tnx.transactionReason}}</td>
-                    <td *ngIf="tnx.transactionType=='INCOME'">{{tnx.income}}</td>
+                    <td *ngIf="tnx.transactionType=='INCOME' || tnx.transactionType=='DEPOSIT'">{{tnx.income}}</td>
                     <td *ngIf="tnx.transactionType=='EXPENSE'">{{tnx.expense}}</td>
                     <td>{{tnx.transactionDate}}</td>
                     <td>{{tnx.refference}}</td>

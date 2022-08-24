@@ -2,7 +2,7 @@
     <form [formGroup]="invoiceIssueForm" (keydown.enter)="$event.preventDefault()">
         <mat-card class="mt-5">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4" style="border-right:2px solid #808080 ;">
                     <div class="row">
                         <h2>Issue Sale Invoice:</h2>
                         <h3 *ngIf="isEdit" style="color:red ; font-weight:bolder ;">Status : {{status}}</h3>

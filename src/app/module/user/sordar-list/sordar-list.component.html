@@ -1,37 +1,35 @@
 <mat-card class="mt-5">
-  <app-add-sordar (sordarAddedEvent)="updateList($event)"></app-add-sordar>
-    <h1>Sordars List</h1>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Contact No</th>
-          <th>Address</th>
-          <th>Type</th>
-          <th>Amount To Pay</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let sordar of sordarList; index as i">
-          <td>{{sordar.id}}</td>
-          <td>{{sordar?.person?.personName}}</td>
-          <td>{{sordar?.person?.contactNo}}</td>
-          <td>{{sordar?.person?.personAddress}}</td>
-          <td>{{sordar?.category}}</td>
-          <td style="color:crimson ;">{{sordar?.account?.amountToPay}}</td>
-        </tr>
-      </tbody>
-    </table>
+  <mat-tab-group class="mt-4">
+    <mat-tab label="Sordar Production Record">
+      <app-sordar-production-record></app-sordar-production-record>
+    </mat-tab>
+    <mat-tab label="Add Sordar">
+      <mat-card>
+        <app-add-sordar (sordarAddedEvent)="updateList($event)"></app-add-sordar>
+        <h1>Sordars List</h1>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Contact No</th>
+              <th>Address</th>
+              <th>Type</th>
+              <th>Amount To Pay</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sordar of sordarList; index as i">
+              <td>{{sordar.id}}</td>
+              <td>{{sordar?.person?.personName}}</td>
+              <td>{{sordar?.person?.contactNo}}</td>
+              <td>{{sordar?.person?.personAddress}}</td>
+              <td>{{sordar?.category}}</td>
+              <td style="color:crimson ;">{{sordar?.account?.amountToPay}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card>
+    </mat-tab>
+  </mat-tab-group>
 </mat-card>
-<!-- <mat-card>
-  <div class="row">
-    <div class="col-md-4">
-      <mat-form-field class="input-field" appearance="outline">
-        <mat-label>মোবাইল নাম্বার</mat-label>
-        <input InputText [ngModelOptions]="{standalone:true}" [(ngModel)]="person.contactNo"
-          placeholder="মোবাইল নাম্বার" matInput>
-        </mat-form-field>
-    </div>
-  </div>
-</mat-card> -->

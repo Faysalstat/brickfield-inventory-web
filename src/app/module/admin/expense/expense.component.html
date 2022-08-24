@@ -5,8 +5,8 @@
             <div class="col-md-4">
                 <mat-form-field appearance="outline" class="input-field">
                     <mat-label>Select Expense Type</mat-label>
-                    <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="expenseType">
-                        <mat-option *ngFor="let expense of expenseTypes" [value]="expense.value">{{expense?.label}}
+                    <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedExpense">
+                        <mat-option *ngFor="let expense of expenseTypes" [value]="expense">{{expense?.expenseName}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

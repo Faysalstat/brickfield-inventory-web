@@ -77,6 +77,7 @@ export const Urls = {
     FETCH_ALL_DUE_INVOICE: BASE_URL+ "/invoice/getallDue",
     FETCH_REGISTER_SUMMARY: BASE_URL+ "/transaction/getsummary",
     FETCH_EXPENSE_CATEGROY: BASE_URL+ "/expense/getallcategory",
+    FETCH_EXPENSE_REASONS_BY_CATEGROY: BASE_URL+ "/transaction/getallreasonsbycategory",
     FETCH_ALL_RAW_PRODUCTION_REPORT: BASE_URL + "/stock/getrawproductionsummaryreport",
     FETCH_ALL_LOAD_UNLOAD_REPORT: BASE_URL + "/stock/getloadsumary",
     FETCH_ESCAVATOR_DUE_LIST: BASE_URL + "/transaction/getall-escavator-due-payment",

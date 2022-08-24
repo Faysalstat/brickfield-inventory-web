@@ -23,12 +23,13 @@ import { CashHandoverComponent } from './cash-handover/cash-handover.component';
 import { EscavatorDuePaymentComponent } from './escavator-due-payment/escavator-due-payment.component';
 import { EscavatorDuePaymentListComponent } from './escavator-due-payment-list/escavator-due-payment-list.component';
 import { DepositManagementComponent } from './deposit-management/deposit-management.component';
+import { SordarProductionRecordComponent } from './sordar-production-record/sordar-production-record.component';
 const components = [
   AddPersonComponent,AddDriverComponent,AddScheduleComponent,AddSupplyerComponent,StockListComponent,
   CashPaymentComponent,CashReceiveComponent,DeliveryDetailsComponent,DueInvoiceListComponent,DuePaymentListComponent,
   RegisterSummaryComponent,NavBarComponent,AddSordarComponent,TransactionListComponent,CashExpenseComponent,
   EscavatorPaymentComponent,CashHandoverComponent,EscavatorDuePaymentComponent,EscavatorDuePaymentListComponent,
-  DepositManagementComponent
+  DepositManagementComponent,SordarProductionRecordComponent
 ]
 
 
