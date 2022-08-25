@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&family=Roboto:wght@500&display=swap');
+h1,h2{
+font-size: 150%;
+    font-family:'Oleo Script Swash Caps', cursive ;
+    text-align: center;
+    font-weight: bold;
+}

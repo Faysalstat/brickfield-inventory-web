@@ -6,7 +6,6 @@ import { UserRoutingModule } from './user-routing.module';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { CustomerAccountComponent } from './customer-account/customer-account.component';
 import { StockManagementComponent } from './stock-management/stock-management.component';
-import { DeliveryComponent } from './delivery/delivery.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CompsModule } from './comps/comps.module';
 import { MaterialModule } from 'src/material.module';
@@ -18,6 +17,15 @@ import { SupplyInvoiceComponent } from './supply-invoice/supply-invoice.componen
 import { SupplyerListComponent } from './supplyer-list/supplyer-list.component';
 import { MakeInvoiceComponent } from './make-invoice/make-invoice.component';
 import { CashPaymentDueListComponent } from './cash-payment-due-list/cash-payment-due-list.component';
+import { InvoiceFormComponent } from './supply/invoice-form/invoice-form.component';
+import { SordarListComponent } from './sordar-list/sordar-list.component';
+import { UserReportsComponent } from './user-reports/reports.component';
+import { ReportModule } from '../report/report.module';
+import { IssueExpenseComponent } from './issue-expense/issue-expense.component';
+import { ListSupplyInvoiceComponent } from './list-supply-invoice/list-supply-invoice.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { EditSupplyInvoiceComponent } from './edit-supply-invoice/edit-supply-invoice.component';
 
 
 
@@ -28,7 +36,6 @@ import { CashPaymentDueListComponent } from './cash-payment-due-list/cash-paymen
     CustomerListComponent,
     CustomerAccountComponent,
     StockManagementComponent,
-    DeliveryComponent,
     ListInvoicesComponent,
     ScheduleDeliveryComponent,
     DriverListComponent,
@@ -36,7 +43,15 @@ import { CashPaymentDueListComponent } from './cash-payment-due-list/cash-paymen
     SupplyInvoiceComponent,
     SupplyerListComponent,
     MakeInvoiceComponent,
-    CashPaymentDueListComponent
+    CashPaymentDueListComponent,
+    InvoiceFormComponent,
+    SordarListComponent,
+    UserReportsComponent,
+    IssueExpenseComponent,
+    ListSupplyInvoiceComponent,
+    ProfileComponent,
+    ChangePasswordComponent,
+    EditSupplyInvoiceComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +59,8 @@ import { CashPaymentDueListComponent } from './cash-payment-due-list/cash-paymen
     FormsModule,
     ReactiveFormsModule,
     CompsModule,
-    MaterialModule
+    MaterialModule,
+    ReportModule
   ]
 })
 export class UserModule { }

@@ -1,0 +1,49 @@
+<mat-card class="mt-5">
+    <div class="row">
+        <h1>Daily Deposit:</h1>
+        <div class="col-md-3">
+            <mat-form-field class="input-field" appearance="outline">
+                <mat-label>জমা: </mat-label>
+                <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="depositAmount"
+                    placeholder="00" matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field appearance="outline" class="input-field">
+                <mat-label>Source:</mat-label>
+                <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="depositType">
+                    <mat-option *ngFor="let type of types" [value]="type.value">{{type?.label}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field class="input-field" appearance="outline">
+                <mat-label>From: </mat-label>
+                <input type="text" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="depositFrom"
+                    placeholder="00" matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field appearance="outline">
+                <mat-label>তারিখ:</mat-label>
+                <input matInput [matDatepicker]="rawpicker" [ngModelOptions]="{standalone:true}"
+                    [(ngModel)]="depositDate">
+                <mat-datepicker-toggle matSuffix [for]="rawpicker"></mat-datepicker-toggle>
+                <mat-datepicker #rawpicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="col-md-12">
+            <mat-form-field class="input-field" appearance="outline">
+                <mat-label>Comment</mat-label>
+                <textarea type="text" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="remark"
+                    matInput></textarea>
+            </mat-form-field>
+        </div>
+        <div class="col-md-12">
+            <button style="margin: 10px; float: right;" mat-raised-button color="primary"
+                (click)="submit()">Submit</button>
+        </div>
+    </div>
+
+</mat-card>

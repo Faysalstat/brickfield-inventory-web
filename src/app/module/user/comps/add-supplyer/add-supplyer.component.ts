@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Person, Product } from 'src/app/module/model';
 import { UserService } from '../../user.service';
@@ -10,6 +10,7 @@ import { UserService } from '../../user.service';
 })
 export class AddSupplyerComponent implements OnInit {
   @Output() supplyerAddedEvent = new EventEmitter<string>();
+  @Input() contactNo = "";
   supplyerForm!: FormGroup;
   disable!:true;
   message:string = "";
@@ -20,11 +21,13 @@ export class AddSupplyerComponent implements OnInit {
     private userService:UserService
   ) { 
     this.selectedProduct = {};
+    this.prepareForm(null);
   }
 
   ngOnInit(): void {
-    this.prepareForm(null);
+    
     this.fetchProducts();
+    this.supplyerForm.get("contactNo")?.setValue(this.contactNo);
   }
   onChnageProduct(){
     this.supplyerForm.get('productId')?.setValue(this.selectedProduct?.id);
@@ -61,13 +64,13 @@ export class AddSupplyerComponent implements OnInit {
       balance:this.supplyerForm.get('balance')?.value||0,
       due:0,
       amountToPay:0,
-      productId:this.selectedProduct.id
+      // productId:this.selectedProduct.id
     }
     params.set("supplyer",supplyer);
     this.userService.addSupplyer(params).subscribe({
       next:(res)=>{
         console.log(res);
-        this.supplyerAddedEvent.emit("Hello from parent");
+        this.supplyerAddedEvent.emit(res.body);
         this.supplyerForm.reset();
       },
       error:(err)=>{},

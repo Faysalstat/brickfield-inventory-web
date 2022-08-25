@@ -8,3 +8,12 @@
     padding: 0.75em 0.75em 0 0.75em;
     /* border: 1px solid #0e0d0d; */
   }
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: .5em 0 .5em 0;
+    margin-top: 0;
+}
+  @media only screen and (min-width: 600px) {
+    .table{
+      width:30%;
+    }
+  }

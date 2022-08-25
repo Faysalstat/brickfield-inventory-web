@@ -11,6 +11,7 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class SignInComponent implements OnInit {
   loginForm!: FormGroup;
+  message!:string;
   constructor(
     private router: Router, 
     private formBuilder: FormBuilder,
@@ -40,9 +41,19 @@ export class SignInComponent implements OnInit {
     this.authService.signIn(params).subscribe({
       next:(res)=>{
         console.log(res);
-        this.router.navigate(["/home"]);
+        localStorage.setItem('token', res.body.token);
+        localStorage.setItem('userId', res.body.userid);
+        if(res.body.userRole== "MANAGER"){
+          this.router.navigate(["/home"]);
+        }else if(res.body.userRole== "ADMIN"){
+          this.router.navigate(["/admin"]);
+        }
+        
       },
-      error:(err)=>{},
+      error:(err)=>{
+        this.message = "*Authentiocation Failed";
+        window.alert
+      },
       complete: ()=>{}
     })
   }

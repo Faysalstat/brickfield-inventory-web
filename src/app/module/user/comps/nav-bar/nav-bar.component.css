@@ -1,0 +1,43 @@
+.navbar-band{
+    margin-right: 20px;
+    padding: 5px 20px
+}
+.nav-item{
+    padding: 5px 10px;
+    
+    
+}
+.dropdown-item{
+    padding: 10px;
+}
+nav{
+    background-color: #6365A2;
+    font-size:15px;
+}
+.dropdown-item{
+    font-size:15px;
+    text-align: center;
+}
+.b-border{
+    border-bottom: 1px solid #878a8c;
+}
+.content{
+    font-size: medium;
+}
+input{
+    font-size: 12px;
+}
+::ng-deep .mat-input-element{
+    font-size: 12px;
+}
+::ng-deep .mat-form-field{
+    line-height: 2.125;
+}
+.dropdown-menu{
+    padding:0px;
+    /* background-color:#34a1eb */
+}
+
+::ng-deep .mat-snack-bar-container {
+    margin-top: 100px !important;
+}

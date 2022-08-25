@@ -35,11 +35,21 @@ export class Driver {
   account!: Account;
   person!: Person;
 }
+
+export class Sordar {
+  id!: number;
+  account!: Account;
+  person!: Person;
+  category!:string;
+}
 export class Brick {
   id!: number;
   category!: string;
   pricePerPiece: number = 0;
   quantity: number = 0;
+  unloadQuantity: number = 0;
+  updatedTotalQuantity:number = 0;
+  type!:string;
 }
 
 export class CustomerDomain {
@@ -67,6 +77,7 @@ export class Product{
 }
 export class InvoiceIssueModel {
   totalPrice!: number;
+  doNo!:string;
   totalQuantity!: number;
   advancePayment: number = 0;
   duePament: number = 0;
@@ -74,12 +85,15 @@ export class InvoiceIssueModel {
   approvalStatus!: string;
   issuedBy!: string;
   customerId!: number;
+  customer!:Customer;
   orders!: OrderModel[];
   scheduleOrders!: ScheduleDeliveryModel[];
+  isEdit!:boolean;
 }
 
 export class InvoiceDomain{
   id!: number;
+  doNo!:string;
   advancePayment!: number;
   approvalStatus!: string;
   approvedAt!: Date;
@@ -87,6 +101,7 @@ export class InvoiceDomain{
   customer!: Customer;
   deliveryStatus!: string;
   duePayment!: number;
+  rebate:number =0;
   transportCost!:number;
   issuedAt!: Date;
   issuedBy!: string;
@@ -98,27 +113,60 @@ export class InvoiceDomain{
   totalPrice!: number;
   totalBill!:number;
   totalQuantity!: number;
+  comment!:string;
 }
 
 export class SupplyInvoiceIssueModel {
     supplyerId!: number;
+    driverId!:number;
     productName!:string;
+    deliveryType!:number;
+
+    // garichukti
+    numberOfTrips:number = 0;
+    vehicleCategoryName!:string;
+
+    //CFT
+    cftQuantity:number=0;
+    actualCftQuantity:number=0;
+    pricePerCFT:number = 0;
+    totalCFTPrice:number =0;
+    actualCFTPrice:number=0;
+
+    // EXcCELETOR 
+    totalHour!:number;
+    costPerHour!:number;
+
+    //TON
+    totalTonQuantity: number = 0;
+    costPerTon: number = 0;
+    totalTonCost: number = 0;
+
+    
+
     totalPrice!: number;
-    actualPrice!: number;
     totalQuantity!: number;
-    actualQuantity!: number;
+    // actualQuantity!: number;
     quantityType!:string;
 
+
+    costAmountToPay: number = 0;
+    totalAmountToPay: number = 0;
     advancePayment: number = 0;
-    duePament: number = 0;
-    isCFT: boolean = false;
-    vehicleCategoryName!:string;
-    pricePerTrip!:number;
+    duePayment: number = 0;
+    rebate: number = 0;
+    
+    
+    pricePerTrip:number = 0;
+    transportCost:number = 0;
 
     deliveryStatus!: string;
     approvalStatus!: string;
+    comment!:string;
     issuedBy!: string;
   }
+
+
 export class OrderModel {
   invoiceId!:number;
   quantity!: number;
@@ -140,6 +188,7 @@ export interface PeriodicInvoiceElement {
 }
 export class ScheduleDeliveryModel {
   id!: number;
+  order!:OrderModel;
   invoiceId!: number;
   invoice!: Invoice;
   driver!: Driver;
@@ -152,6 +201,7 @@ export class ScheduleDeliveryModel {
   vehicleCategoryId!: number;
   deliveryStatus!:string;
   transportCostCustomerPayable!:number;
+  brickId!:number;
 }
 
 export class Invoice {
@@ -185,12 +235,14 @@ export class ApprovalModel {
   payload!: string;
   createdBy!: string;
   taskType!: string;
+  invoiceId!:string;
 }
 export enum Tasks{
   CREATE_INVOICE="CREATE_INVOICE",
   UPDATE_INVOICE= "UPDATE_INVOICE",
   CREATE_SUPPLY= "CREATE_SUPPLY",
-  UPDATE_SUPPLY= "UPDATE_SUPPLY"
+  UPDATE_SUPPLY= "UPDATE_SUPPLY",
+  CASH_HANDOVER = "CASH_HANDOVER"
 }
 export class TransactionSummary{
   totalSale:number = 0;
@@ -198,3 +250,52 @@ export class TransactionSummary{
   totalIncome:number = 0;
   balance:number = 0;
 }
+
+export class RawBrickProduction{
+  categoryName!:number;
+  quantity!:number;
+  productionDate:Date = new Date();
+  sordarName!:string;
+  sordarId!:number;
+}
+
+export class PaginatorModel{
+  length = 100;
+  pageSize = 10;
+}
+
+export class InvoiceQueryBody{
+  offset:number = 0;
+  createdFrom!:Date;
+  createdTo!:Date;
+  invoiceNo:string = "";
+  deliveryStatus:string = "";
+  customerId:number=0;
+  supplyerId:number=0;
+  contactNo:string = "";
+
+}
+export class Expense{
+  categoryName!:string;
+  expenseName!:string;
+  expenseAmount!:number;
+  refference!:string;
+  payTo!:string;
+}
+export class EscavatorExpenseModel{
+  productName!:string;
+  driver!:string;
+  totalHour!:number;
+  totalBill!:number;
+  hourlyRate!:number;
+  expenseName!:string;
+  categoryName!:string;
+  remark !:string;
+  deliveryType!:number;
+  advancePayment!:number;
+  duePayment!:number;
+}
+// export class ExpenseCategory{
+//   {label:'ভাড়া',value:"VARA"},
+  
+// }

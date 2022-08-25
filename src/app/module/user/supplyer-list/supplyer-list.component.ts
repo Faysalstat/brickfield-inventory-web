@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Supplyer } from '../../model';
 import { UserService } from '../user.service';
 
@@ -9,7 +10,9 @@ import { UserService } from '../user.service';
 })
 export class SupplyerListComponent implements OnInit {
   supplyersList!: Supplyer[];
-  constructor(private userService: UserService) {
+  constructor(
+    private userService: UserService,
+    private snackBar: MatSnackBar) {
     this.supplyersList = [];
   }
 
@@ -21,6 +24,13 @@ export class SupplyerListComponent implements OnInit {
       next: (data) => {
         console.log(data);
         this.supplyersList = data.body;
+      },
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
       },
     });
   }

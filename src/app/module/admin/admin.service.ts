@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Urls } from '../constant/urls.const';
+import * as fs from 'file-saver';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,38 @@ export class AdminService {
   constructor( private http:HttpClient) { }
 
 
-  public approveInvoice(queryParams: Map<string,any>): Observable<any>{
+  public approveSaleTask(queryParams: Map<string,any>): Observable<any>{
     console.log(queryParams.get("invoice"))
     return this.http.post(Urls.CREATE_INVOICE,queryParams.get("invoice"));
+  }
+  public paySalary(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("salary"))
+    return this.http.post(Urls.PAY_SALARY,queryParams.get("salary"));
+  }
+  public doOfficeExpense(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("expense"))
+    return this.http.post(Urls.OFFICE_EXPENSE,queryParams.get("expense"));
+  }
+  public addExpenseCategory(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("category"))
+    return this.http.post(Urls.ADD_EXPENSE_CATEORY,queryParams.get("category"));
+  }
+  public doSordarPayment(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("payment"))
+    return this.http.post(Urls.SORDAR_PAYMENT,queryParams.get("payment"));
+  }
+  public approveHandOverTask(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("handover"))
+    return this.http.post(Urls.PAY_OWNER,queryParams.get("handover"));
+  }
+  public approveSupplyTask(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("supplyInvoice"))
+    return this.http.post(Urls.CREATE_SUPPLY_INVOICE,queryParams.get("supplyInvoice"));
+  }
+
+  public declineTask(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("model"))
+    return this.http.post(Urls.DECLINE_TASK,queryParams.get("model"));
   }
 
   public addUser(queryParams: Map<string,any>): Observable<any>{
@@ -34,4 +64,8 @@ export class AdminService {
     params = params.append("username",username);
     return this.http.get(Urls.FETCH_USER_BY_NAME,{params:params});
   }
+  public fetchLoadUnloadHistory(): Observable<any>{
+    return this.http.get(Urls.FETCH_LOAD_UNLOAD_HISTORY);
+  }
+
 }

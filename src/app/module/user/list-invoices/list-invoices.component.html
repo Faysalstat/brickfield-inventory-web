@@ -1,46 +1,88 @@
 <mat-card>
-    <div class="row">
-      <div class="md-col-12">
-  
-      </div>
-      <div class="md-col-12">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Invoice No</th>
-              <th scope="col">Customer</th>
-              <th scope="col">Address</th>
-              <th scope="col">Quantity</th>
-              <th scope="col">Price</th>
-              <th scope="col">Advance</th>
-              <th scope="col">Due</th>
-              <th scope="col">Delivery Status</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let invoice of invoiceList; index as i">
-              <th scope="row">{{i+1}}</th>
-              <td>{{invoice.id}}</td>
-              <td>{{invoice.customer.person.personName}}</td>
-              <td>{{invoice.customer.person.personAddress}}</td>
-              <td>{{invoice.totalQuantity}}</td>
-              <td>{{invoice.totalBill}}</td>
-              <td>{{invoice.advancePayment}}</td>
-              <td>{{invoice.duePament}}</td>
-              <td>{{invoice.deliveryStatus}}</td>
-              <td>
-                <!-- <button mat-button (click)="openInvoice(invoice)" color="warn" >
+  <div class="row">
+    <div class="col-md-2">
+      <mat-form-field class="input-field" appearance="fill">
+        <mat-label>Invoice No</mat-label>
+        <input placeholder="Invoice No" pInputText [ngModelOptions]="{standalone:true}"
+          [(ngModel)]="queryBody.invoiceNo" matInput>
+      </mat-form-field>
+    </div>
+    <div class="col-md-2">
+      <mat-form-field class="input-field" appearance="fill">
+        <mat-label>Contact No</mat-label>
+        <input pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="queryBody.contactNo"
+          placeholder="Contact" matInput>
+      </mat-form-field>
+    </div>
+    <div class="col-md-2">
+      <mat-form-field class="input-field" appearance="fill">
+        <mat-label>Delivery Status</mat-label>
+        <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="queryBody.deliveryStatus">
+          <mat-option *ngFor="let status of statusList" [value]="status.value">{{status?.label}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-2">
+      <button style="margin: 10px; float: left;" (click)="searchInvoice()" mat-raised-button
+        color="warn">Search</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="md-col-12" style="overflow-x:auto;">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Invoice No</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Contact No:</th>
+            <th scope="col">Address</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col">Advance</th>
+            <th scope="col">Due</th>
+            <th scope="col">Rebate</th>
+            <th scope="col">Delivery Status</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let invoice of invoiceList; index as i">
+            <th scope="row">{{i+offset+1}}</th>
+            <td>{{invoice.invoiceNo}}</td>
+            <td>{{invoice.customer.person.personName}}</td>
+            <td>{{invoice.customer.person.contactNo}}</td>
+            <td>{{invoice.customer.person.personAddress}}</td>
+            <td>{{invoice.totalQuantity}}</td>
+            <td>{{invoice.totalBill}}</td>
+            <td>{{invoice.advancePayment}}</td>
+            <td>{{invoice.duePament}}</td>
+            <td>{{invoice.rebate}}</td>
+            <td>{{invoice.deliveryStatus}}</td>
+            <td>
+              <!-- <button mat-button (click)="openInvoice(invoice)" color="warn" >
                   Add Schedule
                 </button> -->
-                  <button mat-mini-fab (click)="editInvoice(invoice)" color="primary" >
-                    <mat-icon>menu</mat-icon>
-                  </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+              <button mat-mini-fab (click)="editInvoice(invoice)" color="primary">
+                <mat-icon>menu</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <td colspan="11">
+            <div  style="float:right ;font-size: 16px;">
+              <button mat-icon-button color="primary" (click)="previousPage()">
+                <mat-icon>fast_rewind</mat-icon>
+              </button>
+              <button mat-icon-button color="primary" (click)="nextPage()">
+                <mat-icon>fast_forward</mat-icon>
+              </button>
+            </div>
+          </td>
+        </tfoot>
+      </table>
     </div>
-  </mat-card>
+  </div>
+</mat-card>

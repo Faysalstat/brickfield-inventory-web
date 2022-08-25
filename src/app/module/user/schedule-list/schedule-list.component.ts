@@ -1,5 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
 
@@ -13,7 +14,8 @@ export class ScheduleListComponent implements OnInit {
   statusColor!:string;
   constructor(
     private route: Router,
-    private userService:UserService) {
+    private userService:UserService,
+    private snackBar: MatSnackBar) {
     this.scheduleList = [];
     this.statusColor = "#02c22f";
    }
@@ -33,7 +35,13 @@ export class ScheduleListComponent implements OnInit {
         console.log(res);
         this.scheduleList = res.body;
       },
-      error:(err)=>{},
+      error:(err)=>{
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
+      },
       complete: ()=>{}
     });
   }

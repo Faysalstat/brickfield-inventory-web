@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   Invoice,
   CustomerDomain,
   ScheduleDeliveryModel,
   Driver,
+  Customer,
+  Brick,
 } from '../../model';
 import { UserService } from '../user.service';
 
@@ -14,14 +17,16 @@ import { UserService } from '../user.service';
   styleUrls: ['./schedule-delivery.component.css'],
 })
 export class ScheduleDeliveryComponent implements OnInit {
-  customer!: CustomerDomain;
+  customer!: Customer;
+  brick!:Brick;
   delivery!: any;
   isPaymentDue: boolean= false;
   transportCostCustomerPayable: boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
     this.delivery = new ScheduleDeliveryModel();
   }
@@ -37,11 +42,20 @@ export class ScheduleDeliveryComponent implements OnInit {
         next: (res) => {
           console.log(res);
           this.delivery = res.body;
+          this.fetchCustomerById(res.body.invoice.customerId);
+          this.fetchBrickById(res.body.brickId);
           if(this.delivery?.invoice?.duePament >0){
             this.isPaymentDue = true;
           }else{
             this.isPaymentDue = false;
           }
+        },
+        error:(err)=>{
+          this.snackBar.open(err, "Close it", {
+            duration: 10000,
+            horizontalPosition:'right',
+            verticalPosition: 'top'
+          });
         },
       });
     });
@@ -68,10 +82,28 @@ export class ScheduleDeliveryComponent implements OnInit {
         this.router.navigate(['/home/schedule-list']);
       },
       error:(err)=>{
-        console.log(err);
+        this.snackBar.open(err, "Close it", {
+          duration: 10000,
+          horizontalPosition:'right',
+          verticalPosition: 'top'
+        });
       },
       complete:()=>{
         console.log("done");
+      }
+    })
+  }
+  fetchCustomerById(id:any){
+    this.userService.fetchCustomerById(id).subscribe({
+      next:(res)=>{
+        this.customer = res.body;
+      }
+    })
+  }
+  fetchBrickById(id:any){
+    this.userService.fetchBrickById(id).subscribe({
+      next:(res)=>{
+        this.brick = res.body;
       }
     })
   }
