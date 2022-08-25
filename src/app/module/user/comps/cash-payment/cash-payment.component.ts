@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Account, Customer, Person } from 'src/app/module/model';
 import { UserService } from '../../user.service';
 
@@ -17,8 +18,11 @@ export class CashPaymentComponent implements OnInit {
   account!:Account;
   updated : boolean = false;
   personTitle: string = "Customer";
+  transactionReason:string = "Payment to Driver";
   constructor(
-    private userService:UserService
+    private userService:UserService,
+    private activatedRoute: ActivatedRoute,
+    private route: Router,
   ) { 
     this.account = new Account();
     this.customer = new Customer();
@@ -26,10 +30,37 @@ export class CashPaymentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe((parameter) => {
+      let id = parameter['id'];
+      console.log(parameter);
+      this.userService.getAccountById(id).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.account = res.body;
+          if(res.body.customer){
+            this.personTitle = "Customer";
+            this.person = res.body.customer.person;
+          }
+          if(res.body.supplyer){
+            this.personTitle = "Suppler";
+            this.person = res.body.supplyer.person;
+          }
+          if(res.body.driver){
+            this.personTitle = "Driver";
+            this.person = res.body.driver.person;
+          }
+          if(res.body.sordar){
+            this.personTitle = "Sordar";
+            this.person = res.body.sordar.person;
+          }
+          this.updatedPayment = this.account.balance;
+        }
+      });
+    });
   }
   onAmountAdded(){
     this.updated = true;
-    this.updatedPayment = this.account.balance + this.cashReceivedAmount;
+    this.updatedPayment = this.account.amountToPay - this.cashReceivedAmount;
   }
   searchCustomer() {
     this.userService.getCustomerByContactNo(this.person.contactNo).subscribe({
@@ -70,7 +101,8 @@ export class CashPaymentComponent implements OnInit {
       let cashReceiveObj = {
         accountId: this.account.id,
         amountReceived: this.cashReceivedAmount,
-        updatedPayment: this.updatedPayment
+        updatedPayment: this.updatedPayment,
+        transactionReason: this.transactionReason,
       }
       const params:Map<string,any> = new Map();
       params.set("account",cashReceiveObj);
@@ -79,6 +111,7 @@ export class CashPaymentComponent implements OnInit {
           this.account = res.body;
           this.cashReceivedAmount=0;
           this.updated = false;
+          this.route.navigate(["/home/cash-payment-due-list"]);
         },
         error:(err)=>{
           console.log(err);

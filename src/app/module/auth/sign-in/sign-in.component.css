@@ -5,7 +5,10 @@ margin: 100px auto;
 }
 
 .login-form{
-    margin: 15px;
+    margin: 15px 30px;
     padding: 20px;
     background-color: #eee;
+}
+label{
+    font-weight: bold;
 }

@@ -1,11 +1,11 @@
-<nav class="navbar .fixed-top navbar-expand-sm navbar-dark bg-primary">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid menu-body">
-      <a class="navbar-brand" href="javascript:void(0)">ABC Brickfield Ltd</a>
+      <a class="navbar-brand" style="color:#FFF ;" href="javascript:void(0)">ABC Brickfield Ltd</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="mynavbar">
-        <ul class="navbar-nav me-auto">
+      <div class="collapse navbar-collapse" id="mynavbar" >
+        <ul class="navbar-nav me-auto" >
           <li class="nav-item">
             <a class="nav-link" href="home" style="color:#FFF ;">হোম</a>
           </li>
@@ -25,8 +25,11 @@
               <li><a class="dropdown-item" routerLink="cash-payment" >Cash Payment</a></li>
             </ul>
           </li> -->
+          <!-- <li class="nav-item">
+            <a class="nav-link" routerLink="cash-payment-due-list" style="color:#FFF ;">ক্যাশ প্রদান</a>
+          </li> -->
           <li class="nav-item">
-            <a class="nav-link" routerLink="cash-payment" style="color:#FFF ;">ক্যাশ প্রদান</a>
+            <a class="nav-link" routerLink="schedule-list" style="color:#FFF ;">ডেলিভারি শিডিউল</a>
           </li>
           <!-- <li class="nav-item">
             <a class="nav-link" routerLink="schedule-list" style="color:#FFF ;">Schedules</a>
@@ -45,14 +48,15 @@
               <li><a class="dropdown-item" routerLink="supply-list"> সাপ্লাই ইনভয়ে‍স তালিকা </a></li>
             </ul>
           </li>
+          
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" style="color:#FFF ;">Person Management</a>
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" style="color:#FFF ;">ক্লায়েন্টস</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" routerLink="customer"> কাস্টমার ম্যানেজমেন্ট </a></li>
-              <!-- <li><a class="dropdown-item" routerLink="account">Customer Account</a></li> -->
-              <li><a class="dropdown-item" routerLink="driver-management">ড্রাইভার ম্যানেজমেন্ট</a></li>
-              <li><a class="dropdown-item" routerLink="supplyer-management">সাপ্লায়ার ম্যানেজমেন্ট</a></li>
-              <li><a class="dropdown-item" routerLink="supplyer-management">সর্দার ম্যানেজমেন্ট</a></li>
+              <li><a class="dropdown-item" routerLink="customer">কাস্টমার</a></li>
+              <!-- <li><a class="dropdown-item" routerLink="account">Customer Account ম্যানেজমেন্ট</a></li> -->
+              <li><a class="dropdown-item" routerLink="driver-management">ড্রাইভার</a></li>
+              <li><a class="dropdown-item" routerLink="supplyer-management">সাপ্লায়ার</a></li>
+              <li><a class="dropdown-item" routerLink="supplyer-management">সর্দার</a></li>
             </ul>
           </li>
           <!-- <li class="nav-item">
@@ -68,7 +72,7 @@
   </nav>
   
 <div class="content" role="main">
-
+  <div class="container bg-light" >
     <router-outlet></router-outlet>
-  
+  </div>
 </div>

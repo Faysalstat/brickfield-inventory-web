@@ -2,24 +2,24 @@
     <h1>Add Driver</h1>
     <form [formGroup]="driverForm">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <mat-form-field class="input-field" appearance="fill">
                     <mat-label>Contact No:</mat-label>
                     <input  (change)="searchDriver()" pInputText formControlName="contactNo" placeholder="Contact No." matInput>
                 </mat-form-field>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <mat-form-field class="input-field" appearance="fill">
                     <mat-label>Driver Name :</mat-label>
                     <input  formControlName="name" placeholder="Customer Name" matInput>
                 </mat-form-field>
             </div>
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
                 <mat-form-field class="input-field" appearance="fill">
                     <mat-label>Advance:</mat-label>
                     <input type="number" id="contact"  pInputText formControlName="amountToPay" matInput>
                 </mat-form-field>
-            </div>
+            </div> -->
             <div class="col-md-6">
                 <mat-form-field class="input-field" appearance="fill">
                     <mat-label>Address:</mat-label>

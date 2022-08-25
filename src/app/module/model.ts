@@ -141,6 +141,7 @@ export interface PeriodicInvoiceElement {
 export class ScheduleDeliveryModel {
   id!: number;
   invoiceId!: number;
+  invoice!: Invoice;
   driver!: Driver;
   driverId!: number;
   deliverableQuantity!: number;
@@ -150,6 +151,7 @@ export class ScheduleDeliveryModel {
   vehicleCategory!:VehicleCategory;
   vehicleCategoryId!: number;
   deliveryStatus!:string;
+  transportCostCustomerPayable!:number;
 }
 
 export class Invoice {
@@ -178,7 +180,21 @@ export class VehicleCategory{
   id!: number;
   categoryName!: string;
 }
-
-// export class Supplyer{
-
-// }
+export class ApprovalModel {
+  id!: number;
+  payload!: string;
+  createdBy!: string;
+  taskType!: string;
+}
+export enum Tasks{
+  CREATE_INVOICE="CREATE_INVOICE",
+  UPDATE_INVOICE= "UPDATE_INVOICE",
+  CREATE_SUPPLY= "CREATE_SUPPLY",
+  UPDATE_SUPPLY= "UPDATE_SUPPLY"
+}
+export class TransactionSummary{
+  totalSale:number = 0;
+  totalExpense:number = 0;
+  totalIncome:number = 0;
+  balance:number = 0;
+}

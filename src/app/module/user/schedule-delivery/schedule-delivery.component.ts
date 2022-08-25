@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Invoice,CustomerDomain,ScheduleDeliveryModel,Driver } from '../../model';
+import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Invoice,
+  CustomerDomain,
+  ScheduleDeliveryModel,
+  Driver,
+} from '../../model';
 import { UserService } from '../user.service';
 
 @Component({
@@ -9,91 +14,65 @@ import { UserService } from '../user.service';
   styleUrls: ['./schedule-delivery.component.css'],
 })
 export class ScheduleDeliveryComponent implements OnInit {
-  selectedDriver!:any;
-  drivers!: Driver[];
-  invoice!: Invoice;
-  customer!:CustomerDomain;
-  delivery!:ScheduleDeliveryModel;
-  date!:Date;
-  scheduleOrders!:ScheduleDeliveryModel[];
+  customer!: CustomerDomain;
+  delivery!: any;
+  isPaymentDue: boolean= false;
+  transportCostCustomerPayable: boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
-    private userService: UserService) {
-      this.delivery = new ScheduleDeliveryModel();
-    this.date = new Date();
-    this.scheduleOrders =[];
-    this.drivers =[];
-    }
+    private userService: UserService,
+    private router: Router
+  ) {
+    this.delivery = new ScheduleDeliveryModel();
+  }
 
   ngOnInit(): void {
-    this.fetchInvoiceById();
+    this.fetchScheduleById();
   }
-  fetchInvoiceById(){
-    this.activatedRoute.params.subscribe(parameter => {
+  fetchScheduleById() {
+    this.activatedRoute.params.subscribe((parameter) => {
       let id = parameter['id'];
       console.log(parameter);
-      this.userService.fetchInvoiceById(id).subscribe({
-        next:(res)=>{
-          this.invoice =res.body;
-          if(!this.invoice.scheduleOrders){
-            this.invoice.scheduleOrders = [];
-          }
-          // this.customer = 
+      this.userService.fetchScheduleById(id).subscribe({
+        next: (res) => {
           console.log(res);
-          this.fetchDrivers();
-        }
+          this.delivery = res.body;
+          if(this.delivery?.invoice?.duePament >0){
+            this.isPaymentDue = true;
+          }else{
+            this.isPaymentDue = false;
+          }
+        },
+      });
+    });
+  }
 
-      })
-     })
+  applyFilter(date: any) {
+    let newDate = new Date(date);
+    return (
+      newDate.getDate() +
+      '/' +
+      (newDate.getMonth() + 1) +
+      '/' +
+      newDate.getFullYear()
+    );
   }
-  fetchDrivers(){
-    this.userService.fetchAllDrivers().subscribe({
-      next:(data)=>{
-        console.log(data.body);
-        this.drivers = data.body;
-      }
-    })
-  }
-  onChnageDriver(){
-    this.delivery.driverId = this.selectedDriver.id;
-
-  }
-  addSchedule(){
-    // this.delivery.scheduledDate = this.date.getFullYear() +"-"+ this.date.getMonth() +"-" + this.date.getDate();
-    // console.log(this.delivery.scheduledDate);
-    this.delivery.invoiceId = this.invoice.id;
-    const params:Map<string,any> = new Map();
-    params.set("schedules",this.delivery);
-    this.userService.createScheduleOrder(params).subscribe({
+  doDelivery(){
+    console.log(this.delivery);
+    this.delivery.transportCostCustomerPayable = this.transportCostCustomerPayable;
+    const params: Map<string, any> = new Map();
+    params.set("schedule", this.delivery);
+    this.userService.setDelivery(params).subscribe({
       next:(res)=>{
         console.log(res);
-        this.fetchInvoiceById();
-        this.delivery = new ScheduleDeliveryModel();
-    // this.delivery.scheduledDate = this.date.getFullYear() +"-"+ this.date.getMonth() +"-" + this.date.getDate();
-    
-
+        this.router.navigate(['/home/schedule-list']);
       },
-      error:(err)=>{},
-      complete: ()=>{}
-    })
-  }
-  applyFilter(date:any) {
-    let newDate = new Date(date);
-    return newDate.getFullYear()+"/"+newDate.getMonth()+"/"+newDate.getDate()
-  }
-  editOrder(i:any){
-    this.delivery = this.invoice.scheduleOrders[i];
-  }
-  deleteOrder(schedule:any){
-    const params:Map<string,any> = new Map();
-    params.set("schedule",schedule);
-    
-    this.userService.deleteSchedule(params).subscribe({
-      next:(data)=>{
-        console.log(data);
-        this.fetchInvoiceById();
+      error:(err)=>{
+        console.log(err);
       },
-      error:(err)=> console.log(err)
+      complete:()=>{
+        console.log("done");
+      }
     })
   }
 }

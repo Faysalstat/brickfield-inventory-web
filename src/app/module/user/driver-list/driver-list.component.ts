@@ -22,6 +22,7 @@ export class DriverListComponent implements OnInit {
   fetchDriversList(){
     this.userService.fetchAllDrivers().subscribe({
       next: (data) => {
+        console.log(data.body);
         this.driverList = data.body;
       },
       error: (err) => {

@@ -9,6 +9,9 @@ import { PendingDeliveryComponent } from './pending-delivery/pending-delivery.co
 import { ReportsComponent } from './reports/reports.component';
 import { UsersComponent } from './users/users.component';
 import { InvoiceDetailComponent } from './invoice-detail/invoice-detail.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TaskListComponent } from './task-list/task-list.component';
+import { PendingSchedulesComponent } from './pending-schedules/pending-schedules.component';
 
 
 
@@ -20,12 +23,16 @@ import { InvoiceDetailComponent } from './invoice-detail/invoice-detail.componen
     PendingDeliveryComponent,
     ReportsComponent,
     UsersComponent,
-    InvoiceDetailComponent
+    InvoiceDetailComponent,
+    TaskListComponent,
+    PendingSchedulesComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class AdminModule { }

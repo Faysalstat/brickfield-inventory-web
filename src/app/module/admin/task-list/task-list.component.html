@@ -1,0 +1,38 @@
+<div class="mt-4 p-5 bg-light rounded">
+    <h1>Approval List</h1>
+    <hr>
+    <mat-card>
+      <div class="row">
+          <div class="md-col-12">
+        
+          </div>
+          <div class="md-col-12">
+            <table class="table" style="text-align:center ;">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col" >Task ID</th>
+                  <th scope="col">Task Type</th>
+                  <th scope="col">Created By</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let task of taskList; index as i">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{task.id}}</td>
+                  <td>{{task?.taskType}}</td>
+                  <td>{{task?.createdBy}}</td>
+                  <td>
+                    <button mat-raised-button (click)="openTask(task)" color="warn">
+                      Open
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </mat-card>
+  </div>
+  

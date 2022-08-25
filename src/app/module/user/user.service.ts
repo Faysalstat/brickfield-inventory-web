@@ -10,7 +10,7 @@ export class UserService {
 
   constructor( private http:HttpClient) { }
 
-
+ 
   public addCustomer(queryParams: Map<string,any>): Observable<any>{
     console.log(queryParams.get("customer"))
     return this.http.post(Urls.CREATE_CUSTOMER,queryParams.get("customer"));
@@ -38,13 +38,23 @@ export class UserService {
   public fetchAllSchedulesByStatus(): Observable<any>{
     return this.http.get(Urls.FETCH_ALL_SCHEDULES_BY_STATUS);
   }
+  public fetchAllSchedulesByDate(): Observable<any>{
+    return this.http.get(Urls.FETCH_ALL_SCHEDULES_BY_DATE);
+  }
   public addSupplyer(queryParams: Map<string,any>): Observable<any>{
     console.log(queryParams.get("supplyer"))
     return this.http.post(Urls.CREATE_SUPPLYER,queryParams.get("supplyer"));
   }
+  public setDelivery(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("schedule"))
+    return this.http.post(Urls.SET_DELIVERY,queryParams.get("schedule"));
+  }
   
   public fetchAllCustomer(): Observable<any>{
     return this.http.get(Urls.FETCH_ALL_CUSTOMER);
+  }
+  public fetchPaymentDueList(): Observable<any>{
+    return this.http.get(Urls.FETCH_ALL_DUE_PAYMENT_ACCOUNTS);
   }
   public fetchAllSupplyers(): Observable<any>{
     return this.http.get(Urls.FETCH_ALL_SUPPLYER);
@@ -61,10 +71,25 @@ export class UserService {
     params = params.append("id",id);
     return this.http.get(Urls.FETCH_INVOICE_BY_ID,{params:params});
   }
+  public fetchScheduleById(id:any): Observable<any>{
+    let params = new HttpParams();
+    params = params.append("id",id);
+    return this.http.get(Urls.FETCH_SCHEDULE_BY_ID,{params:params});
+  }
+  public fetchCustomerById(id:any): Observable<any>{
+    let params = new HttpParams();
+    params = params.append("id",id);
+    return this.http.get(Urls.FETCH_CUSTOMER_BY_ID,{params:params});
+  }
   public getCustomerByContactNo(contactNo:string): Observable<any>{
     let params = new HttpParams();
     params = params.append("contactNo",contactNo);
     return this.http.get(Urls.FETCH_CUSTOMER_BY_CONTACTNO,{params:params});
+  }
+  public getAccountById(id:string): Observable<any>{
+    let params = new HttpParams();
+    params = params.append("id",id);
+    return this.http.get(Urls.FETCH_ACCOUNT_BY_ID,{params:params});
   }
 
   public createInvoice(queryParams: Map<string,any>): Observable<any>{
@@ -87,6 +112,11 @@ export class UserService {
     console.log(queryParams.get("orders"))
     return this.http.post(Urls.CREATE_ORDER,queryParams.get("orders"));
   }
+  public createApproval(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("approval"))
+    return this.http.post(Urls.SEND_TO_APPROVAL,queryParams.get("approval"));
+  }
+
   public fetchBricks(): Observable<any>{
     return this.http.get(Urls.FETCH_ALL_BRICK);
   }
@@ -110,6 +140,14 @@ public deleteOrder(queryParams: Map<string,any>): Observable<any>{
 public deleteSchedule(queryParams: Map<string,any>): Observable<any>{
   console.log(queryParams.get("schedule"))
   return this.http.post(Urls.DELETE_SCHEDULE,queryParams.get("schedule"));
+}
+
+public fetchDueAmountInvoiceList(): Observable<any>{
+  return this.http.get(Urls.FETCH_ALL_DUE_INVOICE);
+}
+
+public getRegistryReport():Observable<any>{
+  return this.http.get(Urls.FETCH_REGISTER_SUMMARY);
 }
 
 }

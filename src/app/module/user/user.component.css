@@ -9,6 +9,7 @@
 .nav-item{
     padding: 5px 20px;
     
+    
 }
 .dropdown-item{
     padding: 10px;
@@ -19,6 +20,8 @@ nav{
 }
 .dropdown-item{
     font-size: large;
+    text-align: center;
+    border-bottom: 1px solid #878a8c;
 }
 .content{
     font-size: larger;
@@ -28,4 +31,8 @@ input{
 }
 ::ng-deep .mat-input-element{
     font-size: 12px;
+}
+.dropdown-menu{
+    padding:0px;
+    /* background-color:#34a1eb */
 }

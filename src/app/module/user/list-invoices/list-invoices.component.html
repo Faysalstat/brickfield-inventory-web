@@ -13,8 +13,8 @@
               <th scope="col">Address</th>
               <th scope="col">Quantity</th>
               <th scope="col">Price</th>
-              <!-- <th scope="col">Advance</th>
-              <th scope="col">Due</th> -->
+              <th scope="col">Advance</th>
+              <th scope="col">Due</th>
               <th scope="col">Delivery Status</th>
               <th scope="col">Action</th>
             </tr>
@@ -27,8 +27,8 @@
               <td>{{invoice.customer.person.personAddress}}</td>
               <td>{{invoice.totalQuantity}}</td>
               <td>{{invoice.totalBill}}</td>
-              <!-- <td>{{invoice.customer.account.balance}}</td>
-              <td>{{invoice.customer.account.due}}</td> -->
+              <td>{{invoice.advancePayment}}</td>
+              <td>{{invoice.duePament}}</td>
               <td>{{invoice.deliveryStatus}}</td>
               <td>
                 <!-- <button mat-button (click)="openInvoice(invoice)" color="warn" >

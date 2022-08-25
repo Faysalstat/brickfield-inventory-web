@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CashPaymentDueListComponent } from './cash-payment-due-list/cash-payment-due-list.component';
 import { CashPaymentComponent } from './comps/cash-payment/cash-payment.component';
 import { CashReceiveComponent } from './comps/cash-receive/cash-receive.component';
 import { CustomerAccountComponent } from './customer-account/customer-account.component';
@@ -32,7 +33,8 @@ const routes: Routes = [{
         {path:'supplyer-management', component:SupplyerListComponent},
         {path:'supply-invoice', component:SupplyInvoiceComponent},
         {path:'cash-receive', component:CashReceiveComponent},
-        {path:'cash-payment', component:CashPaymentComponent}
+        {path:'cash-payment-due-list', component:CashPaymentDueListComponent},
+        {path:'cash-payment/:id', component:CashPaymentComponent},
       ]
 }];
 

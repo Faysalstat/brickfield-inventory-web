@@ -1,0 +1,50 @@
+<mat-card class="mt-5">
+    <div class="row">
+        <h2>Invoices of Due Payments</h2>
+        <!-- <div class="md-col-12">
+  
+      </div> -->
+        <div class="md-col-12">
+            <table class="table  table-striped">
+                <thead>
+                    
+                  <tr>
+                    <th scope="col">SN</th>
+                    <th scope="col">Invoice No</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Contact No</th>
+                    <th scope="col">Total Bill</th>
+                    <th scope="col">Paid</th>
+                    <th scope="col">Due</th>
+                    <th scope="col">Delivery Status</th>
+                    <!-- <th scope="col">Action</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                <tr *ngIf="!isListExist" >
+                    <td colspan="9" style="font-weight:bold ; ">
+                        No Due Payment Pending!!
+                    </td>
+                </tr>
+                  <tr class="row-hover" *ngFor="let invoice of invoiceList; index as i" (click)="viewInvoice(invoice)">
+                    <td scope="row">{{i+1}}</td>
+                    <td>{{invoice.id}}</td>
+                    <td>{{invoice.customer.person.personName}}</td>
+                    <td>{{invoice.customer.person.personAddress}}</td>
+                    <td>{{invoice.customer.person.contactNo}}</td>
+                    <td>{{invoice.totalBill}}</td>
+                    <td>{{invoice.advancePayment}}</td>
+                    <td>{{invoice.duePament}}</td>
+                    <td>{{invoice.deliveryStatus}}</td>
+                    <!-- <td>
+                        <button mat-mini-fab (click)="viewInvoice(invoice)" color="primary" >
+                          <mat-icon>launch</mat-icon>
+                        </button>
+                    </td> -->
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</mat-card>
