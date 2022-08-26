@@ -28,7 +28,9 @@ export class ApprovalListComponent implements OnInit {
         console.log(res);
         this.invoiceList = res.body;
       },
-      error:(err)=>{},
+      error:(err)=>{
+        this.userService.showMessage("ERROR!","List Fetch Operation Successfull" + err.message,"OK",2000);
+      },
       complete: ()=>{}
     });
   }

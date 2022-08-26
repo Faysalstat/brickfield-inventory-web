@@ -33,7 +33,8 @@ export class PaySordarComponent implements OnInit {
         console.log(res);
       },
       error:(err)=>{
-        window.alert("Sordars Fetching Failed");
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })
   }
@@ -54,10 +55,11 @@ export class PaySordarComponent implements OnInit {
         this.selectedSordar = new Sordar();
         this.amount = 0;
         this.remarks = "";
+        this.userService.showMessage("SUCCEESS!","Payment Complete","OK",2000);
       },
       error:(err)=>{
-        console.log(err);
-        window.alert(err.message);
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })
   }

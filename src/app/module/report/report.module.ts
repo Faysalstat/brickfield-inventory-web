@@ -6,11 +6,12 @@ import { MaterialModule } from 'src/material.module';
 import { TransactionReportComponent } from './transaction-report/transaction-report.component';
 import { FormsModule } from '@angular/forms';
 import { CashHandoverReportComponent } from './cash-handover-report/cash-handover-report.component';
+import { SordarRecordReportComponent } from './sordar-record-report/sordar-record-report.component';
 
-const components = [IncomeExpenseComponent,ProductionReportComponent,TransactionReportComponent];
+const components = [IncomeExpenseComponent,ProductionReportComponent,TransactionReportComponent,SordarRecordReportComponent];
 
 @NgModule({
-  declarations: [components, CashHandoverReportComponent],
+  declarations: [components, CashHandoverReportComponent, SordarRecordReportComponent],
   imports: [CommonModule,MaterialModule,FormsModule],
   exports: [components],
 })

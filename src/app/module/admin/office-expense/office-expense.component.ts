@@ -27,7 +27,8 @@ export class OfficeExpenseComponent implements OnInit {
         this.balance = accRes.body.balance;
       },
       error:(err)=>{
-       window.alert(err.message);
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })
   }

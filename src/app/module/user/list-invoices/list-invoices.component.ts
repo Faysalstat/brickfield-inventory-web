@@ -23,7 +23,6 @@ export class ListInvoicesComponent implements OnInit {
     this.invoiceList = [];
     this.queryBody = new InvoiceQueryBody();
     this.statusList = [
-      {label:"Select Delivery Status", value:null},
       {label:"Delivered", value:"DELIVERED"},
       {label:"Pending", value:"PENDING"}
       
@@ -47,7 +46,8 @@ export class ListInvoicesComponent implements OnInit {
         }
       },
       error: (err) => {
-        console.log(err);
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete: () => {},
     });
@@ -62,7 +62,10 @@ export class ListInvoicesComponent implements OnInit {
         console.log(res);
         this.invoiceList = res.body;
       },
-      error:(err)=>{},
+      error:(err)=>{
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Invoice Fetching Failed" + err.message,"OK",2000);
+      },
       complete: ()=>{}
     });
   }

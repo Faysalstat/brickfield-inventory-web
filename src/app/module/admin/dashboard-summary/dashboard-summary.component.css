@@ -1,0 +1,11 @@
+.balance{
+    width: 200px;
+    height: 80px;
+    color: white;
+    font-size: large;
+    margin-right: 5px;
+}
+.c-hr{
+    margin: 3px;
+    background-color: white;
+}

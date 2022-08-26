@@ -13,6 +13,10 @@
             <td>{{taskId}}</td>
           </tr>
           <tr>
+            <td>D.O. No:</td>
+            <td>{{invoice?.doNo}}</td>
+          </tr>
+          <tr>
             <td>Customer Name</td>
             <td>{{person?.personName}}</td>
           </tr>
@@ -52,6 +56,10 @@
           <tr>
             <td>Paid</td>
             <td  style="text-align:right ;">{{invoice?.advancePayment}} BDT</td>
+          </tr>
+          <tr>
+            <td>Rebate</td>
+            <td  style="text-align:right ;">{{invoice?.rebate}} BDT</td>
           </tr>
           <tr *ngIf="isEdit">
             <td>New Payment</td>
@@ -241,7 +249,7 @@
     <div *ngIf="!isSupply" class="col-md-12">
       <button style="margin: 10px; float: right;"  mat-raised-button color="warn" (click)="approveInvoice('DECLINE')">Decline</button>
       <button style="margin: 10px; float: right;"  mat-raised-button color="primary" (click)="approveInvoice('APPROVED')">Approve</button>
-      <button style="margin: 10px; float: right;"  mat-raised-button color="accent" (click)="approveInvoice('CORRECTION')">Correction</button>
+      <!-- <button style="margin: 10px; float: right;"  mat-raised-button color="accent" (click)="approveInvoice('CORRECTION')">Correction</button> -->
     </div>
     <div *ngIf="isSupply" class="col-md-12">
       <button style="margin: 10px; float: right;"  mat-raised-button color="warn" (click)="approveInvoice('DECLINE')">Decline</button>

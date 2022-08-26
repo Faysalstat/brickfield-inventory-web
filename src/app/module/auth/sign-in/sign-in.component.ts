@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../../model';
+import { UserService } from '../../user/user.service';
 import { AuthenticationService } from '../authentication.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class SignInComponent implements OnInit {
   constructor(
     private router: Router, 
     private formBuilder: FormBuilder,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private userService: UserService
     ) {}
 
   ngOnInit(): void {
@@ -51,8 +53,7 @@ export class SignInComponent implements OnInit {
         
       },
       error:(err)=>{
-        this.message = "*Authentiocation Failed";
-        window.alert
+        this.userService.showMessage("ERROR!","Authentication Failed" + err.message,"OK",2000);
       },
       complete: ()=>{}
     })

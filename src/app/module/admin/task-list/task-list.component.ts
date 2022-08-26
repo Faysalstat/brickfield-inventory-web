@@ -26,7 +26,10 @@ export class TaskListComponent implements OnInit {
         console.log(data)
         this.taskList = data.body;
       },
-      error:(err)=> console.log(err)
+      error:(err)=> {
+        console.log(err.message);
+        this.adminService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
+      }
     })
   }
   openTask(task:any){

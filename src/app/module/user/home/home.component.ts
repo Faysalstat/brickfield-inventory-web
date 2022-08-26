@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,6 +10,13 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    Swal.fire({
+      title: 'Hi There',
+      text: 'Welcome To Vatasolution!',
+      // icon: 'error',
+      confirmButtonText: 'Close',
+      timer:2000
+    })
   }
 
 }

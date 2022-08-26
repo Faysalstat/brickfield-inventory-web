@@ -26,7 +26,8 @@ export class DriverListComponent implements OnInit {
         this.driverList = data.body;
       },
       error: (err) => {
-        console.log(err);
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Driver Fetching Failed" + err.message,"OK",2000);
       },
       complete: () => {},
     });
@@ -42,7 +43,10 @@ export class DriverListComponent implements OnInit {
       next: (res) => {
         console.log(res);
       },
-      error: (err) => {},
+      error: (err) => {
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
+      },
       complete: () => {},
     });
   }

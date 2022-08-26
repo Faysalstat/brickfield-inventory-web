@@ -65,7 +65,8 @@ export class UsersComponent implements OnInit {
         }
       },
       error:(err)=>{
-        console.log(err);
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
         
       },
       complete: ()=>{}
@@ -82,8 +83,8 @@ export class UsersComponent implements OnInit {
         this.message = res.message;
       },
       error:(err)=>{
-        console.log(err);
-        window.alert(err);
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })
   }
@@ -106,8 +107,12 @@ export class UsersComponent implements OnInit {
       next:(res)=>{
         console.log(res);
         this.userForm.reset();
+        this.userService.showMessage("SUCCESS!","Operation Successfull!","OK",2000);
       },
-      error:(err)=>{},
+      error:(err)=>{
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
+      },
       complete: ()=>{}
     })
   }

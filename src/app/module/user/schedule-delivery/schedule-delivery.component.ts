@@ -21,7 +21,7 @@ export class ScheduleDeliveryComponent implements OnInit {
   brick!:Brick;
   delivery!: any;
   isPaymentDue: boolean= false;
-  transportCostCustomerPayable: boolean = false;
+  transportCostCustomerPayable: boolean = true;
   constructor(
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
@@ -51,11 +51,8 @@ export class ScheduleDeliveryComponent implements OnInit {
           }
         },
         error:(err)=>{
-          this.snackBar.open(err, "Close it", {
-            duration: 10000,
-            horizontalPosition:'right',
-            verticalPosition: 'top'
-          });
+          console.log(err.message);
+        this.userService.showMessage("ERROR!","Schedule Fetching Operation Failed" + err.message,"OK",2000);
         },
       });
     });
@@ -82,11 +79,8 @@ export class ScheduleDeliveryComponent implements OnInit {
         this.router.navigate(['/home/schedule-list']);
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete:()=>{
         console.log("done");
@@ -97,6 +91,10 @@ export class ScheduleDeliveryComponent implements OnInit {
     this.userService.fetchCustomerById(id).subscribe({
       next:(res)=>{
         this.customer = res.body;
+      },
+      error:(err)=>{
+        console.log(err.message);
+        this.userService.showMessage("ERROR!"," Customer Find Operation Failed" + err.message,"OK",2000);
       }
     })
   }
@@ -104,6 +102,10 @@ export class ScheduleDeliveryComponent implements OnInit {
     this.userService.fetchBrickById(id).subscribe({
       next:(res)=>{
         this.brick = res.body;
+      },
+      error:(err)=>{
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Brick Find Operation Failed" + err.message,"OK",2000);
       }
     })
   }

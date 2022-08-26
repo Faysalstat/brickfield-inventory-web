@@ -43,7 +43,7 @@ export class MakeInvoiceComponent implements OnInit {
   isDue!: boolean;
   transportCostCustomerPayable:boolean = false;
   selectedOrder!: OrderModel;
-  isApprovalNeeded: boolean = false;
+  isApprovalNeeded: boolean = true;
   isCustomerExist:boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -185,11 +185,8 @@ export class MakeInvoiceComponent implements OnInit {
       },
       error:(err)=>{
         this.isCustomerExist = false;
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Customer Found Failed" + err.message,"OK",2000);
       },
       complete: () => {},
     });
@@ -219,7 +216,10 @@ export class MakeInvoiceComponent implements OnInit {
         this.isCustomerExist = true;
 
       },
-      error:(err)=>{},
+      error:(err)=>{
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
+      },
       complete: ()=>{}
     })
   }
@@ -255,11 +255,8 @@ export class MakeInvoiceComponent implements OnInit {
         }
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Brick Fetching Failed" + err.message,"OK",2000);
       },
     });
   }
@@ -276,11 +273,8 @@ export class MakeInvoiceComponent implements OnInit {
           this.calculateOrderTotal();
         },
         error:(err)=>{
-          this.snackBar.open(err, "Close it", {
-            duration: 10000,
-            horizontalPosition:'right',
-            verticalPosition: 'top'
-          });
+          console.log(err.message);
+          this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
         },
         complete: () => {
           this.updateInvoice();
@@ -394,11 +388,8 @@ export class MakeInvoiceComponent implements OnInit {
         }
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Invoice Fetching Operation Failed" + err.message,"OK",2000);
       },
     });
   }
@@ -416,11 +407,8 @@ export class MakeInvoiceComponent implements OnInit {
           this.calculateScheduleTotal();
         },
         error:(err)=>{
-          this.snackBar.open(err, "Close it", {
-            duration: 10000,
-            horizontalPosition:'right',
-            verticalPosition: 'top'
-          });
+          console.log(err.message);
+          this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
         },
         complete: () => {
           this.updateInvoice();
@@ -439,11 +427,8 @@ export class MakeInvoiceComponent implements OnInit {
         this.vehicles = data.body;
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","VEhicle fetching Operation Failed" + err.message,"OK",2000);
       },
     });
   }
@@ -454,11 +439,8 @@ export class MakeInvoiceComponent implements OnInit {
         this.drivers = data.body;
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Driver fetching Operation Failed" + err.message,"OK",2000);
       },
     });
   }
@@ -500,14 +482,12 @@ export class MakeInvoiceComponent implements OnInit {
     this.userService.createApproval(params).subscribe({
       next: (res) => {
         console.log(res);
+        this.userService.showMessage("Success!","Item sent For approval","OK",2000);
         this.router.navigate(['/home/invoice-list']);
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete: () => {},
     });
@@ -519,7 +499,10 @@ export class MakeInvoiceComponent implements OnInit {
         console.log(res);
         this.router.navigate(['/home/invoice-list']);
       },
-      error: (err) => {},
+      error: (err) => {
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
+      },
       complete: () => {},
     });
   }
@@ -536,6 +519,7 @@ export class MakeInvoiceComponent implements OnInit {
       duePayment: this.invoiceIssueForm.get('duePayment')?.value,
       newPayment: this.invoiceIssueForm.get('newPayment')?.value,
       doNo: this.invoiceIssueForm.get('doNo')?.value,
+      rebate: this.invoiceIssueForm.get('rebate')?.value,
       customerId:this.customer.id,
       account: this.account,
       orders : this.newOrders,
@@ -546,7 +530,7 @@ export class MakeInvoiceComponent implements OnInit {
       approvalStatus:"APPROVED"
 
     };
-    if(this.isApprovalNeeded){
+    if(this.isApprovalNeeded || this.isEdit){
       let approvalModel: ApprovalModel = new ApprovalModel();
       approvalModel.payload = JSON.stringify(invoiceUpdateModel);
       // todo add user

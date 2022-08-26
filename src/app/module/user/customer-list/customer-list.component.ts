@@ -25,41 +25,8 @@ export class CustomerListComponent implements OnInit {
         this.customerList = res.body;
       },
       error: (err) => {
-        console.log(err);
-        this.customerList = [
-          {
-            id: 1,
-            person: {
-              id: 1,
-              personName: 'Faysal Ahmad',
-              personAddress: 'Hatirjhil, dhaka',
-              contactNo: '012352323',
-            },
-            account: {
-              id: 1,
-              
-              balance: 100,
-              due: 50,
-              amountToPay: 0,
-            },
-          },
-          {
-            id: 2,
-            person: {
-              id: 2,
-              personName: 'Milton',
-              personAddress: 'Seugari Bogra',
-              contactNo: '012352323',
-            },
-            account: {
-              id: 2,
-              
-              balance: 10000,
-              due: 50,
-              amountToPay: 0,
-            },
-          },
-        ];
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Customer Fetching Failed" + err.message,"OK",2000);
       },
       complete: () => {},
     });
@@ -76,7 +43,10 @@ export class CustomerListComponent implements OnInit {
       next: (res) => {
         console.log(res);
       },
-      error: (err) => {},
+      error: (err) => {
+        console.log(err.message);
+      this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
+      },
       complete: () => {},
     });
   }

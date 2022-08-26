@@ -97,7 +97,8 @@ export class TransactionListComponent implements OnInit {
         });
       },
       error:(err)=>{
-        console.log(err);
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Transaction Fetching Failed" + err.message,"OK",2000);
         this.tnxList = [];
       }
     });

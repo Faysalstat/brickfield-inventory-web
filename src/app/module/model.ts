@@ -257,6 +257,7 @@ export class RawBrickProduction{
   productionDate:Date = new Date();
   sordarName!:string;
   sordarId!:number;
+  sordar!:Sordar;
 }
 
 export class PaginatorModel{
@@ -269,10 +270,11 @@ export class InvoiceQueryBody{
   createdFrom!:Date;
   createdTo!:Date;
   invoiceNo:string = "";
-  deliveryStatus:string = "";
+  deliveryStatus:string = "PENDING";
   customerId:number=0;
   supplyerId:number=0;
   contactNo:string = "";
+  doNo:string = '';
 
 }
 export class Expense{

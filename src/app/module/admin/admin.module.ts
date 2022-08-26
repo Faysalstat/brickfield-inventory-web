@@ -17,6 +17,8 @@ import { OfficeExpenseComponent } from './office-expense/office-expense.componen
 import { ExpenseComponent } from './expense/expense.component';
 import { PaySordarComponent } from './pay-sordar/pay-sordar.component';
 import { AddExpenseCategoryComponent } from './add-expense-category/add-expense-category.component';
+import { DashboardSummaryComponent } from './dashboard-summary/dashboard-summary.component';
+import { OfficeDepositComponent } from './office-deposit/office-deposit.component';
 
 
 
@@ -35,7 +37,9 @@ import { AddExpenseCategoryComponent } from './add-expense-category/add-expense-
     OfficeExpenseComponent,
     ExpenseComponent,
     PaySordarComponent,
-    AddExpenseCategoryComponent
+    AddExpenseCategoryComponent,
+    DashboardSummaryComponent,
+    OfficeDepositComponent
   ],
   imports: [
     CommonModule,

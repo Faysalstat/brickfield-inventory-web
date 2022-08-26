@@ -105,7 +105,7 @@ export class TransactionReportComponent implements OnInit {
     // params.set('limit', 5);
     // params.set('offset', this.offset);
     params.set('query',this.queryBody)
-    console.log();
+    console.log(this.queryBody);
     this.userService.fetchAllTransByPage(params).subscribe({
       next: (datares) => {
         // this.expenseReasons = [];

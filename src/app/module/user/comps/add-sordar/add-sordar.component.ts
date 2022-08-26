@@ -22,6 +22,8 @@ export class AddSordarComponent implements OnInit {
         { label: '১নং পাগ মিল', value: '১নং পাগ মিল' },
         { label: '১নং অটো মিল', value: '১নং অটো মিল' },
         { label: '২নং অটো মিল', value: '২নং অটো মিল' },
+        { label: 'লোড-আনলোড', value: 'লোড-আনলোড' },
+        
       ];
      }
 
@@ -63,7 +65,9 @@ export class AddSordarComponent implements OnInit {
         this.sordarAddedEvent.emit("Hello from parent");
         this.sordarForm.reset();
       },
-      error:(err)=>{},
+      error:(err)=>{
+        this.userService.showMessage("ERROR!","Operation Failed","OK",2000);
+      },
       complete: ()=>{}
     })
   }
@@ -87,6 +91,7 @@ export class AddSordarComponent implements OnInit {
       },
       error:(err)=>{
         console.log(err);
+        this.userService.showMessage("ERROR!","Not Found","OK",2000);
         
       },
       complete: ()=>{}

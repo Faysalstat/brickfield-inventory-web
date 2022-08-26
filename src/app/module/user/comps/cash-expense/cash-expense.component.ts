@@ -31,11 +31,7 @@ export class CashExpenseComponent implements OnInit {
         }
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        this.userService.showMessage("ERROR!","Expense Category Not Found","OK",2000);
       }
     })
   }
@@ -50,11 +46,7 @@ export class CashExpenseComponent implements OnInit {
         window.location.reload();
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        this.userService.showMessage("ERROR!","Operation Failed","OK",2000);
       }
     })
   }

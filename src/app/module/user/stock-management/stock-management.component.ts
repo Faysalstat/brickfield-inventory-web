@@ -21,6 +21,7 @@ export class StockManagementComponent implements OnInit {
   latestLoadQuantity: number = 0;
   totalLoadQuantity: number = 0;
   loadingDate: Date = new Date();
+  sordarloadingDate: Date = new Date();
   unloadQuantity: number = 0;
   loadComment!: string;
   bricks!: Brick[];
@@ -31,9 +32,12 @@ export class StockManagementComponent implements OnInit {
   totalBricks!:number;
   totalStockValue!:number;
   selectedSordar!: Sordar;
+  selectedLoadSordar!: Sordar;
+  loadType: any[];
+  selectedLoadType!:any;
+  totalSordarLoad!:number;
   constructor(
-    private userService:UserService,
-    private snackBar: MatSnackBar
+    private userService:UserService
   ) {
     this.mills = [
       { label: 'Select mill name', value: '' },
@@ -41,6 +45,11 @@ export class StockManagementComponent implements OnInit {
       { label: '১নং অটো মিল', value: '১নং অটো মিল' },
       { label: '২নং অটো মিল', value: '২নং অটো মিল' },
     ];
+    this.loadType = [
+      { label: 'Select type', value: '' },
+      { label: 'লোড', value: 'LOAD' },
+      { label: 'আনলোড', value: 'UNLOAD' },
+    ]
     this.dailyProductionList = [];
     this.rawStockList = [];
   }
@@ -70,11 +79,8 @@ export class StockManagementComponent implements OnInit {
         }
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
     });
   }
@@ -89,11 +95,8 @@ export class StockManagementComponent implements OnInit {
         }
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Raw Stock Fetching Operation Failed" + err.message,"OK",2000);
       },
     });
   }
@@ -105,11 +108,8 @@ export class StockManagementComponent implements OnInit {
 
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Raw Stock Report FEtching Operation Failed" + err.message,"OK",2000);
       },
     })
   }
@@ -122,11 +122,8 @@ export class StockManagementComponent implements OnInit {
 
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Load Unload Report Fetching Operation Failed" + err.message,"OK",2000);
       },
     })
   }
@@ -137,8 +134,7 @@ export class StockManagementComponent implements OnInit {
     if(!this.selectedBrickProduction){
       return
     }
-    this.selectedBrickProduction.sordarName = this.selectedSordar.person.personName;
-    this.selectedBrickProduction.sordarId = this.selectedSordar.id;
+    this.selectedBrickProduction.sordar = this.selectedSordar;
     const params: Map<string, any> = new Map();
     params.set('rawbrick', this.selectedBrickProduction);
     this.userService.addRawStock(params).subscribe({
@@ -146,11 +142,8 @@ export class StockManagementComponent implements OnInit {
         this.dailyProductionList  = data.body;
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete:()=>{
         this.fetchRawStock();
@@ -183,11 +176,8 @@ export class StockManagementComponent implements OnInit {
         this.fetchLoadUnloadReport();
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
     })
     
@@ -201,11 +191,8 @@ export class StockManagementComponent implements OnInit {
         window.alert("item deleted");
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
     })
   }
@@ -229,13 +216,11 @@ export class StockManagementComponent implements OnInit {
     this.userService.UnloadProduction(params).subscribe({
       next:(res)=>{
         console.log(res);
+        this.userService.showMessage("Success!","Brick Uploaded","OK",2000);
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete:()=>{
         this.fetchBricks();
@@ -257,7 +242,32 @@ export class StockManagementComponent implements OnInit {
         console.log(res);
       },
       error:(err)=>{
-        window.alert("Sordars Fetching Failed");
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Sordar Fetching Operation Failed" + err.message,"OK",2000);
+      }
+    })
+  }
+  addSordarRecord(){
+    let record = {
+      sordarId: this.selectedLoadSordar.id,
+      category: this.selectedLoadType,
+      date: this.sordarloadingDate,
+      quantity: this.totalSordarLoad
+
+    };
+    const params: Map<string, any> = new Map();
+    params.set("record",record);
+    this.userService.addSordarRecord(params).subscribe({
+      next:(res)=>{
+        console.log(res);
+        this.selectedLoadSordar = new Sordar();
+        this.selectedLoadType = '';
+        this.sordarloadingDate = new Date();
+        this.totalSordarLoad = 0
+      },
+      error:(err)=>{
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })
   }

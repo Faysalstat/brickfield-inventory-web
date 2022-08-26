@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Driver, EscavatorExpenseModel } from 'src/app/module/model';
 import { UserService } from '../../user.service';
-import { NotificationComponent } from '../notification/notification.component';
 
 @Component({
   selector: 'app-escavator-payment',
@@ -15,8 +13,7 @@ export class EscavatorPaymentComponent implements OnInit {
   excavatorCostModel:EscavatorExpenseModel = new EscavatorExpenseModel();
   productList!:any[];
   constructor(
-    private userService:UserService,
-    private snackBar: MatSnackBar
+    private userService:UserService
   ) { }
 
   ngOnInit(): void {
@@ -31,11 +28,8 @@ export class EscavatorPaymentComponent implements OnInit {
         this.driverList = data.body;
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     });
   }
@@ -62,17 +56,12 @@ export class EscavatorPaymentComponent implements OnInit {
   this.userService.payEscavatorBill(params).subscribe({
     next:(resData)=>{
       console.log(resData)
-      this.snackBar.openFromComponent(NotificationComponent, {
-        duration: 1000,
-      });
+      this.userService.showMessage("Successs!","Operation Success","OK",2000);
       this.excavatorCostModel = new EscavatorExpenseModel();
     },
     error:(err)=>{
-      this.snackBar.open(err, "Close it", {
-        duration: 10000,
-        horizontalPosition:'right',
-        verticalPosition: 'top'
-      });
+      console.log(err.message);
+      this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
     }
   })
   }
@@ -87,11 +76,8 @@ export class EscavatorPaymentComponent implements OnInit {
         
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+      this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     });
   }

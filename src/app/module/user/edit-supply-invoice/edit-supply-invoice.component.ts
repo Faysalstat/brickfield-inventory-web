@@ -59,8 +59,8 @@ export class EditSupplyInvoiceComponent implements OnInit {
         this.comment = this.supplyInvoice.comment;
       },
       error: (err) => {
-        console.log(err);
-        window.alert(err.message);
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
     });
   }
@@ -78,8 +78,8 @@ export class EditSupplyInvoiceComponent implements OnInit {
         console.log(data);
       },
       error: (err) => {
-        console.log(err);
-        window.alert(err.message);
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
     });
   }

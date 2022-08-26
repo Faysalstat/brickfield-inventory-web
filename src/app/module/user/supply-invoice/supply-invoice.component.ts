@@ -46,12 +46,12 @@ export class SupplyInvoiceComponent implements OnInit {
   transportCostPerTrip:number = 0;
   costAmount:number = 0;
   totalCostAmount:number = 0;
+  isApprovalNeeded:boolean = false;
   constructor(
     
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private router: Router,
-    private snackBar: MatSnackBar
+    private router: Router
   ) {
     this.supplyer = new Supplyer();
     this.account = new Account();
@@ -99,11 +99,8 @@ export class SupplyInvoiceComponent implements OnInit {
         this.drivers = data.body;
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Driver Fetching Operation Failed" + err.message,"OK",2000);
       },
     });
   }
@@ -123,11 +120,8 @@ export class SupplyInvoiceComponent implements OnInit {
         }
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Supplyer Searching Operation Failed" + err.message,"OK",2000);
       },
       complete: () => {},
     });
@@ -139,11 +133,8 @@ export class SupplyInvoiceComponent implements OnInit {
         this.productList = data.body;
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Product List Fetching Operation Failed" + err.message,"OK",2000);
       },
     });
   }
@@ -154,11 +145,8 @@ export class SupplyInvoiceComponent implements OnInit {
         this.vehicles = data.body;
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Vehicle Fetching Operation Failed" + err.message,"OK",2000);
       },
     });
   }
@@ -230,14 +218,12 @@ export class SupplyInvoiceComponent implements OnInit {
     this.userService.createApproval(params).subscribe({
       next: (res) => {
         console.log(res);
+        this.userService.showMessage("Success!","Item Sent For Approval","OK",2000);
         this.router.navigate(['/home/supply-list']);
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete: () => {},
     });

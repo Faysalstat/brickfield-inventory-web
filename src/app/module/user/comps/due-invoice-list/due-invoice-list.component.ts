@@ -41,6 +41,9 @@ export class DueInvoiceListComponent implements OnInit {
         }else{
           this.isListExist = true;
         }
+      },
+      error:(err)=>{
+        this.userService.showMessage("ERROR!","Data Fetching Failed!! err: " + err.message,"OK",2000);
       }
     })
   }

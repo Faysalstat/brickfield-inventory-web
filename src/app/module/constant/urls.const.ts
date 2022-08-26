@@ -1,7 +1,7 @@
 import { environment } from '../../../environments/environment';
 // const BASE_URL = environment.BASE_URL;
-// const BASE_URL = "https://vatasolution.me/api";
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://vatasolution.me/api";
+// const BASE_URL = "http://localhost:3000";
 
 export const Urls = {
     USER_SIGN_IN: BASE_URL + "/auth/signin",
@@ -46,6 +46,7 @@ export const Urls = {
     OFFICE_EXPENSE: BASE_URL + "/expense/office-expense",
     SORDAR_PAYMENT: BASE_URL + "/expense/sordar-payment",
     ADD_EXPENSE_CATEORY: BASE_URL + "/expense/add-category",
+    ADD_SORDAR_RECORD : BASE_URL + "/sordar/add-record",
 
     // FETCH 
     FETCH_ALL_CUSTOMER: BASE_URL+ "/customer/getall",
@@ -87,6 +88,10 @@ export const Urls = {
     FETCH_UNLOAD_REPORT : BASE_URL+"/stock/getunloadreport",
     FETCH_RAW_PRODUCTION_REPORT : BASE_URL+"/stock/getrawproductionreport",
     FETCH_SALE_REPORT : BASE_URL+"/stock/getsalereport",
+    FETCH_INCOME_EXPENSE_REPOST : BASE_URL + "/transaction/get-income-expense-summary",
+    FETCH_ALL_SORDARS_PRODUCTION_REPORT : BASE_URL + "/sordar/getproductionreport",
+    FETCH_TOTAL_REBATE: BASE_URL+ "/invoice/gettotalrebate",
+    
 
     
     // CHHECKING 

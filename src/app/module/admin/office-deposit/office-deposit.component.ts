@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../user.service';
+import { UserService } from '../../user/user.service';
+
 @Component({
-  selector: 'app-deposit-management',
-  templateUrl: './deposit-management.component.html',
-  styleUrls: ['./deposit-management.component.css']
+  selector: 'app-office-deposit',
+  templateUrl: './office-deposit.component.html',
+  styleUrls: ['./office-deposit.component.css']
 })
-export class DepositManagementComponent implements OnInit {
+export class OfficeDepositComponent implements OnInit {
   depositAmount!:number;
   depositType!:string;
   depositFrom!:string;
@@ -38,10 +39,10 @@ export class DepositManagementComponent implements OnInit {
       depositDate: this.depositDate,
       depositType: this.depositType,
       remark:this.remark,
-      accountType:"FACTORY_GL",
-      reason:"Deposit To Factory GL",
-      payTo:"FACTORY GL",
-      issuedBy: "MANAGER"
+      accountType:"OFFICE_GL",
+      reason:"Deposit To OFFICE GL",
+      payTo:"OFFICE GL",
+      issuedBy: "ADMIN"
     }
     params.set('deposit', depositModel);
     this.userService.doDepositToFactoryGL(params).subscribe({
@@ -52,6 +53,7 @@ export class DepositManagementComponent implements OnInit {
         this.depositDate = new Date();
         this.depositType = "HANDOVER";
         this.remark = "";
+        this.userService.showMessage("SUCCESS!","Deposit Complete","OK",2000);
       },
       error:(err)=>{
         console.log(err.message);
@@ -61,3 +63,4 @@ export class DepositManagementComponent implements OnInit {
 
   }
 }
+

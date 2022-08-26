@@ -1,18 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppAuthGuard } from 'src/app/app-auth.guard';
-import { ReportsComponent } from '../admin/reports/reports.component';
-import { AuthenticationGuard } from '../authentication.guard';
 import { CashHandoverReportComponent } from '../report/cash-handover-report/cash-handover-report.component';
-import { IncomeExpenseComponent } from '../report/income-expense/income-expense.component';
 import { ProductionReportComponent } from '../report/production-report/production-report.component';
 import { TransactionReportComponent } from '../report/transaction-report/transaction-report.component';
 import { CashPaymentDueListComponent } from './cash-payment-due-list/cash-payment-due-list.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CashPaymentComponent } from './comps/cash-payment/cash-payment.component';
-import { CashReceiveComponent } from './comps/cash-receive/cash-receive.component';
-import { TransactionListComponent } from './comps/transaction-list/transaction-list.component';
-import { CustomerAccountComponent } from './customer-account/customer-account.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { DriverListComponent } from './driver-list/driver-list.component';
 import { EditSupplyInvoiceComponent } from './edit-supply-invoice/edit-supply-invoice.component';
@@ -39,7 +33,6 @@ const routes: Routes = [{
         {path:'invoice',component:MakeInvoiceComponent},
         {path:'edit-invoice/:id',component:MakeInvoiceComponent},
         {path:'customer',component:CustomerListComponent},
-        {path:'account',component:CustomerAccountComponent},
         {path:'invoice-list',component:ListInvoicesComponent},
         {path:'supply-list',component:ListSupplyInvoiceComponent},
         {path:'schedule-list',component:ScheduleListComponent},

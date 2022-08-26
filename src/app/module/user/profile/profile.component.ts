@@ -21,6 +21,10 @@ export class ProfileComponent implements OnInit {
       next:(userRes)=>{
         console.log(userRes);
         this.userProfile = userRes.body;
+      },
+      error:(err)=>{
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
 
       }
     })
@@ -40,8 +44,8 @@ export class ProfileComponent implements OnInit {
 
       },
       error:(err)=>{
-        console.log(err);
-        window.alert(err);
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
         window.location.reload();
       }
     })

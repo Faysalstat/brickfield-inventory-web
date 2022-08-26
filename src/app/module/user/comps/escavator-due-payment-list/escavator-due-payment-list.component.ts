@@ -27,6 +27,10 @@ export class EscavatorDuePaymentListComponent implements OnInit {
       next:(res)=>{
         console.log(res.body);
         this.duePaymentList = res.body;
+      },
+      error:(err)=>{
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })
   }

@@ -14,8 +14,7 @@ export class ScheduleListComponent implements OnInit {
   statusColor!:string;
   constructor(
     private route: Router,
-    private userService:UserService,
-    private snackBar: MatSnackBar) {
+    private userService:UserService) {
     this.scheduleList = [];
     this.statusColor = "#02c22f";
    }
@@ -36,11 +35,8 @@ export class ScheduleListComponent implements OnInit {
         this.scheduleList = res.body;
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Schedule Fetching Operation Failed" + err.message,"OK",2000);
       },
       complete: ()=>{}
     });

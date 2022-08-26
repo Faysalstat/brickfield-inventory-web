@@ -11,8 +11,7 @@ import { UserService } from '../../user.service';
 export class RegisterSummaryComponent implements OnInit {
   summary!:TransactionSummary;
   constructor(
-    private userService:UserService,
-    private snackBar: MatSnackBar
+    private userService:UserService
   ) { 
     this.summary = new TransactionSummary();
   }
@@ -47,11 +46,8 @@ export class RegisterSummaryComponent implements OnInit {
         
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+      this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
     })
   }

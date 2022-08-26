@@ -11,8 +11,7 @@ import { UserService } from '../user.service';
 export class SupplyerListComponent implements OnInit {
   supplyersList!: Supplyer[];
   constructor(
-    private userService: UserService,
-    private snackBar: MatSnackBar) {
+    private userService: UserService) {
     this.supplyersList = [];
   }
 
@@ -26,11 +25,8 @@ export class SupplyerListComponent implements OnInit {
         this.supplyersList = data.body;
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
     });
   }

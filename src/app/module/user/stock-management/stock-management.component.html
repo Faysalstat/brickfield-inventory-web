@@ -1,255 +1,334 @@
-<mat-card class="mt-4">
-    <h2>দৈনিক কাচা ইট তৈরী</h2>
-    <div class="row">
-        <div class="col-md-3">
-            <mat-form-field appearance="outline" class="input-field">
-                <mat-label>নাম</mat-label>
-                <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedBrickProduction.categoryName">
-                    <mat-option *ngFor="let mill of mills" [value]="mill.value">{{mill?.label}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="outline">
-                <mat-label>পরিমান:</mat-label>
-                <input type="number" pInputText [ngModelOptions]="{standalone:true}"
-                    [(ngModel)]="selectedBrickProduction.quantity" matInput>
-            </mat-form-field>
-        </div>
-        <div class="col-md-3">
-            <mat-form-field class="input-field" appearance="outline">
-                <mat-label>সর্দারের নাম :</mat-label>
-                <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedSordar">
-                    <mat-option *ngFor="let sordar of sordars" [value]="sordar">{{sordar.person.personName}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="col-md-3">
-            <mat-form-field appearance="outline">
-                <mat-label>তারিখ:</mat-label>
-                <input matInput [matDatepicker]="rawpicker" [ngModelOptions]="{standalone:true}"
-                    [(ngModel)]="selectedBrickProduction.productionDate">
-                <mat-datepicker-toggle matSuffix [for]="rawpicker"></mat-datepicker-toggle>
-                <mat-datepicker #rawpicker></mat-datepicker>
-            </mat-form-field>
-        </div>
-        <div class="col-md-12">
-            <button style="float:left ; margin-top: 10px;" mat-raised-button color="accent"
-                (click)="addRawProduction()">যোগ করুন</button>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 mt-5" style="overflow-x:auto;">
-            <table class="table table-striped" >
-                <thead>
-                    <tr>
-                        <th>SN</th>
-                        <th>নাম</th>
-                        <th>পরিমান</th>
-                        <th>তারিখ</th>
-                        <th>সর্দারের নাম</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let production of dailyProductionList; index as i">
-                        <td>{{i+1}}</td>
-                        <th>{{production.categoryName}}</th>
-                        <th>{{production.quantity}}</th>
-                        <th>{{production.productionDate}}</th>
-                        <th>{{production.sordarName}}</th>
-                        <th>
-                            <button mat-icon-button color="warn" (click)="deleteRawProduction(production)">
-                                <mat-icon>delete</mat-icon>
-                            </button>
-                        </th>
-                    </tr>
-                </tbody>
-                <tfoot *ngIf="dailyProductionList.length==0" style="font-weight:bold ;">
-                    <tr>
-                        <!-- <td colspan="2">Total Production</td>
-                        <td>{{totalRawProduction}}</td> -->
-                        <td colspan="3">No Production Today</td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-        <div class="col-md-6 mt-5" style="border-right:1px solid black ;">
-            <h2 style="font-weight:400 ;">Raw Production Report</h2>
-            <table class="table table-striped" style="font-size:20px;overflow-x: auto;">
-                <tbody>
-                    <tr>
-                        <th>Previous Raw Production</th>
-                        <td class="atd">{{rawProductionReport?.previousProd}}</td>
-                    </tr>
-                    <tr>
-                        <th>Todays Total Raw Production</th>
-                        <td class="atd">{{rawProductionReport?.todaysProduction}}</td>
-                    </tr>
-                    <tr>
-                        <th>Total Raw Production</th>
-                        <td class="atd">{{rawProductionReport?.total}}</td>
-                    </tr>
-                    <tr>
-                        <th>Reserve After Loading</th>
-                        <td class="atd">{{rawProductionReport?.reserve}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-6 mt-5">
-            <h2 style="font-weight:400 ;">Load/Unload Record</h2>
-            <table class="table table-striped" style="font-size:20px; overflow-x: auto;">
-                <tbody>
-                    <tr>
-                        <th>Total Loaded</th>
-                        <td class="atd">{{loadUnloadReport?.loadStock}}</td>
-                    </tr>
-                    <tr>
-                        <th>Total Unloaded</th>
-                        <td class="atd">{{loadUnloadReport?.unloadStock}}</td>
-                    </tr>
-                    <tr>
-                        <th>Reserved</th>
-                        <td class="atd">{{loadedReserve}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</mat-card>
+<mat-card class="mt-5">
+    <mat-tab-group class="mt-4">
+        <mat-tab label="Daily Production">
+            <mat-card class="mt-4">
+                <h2>দৈনিক কাচা ইট তৈরী</h2>
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline" class="input-field">
+                            <mat-label>নাম</mat-label>
+                            <mat-select [ngModelOptions]="{standalone:true}"
+                                [(ngModel)]="selectedBrickProduction.categoryName">
+                                <mat-option *ngFor="let mill of mills" [value]="mill.value">{{mill?.label}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="input-field" appearance="outline">
+                            <mat-label>পরিমান:</mat-label>
+                            <input type="number" pInputText [ngModelOptions]="{standalone:true}"
+                                [(ngModel)]="selectedBrickProduction.quantity" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="input-field" appearance="outline">
+                            <mat-label>সর্দারের নাম :</mat-label>
+                            <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedSordar">
+                                <mat-option *ngFor="let sordar of sordars" [value]="sordar">{{sordar.person.personName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline">
+                            <mat-label>তারিখ:</mat-label>
+                            <input matInput [matDatepicker]="rawpicker" [ngModelOptions]="{standalone:true}"
+                                [(ngModel)]="selectedBrickProduction.productionDate">
+                            <mat-datepicker-toggle matSuffix [for]="rawpicker"></mat-datepicker-toggle>
+                            <mat-datepicker #rawpicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-12">
+                        <button style="float:left ; margin-top: 10px;" mat-raised-button color="accent"
+                            (click)="addRawProduction()">যোগ করুন</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mt-5" style="overflow-x:auto;">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>SN</th>
+                                    <th>নাম</th>
+                                    <th>পরিমান</th>
+                                    <th>তারিখ</th>
+                                    <th>সর্দারের নাম</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let production of dailyProductionList; index as i">
+                                    <td>{{i+1}}</td>
+                                    <th>{{production.categoryName}}</th>
+                                    <th>{{production.quantity}}</th>
+                                    <th>{{production.productionDate}}</th>
+                                    <th>{{production.sordarName}}</th>
+                                    <th>
+                                        <button mat-icon-button color="warn" (click)="deleteRawProduction(production)">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </th>
+                                </tr>
+                            </tbody>
+                            <tfoot *ngIf="dailyProductionList.length==0" style="font-weight:bold ;">
+                                <tr>
+                                    <!-- <td colspan="2">Total Production</td>
+                                <td>{{totalRawProduction}}</td> -->
+                                    <td colspan="3">No Production Today</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
 
-<mat-card class="mt-4">
-    <h2>দৈনিক কাচা ইট লোড</h2>
-    <div class="row">
-        <div class="col-md-4">
-            <mat-form-field class="input-field" appearance="outline">
-                <mat-label>দৈনিক লোড:</mat-label>
-                <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="latestLoadQuantity"
-                    matInput>
-            </mat-form-field>
-        </div>
-        <div class="col-md-4">
-            <mat-form-field appearance="outline">
-                <mat-label>তারিখ:</mat-label>
-                <input matInput [matDatepicker]="picker" [ngModelOptions]="{standalone:true}"
-                    [(ngModel)]="loadingDate">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-        </div>
-        <div class="col-md-4">
-            <button style="float:left ; margin-top: 10px;" mat-raised-button color="accent" (click)="loadRawProduction()" >যোগ করুন</button>
-        </div>
-    </div>
-</mat-card>
+                </div>
+            </mat-card>
+            <mat-card class="mt-4">
+                <h2>Production Summary</h2>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6" style="border-right:1px solid black ;">
+                        <h2 style="font-weight:400 ;">Raw Production Report</h2>
+                        <hr>
+                        <table class="table table-striped" style="font-size:20px;overflow-x: auto;">
+                            <tbody>
+                                <!-- <tr>
+                                <th>Previous Raw Production</th>
+                                <td class="atd">{{rawProductionReport?.previousProd}}</td>
+                            </tr> -->
+                                <tr>
+                                    <th>Todays Total Raw Production</th>
+                                    <td class="atd">{{rawProductionReport?.todaysProduction}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Total Raw Production</th>
+                                    <td class="atd">{{rawProductionReport?.total}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Reserve After Loading</th>
+                                    <td class="atd">{{rawProductionReport?.reserve}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h2 style="font-weight:400 ;">Load/Unload Record</h2>
+                        <hr>
+                        <table class="table table-striped" style="font-size:20px; overflow-x: auto;">
+                            <tbody>
+                                <tr>
+                                    <th>Total Loaded</th>
+                                    <td class="atd">{{loadUnloadReport?.loadStock}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Total Unloaded</th>
+                                    <td class="atd">{{loadUnloadReport?.unloadStock}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Reserved</th>
+                                    <td class="atd">{{loadedReserve}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                </div>
+                <div class="row mt-4">
+                    <h2>দৈনিক কাচা ইট লোড</h2>
+                    <div class="col-md-3">
+                        <mat-form-field class="input-field" appearance="outline">
+                            <mat-label>কাচা ইটের পরিমান:</mat-label>
+                            <input type="number" pInputText [ngModelOptions]="{standalone:true}"
+                                [(ngModel)]="latestLoadQuantity" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline">
+                            <mat-label>তারিখ:</mat-label>
+                            <input matInput [matDatepicker]="picker" [ngModelOptions]="{standalone:true}"
+                                [(ngModel)]="loadingDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-12">
+                        <button style="float:right ; margin-top: 10px;" mat-raised-button color="accent"
+                            (click)="loadRawProduction()">যোগ করুন</button>
+                    </div>
+                </div>
+            </mat-card>
+            <mat-card class="mt-4">
+                <h2>দৈনিক আনলোডের হিসাব</h2>
+                <div class="row">
+                    <div class="col-md-12 mt-5" style="overflow-x:auto;">
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th>Brick Type</th>
+                                    <th>Stock</th>
+                                    <th style="width:30px ;">Price Per Piece</th>
+                                    <th style="width:30px ;">New Unload</th>
+                                    <th>Total Quantity</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let brick of bricks; index as i">
+                                    <td>{{brick?.category}}</td>
+                                    <td>
+                                        <mat-form-field style="width:60%;text-align: left;" class="input-field">
+                                            <input type="number" pInputText [ngModelOptions]="{standalone:true}"
+                                                disabled="true" [(ngModel)]="brick.quantity" matInput>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:50%;text-align: center;" class="input-field">
+                                            <input type="number" pInputText [ngModelOptions]="{standalone:true}"
+                                                [(ngModel)]="brick.pricePerPiece" matInput>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:60%;text-align: left;" class="input-field">
+                                            <input type="number" pInputText [ngModelOptions]="{standalone:true}"
+                                                (input)="onUnloadQuantityAdded(i)" [(ngModel)]="brick.unloadQuantity"
+                                                matInput>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:60%;text-align: left;" class="input-field">
+                                            <input type="number" pInputText [ngModelOptions]="{standalone:true}"
+                                                disabled="true" [(ngModel)]="brick.updatedTotalQuantity" matInput>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <button mat-icon-button color="primary" (click)="addUnloadBricks(i)">
+                                            <mat-icon style="font-size:35px ;">backup</mat-icon>
+                                        </button>
+                                    </td>
 
-<mat-card class="mt-4">
-    <h2>দৈনিক আনলোডের হিসাব</h2>
-    <div class="row">
-        <!-- <div class="col-md-4">
-            <mat-form-field appearance="outline" class="input-field">
-                <mat-label>ইটের ধরন</mat-label>
-                <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageBrick()"
-                    [(ngModel)]="selectedBrick">
-                    <mat-option *ngFor="let brick of bricks" [value]="brick">{{brick?.category}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="col-md-4">
-            <mat-form-field class="input-field" appearance="outline">
-                <mat-label>Stock:</mat-label>
-                <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedBrick.quantity" disabled="true"
-                    matInput>
-            </mat-form-field>
-        </div>
-        <div class="col-md-4">
-            <mat-form-field class="input-field" appearance="outline">
-                <mat-label>Stock:</mat-label>
-                <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedBrick.unloadQuantity"
-                    matInput>
-            </mat-form-field>
-        </div>
-        <div class="col-md-4">
-            <mat-form-field class="input-field" appearance="outline">
-                <mat-label>new পরিমান:</mat-label>
-                <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="unloadQuantity"
-                    matInput>
-            </mat-form-field>
-        </div>
-        <div class="col-md-4">
-            <mat-form-field class="input-field" appearance="outline">
-                <mat-label>price per piece:</mat-label>
-                <input type="number" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="unloadQuantity"
-                    matInput>
-            </mat-form-field>
-        </div> -->
-        <!-- <div class="col-md-4">
-            <button style="float:left ; margin-top: 10px;" mat-raised-button color="accent"
-                (click)="addUnloadBricks()">যোগ করুন</button>
-        </div> -->
-        <div class="row">
-            <div class="col-md-12 mt-5" style="overflow-x:auto;">
-                <table class="table ">
-                    <thead>
-                        <tr>
-                            <th>Brick Type</th>
-                            <th>Stock</th>
-                            <th style="width:30px ;">Price Per Piece</th>
-                            <th style="width:30px ;">New Unload</th>
-                            <th>Total Quantity</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let brick of bricks; index as i">
-                            <td>{{brick?.category}}</td>
-                            <td><mat-form-field style="width:60%;text-align: left;" class="input-field">
-                                <input type="number" pInputText [ngModelOptions]="{standalone:true}" disabled="true"
-                                     [(ngModel)]="brick.quantity" matInput>
-                            </mat-form-field></td>
-                            <td>
-                                <mat-form-field style="width:50%;text-align: center;" class="input-field">
-                                    <input type="number" pInputText [ngModelOptions]="{standalone:true}"
-                                        [(ngModel)]="brick.pricePerPiece" matInput>
-                                </mat-form-field>
-                            </td>
-                            <td>
-                                <mat-form-field style="width:60%;text-align: left;" class="input-field">
-                                    <input type="number" pInputText [ngModelOptions]="{standalone:true}"
-                                        (input)="onUnloadQuantityAdded(i)" [(ngModel)]="brick.unloadQuantity" matInput>
-                                </mat-form-field>
-                            </td>
-                            <td>
-                                <mat-form-field style="width:60%;text-align: left;" class="input-field">
-                                    <input type="number" pInputText [ngModelOptions]="{standalone:true}" disabled="true"
-                                         [(ngModel)]="brick.updatedTotalQuantity" matInput>
-                                </mat-form-field>
-                            </td>
-                            <td>
-                                <button  mat-icon-button color="primary" (click)="addUnloadBricks(i)">
-                                    <mat-icon style="font-size:35px ;">backup</mat-icon>
-                                </button>
-                            </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Total Bricks</th>
+                                    <th>{{totalBricks}}</th>
+                                    <th>Total Stock Value</th>
+                                    <th>{{totalStockValue}} BDT</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </mat-card>
+        </mat-tab>
+        <!-- <mat-tab label="Unload">
+            <mat-card class="mt-4">
+                <h2>দৈনিক আনলোডের হিসাব</h2>
+                <div class="row">
+                    <div class="col-md-12 mt-5" style="overflow-x:auto;">
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th>Brick Type</th>
+                                    <th>Stock</th>
+                                    <th style="width:30px ;">Price Per Piece</th>
+                                    <th style="width:30px ;">New Unload</th>
+                                    <th>Total Quantity</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let brick of bricks; index as i">
+                                    <td>{{brick?.category}}</td>
+                                    <td>
+                                        <mat-form-field style="width:60%;text-align: left;" class="input-field">
+                                            <input type="number" pInputText [ngModelOptions]="{standalone:true}"
+                                                disabled="true" [(ngModel)]="brick.quantity" matInput>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:50%;text-align: center;" class="input-field">
+                                            <input type="number" pInputText [ngModelOptions]="{standalone:true}"
+                                                [(ngModel)]="brick.pricePerPiece" matInput>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:60%;text-align: left;" class="input-field">
+                                            <input type="number" pInputText [ngModelOptions]="{standalone:true}"
+                                                (input)="onUnloadQuantityAdded(i)" [(ngModel)]="brick.unloadQuantity"
+                                                matInput>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:60%;text-align: left;" class="input-field">
+                                            <input type="number" pInputText [ngModelOptions]="{standalone:true}"
+                                                disabled="true" [(ngModel)]="brick.updatedTotalQuantity" matInput>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <button mat-icon-button color="primary" (click)="addUnloadBricks(i)">
+                                            <mat-icon style="font-size:35px ;">backup</mat-icon>
+                                        </button>
+                                    </td>
 
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Total Bricks</th>
-                            <th>{{totalBricks}}</th>
-                            <th>Total Stock Value</th>
-                            <th>{{totalStockValue}} BDT</th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
-
-        <!-- <div class="col-md-12">
-            <button style="float:right ; margin-top: 10px;font-size:20px;padding: 5px;" mat-raised-button color="accent"
-                (click)="addUnloadBricks()">যোগ করুন</button>
-        </div> -->
-    </div>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Total Bricks</th>
+                                    <th>{{totalBricks}}</th>
+                                    <th>Total Stock Value</th>
+                                    <th>{{totalStockValue}} BDT</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </mat-card>
+        </mat-tab> -->
+        <mat-tab label="Sordar Production">
+            <mat-card>
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-form-field class="input-field" appearance="outline">
+                            <mat-label>Load/Unload</mat-label>
+                            <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedLoadType">
+                                <mat-option *ngFor="let type of loadType" [value]="type.value">{{type.label}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="input-field" appearance="outline">
+                            <mat-label>সর্দারের নাম:</mat-label>
+                            <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedLoadSordar">
+                                <mat-option *ngFor="let sordar of sordars" [value]="sordar">{{sordar.person.personName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="input-field" appearance="outline">
+                            <mat-label>পরিমান:</mat-label>
+                            <input type="number" pInputText [ngModelOptions]="{standalone:true}"
+                                [(ngModel)]="totalSordarLoad" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline">
+                            <mat-label>তারিখ:</mat-label>
+                            <input matInput [matDatepicker]="loadpicker" [ngModelOptions]="{standalone:true}"
+                                [(ngModel)]="sordarloadingDate">
+                            <mat-datepicker-toggle matSuffix [for]="loadpicker"></mat-datepicker-toggle>
+                            <mat-datepicker #loadpicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-12">
+                        <button style="float:right ; margin-top: 10px;" mat-raised-button color="accent"
+                            (click)="addSordarRecord()">যোগ করুন</button>
+                    </div>
+                </div>
+            </mat-card>
+        </mat-tab>
+    </mat-tab-group>
 </mat-card>

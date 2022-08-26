@@ -2,13 +2,21 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {Urls} from '../constant/urls.const';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   constructor(private http: HttpClient) {}
-
+  public showMessage(title:string,msg:string,close:string,timer:number){
+      return Swal.fire({
+        title: title,
+        text: msg,
+        confirmButtonText: close,
+        timer: timer
+      });
+  }
   public addCustomer(queryParams: Map<string, any>): Observable<any> {
     console.log(queryParams.get('customer'));
     return this.http.post(Urls.CREATE_CUSTOMER, queryParams.get('customer'));
@@ -89,6 +97,7 @@ export class UserService {
     params = params.append('offset',queryParams.get('query').offset);
     params = params.append('contactNo',queryParams.get('query').contactNo);
     params = params.append('invoiceNo',queryParams.get('query').invoiceNo);
+    params = params.append('doNo',queryParams.get('query').doNo);
     params = params.append('deliveryStatus',queryParams.get('query').deliveryStatus);
     return this.http.get(Urls.FETCH_ALL_INVOICE,{params:params});
   }
@@ -198,6 +207,8 @@ export class UserService {
     params = params.append('offset',queryParams.get('offset'));
     return this.http.get(Urls.FETCH_ESCAVATOR_DUE_LIST,{ params: params });
   }
+
+  
   
   // UPDATE
   public updateInvoice(queryParams: Map<string, any>): Observable<any> {
@@ -244,6 +255,10 @@ export class UserService {
     console.log(queryParams.get('escavator'));
     return this.http.post(Urls.PAY_ESCAVATOR, queryParams.get('escavator'));
   }
+  public addSordarRecord(queryParams: Map<string, any>): Observable<any> {
+    console.log(queryParams.get('record'));
+    return this.http.post(Urls.ADD_SORDAR_RECORD, queryParams.get('record'));
+  }
   
   // Delete
   public deleteCustomer(queryParams: Map<string, any>): Observable<any> {
@@ -264,8 +279,10 @@ export class UserService {
   }
 
  
-
+  
   public getRegistryReport(): Observable<any> {
     return this.http.get(Urls.FETCH_REGISTER_SUMMARY);
   }
+
+  
 }

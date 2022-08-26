@@ -54,7 +54,9 @@ export class AddPersonComponent implements OnInit {
         this.customerForm.reset();
 
       },
-      error:(err)=>{},
+      error:(err)=>{
+        this.userService.showMessage("ERROR!","Operation Failed","OK",2000);
+      },
       complete: ()=>{}
     })
   }
@@ -89,6 +91,7 @@ export class AddPersonComponent implements OnInit {
       },
       error:(err)=>{
         console.log(err);
+        this.userService.showMessage("ERROR!","Not Found","OK",2000);
         
       },
       complete: ()=>{}

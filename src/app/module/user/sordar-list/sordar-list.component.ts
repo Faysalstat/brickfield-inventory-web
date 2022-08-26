@@ -11,34 +11,30 @@ import { UserService } from '../user.service';
 export class SordarListComponent implements OnInit {
   sordarList!: Sordar[];
   constructor(
-    private userService: UserService,
-    private snackBar: MatSnackBar) {
+    private userService: UserService) {
     this.sordarList = [];
   }
 
   ngOnInit(): void {
-    this.fetchDriversList();
+    this.fetchSordarsList();
   }
 
-  fetchDriversList(){
+  fetchSordarsList(){
     this.userService.fetchAllSordars().subscribe({
       next: (data) => {
         console.log(data.body);
         this.sordarList = data.body;
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Sordar Fetching Operation Failed" + err.message,"OK",2000);
       },
       complete: () => {},
     });
   }
   updateList($event:any){
     console.log("Sordar added. List updated");
-    this.fetchDriversList();
+    this.fetchSordarsList();
   }
   deleteDriver(sordar: any) {
     const params = new Map<string, any>();
@@ -48,11 +44,8 @@ export class SordarListComponent implements OnInit {
         console.log(res);
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete: () => {},
     });

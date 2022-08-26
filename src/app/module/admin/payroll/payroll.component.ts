@@ -28,9 +28,14 @@ export class PayrollComponent implements OnInit {
     this.adminService.paySalary(params).subscribe({
       next:(data)=>{
         console.log(data);
+        this.adminService.showMessage("SUCCEESS!","Payment Complete","OK",2000);
+        this.payTo="";
+        this.payingAmount = 0;
+        this.remarks="";
       },
       error:(err)=>{
-        window.alert(err.message);
+        console.log(err.message);
+        this.adminService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })
 

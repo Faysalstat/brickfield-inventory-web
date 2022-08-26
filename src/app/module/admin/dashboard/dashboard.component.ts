@@ -31,6 +31,8 @@ export class DashboardComponent implements OnInit {
     this.fetchBricks();
     this.fetchLoadUnloadHistory();
   }
+ 
+  
   fetchBricks() {
     this.userService.fetchBricks().subscribe({
       next: (res) => {
@@ -42,6 +44,10 @@ export class DashboardComponent implements OnInit {
           })
         }
       },
+      error:(err)=>{
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Successfull" + err.message,"OK",2000);
+      }
     });
   }
   fetchLoadUnloadHistory(){
@@ -51,7 +57,8 @@ export class DashboardComponent implements OnInit {
         console.log(res);
       },
       error:(err)=>{
-        window.alert(err);
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Successfull" + err.message,"OK",2000);
       }
     })
   }

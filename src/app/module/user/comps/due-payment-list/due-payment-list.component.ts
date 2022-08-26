@@ -31,6 +31,10 @@ export class DuePaymentListComponent implements OnInit {
         }else{
           this.isListExist = true;
         }
+      },
+      error:(err)=>{
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed!! err: " + err.message,"OK",2000);
       }
     })
   }

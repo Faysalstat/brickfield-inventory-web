@@ -4,7 +4,6 @@ import { UserComponent } from './user.component';
 import { HomeComponent } from './home/home.component';
 import { UserRoutingModule } from './user-routing.module';
 import { CustomerListComponent } from './customer-list/customer-list.component';
-import { CustomerAccountComponent } from './customer-account/customer-account.component';
 import { StockManagementComponent } from './stock-management/stock-management.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CompsModule } from './comps/comps.module';
@@ -34,7 +33,6 @@ import { EditSupplyInvoiceComponent } from './edit-supply-invoice/edit-supply-in
     UserComponent,
     HomeComponent,
     CustomerListComponent,
-    CustomerAccountComponent,
     StockManagementComponent,
     ListInvoicesComponent,
     ScheduleDeliveryComponent,

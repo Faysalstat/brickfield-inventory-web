@@ -53,7 +53,9 @@ export class AddDriverComponent implements OnInit {
         this.driverAddedEvent.emit("Hello from parent");
         this.driverForm.reset();
       },
-      error:(err)=>{},
+      error:(err)=>{
+        this.userService.showMessage("ERROR!","Driver Add Failed","OK",2000);
+      },
       complete: ()=>{}
     })
   }
@@ -83,6 +85,7 @@ export class AddDriverComponent implements OnInit {
       },
       error:(err)=>{
         console.log(err);
+        this.userService.showMessage("ERROR!","Driver Fetching Failed","OK",2000);
         
       },
       complete: ()=>{}

@@ -9,6 +9,13 @@
     </div>
     <div class="col-md-2">
       <mat-form-field class="input-field" appearance="fill">
+        <mat-label>D.O No</mat-label>
+        <input placeholder="Invoice No" pInputText [ngModelOptions]="{standalone:true}"
+          [(ngModel)]="queryBody.doNo" matInput>
+      </mat-form-field>
+    </div>
+    <div class="col-md-2">
+      <mat-form-field class="input-field" appearance="fill">
         <mat-label>Contact No</mat-label>
         <input pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="queryBody.contactNo"
           placeholder="Contact" matInput>
@@ -35,6 +42,7 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Invoice No</th>
+            <th scope="col">D.O. No</th>
             <th scope="col">Customer</th>
             <th scope="col">Contact No:</th>
             <th scope="col">Address</th>
@@ -51,6 +59,7 @@
           <tr *ngFor="let invoice of invoiceList; index as i">
             <th scope="row">{{i+offset+1}}</th>
             <td>{{invoice.invoiceNo}}</td>
+            <td>{{invoice.doNo}}</td>
             <td>{{invoice.customer.person.personName}}</td>
             <td>{{invoice.customer.person.contactNo}}</td>
             <td>{{invoice.customer.person.personAddress}}</td>

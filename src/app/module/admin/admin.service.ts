@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Urls } from '../constant/urls.const';
 import * as fs from 'file-saver';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -67,5 +68,19 @@ export class AdminService {
   public fetchLoadUnloadHistory(): Observable<any>{
     return this.http.get(Urls.FETCH_LOAD_UNLOAD_HISTORY);
   }
+  public getIncomeExpenseSummary(): Observable<any> {
+    return this.http.get(Urls.FETCH_INCOME_EXPENSE_REPOST);
+  }
+  public fetchTotalRebate(): Observable<any> {
+    return this.http.get(Urls.FETCH_TOTAL_REBATE);
+  }
+  public showMessage(title:string,msg:string,close:string,timer:number){
+    return Swal.fire({
+      title: title,
+      text: msg,
+      confirmButtonText: close,
+      timer: timer
+    });
+}
 
 }

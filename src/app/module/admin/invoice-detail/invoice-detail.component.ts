@@ -47,6 +47,7 @@ export class InvoiceDetailComponent implements OnInit {
         next: (res) => {
           if(res.body.taskType==Tasks.CREATE_SUPPLY){
             this.supplyInvoice = res.body;
+            console.log(this.supplyInvoice);
             if(this.supplyInvoice.deliveryType == 1){
               this.isCC = true;
               this.deliveryType = 'গাড়ি চু্ক্তি';
@@ -80,8 +81,8 @@ export class InvoiceDetailComponent implements OnInit {
           console.log(res);
         },
         error: (err) => {
-          console.log(err);
-          window.alert("Operation Failed. ERR: "+err);
+          console.log(err.message);
+          this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
         },
       });
     });
@@ -94,8 +95,8 @@ export class InvoiceDetailComponent implements OnInit {
         console.log(res);
       },
       error: (err) => {
-        console.log(err);
-        window.alert("Customer fetching Failed. ERR: "+err);
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
     });
   }
@@ -107,7 +108,8 @@ export class InvoiceDetailComponent implements OnInit {
         console.log(res);
       },
       error:(err)=>{
-        window.alert(err);
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     });
   }
@@ -127,11 +129,12 @@ export class InvoiceDetailComponent implements OnInit {
       this.adminService.approveSaleTask(params).subscribe({
         next: (data) => {
           console.log(data);
+        this.userService.showMessage("Success!","Approval Done!","OK",2000);
           this.router.navigate(['/admin/task-list']);
         },
         error: (err) => {
-          console.log(err)
-          window.alert("Operation Failed. ERR: "+err);
+          console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
         },
       });
     }else{
@@ -147,8 +150,8 @@ export class InvoiceDetailComponent implements OnInit {
           this.router.navigate(['/admin/task-list']);
         },
         error: (err) => {
-          console.log(err);
-          window.alert("Operation Failed. ERR: "+err);
+          console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
         },
       });
     }
@@ -170,11 +173,12 @@ export class InvoiceDetailComponent implements OnInit {
       this.adminService.approveSupplyTask(params).subscribe({
         next: (data) => {
           console.log(data);
+        this.userService.showMessage("SUCCESS!","Approval Done","OK",2000);
           this.router.navigate(['/admin/task-list']);
         },
         error: (err) => {
-          console.log(err);
-          window.alert("Operation Failed. ERR: "+err.message);
+          console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
         },
       });
     }else{
@@ -185,8 +189,8 @@ export class InvoiceDetailComponent implements OnInit {
           this.router.navigate(['/admin/task-list']);
         },
         error: (err) => {
-          console.log(err);
-          window.alert("Operation Failed. ERR: "+err.message);
+          console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
         },
       });
     }

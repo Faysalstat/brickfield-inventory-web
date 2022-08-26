@@ -58,11 +58,8 @@ export class ListSupplyInvoiceComponent implements OnInit {
         }
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Customer fetching Failed" + err.message,"OK",2000);
       },
       complete: () => {},
     });
@@ -77,7 +74,10 @@ export class ListSupplyInvoiceComponent implements OnInit {
         console.log(res);
         this.invoiceList = res.body;
       },
-      error:(err)=>{},
+      error:(err)=>{
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Supplyer Fetching Failed" + err.message,"OK",2000);
+      },
       complete: ()=>{}
     });
   }

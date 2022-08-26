@@ -20,8 +20,7 @@ export class CashReceiveComponent implements OnInit {
   updated : boolean = false;
   personTitle: string = "Customer";
   constructor(
-    private userService:UserService,
-    private snackBar: MatSnackBar
+    private userService:UserService
   ) { 
     this.account = new Account();
     this.customer = new Customer();
@@ -48,11 +47,7 @@ export class CashReceiveComponent implements OnInit {
         }
       },
       error:(err)=>{
-        this.snackBar.open(err, "Close it", {
-          duration: 10000,
-          horizontalPosition:'right',
-          verticalPosition: 'top'
-        });
+        this.userService.showMessage("ERROR!",err.message,"OK",2000);
       },
       complete: () => {},
     });
@@ -75,11 +70,7 @@ export class CashReceiveComponent implements OnInit {
           this.updated = false;
         },
         error:(err)=>{
-          this.snackBar.open(err, "Close it", {
-            duration: 10000,
-            horizontalPosition:'right',
-            verticalPosition: 'top'
-          });
+          this.userService.showMessage("ERROR!","Operation Failed","OK",2000);
         },
       })
 

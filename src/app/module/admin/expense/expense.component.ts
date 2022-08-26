@@ -32,7 +32,8 @@ export class ExpenseComponent implements OnInit {
         }
       },
       error:(err)=>{
-        window.alert(err.message);
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })
   }
@@ -46,8 +47,8 @@ export class ExpenseComponent implements OnInit {
         remarks: this.remarks,
     }
     const params:Map<string,any> = new Map();
-    params.set("payment",expenseModel);
-    this.adminService.doSordarPayment(params).subscribe({
+    params.set("expense",expenseModel);
+    this.adminService.doOfficeExpense(params).subscribe({
       next:(data)=>{
         console.log(data);
         this.selectedExpense = null;
@@ -55,9 +56,12 @@ export class ExpenseComponent implements OnInit {
         this.receivedBy = "";
         this.remarks ="";
         this.expenseEvent.emit("Balance Changed");
+        
+        this.userService.showMessage("Success!","Payment Complete","OK",2000);
       },
       error:(err)=>{
-        window.alert(err.message);
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })
 

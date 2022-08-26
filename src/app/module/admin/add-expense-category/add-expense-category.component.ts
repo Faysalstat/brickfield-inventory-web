@@ -45,9 +45,10 @@ export class AddExpenseCategoryComponent implements OnInit {
         this.selectedType = '';
         this.selectedCategory = '';
         this.expenseName = '';
+        this.adminService.showMessage("Success!","Operation Successfull","OK",2000);
       },
       error: (err) => {
-        window.alert(err.message);
+        this.adminService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
     });
   }

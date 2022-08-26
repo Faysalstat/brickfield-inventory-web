@@ -27,7 +27,8 @@ export class SordarProductionRecordComponent implements OnInit {
         console.log(res);
       },
       error:(err)=>{
-        window.alert("Sordars Fetching Failed");
+        console.log(err.message);
+      this.userService.showMessage("ERROR!","Sordars Fetching Failed" + err.message,"OK",2000);
       }
     })
   }

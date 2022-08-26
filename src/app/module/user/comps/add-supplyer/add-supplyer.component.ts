@@ -48,6 +48,9 @@ export class AddSupplyerComponent implements OnInit {
       next:(data)=>{
         console.log(data);
         this.products =data.body;
+      },
+      error:(err)=>{
+        this.userService.showMessage("ERROR!","Product Not Found","OK",2000);
       }
     })
   }
@@ -73,7 +76,9 @@ export class AddSupplyerComponent implements OnInit {
         this.supplyerAddedEvent.emit(res.body);
         this.supplyerForm.reset();
       },
-      error:(err)=>{},
+      error:(err)=>{
+        this.userService.showMessage("ERROR!","Operation Failed","OK",2000);
+      },
       complete: ()=>{}
     })
   }
@@ -108,6 +113,7 @@ export class AddSupplyerComponent implements OnInit {
       },
       error:(err)=>{
         console.log(err);
+        this.userService.showMessage("ERROR!","Supplyer Not Found","OK",2000);
         
       },
       complete: ()=>{}
