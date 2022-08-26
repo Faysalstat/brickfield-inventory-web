@@ -33,7 +33,10 @@ export class PendingSchedulesComponent implements OnInit {
         console.log(res);
         this.scheduleList = res.body;
       },
-      error: (err) => {},
+      error: (err) => {
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
+      },
       complete: () => {},
     });
   }

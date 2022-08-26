@@ -1,46 +1,96 @@
 <!-- <div class="mt-4 p-5 bg-light rounded"> -->
    <h1>Dashboard</h1>
+   <hr>
    <!-- <mat-card> -->
-      <div class="row">
-         <div class="col-md-3">
-            <h3>Sale</h3>
-            <table class="table table-striped" >
-               <thead>
-                  <tr>
-                     <th>Brick Type</th>
-                     <th>Piece Sold</th>
-                     <th>Amount In Taka</th>
-                  </tr>
-               </thead>
-               <tbody>
-                 <tr>
-                     <td>পাকা ইট</td>
-                     <td>159000</td>
-                     <td>2000000 BDT</td>
-                 </tr>
-                  <tr>
-                     <td>পিকিট</td>
-                     <td>200000</td>
-                     <td>2000000 BDT</td>
-                  </tr>
-                  <tr>
-                     <td>কাঁচা ইট</td>
-                     <td>203754</td>
-                     <td>2000000 BDT</td>
-                  </tr>
-               </tbody>
-            </table>
+      <app-dashboard-summary></app-dashboard-summary>
+      <hr>
+      <div class="row mt-4">
+         <div class="col-md-12">
+            <mat-card>
+               <h1>Bricks Reserve</h1>
+               <hr>
+               <table class="table table-striped" style="overflow-x:auto;">
+                  <thead>
+                     <tr>
+                        <th *ngFor="let brick of bricks">{{brick?.category}}</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td *ngFor="let brick of bricks">{{brick?.quantity}}</td>
+                     </tr>
+                  </tbody>
+                  <tfoot>
+                     <tr>
+                        <th>Total:</th>
+                        <td>{{totalBrick}}</td>
+                     </tr>
+                  </tfoot>
+               </table>
+            </mat-card>
          </div>
-         <div class="col-md-3">
-
+         
+         <div class="col-md-12 mt-3">
+            <hr>
+            <mat-card style="overflow: scroll;">
+               <h1>Load Unload History</h1>
+               <hr>
+               <div class="row">
+                  <div class="col-md-3">
+                     <mat-form-field appearance="outline" class="input-field">
+                        <mat-label>Load Type</mat-label>
+                        <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="onChnageType()"
+                            [(ngModel)]="selectedType">
+                            <mat-option *ngFor="let type of loadingTypes" [value]="type.value">
+                                {{type?.label}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3 col-sm-4">
+                     <mat-form-field appearance="outline">
+                         <mat-label>From Date</mat-label>
+                         <input matInput [matDatepicker]="fromDatePicker" (dateInput)="onDateChange()"
+                             [ngModelOptions]="{standalone:true}" [(ngModel)]="fromDate">
+                         <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+                         <mat-datepicker #fromDatePicker></mat-datepicker>
+                     </mat-form-field>
+                 </div>
+                 <div class="col-md-3 col-sm-4">
+                     <mat-form-field appearance="outline">
+                         <mat-label>To Date</mat-label>
+                         <input matInput [matDatepicker]="toDatePicker" (dateInput)="onDateChange()"
+                             [ngModelOptions]="{standalone:true}" [(ngModel)]="toDate">
+                         <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+                         <mat-datepicker #toDatePicker></mat-datepicker>
+                     </mat-form-field>
+                 </div>
+               </div>
+               <table class="table table-striped" style="overflow-x:auto;">
+                  <thead>
+                     <tr>
+                        <th>SN</th>
+                        <th>Category Name</th>
+                        <th>Type</th>
+                        <th>Quantity</th>
+                        <th>Production Date</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr *ngIf="loadUnloadHistoryList?.length==0">
+                        <td colspan="6">No History Found</td>
+                     </tr>
+                     <tr *ngFor="let history of loadUnloadHistoryList ; index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{history.categoryName}}</td>
+                        <td>{{history.type}}</td>
+                        <td>{{history.quantity}}</td>
+                        <td>{{history.productionDate}}</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </mat-card>
          </div>
-         <div class="col-md-3">
-
-         </div>
-         <div class="col-md-3">
-
-         </div>
-
       </div>
    <!-- </mat-card> -->
 <!-- </div> -->

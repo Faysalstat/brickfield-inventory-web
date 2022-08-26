@@ -12,3 +12,20 @@ margin: 100px auto;
 label{
     font-weight: bold;
 }
+form{
+    width:60%; 
+    margin:auto;
+   }
+
+@media screen and (max-width: 200px) {
+   form{
+    width:100%;
+    color: red;
+   }
+   .box {
+    /* margin-top: 400px; */
+    width: 90%;
+    margin: 100px auto;
+    }
+
+  }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Supplyer } from '../../model';
 import { UserService } from '../user.service';
 
@@ -9,7 +10,8 @@ import { UserService } from '../user.service';
 })
 export class SupplyerListComponent implements OnInit {
   supplyersList!: Supplyer[];
-  constructor(private userService: UserService) {
+  constructor(
+    private userService: UserService) {
     this.supplyersList = [];
   }
 
@@ -21,6 +23,10 @@ export class SupplyerListComponent implements OnInit {
       next: (data) => {
         console.log(data);
         this.supplyersList = data.body;
+      },
+      error:(err)=>{
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
     });
   }

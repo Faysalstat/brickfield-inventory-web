@@ -1,10 +1,18 @@
 <mat-card class="mt-5">
     <div class="row">
-        <h2>Invoice No: {{delivery.invoiceId}}</h2>
+        <h2>Invoice No: {{delivery?.invoice?.invoiceNo}}</h2>
         <hr/>
         <div class="col-md-6">
             <table class="table table-striped" >
                 <tbody>
+                    <tr>
+                        <td>Customer Name:</td>
+                        <td>{{customer?.person?.personName}}</td>
+                    </tr>
+                    <tr>
+                        <td>Brick Type:</td>
+                        <td>{{brick?.category}}</td>
+                    </tr>
                     <tr>
                         <td>Delivery Status:</td>
                         <td>{{delivery.deliveryStatus}} </td>
@@ -28,6 +36,14 @@
             <table class="table table-striped" >
                 <tbody>
                     <tr>
+                        <td>Customer Contact:</td>
+                        <td>{{customer?.person?.contactNo}}</td>
+                    </tr>
+                    <tr>
+                        <td>Brick Quantity:</td>
+                        <td>{{delivery.deliverableQuantity}}</td>
+                    </tr>
+                    <tr>
                         <td>Driver Name:</td>
                         <td>{{delivery?.driver?.person?.personName}}</td>
                     </tr>
@@ -47,19 +63,26 @@
             </table>
         </div>
         <div class="col-md-4">
-            <h2>Transport Cost: {{delivery?.transportCost }}</h2>
-            <!-- <mat-form-field class="input-field" appearance="fill">
+            <!-- <h2>Transport Cost: {{delivery?.transportCost }}</h2> -->
+            <mat-form-field class="input-field" appearance="fill">
                 <mat-label>Transport Cost:</mat-label>
-                <input [ngModelOptions]="{standalone:true}" [(ngModel)]="delivery.transportCost" 
-                [disabled]="true" matInput>
-            </mat-form-field> -->
+                <input [ngModelOptions]="{standalone:true}" [(ngModel)]="delivery.transportCost" matInput>
+            </mat-form-field>
         </div>
-        <div class="col-md-4">
+        
+        <div class="col-md-8">
             <mat-checkbox  [(ngModel)]="transportCostCustomerPayable">
                 পরিবহন খরচ কাস্টমার পরিশোধ করবে
             </mat-checkbox>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
+            <mat-form-field class="input-field" appearance="fill">
+                <mat-label>Delivery Location:</mat-label>
+                <textarea type="text" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="delivery.deliveryLocation" matInput></textarea>
+            </mat-form-field>
+        </div>
+        
+        <div class="col-md-6">
             <button style="float:right; margin-top: 10px; width: 60%;" mat-raised-button 
             (click)="doDelivery()" color="accent">Deliver</button>
         </div>

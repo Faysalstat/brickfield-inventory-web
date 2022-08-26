@@ -1,0 +1,3 @@
+set url="http://localhost:4200"
+call startInventory.bat
+call start chrome %url%

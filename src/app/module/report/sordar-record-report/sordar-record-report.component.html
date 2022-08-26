@@ -1,0 +1,33 @@
+<mat-card class="mt-4">
+    <div class="row">
+        
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-stripe mt-4">
+                <thead>
+                    <th style="width:10%;">SN</th>
+                    <th style="width:20%;">Sordar Name</th>
+                    <th style="width:20%;">Category</th>
+                    <th style="width:10%;">Quantity</th>
+                    <th style="width:10%;">Prod. Date</th>
+                </thead>
+                <tbody>
+                    <tr *ngIf="recordList.length==0">
+                        <td style="font-weight:bold ; ">
+                            No Transaction Found!!
+                        </td>
+                    </tr>
+                    <tr *ngFor="let record of recordList; index as i">
+                        <td>{{i+offset+1}}</td>
+                        <td>{{record?.sordar?.person?.personName}}</td>
+                        <td>{{record?.category}}</td>
+                        <td>{{record?.quantity}}</td>
+                        <td>{{record?.date}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</mat-card>

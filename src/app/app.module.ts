@@ -6,6 +6,7 @@ import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MaterialModule } from 'src/material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AppAuthGuard } from './app-auth.guard';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AppAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

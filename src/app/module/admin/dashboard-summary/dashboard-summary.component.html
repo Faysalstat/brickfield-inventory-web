@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-md-3">
+        <button class="balance" mat-raised-button color="accent">Office Balance <br>
+            <hr class="c-hr"> {{officeBalance}} BDT
+        </button>
+    </div>
+    <div class="col-md-3">
+        <button class="balance" mat-raised-button color="accent">Factory Balance <br>
+            <hr class="c-hr"> {{factoryBalance}} BDT
+        </button>
+    </div>
+    <div class="col-md-3">
+        <button class="balance" mat-raised-button color="accent">Total Rebate <br>
+            <hr class="c-hr"> {{totalRebate}} BDT
+        </button>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-md-3">
+        <mat-card class="mt-2">
+            <h4>Todays Office Income</h4>
+            <h2>{{summary?.todayOfficeSummary?.totalIncome || 0}} BDT</h2>
+            <hr>
+            <h4>Todays Factory Income</h4>
+            <h2>{{summary?.todayFactorySummary?.totalIncome || 0}} BDT</h2>
+        </mat-card>
+    </div>
+    <div class="col-md-3">
+        <mat-card class="mt-2">
+            <h4>Todays Office Expense</h4>
+            <h2>{{summary?.todayOfficeSummary?.totalExpense || 0}} BDT</h2>
+            <hr>
+            <h4>Todays Factory Expense</h4>
+            <h2>{{summary?.todayFactorySummary?.totalExpense || 0}} BDT</h2>
+        </mat-card>
+    </div>
+    <div class="col-md-3">
+        <mat-card class="mt-2">
+            <h4>Total Office Income</h4>
+            <h2>{{summary?.totalOfficeSummary?.totalIncome || 0}} BDT</h2>
+            <hr>
+            <h4>Total Factory Income</h4>
+            <h2>{{summary?.totalFactorySummary?.totalIncome || 0}} BDT</h2>
+        </mat-card>
+    </div>
+    <div class="col-md-3">
+        <mat-card class="mt-2">
+            <h4>Total Office Expense </h4>
+            <h2>{{summary?.totalOfficeSummary?.totalExpense || 0}} BDT</h2>
+            <hr>
+            <h4>Total Factory Expense</h4>
+            <h2>{{summary?.totalFactorySummary?.totalExpense || 0}} BDT</h2>
+        </mat-card>
+    </div>
+    <!-- <div class="col-md-3">
+        <mat-card class="mt-2">
+            <h4>Todays Sale</h4>
+            <h2>{{summary.totalSale}} BDT</h2>
+        </mat-card>
+    </div>
+    <div class="col-md-3">
+        <mat-card class="mt-2">
+            <h4>Todays Expense</h4>
+            <h2>{{summary.totalExpense}} BDT</h2>
+        </mat-card>
+    </div>
+    <div class="col-md-3">
+        <mat-card class="mt-2">
+            <h4>Todays Income</h4>
+            <h2>{{summary.totalIncome}} BDT</h2>
+        </mat-card>
+    </div> -->
+</div> 

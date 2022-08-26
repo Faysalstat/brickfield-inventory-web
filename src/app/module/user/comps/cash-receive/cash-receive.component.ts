@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Account, Customer, Person } from 'src/app/module/model';
 import { UserService } from '../../user.service';
 
@@ -45,8 +46,8 @@ export class CashReceiveComponent implements OnInit {
           return;
         }
       },
-      error: (err) => {
-        console.log(err);
+      error:(err)=>{
+        this.userService.showMessage("ERROR!",err.message,"OK",2000);
       },
       complete: () => {},
     });
@@ -69,9 +70,8 @@ export class CashReceiveComponent implements OnInit {
           this.updated = false;
         },
         error:(err)=>{
-          console.log(err);
-          window.alert(err);
-        }
+          this.userService.showMessage("ERROR!","Operation Failed","OK",2000);
+        },
       })
 
     }

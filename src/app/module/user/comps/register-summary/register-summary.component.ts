@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TransactionSummary } from 'src/app/module/model';
 import { UserService } from '../../user.service';
 
@@ -32,13 +33,22 @@ export class RegisterSummaryComponent implements OnInit {
         }else{
           this.summary.totalExpense = res.body.totalExpense;
         }
+        if(!res.body.balance){
+          this.summary.balance = 0;
+        }else{
+          this.summary.balance = res.body.balance;
+        }
         if(!res.body.totalSale){
           this.summary.totalSale = 0;
         }else{
           this.summary.totalSale = res.body.totalSale;
         }
         
-      }
+      },
+      error:(err)=>{
+        console.log(err.message);
+      this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
+      },
     })
   }
 

@@ -18,7 +18,7 @@ export class CashPaymentComponent implements OnInit {
   account!:Account;
   updated : boolean = false;
   personTitle: string = "Customer";
-  transactionReason:string = "Payment to Driver";
+  transactionReason:string = "TRANSPORT_COST";
   constructor(
     private userService:UserService,
     private activatedRoute: ActivatedRoute,
@@ -54,6 +54,9 @@ export class CashPaymentComponent implements OnInit {
             this.person = res.body.sordar.person;
           }
           this.updatedPayment = this.account.balance;
+        },
+        error:(err)=>{
+          this.userService.showMessage("ERROR!","Account Not Found","OK",2000);
         }
       });
     });
@@ -90,6 +93,7 @@ export class CashPaymentComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
+        this.userService.showMessage("ERROR!","Customer Not Found","OK",2000);
       },
       complete: () => {},
     });
@@ -115,7 +119,7 @@ export class CashPaymentComponent implements OnInit {
         },
         error:(err)=>{
           console.log(err);
-          window.alert(err);
+          this.userService.showMessage("ERROR!","Operation Failed","OK",2000);
         }
       })
 

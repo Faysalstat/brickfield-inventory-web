@@ -1,0 +1,101 @@
+<mat-card class="mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Raw Production Report</h2>
+            <table class="table table-stripe mt-4">
+                <thead>
+                    <th>SN</th>
+                    <th>Mill Category</th>
+                    <th>Production Date</th>
+                    <th>Quantity</th>
+                    <th>Sordar Name</th>
+                </thead>
+                <tbody>
+                    <tr *ngIf="rawProductionReportList.length==0">
+                        <td style="font-weight:bold ; ">
+                            No Transaction Found!!
+                        </td>
+                    </tr>
+                    <tr *ngFor="let data of rawProductionReportList; index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{data.categoryName}}</td>
+                        <td>{{data.productionDate}}</td>
+                        <td>{{data.quantity}}</td>
+                        <td>{{data.sordarName}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12 mt3">
+            <h2>Brick Load Report</h2>
+            <table class="table table-stripe mt-4">
+                <thead>
+                    <th>SN</th>
+                    <th>Date</th>
+                    <th>Quantity</th>
+                </thead>
+                <tbody>
+                    <tr *ngIf="loadReportList.length==0">
+                        <td style="font-weight:bold ; ">
+                            No Transaction Found!!
+                        </td>
+                    </tr>
+                    <tr *ngFor="let data of loadReportList; index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{data.quantity}}</td>
+                        <td>{{applyFilter(data.createdAt)}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12 mt3">
+            <h2>Brick Unload Report</h2>
+            <table class="table table-stripe mt-4">
+                <thead>
+                    <th>SN</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Date</th>
+                </thead>
+                <tbody>
+                    <tr *ngIf="unLoadReportList.length==0">
+                        <td style="font-weight:bold ; ">
+                            No Transaction Found!!
+                        </td>
+                    </tr>
+                    <tr *ngFor="let data of unLoadReportList; index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{data.categoryName}}</td>
+                        <td>{{data.quantity}}</td>
+                        <td>{{applyFilter(data.createdAt)}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12 mt3">
+            <h2>Sale Report</h2>
+            <table class="table table-stripe mt-4">
+                <thead>
+                    <th>SN</th>
+                    <th>Invoice No</th>
+                    <th>Quantity</th>
+                    <th>Date</th>
+                </thead>
+                <tbody>
+                    <tr *ngIf="saleReportList.length==0">
+                        <td style="font-weight:bold ; ">
+                            No Transaction Found!!
+                        </td>
+                    </tr>
+                    <tr *ngFor="let data of saleReportList; index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{data.invoice.invoiceNo}}</td>
+                        <!-- <td>{{data.brick.category}}</td> -->
+                        <td>{{data.deliverableQuantity}}</td>
+                        <td>{{applyFilter(data.updatedAt)}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</mat-card>

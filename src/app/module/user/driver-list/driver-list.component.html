@@ -1,41 +1,24 @@
-<div class="mt-4 p-5 bg-light rounded">
-  <mat-card class="mt-5">
-    <h2>This is driver-list page</h2>
-        <app-add-driver (driverAddedEvent)="updateList($event)"></app-add-driver>
-    <div class="mt-4 p-5 bg-light rounded">
-        <h1>Drivers List</h1>
-        <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Contact No</th>
-                <th>Address</th>
-                <!-- <th>Balance</th> -->
-                <th>Amount To Pay</th>
-                <!-- <th>Delivery Pending</th> -->
-                <!-- <th>Action</th> -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let driver of driverList; index as i">
-                <td>{{driver.id}}</td>
-                <td>{{driver?.person?.personName}}</td>
-                <td>{{driver?.person?.contactNo}}</td>
-                <td>{{driver?.person?.personAddress}}</td>
-                <!-- <td>{{driver?.account?.balance}}</td> -->
-                <td style="color:crimson ;">{{driver?.account?.amountToPay}}</td>
-                <!-- <td>NO</td> -->
-                <!-- <td>
-                  <span style="margin-right: 5px;"> </span>
-                  <button mat-mini-fab (click)="deleteDriver(driver)" color="primary" >
-                    <mat-icon>delete</mat-icon>
-                  </button>
-                </td> -->
-              </tr>
-              
-            </tbody>
-          </table>
-    </div>
-  </mat-card>
-</div>
+<mat-card class="mt-5 " style="padding:50px ;">
+  <app-add-driver (driverAddedEvent)="updateList($event)"></app-add-driver>
+  <h1 class="mt-5">Drivers List</h1>
+  <table class="table table-striped" style="text-align:center ;">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Contact No</th>
+          <th>Address</th>
+          <th>Amount To Pay</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let driver of driverList; index as i">
+          <td>{{driver.id}}</td>
+          <td>{{driver?.person?.personName}}</td>
+          <td>{{driver?.person?.contactNo}}</td>
+          <td>{{driver?.person?.personAddress}}</td>
+          <td style="color:crimson ;">{{driver?.account?.amountToPay}}</td>
+        </tr>
+      </tbody>
+    </table>
+</mat-card>

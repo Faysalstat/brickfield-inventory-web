@@ -7,7 +7,7 @@
     padding: 5px 20px
 }
 .nav-item{
-    padding: 5px 20px;
+    padding: 5px 10px;
     
     
 }
@@ -16,15 +16,17 @@
 }
 nav{
     background-color: #6365A2;
-    font-size: large;
+    font-size:15px;
 }
 .dropdown-item{
-    font-size: large;
+    font-size:15px;
     text-align: center;
+}
+.b-border{
     border-bottom: 1px solid #878a8c;
 }
 .content{
-    font-size: larger;
+    font-size: medium;
 }
 input{
     font-size: 12px;
@@ -32,7 +34,54 @@ input{
 ::ng-deep .mat-input-element{
     font-size: 12px;
 }
+::ng-deep .mat-form-field{
+    line-height: 2.125;
+}
 .dropdown-menu{
     padding:0px;
     /* background-color:#34a1eb */
 }
+
+::ng-deep .mat-snack-bar-container {
+    margin-top: 100px !important;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&family=Roboto:wght@500&display=swap');
+.footer p{
+    font-size: 16px;
+    font-family:'Roboto', sans-serif;
+    text-align: center;
+    font-style: italic;
+    /* font-weight: bold; */
+}
+.footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+}
+
+
+#container {
+    min-height:100%;
+    position:relative;
+ }
+
+ #body {
+    padding:10px;
+    padding-bottom:180px;   /* Height of the footer */
+ }
+ #footer {
+    position:absolute;
+    margin-top: 20px;
+    bottom:0;
+    width:100%;
+    height:50px;   /* Height of the footer */
+    background:#6cf;
+ }
+ #somadhanit{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+ }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApprovalModel } from '../../model';
+import { ApprovalModel, Tasks } from '../../model';
 import { AdminService } from '../admin.service';
 
 @Component({
@@ -26,11 +26,19 @@ export class TaskListComponent implements OnInit {
         console.log(data)
         this.taskList = data.body;
       },
-      error:(err)=> console.log(err)
+      error:(err)=> {
+        console.log(err.message);
+        this.adminService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
+      }
     })
   }
   openTask(task:any){
-    this.route.navigate(["/admin/invoice-details",task.id]);
+    if(task.taskType == Tasks.CASH_HANDOVER){
+      this.route.navigate(["/admin/handover-details",task.id]);
+    }else{
+      this.route.navigate(["/admin/invoice-details",task.id]);
+    }
+    
   }
 
 }

@@ -1,16 +1,45 @@
-.menu-list{
-    margin: 50px auto;
-    width: 80%;
+/* .menu-body{
+    width: 60%;
+    margin: auto;
+} */
+.navbar-band{
+    margin-right: 20px;
+    padding: 5px 20px
+}
+.nav-item{
+    padding: 5px 10px;
+    
+    
+}
+.dropdown-item{
+    padding: 10px;
+}
+nav{
+    background-color: #6365A2;
+    font-size:15px;
+}
+.dropdown-item{
+    font-size:15px;
     text-align: center;
+    border-bottom: 1px solid #878a8c;
 }
-.list-group-item{
-    font-size: 1.3em;
-    background-color: #039dfc;
-    /* font-weight: bold; */
-    color: #fff;
-    padding: 15px;
+.content{
+    font-size: medium;
+}
+input{
+    font-size: 12px;
+}
+::ng-deep .mat-input-element{
+    font-size: 12px;
+}
+::ng-deep .mat-form-field{
+    line-height: 2.125;
+}
+.dropdown-menu{
+    padding:0px;
+    /* background-color:#34a1eb */
+}
 
-}
-.navbar{
-    background-color:#03cefc ;
+::ng-deep .mat-snack-bar-container {
+    margin-top: 100px !important;
 }

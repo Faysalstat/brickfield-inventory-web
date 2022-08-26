@@ -1,0 +1,22 @@
+<div class="mt-5" style="padding:10px 20px ;">
+    <h1>Office GL</h1>
+    <h2>Balance: <span>{{balance}} BDT</span></h2>
+    <hr>
+</div>
+<mat-tab-group class="mt-4">
+    <mat-tab label="DEPOSIT">
+        <app-office-deposit></app-office-deposit>
+    </mat-tab>
+    <mat-tab label="SALARY">
+        <app-payroll ></app-payroll>
+    </mat-tab>
+    <mat-tab label="EXPENSE">
+        <app-expense (expenseEvent)="updateBalance($event)" ></app-expense>
+    </mat-tab>
+    <mat-tab label="SORDAR">
+        <app-pay-sordar></app-pay-sordar>
+    </mat-tab>
+    <mat-tab label = "ADD CATEGORY">
+        <app-add-expense-category></app-add-expense-category>
+    </mat-tab>
+</mat-tab-group>

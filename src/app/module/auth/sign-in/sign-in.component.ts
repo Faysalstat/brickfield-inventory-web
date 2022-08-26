@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../../model';
+import { UserService } from '../../user/user.service';
 import { AuthenticationService } from '../authentication.service';
 
 @Component({
@@ -11,10 +12,12 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class SignInComponent implements OnInit {
   loginForm!: FormGroup;
+  message!:string;
   constructor(
     private router: Router, 
     private formBuilder: FormBuilder,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private userService: UserService
     ) {}
 
   ngOnInit(): void {
@@ -40,9 +43,18 @@ export class SignInComponent implements OnInit {
     this.authService.signIn(params).subscribe({
       next:(res)=>{
         console.log(res);
-        this.router.navigate(["/home"]);
+        localStorage.setItem('token', res.body.token);
+        localStorage.setItem('userId', res.body.userid);
+        if(res.body.userRole== "MANAGER"){
+          this.router.navigate(["/home"]);
+        }else if(res.body.userRole== "ADMIN"){
+          this.router.navigate(["/admin"]);
+        }
+        
       },
-      error:(err)=>{},
+      error:(err)=>{
+        this.userService.showMessage("ERROR!","Authentication Failed" + err.message,"OK",2000);
+      },
       complete: ()=>{}
     })
   }

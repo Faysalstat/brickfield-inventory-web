@@ -1,7 +1,7 @@
 <div class="container">
    <div class="box">
       <div class="mt-4 p-5 bg-light rounded" style="border:1px solid black">
-         <form [formGroup]="loginForm" style="width:60%; margin:auto">
+         <form [formGroup]="loginForm" >
             <div class="row" >
                <div class="mb-3 mt-3">
                   <label for="username" class="form-label">User Name:</label>
@@ -15,6 +15,10 @@
                <div class="mb-3 mt-3">
                   <button type="submit" (click)="signIn()" class="btn btn-primary "
                      style="margin-top: 10px;width:100%;">Login</button>
+               </div>
+               <div style="color:red ;">
+                  <span>{{message}}</span>
+
                </div>
             </div>
          </form>

@@ -1,5 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
 
@@ -33,7 +34,10 @@ export class ScheduleListComponent implements OnInit {
         console.log(res);
         this.scheduleList = res.body;
       },
-      error:(err)=>{},
+      error:(err)=>{
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Schedule Fetching Operation Failed" + err.message,"OK",2000);
+      },
       complete: ()=>{}
     });
   }

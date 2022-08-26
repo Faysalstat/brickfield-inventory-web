@@ -13,6 +13,7 @@ export class AddPersonComponent implements OnInit {
   customerForm!: FormGroup;
   disable!:true;
   message:string = "";
+  personId!:number;
   constructor(
     private formBuilder: FormBuilder,
     private userService:UserService) { }
@@ -36,7 +37,8 @@ export class AddPersonComponent implements OnInit {
     if(this.customerForm.invalid || this.disable){
       return;
     }
-    const customer = {
+    let customer = {
+      personId : this.customerForm.get("id")?.value,
       personName:this.customerForm.get('name')?.value,
       contactNo:this.customerForm.get('contactNo')?.value,
       personAddress:this.customerForm.get('address')?.value,
@@ -50,8 +52,11 @@ export class AddPersonComponent implements OnInit {
         console.log(res);
         this.customerAddedEvent.emit("Hello from parent");
         this.customerForm.reset();
+
       },
-      error:(err)=>{},
+      error:(err)=>{
+        this.userService.showMessage("ERROR!","Operation Failed","OK",2000);
+      },
       complete: ()=>{}
     })
   }
@@ -62,6 +67,7 @@ export class AddPersonComponent implements OnInit {
         console.log(res.body);
         if(res.body){
           this.message= "This person is in our database";
+          this.customerForm.get('id')?.setValue(res.body?.id);
           this.customerForm.get('name')?.setValue(res.body?.personName);
           this.customerForm.get('address')?.setValue(res.body?.personAddress);
           this.customerForm.get('name')?.disable();
@@ -72,18 +78,20 @@ export class AddPersonComponent implements OnInit {
             this.customerForm.get('balance')?.disable();
           }
           
-          this.message = "* This Customer already exists!"
+          // this.message = "* This Customer already exists!"
 
         }
         else{
           this.customerForm.get('name')?.enable();
           this.customerForm.get('address')?.enable();
           this.customerForm.get('balance')?.enable();
+          this.message= "";
           return;
         }
       },
       error:(err)=>{
         console.log(err);
+        this.userService.showMessage("ERROR!","Not Found","OK",2000);
         
       },
       complete: ()=>{}
