@@ -1,7 +1,7 @@
 import { environment } from '../../../environments/environment';
 // const BASE_URL = environment.BASE_URL;
-const BASE_URL = "https://vatasolution.me/api";
-// const BASE_URL = "http://localhost:3000";
+// const BASE_URL = "https://vatasolution.me/api";
+const BASE_URL = "http://localhost:3000";
 
 export const Urls = {
     USER_SIGN_IN: BASE_URL + "/auth/signin",

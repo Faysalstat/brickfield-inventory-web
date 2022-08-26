@@ -50,7 +50,8 @@ export class TransactionReportComponent implements OnInit {
       {label:'পরিবহন',value:"পরিবহন"},
       {label:'মজুরি',value:"মজুরি"},
       {label:'খরচ',value:"খরচ"},
-      {label:'বিল',value:"বিল"}
+      {label:'বিল',value:"বিল"},
+      {label:'Hand Over',value:"HAND_OVER"}
     ];
     this.expenseReasons = [{label:'Select Category',value:null}];
     this.transactionTypes=[
@@ -171,6 +172,10 @@ export class TransactionReportComponent implements OnInit {
       this.isExpense = true;
     }else{
       this.isExpense = false;
+      this.queryBody.reason = null;
+      this.queryBody.category = null;
+      this.queryBody.fromDate= null;
+      this.queryBody.toDate= null;
     }
     
     this.fetchAllTransByPage();
