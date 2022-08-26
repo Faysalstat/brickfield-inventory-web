@@ -40,7 +40,7 @@ export class HandoverDetailsComponent implements OnInit {
     params.set('handover', this.handoverDetails);
     this.adminService.approveHandOverTask(params).subscribe({
       next: (data) => {
-        this.userService.showMessage("Success!","Payment Complete","OK",2000);
+        this.userService.showMessage("SUCCESS!","Payment Complete","OK",2000);
         this.router.navigate(['/admin/task-list']);
       },
       error: (err) => {
