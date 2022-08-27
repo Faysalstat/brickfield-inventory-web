@@ -179,6 +179,8 @@ export class MakeInvoiceComponent implements OnInit {
           this.customer = res.body.customer;
           this.isCustomerExist = true;
         } else {
+          this.person.personAddress = '';
+          this.person.personName = '';
           this.isCustomerExist = false;
           return;
         }
@@ -194,11 +196,7 @@ export class MakeInvoiceComponent implements OnInit {
   addCustomer(){
     const params:Map<string,any> = new Map();
     if(!this.person.contactNo || !this.person.personName || !this.person.personAddress){
-      this.snackBar.open("Invalid Input", "Close it", {
-        duration: 10000,
-        horizontalPosition:'right',
-        verticalPosition: 'top'
-      });
+      this.userService.showMessage("WARNING!","Invalid Input","OK",10000);
       return;
     }
     let customer = {
@@ -213,6 +211,7 @@ export class MakeInvoiceComponent implements OnInit {
     this.userService.addCustomer(params).subscribe({
       next:(res)=>{
         this.customer = res.body;
+        this.invoiceIssueForm.get("customerId")?.setValue(this.customer.id);
         this.isCustomerExist = true;
 
       },
@@ -450,8 +449,13 @@ export class MakeInvoiceComponent implements OnInit {
   submitInvoice() {
     console.log(this.orders);
     const params: Map<string, any> = new Map();
+    if(!this.isCustomerExist){
+      this.userService.showMessage("WARNING!","Please Add Customer","OK",10000);
+      return;
+    }
     console.log(this.invoiceIssueForm.value);
     if (this.invoiceIssueForm.invalid) {
+      this.userService.showMessage("WARNING!","Invalid Form","OK",10000);
       return;
     }
     let invoice: InvoiceIssueModel = this.invoiceIssueForm.value;

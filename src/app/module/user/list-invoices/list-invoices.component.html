@@ -60,9 +60,9 @@
             <th scope="row">{{i+offset+1}}</th>
             <td>{{invoice.invoiceNo}}</td>
             <td>{{invoice.doNo}}</td>
-            <td>{{invoice.customer.person.personName}}</td>
-            <td>{{invoice.customer.person.contactNo}}</td>
-            <td>{{invoice.customer.person.personAddress}}</td>
+            <td>{{invoice?.customer?.person?.personName}}</td>
+            <td>{{invoice?.customer?.person?.contactNo}}</td>
+            <td>{{invoice?.customer?.person?.personAddress}}</td>
             <td>{{invoice.totalQuantity}}</td>
             <td>{{invoice.totalBill}}</td>
             <td>{{invoice.advancePayment}}</td>
