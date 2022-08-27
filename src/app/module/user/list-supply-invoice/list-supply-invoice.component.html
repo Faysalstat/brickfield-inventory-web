@@ -34,6 +34,7 @@
               <th scope="col">Total Price</th>
               <th scope="col">Advance</th>
               <th scope="col">Due</th>
+              <th scope="col">Rebate</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -48,6 +49,7 @@
               <td>{{invoice.totalAmountToPay}}</td>
               <td>{{invoice.advancePayment}}</td>
               <td>{{invoice.duePayment}}</td>
+              <td>{{invoice.rebate}}</td>
               <td>
                 <!-- <button mat-button (click)="openInvoice(invoice)" color="warn" >
                     Add Schedule

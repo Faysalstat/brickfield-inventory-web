@@ -22,7 +22,9 @@ export class EscavatorPaymentComponent implements OnInit {
     
   }
   fetchDrivers() {
-    this.userService.fetchAllDrivers().subscribe({
+    const params: Map<string, any> = new Map();
+    params.set('offset', 0);
+    this.userService.fetchAllDrivers(params).subscribe({
       next: (data) => {
         console.log(data.body);
         this.driverList = data.body;

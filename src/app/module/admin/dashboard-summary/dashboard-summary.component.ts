@@ -11,7 +11,8 @@ export class DashboardSummaryComponent implements OnInit {
   summary!:any;
   officeBalance!:number;
   factoryBalance!:number;
-  totalRebate!:number;
+  totalRebateTaken!:number;
+  totalRebateGiven!:number;
   constructor(
     private userService:UserService,
     private adminService:AdminService
@@ -62,7 +63,8 @@ export class DashboardSummaryComponent implements OnInit {
   fetchTotalRebate(){
     this.adminService.fetchTotalRebate().subscribe({
       next:(res)=>{
-        this.totalRebate = res.body.totalRebate;
+        this.totalRebateTaken = res.body.totalRebateTaken;
+        this.totalRebateGiven = res.body.totalRebateGiven;
       },
       error:(err)=>{
         console.log(err.message);

@@ -47,7 +47,7 @@
                         </mat-select>
                     </mat-form-field>
                   </div>
-                  <div class="col-md-3 col-sm-4">
+                  <div class="col-md-3">
                      <mat-form-field appearance="outline">
                          <mat-label>From Date</mat-label>
                          <input matInput [matDatepicker]="fromDatePicker" (dateInput)="onDateChange()"
@@ -56,7 +56,7 @@
                          <mat-datepicker #fromDatePicker></mat-datepicker>
                      </mat-form-field>
                  </div>
-                 <div class="col-md-3 col-sm-4">
+                 <div class="col-md-3">
                      <mat-form-field appearance="outline">
                          <mat-label>To Date</mat-label>
                          <input matInput [matDatepicker]="toDatePicker" (dateInput)="onDateChange()"
@@ -88,6 +88,21 @@
                         <td>{{history.productionDate}}</td>
                      </tr>
                   </tbody>
+                  <tfoot>
+                     <tr>
+                       <td colspan="4"></td>
+                       <td>
+                         <div  style="float:right ;font-size: 16px;">
+                           <button mat-icon-button color="primary" (click)="previousPage()">
+                             <mat-icon>fast_rewind</mat-icon>
+                           </button>
+                           <button mat-icon-button color="primary" (click)="nextPage()">
+                             <mat-icon>fast_forward</mat-icon>
+                           </button>
+                         </div>
+                       </td>
+                     </tr>
+                   </tfoot>
                </table>
             </mat-card>
          </div>

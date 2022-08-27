@@ -10,6 +10,8 @@ import { UserService } from '../user.service';
 })
 export class SupplyerListComponent implements OnInit {
   supplyersList!: Supplyer[];
+  limit = 10;
+  offset = 0;
   constructor(
     private userService: UserService) {
     this.supplyersList = [];
@@ -19,7 +21,9 @@ export class SupplyerListComponent implements OnInit {
     this.fetchSupplyers();
   }
   fetchSupplyers() {
-    this.userService.fetchAllSupplyers().subscribe({
+    const params: Map<string, any> = new Map();
+    params.set('offset', this.offset);
+    this.userService.fetchAllSupplyers(params).subscribe({
       next: (data) => {
         console.log(data);
         this.supplyersList = data.body;
@@ -46,5 +50,18 @@ export class SupplyerListComponent implements OnInit {
     //   error: (err) => {},
     //   complete: () => {},
     // });
+  }
+  nextPage() {
+    // this.tnxIndex+=
+    this.offset += 20;
+    this.fetchSupplyers();
+  }
+  previousPage() {
+    if (this.offset > 20) {
+      this.offset -= 20;
+      this.fetchSupplyers();
+    } else {
+      return;
+    }
   }
 }

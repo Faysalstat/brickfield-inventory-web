@@ -11,6 +11,8 @@ import { UserService } from '../user.service';
 
 export class DriverListComponent implements OnInit {
   driverList!: Driver[];
+  limit = 10;
+  offset = 0;
   constructor(private userService: UserService) {
     this.driverList = [];
   }
@@ -20,7 +22,9 @@ export class DriverListComponent implements OnInit {
   }
 
   fetchDriversList(){
-    this.userService.fetchAllDrivers().subscribe({
+    const params: Map<string, any> = new Map();
+    params.set('offset', this.offset);
+    this.userService.fetchAllDrivers(params).subscribe({
       next: (data) => {
         console.log(data.body);
         this.driverList = data.body;
@@ -49,6 +53,20 @@ export class DriverListComponent implements OnInit {
       },
       complete: () => {},
     });
+  }
+
+  nextPage() {
+    // this.tnxIndex+=
+    this.offset += 20;
+    this.fetchDriversList();
+  }
+  previousPage() {
+    if (this.offset > 20) {
+      this.offset -= 20;
+      this.fetchDriversList();
+    } else {
+      return;
+    }
   }
 
 }

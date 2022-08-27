@@ -167,6 +167,7 @@ export class MakeInvoiceComponent implements OnInit {
     this.userService.getCustomerByContactNo(this.person.contactNo).subscribe({
       next: (res) => {
         if (res.body) {
+          this.userService.showMessage("SUCCESS!","Customer Created","OK",2000);
           this.person = res.body;
           this.account = res.body.customer.account;
           if (this.account.balance >= 0) {
@@ -432,7 +433,9 @@ export class MakeInvoiceComponent implements OnInit {
     });
   }
   fetchDrivers() {
-    this.userService.fetchAllDrivers().subscribe({
+    const params: Map<string, any> = new Map();
+    params.set('offset', 0);
+    this.userService.fetchAllDrivers(params).subscribe({
       next: (data) => {
         console.log(data.body);
         this.drivers = data.body;

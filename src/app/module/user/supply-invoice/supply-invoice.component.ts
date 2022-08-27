@@ -93,7 +93,9 @@ export class SupplyInvoiceComponent implements OnInit {
     // this.supplyerForm.get('productId')?.setValue(this.selectedProduct?.id);
   }
   fetchDrivers() {
-    this.userService.fetchAllDrivers().subscribe({
+    const params: Map<string, any> = new Map();
+    params.set('offset', 0);
+    this.userService.fetchAllDrivers(params).subscribe({
       next: (data) => {
         console.log(data.body);
         this.drivers = data.body;

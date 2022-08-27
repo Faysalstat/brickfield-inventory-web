@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Person } from '../../model';
 import { UserService } from '../user.service';
 
@@ -24,7 +24,8 @@ export class EditSupplyInvoiceComponent implements OnInit {
   comment!: string;
   constructor(
     private activatedRoute: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -76,6 +77,8 @@ export class EditSupplyInvoiceComponent implements OnInit {
     this.userService.updateSupplyInvoice(params).subscribe({
       next: (data) => {
         console.log(data);
+        this.userService.showMessage("Success!","Payment Successfull!!","OK",2000);
+        this.router.navigate(['/home/supply-list']);
       },
       error: (err) => {
         console.log(err.message);
