@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-3">
-        <button class="balance" mat-raised-button color="accent">Office Balance <br>
+        <button class="balance" mat-raised-button color="primary">Office Balance <br>
             <hr class="c-hr"> {{officeBalance}} BDT
         </button>
     </div>
@@ -10,8 +10,13 @@
         </button>
     </div>
     <div class="col-md-3">
-        <button class="balance" mat-raised-button color="accent">Total Rebate <br>
-            <hr class="c-hr"> {{totalRebate}} BDT
+        <button class="balance" mat-raised-button style="background-color:#02bf38">Total Rebate Taken<br>
+            <hr class="c-hr"> {{totalRebateTaken}} BDT
+        </button>
+    </div>
+    <div class="col-md-3">
+        <button class="balance" mat-raised-button color="warn">Total Rebate Given<br>
+            <hr class="c-hr"> {{totalRebateGiven}} BDT
         </button>
     </div>
 </div>
@@ -19,6 +24,13 @@
 <div class="row">
     <div class="col-md-3">
         <mat-card class="mt-2">
+            <!-- <button class="balance" mat-raised-button color="primary">Todays Office Income<br>
+                <hr class="c-hr"> {{summary?.todayOfficeSummary?.totalIncome || 0}} BDT
+            </button>
+            <hr>
+            <button class="balance" mat-raised-button color="accent">Todays Factory Income<br>
+                <hr class="c-hr"> {{summary?.todayFactorySummary?.totalIncome || 0}} BDT
+            </button> -->
             <h4>Todays Office Income</h4>
             <h2>{{summary?.todayOfficeSummary?.totalIncome || 0}} BDT</h2>
             <hr>

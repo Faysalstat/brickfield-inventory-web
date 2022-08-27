@@ -63,8 +63,10 @@ export class UserService {
   }
 
   // FETCING DATA API
-  public fetchAllDrivers(): Observable<any> {
-    return this.http.get(Urls.FETCH_ALL_DRIVERS);
+  public fetchAllDrivers(queryParams: Map<string, any>): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('offset',queryParams.get('offset'));
+    return this.http.get(Urls.FETCH_ALL_DRIVERS,{params:params});
   }
   public fetchAllSordars(): Observable<any> {
     return this.http.get(Urls.FETCH_ALL_SORDARS);
@@ -79,14 +81,18 @@ export class UserService {
     return this.http.get(Urls.FETCH_ALL_SCHEDULES_BY_DATE);
   }
 
-  public fetchAllCustomer(): Observable<any> {
-    return this.http.get(Urls.FETCH_ALL_CUSTOMER);
+  public fetchAllCustomer(queryParams: Map<string, any>): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('offset',queryParams.get('offset'));
+    return this.http.get(Urls.FETCH_ALL_CUSTOMER,{params:params});
   }
   public fetchPaymentDueList(): Observable<any> {
     return this.http.get(Urls.FETCH_ALL_DUE_PAYMENT_ACCOUNTS);
   }
-  public fetchAllSupplyers(): Observable<any> {
-    return this.http.get(Urls.FETCH_ALL_SUPPLYER);
+  public fetchAllSupplyers(queryParams: Map<string, any>): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('offset',queryParams.get('offset'));
+    return this.http.get(Urls.FETCH_ALL_SUPPLYER,{params:params});
   }
   public fetchAllPendingInvoice(): Observable<any> {
     return this.http.get(Urls.FETCH_ALL_PENDING_INVOICE);

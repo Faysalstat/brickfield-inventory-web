@@ -11,6 +11,10 @@ import { UserService } from '../user.service';
 })
 export class CustomerListComponent implements OnInit {
   customerList: Customer[] = [];
+  // MatPaginator Inputs
+  limit = 10;
+  offset = 0;
+  tnxIndex:number = 0;
   constructor(private userService: UserService, private route: Router) {}
 
   ngOnInit(): void {
@@ -19,7 +23,9 @@ export class CustomerListComponent implements OnInit {
   }
 
   fetchCustomers() {
-    this.userService.fetchAllCustomer().subscribe({
+    const params: Map<string, any> = new Map();
+    params.set('offset', this.offset);
+    this.userService.fetchAllCustomer(params).subscribe({
       next: (res) => {
         console.log(res.body);
         this.customerList = res.body;
@@ -52,5 +58,18 @@ export class CustomerListComponent implements OnInit {
   }
   updateList(event:any){
     this.fetchCustomers();
+  }
+  nextPage() {
+    // this.tnxIndex+=
+    this.offset += 20;
+    this.fetchCustomers();
+  }
+  previousPage() {
+    if (this.offset > 20) {
+      this.offset -= 20;
+      this.fetchCustomers();
+    } else {
+      return;
+    }
   }
 }

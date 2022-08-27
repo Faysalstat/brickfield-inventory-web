@@ -65,8 +65,13 @@ export class AdminService {
     params = params.append("username",username);
     return this.http.get(Urls.FETCH_USER_BY_NAME,{params:params});
   }
-  public fetchLoadUnloadHistory(): Observable<any>{
-    return this.http.get(Urls.FETCH_LOAD_UNLOAD_HISTORY);
+  public fetchLoadUnloadHistory(queryParams: Map<string, any>): Observable<any>{
+    let params = new HttpParams();
+    params = params.append('offset',queryParams.get('query').offset);
+    params = params.append('type',queryParams.get('query').type);
+    params = params.append('fromDate',queryParams.get('query').fromDate);
+    params = params.append('toDate',queryParams.get('query').toDate);
+    return this.http.get(Urls.FETCH_LOAD_UNLOAD_HISTORY,{params:params});
   }
   public getIncomeExpenseSummary(): Observable<any> {
     return this.http.get(Urls.FETCH_INCOME_EXPENSE_REPOST);
