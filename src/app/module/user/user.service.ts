@@ -110,9 +110,11 @@ export class UserService {
 
   public fetchAllSupplyInvoice(queryParams: Map<string, any>): Observable<any> {
     let params = new HttpParams();
-    params = params.append('offset',queryParams.get('query').offset);
-    params = params.append('supplyerId',queryParams.get('query').supplyerId);
-    params = params.append('invoiceNo',queryParams.get('query').invoiceNo);
+    params = params.append('offset',queryParams.get('offset'));
+    params = params.append('productName',queryParams.get('query').productName);
+    params = params.append('contactNo',queryParams.get('query').contactNo);
+    params = params.append('fromDate',queryParams.get('query').fromDate);
+    params = params.append('toDate',queryParams.get('query').toDate);
     return this.http.get(Urls.FETCH_ALL_SUPPLY_INVOICE,{params:params});
   }
   public fetchInvoiceById(id: any): Observable<any> {

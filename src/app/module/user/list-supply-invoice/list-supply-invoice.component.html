@@ -1,21 +1,41 @@
 <mat-card>
     <div class="row">
       <div class="col-md-2">
-        <mat-form-field class="input-field" appearance="fill">
-          <mat-label>Invoice No</mat-label>
-          <input placeholder="Invoice No" pInputText [ngModelOptions]="{standalone:true}"
-            [(ngModel)]="queryBody.invoiceNo" matInput>
+        <mat-form-field appearance="outline" class="input-field">
+          <mat-label> সাপ্লাই প্রোডাক্ট : </mat-label>
+          <mat-select [ngModelOptions]="{standalone:true}"
+            [(ngModel)]="queryBody.productName">
+            <mat-option *ngFor="let product of productList" [value]="product.value">{{product?.label}}</mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
       <div class="col-md-2">
-        <mat-form-field class="input-field" appearance="fill">
+        <mat-form-field class="input-field" appearance="outline">
           <mat-label>Contact No</mat-label>
-          <input (change)="searchSupplyer()" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="contactNo"
+          <input  pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="queryBody.contactNo"
             placeholder="Contact" matInput>
         </mat-form-field>
       </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline">
+            <mat-label>From Date</mat-label>
+            <input matInput [matDatepicker]="fromDatePicker"
+                [ngModelOptions]="{standalone:true}" [(ngModel)]="queryBody.fromDate">
+            <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromDatePicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="col-md-3">
+        <mat-form-field appearance="outline">
+            <mat-label>To Date</mat-label>
+            <input matInput [matDatepicker]="toDatePicker"
+                [ngModelOptions]="{standalone:true}" [(ngModel)]="queryBody.toDate">
+            <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #toDatePicker></mat-datepicker>
+        </mat-form-field>
+    </div>
       <div class="col-md-2">
-        <button style="margin: 10px; float: left;" (click)="searchInvoice()" mat-raised-button
+        <button style="margin: 10px; float: left;" (click)="fetchAllInvoices()" mat-raised-button
           color="warn">Search</button>
       </div>
     </div>

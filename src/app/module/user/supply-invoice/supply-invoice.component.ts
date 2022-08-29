@@ -113,7 +113,13 @@ export class SupplyInvoiceComponent implements OnInit {
       next: (res) => {
         if (res.body) {
           this.person = res.body;
-          this.supplyer = res.body.supplyer;
+          if(res.body.supplyer){
+            this.supplyer = res.body.supplyer;
+          }else{
+            this.userService.showMessage("ERROR!","Not a Supplyer, Add Now!","OK",2000);
+            this.needSupplyer = true;
+            return;
+          }
           this.needSupplyer = false;
         } else {
           this.needSupplyer = true;
@@ -202,7 +208,6 @@ export class SupplyInvoiceComponent implements OnInit {
     console.log(this.supplyInvoice);
     let supplyInvoiceModel:any = this.supplyInvoice;
     supplyInvoiceModel.supplyer = this.supplyer;
-    // supplyInvoiceModel.supplyer.person = this.person;
     supplyInvoiceModel.driver = this.selectedDriver;
     supplyInvoiceModel.productName = this.selectedProduct.productName;
     supplyInvoiceModel.deliveryType = this.selectedType;

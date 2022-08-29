@@ -301,3 +301,10 @@ export class EscavatorExpenseModel{
 //   {label:'ভাড়া',value:"VARA"},
   
 // }
+
+export class SupplyQuery{
+  productName: string = '';
+  contactNo: string ='';
+  fromDate: string ='';
+  toDate:string='';
+}

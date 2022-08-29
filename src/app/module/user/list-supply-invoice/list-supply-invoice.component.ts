@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Account, Customer, InvoiceQueryBody, Person, Supplyer } from '../../model';
+import { Account, Customer, InvoiceQueryBody, Person, Supplyer, SupplyQuery } from '../../model';
 import { UserService } from '../user.service';
 
 @Component({
@@ -13,22 +13,23 @@ export class ListSupplyInvoiceComponent implements OnInit {
 
   invoiceList!:any;
   customer!:Customer;
-  offset:number = 0;
+  offset: number = 0;
   limit = 5;
-  queryBody!:InvoiceQueryBody;
+  queryBody!:SupplyQuery;
   contactNo!:string;
   statusList!:any[];
   supplyer!: Supplyer;
   account!: Account;
   person!: Person;
   notFoundMessage!: string;
+  productList!: any[];
   constructor(
     private route: Router,
     private userService:UserService,
     private snackBar: MatSnackBar
     ) {
     this.invoiceList = [];
-    this.queryBody = new InvoiceQueryBody();
+    this.queryBody = new SupplyQuery();
     this.statusList = [
       {label:"Select Delivery Status", value:null},
       {label:"Delivered", value:"DELIVERED"},
@@ -37,42 +38,41 @@ export class ListSupplyInvoiceComponent implements OnInit {
     ]
    }
   ngOnInit(): void {
-    
     this.fetchAllInvoices();
+    this.fetchProductList();
+  }
+
+
+  fetchProductList() {
+    this.userService.fetchAllProducts().subscribe({
+      next: (data) => {
+        console.log(data);
+
+        this.productList = [{label:"Select Product",value:""}];
+        data.body.map((elem:any)=>{
+          this.productList.push({label:elem.productName,value:elem.productName});
+        })
+
+      },
+      error:(err)=>{
+        console.log(err.message);
+        this.userService.showMessage("ERROR!","Product List Fetching Operation Failed" + err.message,"OK",2000);
+      },
+    });
   }
   searchInvoice(){
     this.fetchAllInvoices();
   }
 
-  searchSupplyer() {
-    console.log('Change Detected');
-    this.userService.getCustomerByContactNo(this.person.contactNo).subscribe({
-      next: (res) => {
-        if (res.body) {
-          this.person = res.body;
-          this.supplyer = res.body.supplyer;
-          this.queryBody.supplyerId = this.supplyer.id;
-        } else {
-          this.notFoundMessage = '*Supplyer Not Found. Please Add Suppler';
-          return;
-        }
-      },
-      error:(err)=>{
-        console.log(err.message);
-        this.userService.showMessage("ERROR!","Customer fetching Failed" + err.message,"OK",2000);
-      },
-      complete: () => {},
-    });
-  }
-
   fetchAllInvoices(){
     const params: Map<string, any> = new Map();
-    this.queryBody.offset = this.offset;
+    params.set('offset', this.offset);
     params.set('query', this.queryBody);
     this.userService.fetchAllSupplyInvoice(params).subscribe({
       next:(res)=>{
         console.log(res);
         this.invoiceList = res.body;
+        this.queryBody = new SupplyQuery();
       },
       error:(err)=>{
         console.log(err.message);
