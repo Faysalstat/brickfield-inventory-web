@@ -13,6 +13,7 @@ export class AddDriverComponent implements OnInit {
   driverForm!: FormGroup;
   disable:boolean = true;
   message:string = "";
+  person!:Person;
   constructor(
     private formBuilder: FormBuilder,
     private userService:UserService) { }
@@ -38,20 +39,20 @@ export class AddDriverComponent implements OnInit {
     if(this.driverForm.invalid || this.disable){
       return;
     }
-    const customer = {
+    const driver = {
+      personId: this.person.id,
       personName:this.driverForm.get('name')?.value,
       contactNo:this.driverForm.get('contactNo')?.value,
       personAddress:this.driverForm.get('address')?.value,
-      amountToPay:this.driverForm.get('amountToPay')?.value||0,
-      due:0,
-      balance:0
+      clientType:"DRIVER"
     }
-    params.set("driver",customer);
+    params.set("driver",driver);
     this.userService.addDriver(params).subscribe({
       next:(res)=>{
         console.log(res);
         this.driverAddedEvent.emit("Hello from parent");
         this.driverForm.reset();
+        this.message = "";
       },
       error:(err)=>{
         this.userService.showMessage("ERROR!","Driver Add Failed","OK",2000);
@@ -64,19 +65,20 @@ export class AddDriverComponent implements OnInit {
     this.userService.getCustomerByContactNo(this.driverForm.get('contactNo')?.value).subscribe({
       next:(res)=>{
         if(res.body){
+          this.person = res.body;
           this.driverForm.get('name')?.setValue(res.body?.personName);
           this.driverForm.get('amountToPay')?.setValue(res.body?.account?.balance);
           this.driverForm.get('address')?.setValue(res.body?.personAddress);
-          this.driverForm.get('name')?.disable();
-          this.driverForm.get('address')?.disable();
-          this.driverForm.get('amountToPay')?.disable();
           if(res.body.driver){
+            this.driverForm.get('name')?.disable();
+            this.driverForm.get('address')?.disable();
+            this.driverForm.get('amountToPay')?.disable();
             this.disable = true;
             this.message = "* This Driver already exists in database!"
           }else{
-           this.disable = false;
+            this.disable = false;
+            this.message = "* This Person is not a Driver. Please Add!!"
           }
-          
 
         }else{
           this.disable = false;

@@ -91,6 +91,7 @@ export class ScheduleDeliveryComponent implements OnInit {
     this.userService.fetchCustomerById(id).subscribe({
       next:(res)=>{
         this.customer = res.body;
+        this.delivery.deliveryLocation = this.customer.person.personAddress;
       },
       error:(err)=>{
         console.log(err.message);

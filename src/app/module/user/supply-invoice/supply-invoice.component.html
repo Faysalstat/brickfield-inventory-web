@@ -15,7 +15,7 @@
           </div>
           <div class="col-md-3">
             <mat-form-field class="input-field" appearance="outline">
-              <mat-label>নাম ::</mat-label>
+              <mat-label>নাম :</mat-label>
               <input [ngModelOptions]="{standalone:true}" [(ngModel)]="person.personName" placeholder="নাম :"
                 matInput>
             </mat-form-field>
@@ -48,9 +48,8 @@
             </mat-form-field>
           </div>
           <div class="col-md-6" *ngIf="needSupplyer">
-            <button type="button" style="margin-top:42px ;" class="btn btn-primary" data-bs-toggle="modal"
-              data-bs-target="#myModal">
-              Add New Supplyer
+            <button type="button" style="margin-top:42px ;" class="btn btn-primary" (click)="addSupplyer()">
+              Add Supplyer
             </button>
           </div>
           <div class="col-md-12">
@@ -309,10 +308,10 @@
           <div class="modal-content">
 
             <!-- Modal Header -->
-            <div class="modal-header">
+            <!-- <div class="modal-header">
               <h4 class="modal-title">Modal Heading</h4>
               <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
+            </div> -->
 
             <!-- Modal body -->
             <div class="modal-body">

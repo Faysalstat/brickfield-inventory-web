@@ -36,6 +36,7 @@ export class StockManagementComponent implements OnInit {
   loadType: any[];
   selectedLoadType!:any;
   totalSordarLoad!:number;
+  roundNo!:number;
   constructor(
     private userService:UserService
   ) {
@@ -131,7 +132,8 @@ export class StockManagementComponent implements OnInit {
     
     // this.dailyProductionList.push(this.selectedBrickProduction);
     console.log(" data submitted ")
-    if(!this.selectedBrickProduction){
+    if(!this.selectedBrickProduction || !this.selectedSordar){
+      this.userService.showMessage("ERROR!","Invalid Form","OK",2000);
       return
     }
     this.selectedBrickProduction.sordar = this.selectedSordar;
@@ -252,8 +254,8 @@ export class StockManagementComponent implements OnInit {
       sordarId: this.selectedLoadSordar.id,
       category: this.selectedLoadType,
       date: this.sordarloadingDate,
-      quantity: this.totalSordarLoad
-
+      quantity: this.totalSordarLoad,
+      roundNo:this.roundNo
     };
     const params: Map<string, any> = new Map();
     params.set("record",record);

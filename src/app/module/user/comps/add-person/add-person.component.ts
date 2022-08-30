@@ -14,6 +14,7 @@ export class AddPersonComponent implements OnInit {
   disable!:true;
   message:string = "";
   personId!:number;
+  isCustomer: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private userService:UserService) { }

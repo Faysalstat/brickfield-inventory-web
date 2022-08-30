@@ -18,10 +18,11 @@
                 <div class="col-md-8">
                     <div class="row">
                         <h2>কাস্টমার বিবরন :</h2>
+                        <h4 style="color:red">{{errMsg}}</h4>
                         <div class="col-md-6">
                             <mat-form-field class="input-field" appearance="outline">
                                 <mat-label>মোবাইল নাম্বার</mat-label>
-                                <input (change)="searchCustomer()" pInputText [ngModelOptions]="{standalone:true}"
+                                <input (change)="searchCustomer()" pInputText [ngModelOptions]="{standalone:true}" [disabled]="isEdit"
                                     [(ngModel)]="person.contactNo" placeholder="মোবাইল নাম্বার" matInput>
                             </mat-form-field>
                         </div>
