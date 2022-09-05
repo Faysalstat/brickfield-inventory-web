@@ -101,7 +101,7 @@ export class InvoiceDomain{
   customer!: Customer;
   deliveryStatus!: string;
   duePayment!: number;
-  rebate:number =0;
+  rebate:number = 0;
   transportCost!:number;
   issuedAt!: Date;
   issuedBy!: string;
@@ -266,6 +266,7 @@ export class PaginatorModel{
 }
 
 export class InvoiceQueryBody{
+  limit:number = 0;
   offset:number = 0;
   createdFrom!:Date;
   createdTo!:Date;

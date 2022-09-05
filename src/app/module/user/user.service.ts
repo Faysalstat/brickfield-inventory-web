@@ -101,6 +101,7 @@ export class UserService {
   public fetchAllInvoice(queryParams: Map<string, any>): Observable<any> {
     let params = new HttpParams();
     params = params.append('offset',queryParams.get('query').offset);
+    params = params.append('limit',queryParams.get('query').limit);
     params = params.append('contactNo',queryParams.get('query').contactNo);
     params = params.append('invoiceNo',queryParams.get('query').invoiceNo);
     params = params.append('doNo',queryParams.get('query').doNo);

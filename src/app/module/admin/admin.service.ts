@@ -51,6 +51,10 @@ export class AdminService {
     console.log(queryParams.get("user"))
     return this.http.post(Urls.CREATE_USER,queryParams.get("user"));
   }
+  public addAppConfig(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("config"))
+    return this.http.post(Urls.CREATE_APP_CONFIG,queryParams.get("config"));
+  }
 
   public fetchAllTask(): Observable<any>{
     return this.http.get(Urls.FETCH_ALL_TASK);

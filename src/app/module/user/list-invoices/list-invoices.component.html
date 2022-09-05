@@ -81,14 +81,12 @@
         </tbody>
         <tfoot>
           <td colspan="11">
-            <div  style="float:right ;font-size: 16px;">
-              <button mat-icon-button color="primary" (click)="previousPage()">
-                <mat-icon>fast_rewind</mat-icon>
-              </button>
-              <button mat-icon-button color="primary" (click)="nextPage()">
-                <mat-icon>fast_forward</mat-icon>
-              </button>
-            </div>
+            <mat-paginator [length]="length"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="pageChange($event)"
+               aria-label="Select page">
+            </mat-paginator>
           </td>
         </tfoot>
       </table>

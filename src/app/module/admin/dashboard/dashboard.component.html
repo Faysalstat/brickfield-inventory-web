@@ -1,6 +1,20 @@
 <!-- <div class="mt-4 p-5 bg-light rounded"> -->
    <h1>Dashboard</h1>
    <hr>
+   <div class="row">
+      <div class="col-md-3">
+         <mat-form-field class="input-field" appearance="outline">
+            <mat-label>Set Year Starting Date</mat-label>
+            <input matInput [matDatepicker]="picker" [ngModelOptions]="{standalone:true}"
+                            [(ngModel)]="startingDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+         <button type="submit" (click)="setAppConfiguration()" mat-raised-button color="primary">Set Date</button>
+      </div>
+   </div>
    <!-- <mat-card> -->
       <app-dashboard-summary></app-dashboard-summary>
       <hr>
@@ -24,6 +38,8 @@
                      <tr>
                         <th>Total:</th>
                         <td>{{totalBrick}}</td>
+                        <th>Total Stock Value:</th>
+                        <td>{{totalStockValue}} BDT</td>
                      </tr>
                   </tfoot>
                </table>

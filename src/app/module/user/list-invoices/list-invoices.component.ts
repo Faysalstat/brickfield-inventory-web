@@ -17,6 +17,9 @@ export class ListInvoicesComponent implements OnInit {
   queryBody!:InvoiceQueryBody;
   contactNo!:string;
   statusList!:any[];
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
   constructor(
     private route: Router,
     private userService:UserService) {
@@ -56,11 +59,13 @@ export class ListInvoicesComponent implements OnInit {
   fetchAllInvoices(){
     const params: Map<string, any> = new Map();
     this.queryBody.offset = this.offset;
+    this.queryBody.limit = this.pageSize;
     params.set('query', this.queryBody);
     this.userService.fetchAllInvoice(params).subscribe({
       next:(res)=>{
         console.log(res);
-        this.invoiceList = res.body;
+        this.invoiceList = res.body.data;
+        this.length = res.body.length;
       },
       error:(err)=>{
         console.log(err.message);
@@ -90,6 +95,14 @@ export class ListInvoicesComponent implements OnInit {
     else{
       return
     }
+    this.fetchAllInvoices();
+  }
+  pageChange(event:any){
+    console.log(this.length);
+    console.log(this.pageSize);
+    console.log("event fired " + event.pageIndex);
+    this.pageSize = event.pageSize;
+    this.offset = this.pageSize * event.pageIndex;
     this.fetchAllInvoices();
   }
  
