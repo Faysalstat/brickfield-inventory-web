@@ -45,7 +45,7 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col-md-3 col-sm-3">
+        <div class="col-md-3">
             <mat-form-field appearance="outline">
                 <mat-label>From Date</mat-label>
                 <input matInput [matDatepicker]="fromDatePicker" (dateInput)="onDateChange()"
@@ -54,7 +54,7 @@
                 <mat-datepicker #fromDatePicker></mat-datepicker>
             </mat-form-field>
         </div>
-        <div class="col-md-3 col-sm-3">
+        <div class="col-md-3">
             <mat-form-field appearance="outline">
                 <mat-label>To Date</mat-label>
                 <input matInput [matDatepicker]="toDatePicker" (dateInput)="onDateChange()"
@@ -66,10 +66,11 @@
         <div class="col-md-12">
             <button mat-raised-button (click)="export()" color="warn">Export</button>
         </div>
+        <hr class="mt-2">
     </div>
 
-    <div class="col-md-12">
-        <table class="table table-stripe mt-4">
+    <div class="col-md-12 overflow-auto mt-3" style="max-height:450px;">
+        <table class="table table-stripe mt-4 ">
             <thead>
                 <th style="width:10%;">SN</th>
                 <th style="width:20%;">Transaction Type</th>
@@ -94,26 +95,6 @@
                     <td>{{tnx.refference}}</td>
                 </tr>
             </tbody>
-            <tfoot>
-                <tr>
-                    <button mat-icon-button color="primary" (click)="previousPage()">
-                        <mat-icon>fast_rewind</mat-icon>
-                    </button>
-                    <button mat-icon-button color="primary" (click)="nextPage()">
-                        <mat-icon>fast_forward</mat-icon>
-                    </button>
-                    <!-- <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                              <li class="page-item">
-                                <button type="button"  (click)="previousPage()" class="btn btn-primary">Previous</button>
-                              </li>
-                              <li class="page-item">
-                                <button type="button"  (click)="nextPage()" class="btn btn-primary">Next</button>
-                            </li>
-                            </ul>
-                          </nav> -->
-                </tr>
-            </tfoot>
         </table>
 
     </div>

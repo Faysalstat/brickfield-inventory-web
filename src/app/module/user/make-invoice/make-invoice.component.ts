@@ -45,6 +45,7 @@ export class MakeInvoiceComponent implements OnInit {
   selectedOrder!: OrderModel;
   isApprovalNeeded: boolean = true;
   isCustomerExist:boolean = false;
+  errMsg!:string;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -72,6 +73,7 @@ export class MakeInvoiceComponent implements OnInit {
       console.log(parameter);
       if (id) {
         this.isEdit = true;
+        this.isCustomerExist = true;
         this.invoiceId = id;
         this.fetchInvoiceById(id);
       } else {
@@ -167,18 +169,17 @@ export class MakeInvoiceComponent implements OnInit {
     this.userService.getCustomerByContactNo(this.person.contactNo).subscribe({
       next: (res) => {
         if (res.body) {
-          this.userService.showMessage("SUCCESS!","Customer Created","OK",2000);
+          this.userService.showMessage("SUCCESS!","Person Found","OK",2000);
           this.person = res.body;
-          this.account = res.body.customer.account;
-          if (this.account.balance >= 0) {
-            this.isNeg = false;
-            this.customerBalance = this.account.balance;
-          } else {
-            this.isNeg = true;
-            this.customerBalance = Math.abs(this.account.balance);
+          
+          if(res.body.customer){
+            this.customer = res.body.customer;
+            this.account = res.body.customer.account;
+            this.isCustomerExist = true;
+          }else{
+            this.errMsg = "** This person is not a Customer, Please Add as a Customer"
+            this.isCustomerExist = false;
           }
-          this.customer = res.body.customer;
-          this.isCustomerExist = true;
         } else {
           this.person.personAddress = '';
           this.person.personName = '';
@@ -201,18 +202,18 @@ export class MakeInvoiceComponent implements OnInit {
       return;
     }
     let customer = {
+      personId: this.person.id,
       personName:this.person.personName,
       contactNo:this.person.contactNo,
       personAddress:this.person.personAddress,
-      balance: 0,
-      due:0,
-      amountToPay:0
+      clientType:"CUSTOMER"
     }
     params.set("customer",customer);
     this.userService.addCustomer(params).subscribe({
       next:(res)=>{
         this.customer = res.body;
         this.invoiceIssueForm.get("customerId")?.setValue(this.customer.id);
+        this.errMsg = "";
         this.isCustomerExist = true;
 
       },

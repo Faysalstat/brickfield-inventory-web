@@ -12,12 +12,14 @@ export class DashboardComponent implements OnInit {
   bricks!: Brick[];
   loadUnloadHistoryList!:any[];
   totalBrick:number =0;
+  totalStockValue:number = 0;
   selectedType!:any;
   loadingTypes!:any[];
   fromDate!:any;
   toDate!:any;
   queryBody!:any;
   offset:number =0;
+  startingDate!: string;
   constructor(
     private userService:UserService,
     private adminService:AdminService
@@ -52,6 +54,7 @@ export class DashboardComponent implements OnInit {
           this.bricks = res.body;
           this.bricks.map((brick)=>{
             this.totalBrick += brick.quantity;
+            this.totalStockValue += (brick.pricePerPiece * brick.quantity);
           })
         }
       },
@@ -104,5 +107,19 @@ export class DashboardComponent implements OnInit {
       this.fetchLoadUnloadHistory();
       return;
     }
+  }
+  setAppConfiguration(){
+    const params: Map<string, any> = new Map();
+    let date = new Date(this.startingDate);
+    let startDate = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+    params.set('config', {startDate:startDate});
+    this.adminService.addAppConfig(params).subscribe({
+      next:(res)=>{
+        console.log(res);
+      },
+      error:(err)=>{
+
+      }
+    })
   }
 }

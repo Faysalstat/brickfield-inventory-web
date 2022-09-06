@@ -1,39 +1,45 @@
-    <h1>Approval List</h1>
-    <hr>
-    <mat-card>
-      <div class="row">
-          <div class="md-col-12">
-        
-          </div>
-          <div class="md-col-12" style="overflow-x:auto;">
-            <table class="table" style="text-align:center ;">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col" >Task ID</th>
-                  <th scope="col">Task Type</th>
-                  <th scope="col">Created By</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngIf="taskList?.length==0">
-                  <td colspan="5">No Data Found</td>
-               </tr>
-                <tr *ngFor="let task of taskList; index as i">
-                  <th scope="row">{{i+1}}</th>
-                  <td>{{task.id}}</td>
-                  <td>{{task?.taskType}}</td>
-                  <td>{{task?.createdBy}}</td>
-                  <td>
-                    <button mat-raised-button (click)="openTask(task)" color="warn">
-                      Open
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+<h1>Approval List</h1>
+<hr>
+<mat-card>
+  <div class="row">
+    <div class="md-col-12">
+
+    </div>
+    <div class="md-col-12" style="overflow-x:auto;">
+      <table class="table" style="text-align:center ;">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Task ID</th>
+            <th scope="col">Task Type</th>
+            <th scope="col">Created By</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="taskList?.length==0">
+            <td colspan="5">No Data Found</td>
+          </tr>
+          <tr *ngFor="let task of taskList; index as i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{task.id}}</td>
+            <td>{{task?.taskType}}</td>
+            <td>{{task?.createdBy}}</td>
+            <td>
+              <button mat-raised-button (click)="openTask(task)" color="warn">
+                Open
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-12">
+      <div style="float:right ;font-size: 16px;">
+        <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+          (page)="pageChange($event)" aria-label="Select page">
+        </mat-paginator>
       </div>
-    </mat-card>
-  
+    </div>
+  </div>
+</mat-card>

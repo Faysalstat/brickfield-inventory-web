@@ -21,6 +21,6 @@
             </mat-form-field>
         </div>
     </div>
-    <button type="submit" (click)="submit()" mat-raised-button color="primary">Submit</button>
+    <button *ngIf="!isSupplyer" type="submit" (click)="submit()" mat-raised-button color="primary">Submit</button>
     <p style="color: red;font-size:medium;margin-top:10px;">{{message}}</p>
 </form>

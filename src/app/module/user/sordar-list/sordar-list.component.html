@@ -9,7 +9,9 @@
           <th>Contact No</th>
           <th>Address</th>
           <th>Type</th>
-          <th>Amount To Pay</th>
+          <th>Contacted Amount </th>
+          <th>Contacted Quantity</th>
+          <th>Amount Paid</th>
         </tr>
       </thead>
       <tbody>
@@ -19,7 +21,9 @@
           <td>{{sordar?.person?.contactNo}}</td>
           <td>{{sordar?.person?.personAddress}}</td>
           <td>{{sordar?.category}}</td>
-          <td style="color:crimson ;">{{sordar?.account?.amountToPay}}</td>
+          <td style="color:crimson ;">{{sordar?.contactAmount}}</td>
+          <td style="color:crimson ;">{{sordar?.contactQuantity}}</td>
+          <td style="color:crimson ;">{{sordar?.account?.balance}}</td>
         </tr>
       </tbody>
     </table>

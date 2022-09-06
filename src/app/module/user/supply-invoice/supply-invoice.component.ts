@@ -113,7 +113,16 @@ export class SupplyInvoiceComponent implements OnInit {
       next: (res) => {
         if (res.body) {
           this.person = res.body;
-          this.supplyer = res.body.supplyer;
+          console.log(res.body);
+          if(res.body.supplyer){
+            this.supplyer = res.body.supplyer;
+            this.notFoundMessage = '';
+          }else{
+            this.userService.showMessage("ERROR!","Not a Supplyer, Add Now!","OK",2000);
+            this.notFoundMessage = '*Not a Supplyer, Add Now!';
+            this.needSupplyer = true;
+            return;
+          }
           this.needSupplyer = false;
         } else {
           this.needSupplyer = true;
@@ -127,6 +136,37 @@ export class SupplyInvoiceComponent implements OnInit {
       },
       complete: () => {},
     });
+  }
+
+  addSupplyer(){
+    const params:Map<string,any> = new Map();
+    if(!this.person.contactNo || !this.person.personName || !this.person.personAddress){
+      this.userService.showMessage("WARNING!","Invalid Input","OK",10000);
+      return;
+    }
+    let supplyer = {
+      personId: this.person.id,
+      personName:this.person.personName,
+      contactNo:this.person.contactNo,
+      personAddress:this.person.personAddress,
+      clientType:"SUPPLYER"
+    }
+    params.set("supplyer",supplyer);
+    this.userService.addSupplyer(params).subscribe({
+      next:(res)=>{
+        this.supplyer = res.body;
+        this.notFoundMessage = '';
+        this.needSupplyer = false;
+
+      },
+      error:(err)=>{
+        console.log(err.message);
+        this.notFoundMessage = '*Supplyer Not Found. Please Add Suppler';
+        this.needSupplyer = true;
+        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
+      },
+      complete: ()=>{}
+    })
   }
   fetchProductList() {
     this.userService.fetchAllProducts().subscribe({
@@ -200,9 +240,16 @@ export class SupplyInvoiceComponent implements OnInit {
 
   submitInvoice() {
     console.log(this.supplyInvoice);
+    if(!this.supplyer){
+      this.userService.showMessage("ERROR!","Invalid Form, ADD SUPPLYER","OK",2000);
+      return;
+    }
+    if(!this.selectedProduct || this.selectedType){
+      this.userService.showMessage("ERROR!","Invalid Form!","OK",2000);
+      return;
+    }
     let supplyInvoiceModel:any = this.supplyInvoice;
     supplyInvoiceModel.supplyer = this.supplyer;
-    // supplyInvoiceModel.supplyer.person = this.person;
     supplyInvoiceModel.driver = this.selectedDriver;
     supplyInvoiceModel.productName = this.selectedProduct.productName;
     supplyInvoiceModel.deliveryType = this.selectedType;

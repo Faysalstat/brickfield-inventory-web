@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Sordar } from '../../model';
+import { ReportExportService } from '../../report-export.service';
+import { UserService } from '../../user/user.service';
 import { ReportService } from '../report.service';
 
 @Component({
@@ -12,24 +15,54 @@ export class SordarRecordReportComponent implements OnInit {
   limit = 10;
   exportData!:any[];
   queryBody:any;
+  selectedSordar:string = ''; 
+  selectedCategory:string = '';
+  sordars!:Sordar[];
+  categories!:any[];
   constructor(
-    private reportService:ReportService
+    private reportService:ReportService,
+    private reportExportService: ReportExportService,
+    private userService:UserService
   ) {
     this.recordList = [];
+    this.exportData = [];
     this.queryBody = {
-      sordarId:"",
+      sordar:this.selectedSordar,
       category:""
     }
+      
+    this.categories = [
+      { label: 'Select Category', value: '' },
+      { label: '১নং পাগ মিল', value: '১নং পাগ মিল' },
+      { label: '১নং অটো মিল', value: '১নং অটো মিল' },
+      { label: '২নং অটো মিল', value: '২নং অটো মিল' },
+      { label: 'লোড', value: 'LOAD' },
+      { label: 'আনলোড', value: 'UNLOAD' },
+    ]
    }
 
   ngOnInit(): void {
-    this.fetchAllTransByPage();
+    this.fetchSordarProdReport();
+    this.fetchSordarList();
   }
-  fetchAllTransByPage() {
+  fetchSordarList(){
+    this.userService.fetchAllSordars().subscribe({
+      next:(res)=>{
+        this.sordars = res.body;
+        console.log(res);
+        
+      },
+      error:(err)=>{
+        console.log(err.message);
+      this.userService.showMessage("ERROR!","Sordars Fetching Failed" + err.message,"OK",2000);
+      }
+    })
+  }
+  fetchSordarProdReport() {
     this.exportData = [];
     const params: Map<string, any> = new Map();
-    // params.set('limit', 5);
-    // params.set('offset', this.offset);
+    this.queryBody.sordarId = this.selectedSordar
+    this.queryBody.category = this.selectedCategory;
     params.set('query',this.queryBody)
     console.log();
     this.reportService.fetchSordarProductionReport(params).subscribe({
@@ -37,21 +70,21 @@ export class SordarRecordReportComponent implements OnInit {
         // this.expenseReasons = [];
         console.log(datares);
         this.recordList = datares.body;
-        // this.recordList.forEach(elem=>{
-        //   let item = {
-        //     TransactionType: elem.transactionType,
-        //     TransactionReason: elem.transactionReason,
-        //     IncomeAmount: elem.income,
-        //     ExpenseAmount: elem.expense,
-        //     Reversed: elem.reversedAmount,
-        //     TnxDate:elem.transactionDate,
-        //     Refference: elem.refference,
-        //     ReceivedBy: (elem.receivedBy)?elem.receivedBy:elem.payTo,
-        //   }
-        //   this.exportData.push(item);
-   
-          
-        // });
+        let index = 0;
+        this.recordList.map((elem)=>{
+          index++;
+          let sorProdRec = {
+            sn: index,
+            SordarName: elem.sordar.person.personName,
+            CategoryName: elem.category,
+            Quantity: elem.quantity,
+            ProductionDate: elem.date
+
+          }
+          this.exportData.push(sorProdRec);
+        })
+        this.selectedSordar = '';
+        this.selectedCategory ='';
       },
       error:(err)=>{
         console.log(err);
@@ -62,14 +95,20 @@ export class SordarRecordReportComponent implements OnInit {
   nextPage() {
     // this.tnxIndex+=
     this.offset += 5;
-    this.fetchAllTransByPage();
+    this.fetchSordarProdReport();
   }
   previousPage() {
     if (this.offset > 5) {
       this.offset = this.limit + 5;
-      this.fetchAllTransByPage();
+      this.fetchSordarProdReport();
     } else {
       return;
     }
+  }
+  async export(){
+    this.reportExportService.exportAsExcelFile(this.exportData, 'Sordar_Production_Report')
+  }
+  fetchReport(){
+      this.fetchSordarProdReport();
   }
 }

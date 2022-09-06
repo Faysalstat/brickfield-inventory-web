@@ -16,6 +16,8 @@ export class AddSupplyerComponent implements OnInit {
   message:string = "";
   products:Product[] = [];
   selectedProduct!:any;
+  isSupplyer: boolean = false;
+  person!:any;
   constructor(
     private formBuilder: FormBuilder,
     private userService:UserService
@@ -61,6 +63,7 @@ export class AddSupplyerComponent implements OnInit {
       return;
     }
     const supplyer = {
+      personId: this.person.id,
       personName:this.supplyerForm.get('name')?.value,
       contactNo:this.supplyerForm.get('contactNo')?.value,
       personAddress:this.supplyerForm.get('address')?.value,
@@ -91,23 +94,35 @@ export class AddSupplyerComponent implements OnInit {
         console.log(res.body);
         if(res.body){
           this.message= "This person is in our database";
+          this.person = res.body;
           this.supplyerForm.get('name')?.setValue(res.body?.personName);
           this.supplyerForm.get('address')?.setValue(res.body?.personAddress);
           this.supplyerForm.get('name')?.disable();
           this.supplyerForm.get('address')?.disable();
-          if(res.body.customer){
-            this.message= "This person is in our database. </br> This person is a customer";
-            this.supplyerForm.get('balance')?.setValue(res.body?.customer?.account?.balance);
-            this.supplyerForm.get('balance')?.disable();
+          if(res.body.supplyer){
+            this.message= "This person is in our database. This person is a Supplyer";
+            this.isSupplyer = true;
           }
-          
-          this.message = "* This Customer already exists!"
+          if(res.body.customer){
+            this.isSupplyer = false;
+            this.message= "This person is in our database. This person is a customer";
+          }
+          if(res.body.driver){
+            this.isSupplyer = false;
+            this.message= "This person is in our database. This person is a driver";
+          }
+          if(res.body.sordar){
+            this.isSupplyer = false;
+            this.message= "This person is in our database. This person is a sordar";
+          }
 
         }
         else{
           this.supplyerForm.get('name')?.enable();
           this.supplyerForm.get('address')?.enable();
           this.supplyerForm.get('balance')?.enable();
+          this.message ="";
+          this.isSupplyer = false;
           return;
         }
       },

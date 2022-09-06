@@ -1,7 +1,7 @@
 import { environment } from '../../../environments/environment';
 // const BASE_URL = environment.BASE_URL;
-// const BASE_URL = "https://vatasolution.me/api";
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://vatasolution.me/api";
+// const BASE_URL = "http://localhost:3000/api";
 
 export const Urls = {
     USER_SIGN_IN: BASE_URL + "/auth/signin",
@@ -14,6 +14,7 @@ export const Urls = {
     UPDATE_SCHEDULE : BASE_URL+ "/schedule/update",
     DELETE_SCHEDULE : BASE_URL+ "/schedule/delete",
     UPDATE_USER: BASE_URL+"/user/updateuser",
+    UPDATE_SORDAR : BASE_URL + "/sordar/updatesordar", 
     // UPDATE_PASSWORD : BASE_URL +"/user/updateuser",
     UNLOAD_PRODUCTION: BASE_URL+"/stock/unloadproduction",
     LOAD_PRODUCTION: BASE_URL+"/stock/loadproduction",
@@ -47,7 +48,7 @@ export const Urls = {
     SORDAR_PAYMENT: BASE_URL + "/expense/sordar-payment",
     ADD_EXPENSE_CATEORY: BASE_URL + "/expense/add-category",
     ADD_SORDAR_RECORD : BASE_URL + "/sordar/add-record",
-
+    CREATE_APP_CONFIG: BASE_URL + "/config/addconfig",
     // FETCH 
     FETCH_ALL_CUSTOMER: BASE_URL+ "/customer/getall",
     FETCH_ALL_SUPPLYER: BASE_URL+ "/supplyer/getall",

@@ -51,9 +51,21 @@ export class AdminService {
     console.log(queryParams.get("user"))
     return this.http.post(Urls.CREATE_USER,queryParams.get("user"));
   }
+  public addAppConfig(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("config"))
+    return this.http.post(Urls.CREATE_APP_CONFIG,queryParams.get("config"));
+  }
+  public updateSordar(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("sordar"))
+    return this.http.post(Urls.UPDATE_SORDAR,queryParams.get("sordar"));
+  }
 
-  public fetchAllTask(): Observable<any>{
-    return this.http.get(Urls.FETCH_ALL_TASK);
+  public fetchAllTask(queryParams: Map<string, any>): Observable<any>{
+    let params = new HttpParams();
+    params = params.append('offset',queryParams.get('query').offset);
+    params = params.append('taskType',queryParams.get('query').taskType);
+    params = params.append('limit',queryParams.get('query').limit);
+    return this.http.get(Urls.FETCH_ALL_TASK,{params:params});
   }
   public fetchTaskById(id:any): Observable<any>{
     let params = new HttpParams();

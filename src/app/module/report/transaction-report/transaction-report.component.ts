@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReportService } from '../../report.service';
+import { ReportExportService } from '../../report-export.service';
 import { UserService } from '../../user/user.service';
 
 @Component({
@@ -32,7 +32,7 @@ export class TransactionReportComponent implements OnInit {
   isExpense:boolean = false;
   constructor(
     private userService: UserService,
-    private reportService: ReportService
+    private reportExportService: ReportExportService
     ) {
     
     this.tnxList = [];
@@ -51,7 +51,8 @@ export class TransactionReportComponent implements OnInit {
       {label:'মজুরি',value:"মজুরি"},
       {label:'খরচ',value:"খরচ"},
       {label:'বিল',value:"বিল"},
-      {label:'Hand Over',value:"HAND_OVER"}
+      {label:'Hand Over',value:"HAND_OVER"},
+      {label:'Salary',value:"SALARY"}
     ];
     this.expenseReasons = [{label:'Select Category',value:null}];
     this.transactionTypes=[
@@ -154,7 +155,7 @@ export class TransactionReportComponent implements OnInit {
     }
   }
   async export(){
-    this.reportService.exportAsExcelFile(this.exportData, 'Transaction_Summary')
+    this.reportExportService.exportAsExcelFile(this.exportData, 'Transaction_Summary')
   }
   onChnageCategory(){
     this.queryBody.category = this.selectedCategory;

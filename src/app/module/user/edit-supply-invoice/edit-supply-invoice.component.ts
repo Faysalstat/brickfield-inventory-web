@@ -58,6 +58,7 @@ export class EditSupplyInvoiceComponent implements OnInit {
           this.deliveryType = 'TON';
         }
         this.comment = this.supplyInvoice.comment;
+        this.newDue = this.supplyInvoice.duePayment;
       },
       error: (err) => {
         console.log(err.message);

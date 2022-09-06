@@ -315,6 +315,13 @@
                         </mat-form-field>
                     </div>
                     <div class="col-md-3">
+                        <mat-form-field class="input-field" appearance="outline">
+                            <mat-label>রাউন্ড নং:</mat-label>
+                            <input type="number" pInputText [ngModelOptions]="{standalone:true}"
+                                [(ngModel)]="roundNo" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
                         <mat-form-field appearance="outline">
                             <mat-label>তারিখ:</mat-label>
                             <input matInput [matDatepicker]="loadpicker" [ngModelOptions]="{standalone:true}"

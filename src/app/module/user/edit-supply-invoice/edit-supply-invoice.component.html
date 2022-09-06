@@ -44,9 +44,9 @@
                     <tr>
                         <td colspan="2" style="text-align:center;font-weight: bolder">Transaction Details</td>
                     </tr>
-                    <tr *ngIf="isCC">
+                    <tr>
                         <td>পরিমান</td>
-                        <td> {{supplyInvoice.numberOfTrips}} গাড়ি </td>
+                        <td> {{supplyInvoice.numberOfTrips||0}} গাড়ি </td>
                     </tr>
                     <tr *ngIf="isCC">
                         <td>গাড়ি প্রতি ক্রয় মূল্য</td>
