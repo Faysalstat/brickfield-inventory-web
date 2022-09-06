@@ -34,6 +34,15 @@
             <mat-datepicker #toDatePicker></mat-datepicker>
         </mat-form-field>
     </div>
+    <div class="col-md-2">
+      <mat-form-field appearance="outline" class="input-field">
+        <mat-label>Select Due Type: </mat-label>
+        <mat-select [ngModelOptions]="{standalone:true}"
+          [(ngModel)]="queryBody.isDue">
+          <mat-option *ngFor="let due of dueList" [value]="due.value">{{due?.label}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
       <div class="col-md-2">
         <button style="margin: 10px; float: left;" (click)="fetchAllInvoices()" mat-raised-button
           color="warn">Search</button>
@@ -80,7 +89,7 @@
               </td>
             </tr>
           </tbody>
-          <tfoot>
+          <!-- <tfoot>
             <td colspan="11">
               <div  style="float:right ;font-size: 16px;">
                 <button mat-icon-button color="primary" (click)="previousPage()">
@@ -91,8 +100,15 @@
                 </button>
               </div>
             </td>
-          </tfoot>
+          </tfoot> -->
         </table>
+      </div>
+      <div class="col-md-12">
+        <div style="float:right ;font-size: 16px;">
+          <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+            (page)="pageChange($event)" aria-label="Select page">
+          </mat-paginator>
+        </div>
       </div>
     </div>
   </mat-card>

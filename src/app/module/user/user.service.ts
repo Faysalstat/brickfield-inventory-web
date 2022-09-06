@@ -74,8 +74,11 @@ export class UserService {
   public fetchAllProducts(): Observable<any> {
     return this.http.get(Urls.FETCH_ALL_PRODUCTS);
   }
-  public fetchAllSchedulesByStatus(): Observable<any> {
-    return this.http.get(Urls.FETCH_ALL_SCHEDULES_BY_STATUS);
+  public fetchAllSchedulesByStatus(queryParams: Map<string, any>): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('offset',queryParams.get('query').offset);
+    params = params.append('limit',queryParams.get('query').limit);
+    return this.http.get(Urls.FETCH_ALL_SCHEDULES_BY_STATUS,{params:params});
   }
   public fetchAllSchedulesByDate(): Observable<any> {
     return this.http.get(Urls.FETCH_ALL_SCHEDULES_BY_DATE);
@@ -105,17 +108,20 @@ export class UserService {
     params = params.append('contactNo',queryParams.get('query').contactNo);
     params = params.append('invoiceNo',queryParams.get('query').invoiceNo);
     params = params.append('doNo',queryParams.get('query').doNo);
+    params = params.append('isDue',queryParams.get('query').isDue);
     params = params.append('deliveryStatus',queryParams.get('query').deliveryStatus);
     return this.http.get(Urls.FETCH_ALL_INVOICE,{params:params});
   }
 
   public fetchAllSupplyInvoice(queryParams: Map<string, any>): Observable<any> {
     let params = new HttpParams();
-    params = params.append('offset',queryParams.get('offset'));
+    params = params.append('offset',queryParams.get('query').offset);
+    params = params.append('limit',queryParams.get('query').limit);
     params = params.append('productName',queryParams.get('query').productName);
     params = params.append('contactNo',queryParams.get('query').contactNo);
     params = params.append('fromDate',queryParams.get('query').fromDate);
     params = params.append('toDate',queryParams.get('query').toDate);
+    params = params.append('isDue',queryParams.get('query').isDue);
     return this.http.get(Urls.FETCH_ALL_SUPPLY_INVOICE,{params:params});
   }
   public fetchInvoiceById(id: any): Observable<any> {
@@ -203,7 +209,8 @@ export class UserService {
   }
   public fetchDueAmountInvoiceList(queryParams: Map<string, any>): Observable<any> {
     let params = new HttpParams();
-    params = params.append('offset',queryParams.get('offset'));
+    params = params.append('offset',queryParams.get('query').offset);
+    params = params.append('limit',queryParams.get('query').limit);
     return this.http.get(Urls.FETCH_ALL_DUE_INVOICE,{ params: params });
   }
   public fetchGLAccountBalance(type: string): Observable<any> {

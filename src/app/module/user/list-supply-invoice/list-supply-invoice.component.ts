@@ -13,8 +13,11 @@ export class ListSupplyInvoiceComponent implements OnInit {
 
   invoiceList!:any;
   customer!:Customer;
-  offset: number = 0;
+  offset:number = 0;
   limit = 5;
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
   queryBody!:SupplyQuery;
   contactNo!:string;
   statusList!:any[];
@@ -23,6 +26,7 @@ export class ListSupplyInvoiceComponent implements OnInit {
   person!: Person;
   notFoundMessage!: string;
   productList!: any[];
+  dueList!:any[];
   constructor(
     private route: Router,
     private userService:UserService,
@@ -35,6 +39,10 @@ export class ListSupplyInvoiceComponent implements OnInit {
       {label:"Delivered", value:"DELIVERED"},
       {label:"Pending", value:"PENDING"}
       
+    ];
+    this.dueList = [
+      {label:"Find All", value:false},
+      {label:"Due", value:true}
     ]
    }
   ngOnInit(): void {
@@ -66,12 +74,14 @@ export class ListSupplyInvoiceComponent implements OnInit {
 
   fetchAllInvoices(){
     const params: Map<string, any> = new Map();
-    params.set('offset', this.offset);
+    this.queryBody.offset = this.offset;
+    this.queryBody.limit = this.pageSize;
     params.set('query', this.queryBody);
     this.userService.fetchAllSupplyInvoice(params).subscribe({
       next:(res)=>{
         console.log(res);
-        this.invoiceList = res.body;
+        this.invoiceList = res.body.data;
+        this.length = res.body.length;
         this.queryBody = new SupplyQuery();
       },
       error:(err)=>{
@@ -104,5 +114,9 @@ export class ListSupplyInvoiceComponent implements OnInit {
     }
     this.fetchAllInvoices();
   }
-
+  pageChange(event:any){
+    this.pageSize = event.pageSize;
+    this.offset = this.pageSize * event.pageIndex;
+    this.fetchAllInvoices();
+  }
 }

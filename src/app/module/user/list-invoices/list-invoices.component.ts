@@ -12,11 +12,12 @@ export class ListInvoicesComponent implements OnInit {
  
   invoiceList!:any;
   customer!:Customer;
-  offset:number = 0;
-  limit = 5;
+  
   queryBody!:InvoiceQueryBody;
   contactNo!:string;
   statusList!:any[];
+  offset:number = 0;
+  limit = 5;
   length = 100;
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];

@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { ScheduleQuery } from '../../model';
 import { UserService } from '../user.service';
 
 @Component({
@@ -12,11 +13,18 @@ import { UserService } from '../user.service';
 export class ScheduleListComponent implements OnInit {
   scheduleList!:any;
   statusColor!:string;
+  offset:number = 0;
+  limit = 5;
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  queryBody!:ScheduleQuery;
   constructor(
     private route: Router,
     private userService:UserService) {
     this.scheduleList = [];
     this.statusColor = "#02c22f";
+    this.queryBody = new ScheduleQuery();
    }
   ngOnInit(): void {
     this.fetchAllSchedules();
@@ -29,10 +37,15 @@ export class ScheduleListComponent implements OnInit {
   }
 
   fetchAllSchedules(){
-    this.userService.fetchAllSchedulesByStatus().subscribe({
+    const params: Map<string, any> = new Map();
+    this.queryBody.offset = this.offset;
+    this.queryBody.limit = this.pageSize;
+    params.set('query', this.queryBody);
+    this.userService.fetchAllSchedulesByStatus(params).subscribe({
       next:(res)=>{
         console.log(res);
-        this.scheduleList = res.body;
+        this.scheduleList = res.body.data;
+        this.length = res.body.length;
       },
       error:(err)=>{
         console.log(err.message);
@@ -53,5 +66,10 @@ export class ScheduleListComponent implements OnInit {
       this.statusColor="#29d10f";
     }
     return status;
+  }
+  pageChange(event:any){
+    this.pageSize = event.pageSize;
+    this.offset = this.pageSize * event.pageIndex;
+    this.fetchAllSchedules();
   }
 }

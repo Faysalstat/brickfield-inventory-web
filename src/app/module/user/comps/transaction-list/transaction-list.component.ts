@@ -1,7 +1,7 @@
 import { Element } from '@angular/compiler/src/render3/r3_ast';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { ReportService } from 'src/app/module/report.service';
+import { ReportExportService } from 'src/app/module/report-export.service';
 import { UserService } from '../../user.service';
 
 @Component({
@@ -29,7 +29,7 @@ export class TransactionListComponent implements OnInit {
   toDate!:any;
   constructor(
     private userService: UserService,
-    private reportService: ReportService
+    private reportExportService: ReportExportService
     ) {
     
     this.tnxList = [];
@@ -117,7 +117,7 @@ export class TransactionListComponent implements OnInit {
     }
   }
   async export(){
-    this.reportService.exportAsExcelFile(this.exportData, 'Transaction_Summary')
+    this.reportExportService.exportAsExcelFile(this.exportData, 'Transaction_Summary')
   }
   onChnageCategory(){
     this.queryBody.category = this.selectedCategory;

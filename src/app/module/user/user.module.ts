@@ -59,6 +59,7 @@ import { EditSupplyInvoiceComponent } from './edit-supply-invoice/edit-supply-in
     CompsModule,
     MaterialModule,
     ReportModule
-  ]
+  ],
+  exports:[SordarListComponent]
 })
 export class UserModule { }

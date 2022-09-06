@@ -41,6 +41,8 @@ export class Sordar {
   account!: Account;
   person!: Person;
   category!:string;
+  contactAmount: number =0;
+  contactQuantity: number = 0;
 }
 export class Brick {
   id!: number;
@@ -271,11 +273,12 @@ export class InvoiceQueryBody{
   createdFrom!:Date;
   createdTo!:Date;
   invoiceNo:string = "";
-  deliveryStatus:string = "PENDING";
+  deliveryStatus:string = "";
   customerId:number=0;
   supplyerId:number=0;
   contactNo:string = "";
   doNo:string = '';
+  isDue:boolean = false;
 
 }
 export class Expense{
@@ -304,7 +307,19 @@ export class EscavatorExpenseModel{
 // }
 
 export class SupplyQuery{
+  limit:number = 0;
+  offset:number = 0;
   productName: string = '';
+  contactNo: string ='';
+  fromDate: string ='';
+  toDate:string='';
+  isDue:boolean = false;
+}
+
+export class ScheduleQuery{
+  limit:number = 0;
+  offset:number = 0;
+  driverContactNo: string = '';
   contactNo: string ='';
   fromDate: string ='';
   toDate:string='';

@@ -26,7 +26,7 @@ export class ReportService {
     let params = new HttpParams();
     params = params.append('offset',queryParams.get('query').offset);
     params = params.append('category',queryParams.get('query').category);
-    params = params.append('sordarId',queryParams.get('query').sordarId);
+    params = params.append('sordar',queryParams.get('query').sordarId);
     return this.http.get(Urls.FETCH_ALL_SORDARS_PRODUCTION_REPORT, { params: params });
   }
 

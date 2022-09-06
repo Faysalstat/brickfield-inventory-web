@@ -19,6 +19,7 @@ import { PaySordarComponent } from './pay-sordar/pay-sordar.component';
 import { AddExpenseCategoryComponent } from './add-expense-category/add-expense-category.component';
 import { DashboardSummaryComponent } from './dashboard-summary/dashboard-summary.component';
 import { OfficeDepositComponent } from './office-deposit/office-deposit.component';
+import { EmployeesComponent } from './employees/employees.component';
 
 
 
@@ -39,7 +40,9 @@ import { OfficeDepositComponent } from './office-deposit/office-deposit.componen
     PaySordarComponent,
     AddExpenseCategoryComponent,
     DashboardSummaryComponent,
-    OfficeDepositComponent
+    OfficeDepositComponent,
+    EmployeesComponent,
+    
   ],
   imports: [
     CommonModule,

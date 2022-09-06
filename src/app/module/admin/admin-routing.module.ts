@@ -9,6 +9,7 @@ import { TransactionReportComponent } from '../report/transaction-report/transac
 import { AdminComponent } from './admin.component';
 import { ApprovalListComponent } from './approval-list/approval-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EmployeesComponent } from './employees/employees.component';
 import { HandoverDetailsComponent } from './handover-details/handover-details.component';
 import { InvoiceDetailComponent } from './invoice-detail/invoice-detail.component';
 import { OfficeExpenseComponent } from './office-expense/office-expense.component';
@@ -33,6 +34,8 @@ const routes: Routes = [{
           {path:"cash-handover-report",component: CashHandoverReportComponent},
           {path:"sordar-report",component: SordarRecordReportComponent}
         ]},
+        
+        {path: 'employees', component: EmployeesComponent},
         {path: 'users', component: UsersComponent},
         {path: 'invoice-details/:id', component: InvoiceDetailComponent},
         {path: 'handover-details/:id', component: HandoverDetailsComponent},

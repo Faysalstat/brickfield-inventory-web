@@ -1,8 +1,33 @@
 <mat-card class="mt-4">
     <div class="row">
-        
+        <div class="col-md-3 col-sm-3">
+            <mat-form-field appearance="outline" class="input-field">
+                <mat-label>Sordar</mat-label>
+                <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="fetchReport()"
+                    [(ngModel)]="selectedSordar">
+                    <mat-option *ngFor="let sordar of sordars" [value]="sordar?.id">
+                        {{sordar?.person?.personName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3 col-sm-3">
+            <mat-form-field appearance="outline" class="input-field">
+                <mat-label>Category</mat-label>
+                <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="fetchReport()"
+                    [(ngModel)]="selectedCategory">
+                    <mat-option *ngFor="let category of categories" [value]="category.value">
+                        {{category?.label}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
     </div>
     <div class="row">
+        <div class="col-md-12">
+            <button mat-raised-button (click)="export()" color="warn">Export</button>
+        </div>
+        <hr class="mt-2">
         <div class="col-md-12">
             <table class="table table-stripe mt-4">
                 <thead>
