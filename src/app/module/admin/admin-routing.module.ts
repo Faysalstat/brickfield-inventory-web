@@ -8,6 +8,7 @@ import { SordarRecordReportComponent } from '../report/sordar-record-report/sord
 import { TransactionReportComponent } from '../report/transaction-report/transaction-report.component';
 import { AdminComponent } from './admin.component';
 import { ApprovalListComponent } from './approval-list/approval-list.component';
+import { ConfigurationsComponent } from './configurations/configurations.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { HandoverDetailsComponent } from './handover-details/handover-details.component';
@@ -36,6 +37,7 @@ const routes: Routes = [{
         ]},
         
         {path: 'employees', component: EmployeesComponent},
+        {path: 'config', component: ConfigurationsComponent},
         {path: 'users', component: UsersComponent},
         {path: 'invoice-details/:id', component: InvoiceDetailComponent},
         {path: 'handover-details/:id', component: HandoverDetailsComponent},

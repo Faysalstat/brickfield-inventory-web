@@ -1,31 +1,21 @@
-.box {
-/* margin-top: 400px; */
-width: 50%;
-margin: 100px auto;
-}
+/*  */
 
-.login-form{
-    margin: 15px 30px;
-    padding: 20px;
-    background-color: #eee;
-}
-label{
-    font-weight: bold;
-}
-form{
-    width:60%; 
-    margin:auto;
-   }
 
-@media screen and (max-width: 200px) {
-   form{
-    width:100%;
-    color: red;
-   }
-   .box {
-    /* margin-top: 400px; */
-    width: 90%;
-    margin: 100px auto;
-    }
-
-  }
+  .divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+.l-img{
+    display: none;
+}
+}
