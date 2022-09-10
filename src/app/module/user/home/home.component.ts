@@ -10,13 +10,6 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    Swal.fire({
-      title: 'Hi There',
-      text: 'Welcome To Vatasolution!',
-      // icon: 'error',
-      confirmButtonText: 'Close',
-      timer:2000
-    })
   }
 
 }

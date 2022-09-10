@@ -3,36 +3,42 @@
     <div class="col-md-2">
       <mat-form-field class="input-field" appearance="fill">
         <mat-label>Invoice No</mat-label>
-        <input placeholder="Invoice No" pInputText [ngModelOptions]="{standalone:true}"
+        <input placeholder="Invoice No" pInputText (change)="fetchAllInvoices()" [ngModelOptions]="{standalone:true}"
           [(ngModel)]="queryBody.invoiceNo" matInput>
       </mat-form-field>
     </div>
     <div class="col-md-2">
       <mat-form-field class="input-field" appearance="fill">
         <mat-label>D.O No</mat-label>
-        <input placeholder="Invoice No" pInputText [ngModelOptions]="{standalone:true}"
+        <input placeholder="Invoice No" pInputText (change)="fetchAllInvoices()" [ngModelOptions]="{standalone:true}"
           [(ngModel)]="queryBody.doNo" matInput>
       </mat-form-field>
     </div>
     <div class="col-md-2">
       <mat-form-field class="input-field" appearance="fill">
         <mat-label>Contact No</mat-label>
-        <input pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="queryBody.contactNo"
+        <input pInputText [ngModelOptions]="{standalone:true}" (change)="fetchAllInvoices()" [(ngModel)]="queryBody.contactNo"
           placeholder="Contact" matInput>
       </mat-form-field>
     </div>
     <div class="col-md-2">
       <mat-form-field class="input-field" appearance="fill">
         <mat-label>Delivery Status</mat-label>
-        <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="queryBody.deliveryStatus">
+        <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="fetchAllInvoices()" [(ngModel)]="queryBody.deliveryStatus">
           <mat-option *ngFor="let status of statusList" [value]="status.value">{{status?.label}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
-
-    <div class="col-md-2">
+    
+    <!-- <div class="col-md-2">
       <button style="margin: 10px; float: left;" (click)="searchInvoice()" mat-raised-button
         color="warn">Search</button>
+    </div> -->
+    <div class="col-md-3">
+      <button style="margin-top:10px ;" mat-raised-button color="warn"  (click)="refresh()" >
+        Refresh
+        <mat-icon>refresh</mat-icon>
+      </button>
     </div>
   </div>
   <div class="row">

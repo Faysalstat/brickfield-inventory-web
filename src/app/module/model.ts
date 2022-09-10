@@ -319,6 +319,8 @@ export class SupplyQuery{
 export class ScheduleQuery{
   limit:number = 0;
   offset:number = 0;
+  doNo: string = '';
+  deliveryStatus: string = 'PENDING';
   driverContactNo: string = '';
   contactNo: string ='';
   fromDate: string ='';

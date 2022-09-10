@@ -28,7 +28,8 @@ export class ListInvoicesComponent implements OnInit {
     this.queryBody = new InvoiceQueryBody();
     this.statusList = [
       {label:"Delivered", value:"DELIVERED"},
-      {label:"Pending", value:"PENDING"}
+      {label:"Pending", value:"PENDING"},
+      {label:"Schedule Pending", value:"SCHEDULE_PENDING"}
       
     ]
    }
@@ -99,12 +100,12 @@ export class ListInvoicesComponent implements OnInit {
     this.fetchAllInvoices();
   }
   pageChange(event:any){
-    console.log(this.length);
-    console.log(this.pageSize);
-    console.log("event fired " + event.pageIndex);
     this.pageSize = event.pageSize;
     this.offset = this.pageSize * event.pageIndex;
     this.fetchAllInvoices();
   }
- 
+  refresh(){
+    this.queryBody = new InvoiceQueryBody();
+    this.fetchAllInvoices();
+  }
 }

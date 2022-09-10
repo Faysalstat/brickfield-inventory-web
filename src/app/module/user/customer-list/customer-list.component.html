@@ -1,5 +1,5 @@
 <mat-card class="mt-5" style="padding:50px ;">
-  <app-add-person (customerAddedEvent)="updateList($event)"></app-add-person>
+  <!-- <app-add-person (customerAddedEvent)="updateList($event)"></app-add-person> -->
   <h1 class="mt-5">Customer List</h1>
   <table class="table table-striped" style="text-align:left ;">
     <thead>
@@ -18,20 +18,14 @@
         <td>{{customer?.person?.personAddress}}</td>
       </tr>
     </tbody>
-    <tfoot>
-      <tr>
-        <td colspan="3"></td>
-        <td>
-          <div  style="float:right ;font-size: 16px;">
-            <button mat-icon-button color="primary" (click)="previousPage()">
-              <mat-icon>fast_rewind</mat-icon>
-            </button>
-            <button mat-icon-button color="primary" (click)="nextPage()">
-              <mat-icon>fast_forward</mat-icon>
-            </button>
-          </div>
-        </td>
-      </tr>
-    </tfoot>
   </table>
+  <div class="row">
+    <div class="col-md-12">
+      <div style="float:right ;font-size: 16px;">
+        <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+          (page)="pageChange($event)" aria-label="Select page">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
 </mat-card>

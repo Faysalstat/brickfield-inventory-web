@@ -95,10 +95,11 @@ export class SupplyInvoiceComponent implements OnInit {
   fetchDrivers() {
     const params: Map<string, any> = new Map();
     params.set('offset', 0);
+    params.set('limit', 100);
     this.userService.fetchAllDrivers(params).subscribe({
       next: (data) => {
         console.log(data.body);
-        this.drivers = data.body;
+        this.drivers = data.body.data;
       },
       error:(err)=>{
         console.log(err.message);

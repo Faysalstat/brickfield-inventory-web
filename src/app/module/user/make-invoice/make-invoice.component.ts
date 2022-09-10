@@ -114,6 +114,7 @@ export class MakeInvoiceComponent implements OnInit {
       } else {
         this.isDue = false;
       }
+      
     });
     this.invoiceIssueForm.get('rebate')?.valueChanges.subscribe((data) => {
       this.invoiceIssueForm
@@ -309,6 +310,7 @@ export class MakeInvoiceComponent implements OnInit {
     if (!this.scheduleItem.vehicleCategory || !this.scheduleItem.driver) {
       return;
     }
+    
     if (this.isEdit) {
       const params: Map<string, any> = new Map();
       this.scheduleItem.invoiceId = this.invoiceIssueForm.get('id')?.value;
@@ -322,7 +324,7 @@ export class MakeInvoiceComponent implements OnInit {
     this.selectedDriver = new Driver();
     this.scheduleItem = new ScheduleDeliveryModel();
     this.calculateScheduleTotal();
-    this.checkScheduledQuantity();
+    
   }
   calculateScheduleTotal() {
     let scheduledQuantity = 0;
@@ -436,10 +438,11 @@ export class MakeInvoiceComponent implements OnInit {
   fetchDrivers() {
     const params: Map<string, any> = new Map();
     params.set('offset', 0);
+    params.set('limit', 100);
     this.userService.fetchAllDrivers(params).subscribe({
       next: (data) => {
         console.log(data.body);
-        this.drivers = data.body;
+        this.drivers = data.body.data;
       },
       error:(err)=>{
         console.log(err.message);
@@ -447,14 +450,45 @@ export class MakeInvoiceComponent implements OnInit {
       },
     });
   }
-  checkScheduledQuantity() {
-    // for(let schedule of this.scheduleOrders)
+  checkScheduleValidity() {
+    let totalOrder = this.invoiceIssueForm.get('totalQuantity')?.value;
+    let scheduledQuantity = this.invoiceIssueForm.get('scheduledQuantity')?.value;
+    let isValid = false;
+    if(totalOrder < scheduledQuantity){
+      isValid = true;
+    }
+    if(this.invoiceIssueForm.get("duePayment")?.value < 0){
+      
+    }
+    return isValid;
+  }
+  checkFormValidity() {
+    let isValid = false;
+    if(
+      this.invoiceIssueForm.get('totalQuantity')?.value == 0 ||
+      this.invoiceIssueForm.get('duePayment')?.value < 0){
+      isValid = true;
+    }
+    if(this.invoiceIssueForm.get("duePayment")?.value < 0){
+      
+    }
+    return isValid;
   }
   submitInvoice() {
     console.log(this.orders);
     const params: Map<string, any> = new Map();
     if(!this.isCustomerExist){
       this.userService.showMessage("WARNING!","Please Add Customer","OK",10000);
+      return;
+    } 
+    let formInvalid = this.checkFormValidity();
+    if(formInvalid){
+      this.userService.showMessage("WARNING!","Due Amount Can Not be Negative. Check Rebate, Advance or Payment Value.","OK",10000);
+      return;
+    }
+    let isValid = this.checkScheduleValidity();
+    if(isValid){
+      this.userService.showMessage("WARNING!","Schedule Quantity is Greater Than Order Quantity","OK",10000);
       return;
     }
     console.log(this.invoiceIssueForm.value);
@@ -516,6 +550,17 @@ export class MakeInvoiceComponent implements OnInit {
   }
   updateInvoice() {
     const params: Map<string, any> = new Map();
+    let isScheduleValid = this.checkScheduleValidity();
+    
+    if(isScheduleValid){
+      this.userService.showMessage("WARNING!","Schedule Quantity is Greater Than Order Quantity","OK",10000);
+      return;
+    }
+    let formInvalid = this.checkFormValidity();
+    if(formInvalid){
+      this.userService.showMessage("WARNING!","Due Amount Can Not be Negative. Check Rebate, Advance or Payment Value.","OK",10000);
+      return;
+    }
     let invoiceUpdateModel = {
       id: this.invoiceIssueForm.get('id')?.value,
       totalPrice: this.invoiceIssueForm.get('totalPrice')?.value,

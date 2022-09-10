@@ -10,8 +10,12 @@ import { UserService } from '../user.service';
 })
 export class SupplyerListComponent implements OnInit {
   supplyersList!: Supplyer[];
-  limit = 10;
-  offset = 0;
+  
+  offset:number = 0;
+  limit = 5;
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
   constructor(
     private userService: UserService) {
     this.supplyersList = [];
@@ -23,10 +27,12 @@ export class SupplyerListComponent implements OnInit {
   fetchSupplyers() {
     const params: Map<string, any> = new Map();
     params.set('offset', this.offset);
+    params.set('limit', this.pageSize);
     this.userService.fetchAllSupplyers(params).subscribe({
       next: (data) => {
         console.log(data);
-        this.supplyersList = data.body;
+        this.supplyersList = data.body.data;
+        this.length = data.body.length
       },
       error:(err)=>{
         console.log(err.message);
@@ -51,17 +57,9 @@ export class SupplyerListComponent implements OnInit {
     //   complete: () => {},
     // });
   }
-  nextPage() {
-    // this.tnxIndex+=
-    this.offset += 20;
+  pageChange(event:any){
+    this.pageSize = event.pageSize;
+    this.offset = this.pageSize * event.pageIndex;
     this.fetchSupplyers();
-  }
-  previousPage() {
-    if (this.offset > 20) {
-      this.offset -= 20;
-      this.fetchSupplyers();
-    } else {
-      return;
-    }
   }
 }

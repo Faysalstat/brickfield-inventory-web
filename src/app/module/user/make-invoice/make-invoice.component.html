@@ -4,12 +4,12 @@
             <div class="row">
                 <div class="col-md-4" style="border-right:2px solid #808080 ;">
                     <div class="row">
-                        <h2>Issue Sale Invoice:</h2>
+                        <h2 class="bangla-font">ইনভয়েস ইস্যু করুন:</h2>
                         <h3 *ngIf="isEdit" style="color:red ; font-weight:bolder ;">Status : {{status}}</h3>
                         <h4 *ngIf="isDue" style="color:red ; font-weight:bolder ;">Payment Due</h4>
                         <div class="col-md-12">
                             <mat-form-field class="input-field" appearance="outline">
-                                <mat-label>D.O No:</mat-label>
+                                <mat-label>D.O নং:</mat-label>
                                 <input type="text" formControlName="doNo" matInput>
                             </mat-form-field>
                         </div>
@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-md-8">
                     <div class="row">
-                        <h2>কাস্টমার বিবরন :</h2>
+                        <h2 class="bangla-font">কাস্টমার বিবরন :</h2>
                         <h4 style="color:red">{{errMsg}}</h4>
                         <div class="col-md-6">
                             <mat-form-field class="input-field" appearance="outline">
@@ -65,7 +65,7 @@
             </div>
         </mat-card>
         <mat-card class="mt-5">
-            <h2>অর্ডারের বিবরণ:</h2>
+            <h2 class="bangla-font">অর্ডারের বিবরণ:</h2>
             <div class="row">
                 <div class="col-md-4">
                     <mat-form-field appearance="outline" class="input-field">
@@ -142,7 +142,7 @@
         </mat-card>
         <mat-card class="mt-5">
             <div class="row">
-                <h2>ডেলিভারি শিডিউল</h2>
+                <h2 class="bangla-font">ডেলিভারি শিডিউল</h2>
                 <div class="col-md-3">
                     <mat-form-field appearance="outline" class="input-field">
                         <mat-label>অর্ডার</mat-label>
@@ -211,7 +211,7 @@
                 </div> -->
                 <div class="col-md-12">
                     <button style="float:left ; margin-top: 10px;" mat-raised-button (click)="addSchedule()"
-                        color="accent">Add</button>
+                        color="accent">যোগ করুন</button>
                 </div>
                 <div class="col-md-12 mt-5" style="overflow-x:auto;">
                     <table class="table table-striped">
@@ -263,7 +263,7 @@
         </mat-card>
         <mat-card class="mt-5">
             <div class="row">
-                <h2>Invoice Summary</h2>
+                <h2 class="bangla-font">ইনভয়েস সামারি:</h2>
                 <!-- <div class="col-md-12">
                     <div class="col-md-4">
                         <mat-checkbox class="mt-5" [(ngModel)]="transportCostCustomerPayable">
@@ -313,7 +313,7 @@
                 <div class="col-md-3">
                     <!-- <h3>Payment:</h3> -->
                     <mat-form-field class="input-field" appearance="outline">
-                        <mat-label>Rebate:</mat-label>
+                        <mat-label>রিবেট:</mat-label>
                         <input type="number" pInputText formControlName="rebate" matInput>
                     </mat-form-field>
                 </div>
@@ -333,17 +333,17 @@
                 </div>
                 <div class="col-md-12">
                     <mat-form-field class="input-field" appearance="outline">
-                        <mat-label>Comment</mat-label>
+                        <mat-label>মন্তব্য:</mat-label>
                         <textarea type="text" pInputText formControlName="comment" matInput></textarea>
                     </mat-form-field>
                 </div>
                 <div *ngIf="!isEdit" class="col-md-12">
                     <button style="margin: 10px; float: right;" mat-raised-button color="primary"
-                        (click)="submitInvoice()">Submit</button>
+                        (click)="submitInvoice()">সাবমিট</button>
                 </div>
                 <div *ngIf="isEdit" class="col-md-12">
                     <button style="margin: 10px; float: right;" mat-raised-button color="primary"
-                        [disabled]="status=='PENDING'" (click)="updateInvoice()">Submit</button>
+                        [disabled]="status=='PENDING'" (click)="updateInvoice()">সাবমিট</button>
                 </div>
             </div>
             <!-- <app-cash-receive [hidden]="isReceiving" [invoiceId]= invoiceId ></app-cash-receive> -->
