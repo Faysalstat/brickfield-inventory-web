@@ -14,6 +14,10 @@
                 <input type="number" [ngModelOptions]="{standalone:true}"  [(ngModel)]="amount" placeholder="Amount" matInput>
             </mat-form-field>
         </div>
+        <div class="col-md-4">
+                <button mat-raised-button (click)="fetchGlBalance()" color="warn">
+                    <mat-icon>refresh</mat-icon>Refresh Balance</button>
+        </div>
        
         <div class="col-md-6">
             <mat-form-field class="input-field" appearance="outline">

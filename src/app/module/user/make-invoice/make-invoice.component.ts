@@ -273,6 +273,7 @@ export class MakeInvoiceComponent implements OnInit {
           window.alert('Order deleted');
           this.orders.splice(index, 1);
           this.calculateOrderTotal();
+          this.userService.showMessage("SUCCESS!","Order Deleted","OK",2000);
         },
         error:(err)=>{
           console.log(err.message);

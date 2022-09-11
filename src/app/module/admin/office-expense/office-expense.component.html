@@ -5,10 +5,10 @@
 </div>
 <mat-tab-group class="mt-4">
     <mat-tab label="DEPOSIT">
-        <app-office-deposit></app-office-deposit>
+        <app-office-deposit (depositEvent)="updateBalance($event)" ></app-office-deposit>
     </mat-tab>
     <mat-tab label="SALARY">
-        <app-payroll ></app-payroll>
+        <app-payroll (payrollEvent)="updateBalance($event)" ></app-payroll>
     </mat-tab>
     <mat-tab label="EXPENSE">
         <app-expense (expenseEvent)="updateBalance($event)" ></app-expense>
@@ -16,7 +16,7 @@
     <mat-tab label="SORDAR">
         <app-pay-sordar></app-pay-sordar>
     </mat-tab>
-    <mat-tab label = "ADD CATEGORY">
+    <!-- <mat-tab label = "ADD CATEGORY">
         <app-add-expense-category></app-add-expense-category>
-    </mat-tab>
+    </mat-tab> -->
 </mat-tab-group>

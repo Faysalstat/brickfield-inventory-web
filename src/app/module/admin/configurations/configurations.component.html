@@ -1,22 +1,25 @@
 <mat-card>
     <div class="row">
         <div class="col-md-12">
-            <h1>The Start Date Of The Fiscal Year</h1>
+            <h2>The Start Date Of The Fiscal Year</h2>
             <h2 style="font-weight:bold; color:#ff3a17">{{startDateOfTheYear}}</h2>
         </div>
         <div class="col-md-3">
-           <mat-form-field class="input-field" appearance="outline">
-              <mat-label>Set Year Starting Date</mat-label>
-              <input matInput [matDatepicker]="picker" [ngModelOptions]="{standalone:true}"
-                              [(ngModel)]="startingDate">
-                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                          <mat-datepicker #picker></mat-datepicker>
-            
-          </mat-form-field>
+            <mat-form-field class="input-field" appearance="outline">
+                <mat-label>Set Year Starting Date</mat-label>
+                <input matInput [matDatepicker]="picker" [ngModelOptions]="{standalone:true}"
+                    [(ngModel)]="startingDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+
+            </mat-form-field>
         </div>
         <div class="col-md-3">
-           <button type="submit" (click)="setAppConfiguration()" style="margin-top:15px ;" mat-raised-button color="primary">Set Date</button>
+            <button type="submit" (click)="setAppConfiguration()" style="margin-top:15px ;" mat-raised-button
+                color="primary">Set Date</button>
         </div>
         <hr>
-     </div>
+    </div>
+    <app-add-expense-category></app-add-expense-category>
+
 </mat-card>

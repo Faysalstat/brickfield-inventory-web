@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Sordar } from '../../model';
 import { UserService } from '../../user/user.service';
 import { AdminService } from '../admin.service';
@@ -9,6 +9,7 @@ import { AdminService } from '../admin.service';
   styleUrls: ['./pay-sordar.component.css']
 })
 export class PaySordarComponent implements OnInit {
+  @Output() payrollEvent = new EventEmitter<string>();
   selectedSordar: Sordar = new Sordar();
   sordars!: Sordar[];
   tnxDate!:Date;

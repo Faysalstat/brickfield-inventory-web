@@ -245,8 +245,8 @@ export class SupplyInvoiceComponent implements OnInit {
       this.userService.showMessage("ERROR!","Invalid Form, ADD SUPPLYER","OK",2000);
       return;
     }
-    if(!this.selectedProduct || this.selectedType){
-      this.userService.showMessage("ERROR!","Invalid Form!","OK",2000);
+    if(!this.selectedProduct || !this.selectedType){
+      this.userService.showMessage("ERROR!","Invalid Form! Select Product and Type","OK",2000);
       return;
     }
     let supplyInvoiceModel:any = this.supplyInvoice;

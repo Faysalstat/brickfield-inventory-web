@@ -43,7 +43,7 @@ export class CashExpenseComponent implements OnInit {
       next:(data)=>{
         console.log(data);
         this.selectedExpense = new Expense();
-        window.location.reload();
+        // window.location.reload();
       },
       error:(err)=>{
         this.userService.showMessage("ERROR!","Operation Failed","OK",2000);

@@ -5,7 +5,7 @@
                 <div class="col-md-4" style="border-right:2px solid #808080 ;">
                     <div class="row">
                         <h2 class="bangla-font">ইনভয়েস ইস্যু করুন:</h2>
-                        <h3 *ngIf="isEdit" style="color:red ; font-weight:bolder ;">Status : {{status}}</h3>
+                        <h3 *ngIf="isEdit" style="color:red ; font-weight:bolder ;">Approval : {{status}}</h3>
                         <h4 *ngIf="isDue" style="color:red ; font-weight:bolder ;">Payment Due</h4>
                         <div class="col-md-12">
                             <mat-form-field class="input-field" appearance="outline">
@@ -58,7 +58,7 @@
                         <div class="col-md-12">
                             <button *ngIf="!isCustomerExist" style="float: left;" (click)="addCustomer()"
                                 mat-raised-button color="warn">যোগ
-                                করুন:</button>
+                                করুন</button>
                         </div>
                     </div>
                 </div>
