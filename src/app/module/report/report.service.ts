@@ -22,6 +22,9 @@ export class ReportService {
   public fetchSaleReport(): Observable<any> {
     return this.http.get(Urls.FETCH_SALE_REPORT);
   }
+  public fetchDeliveryReport(): Observable<any> {
+    return this.http.get(Urls.FETCH_DELIVERY_REPORT);
+  }
   public fetchSordarProductionReport(queryParams: Map<string, any>): Observable<any> {
     let params = new HttpParams();
     params = params.append('offset',queryParams.get('query').offset);

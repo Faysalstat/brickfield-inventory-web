@@ -1,5 +1,3 @@
-import { environment } from '../../../environments/environment';
-// const BASE_URL = environment.BASE_URL;
 const BASE_URL = "https://vatasolution.me/api";
 // const BASE_URL = "http://localhost:3000/api";
 
@@ -62,6 +60,7 @@ export const Urls = {
     FETCH_ALL_PENDING_INVOICE: BASE_URL + "/invoice/getallpending",
     FETCH_ALL_SCHEDULES_BY_STATUS: BASE_URL + "/schedule/getallbystatus",
     FETCH_ALL_SCHEDULES_BY_DATE: BASE_URL + "/schedule/getbydate",
+    FETCH_ALL_ORDERS: BASE_URL + "/order/getall",
     FETCH_ALL_BRICK: BASE_URL + "/brick/getall",
     FETCH_BRICK_BY_ID: BASE_URL + "/brick/getbyid",
     FETCH_ALL_RAW_BRICK: BASE_URL + "/stock/getallrawbrick",
@@ -89,6 +88,8 @@ export const Urls = {
     FETCH_UNLOAD_REPORT : BASE_URL+"/stock/getunloadreport",
     FETCH_RAW_PRODUCTION_REPORT : BASE_URL+"/stock/getrawproductionreport",
     FETCH_SALE_REPORT : BASE_URL+"/stock/getsalereport",
+    
+    FETCH_DELIVERY_REPORT : BASE_URL+"/stock/getdeliveryreport",
     FETCH_INCOME_EXPENSE_REPOST : BASE_URL + "/transaction/get-income-expense-summary",
     FETCH_ALL_SORDARS_PRODUCTION_REPORT : BASE_URL + "/sordar/getproductionreport",
     FETCH_TOTAL_REBATE: BASE_URL+ "/invoice/gettotalrebate",

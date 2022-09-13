@@ -175,6 +175,7 @@ export class OrderModel {
   totalPrice!: number;
   brickId!: number;
   brick!: Brick;
+  state!:string;
 }
 
 export interface PeriodicInvoiceElement {
@@ -204,6 +205,8 @@ export class ScheduleDeliveryModel {
   deliveryStatus!:string;
   transportCostCustomerPayable!:number;
   brickId!:number;
+  brick!: Brick;
+  state!:string;
 }
 
 export class Invoice {
@@ -238,6 +241,7 @@ export class ApprovalModel {
   createdBy!: string;
   taskType!: string;
   invoiceId!:string;
+  deleteMessage!:string;
 }
 export enum Tasks{
   CREATE_INVOICE="CREATE_INVOICE",

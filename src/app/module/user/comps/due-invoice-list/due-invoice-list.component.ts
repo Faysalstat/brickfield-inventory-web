@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { InvoiceQueryBody } from 'src/app/module/model';
+import { ReportExportService } from 'src/app/module/report-export.service';
 import { UserService } from '../../user.service';
 
 @Component({
@@ -17,13 +18,16 @@ export class DueInvoiceListComponent implements OnInit {
   offset = 0;
   length = 100;
   pageSize = 10;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageSizeOptions: number[] = [5, 10, 25, 100,500,1000];
   queryBody!:InvoiceQueryBody;
+  dueInvoiceExportList!:any[];
   constructor(
     private route: Router,
-    private userService:UserService
+    private userService:UserService,
+    private reportExportService:ReportExportService
   ) { 
     this.invoiceList = [];
+    this.dueInvoiceExportList =[];
     this.queryBody = new InvoiceQueryBody();
   }
 
@@ -46,6 +50,21 @@ export class DueInvoiceListComponent implements OnInit {
         }else{
           this.isListExist = true;
         }
+        let index = 0;
+        this.invoiceList.map((elem:any)=>{
+          index++;
+          let model = {
+            SN: index,
+            DoNo: elem.doNo,
+            Customer: elem.customer.person.personName,
+            ContactNo:elem.customer.person.contactNo,
+            TotalBill:elem.totalBill,
+            Advanced:elem.advancePayment,
+            Due:elem.duePament,
+            Status:elem.deliveryStatus
+          };
+          this.dueInvoiceExportList.push(model);
+        })
       },
       error:(err)=>{
         console.log(err.message);
@@ -76,5 +95,7 @@ export class DueInvoiceListComponent implements OnInit {
     this.offset = this.pageSize * event.pageIndex;
     this.fetchDueAmountInvoiceList();
   }
-
+  exportList(){
+    this.reportExportService.exportAsExcelFile(this.dueInvoiceExportList, 'Sales_Report');
+  }
 }

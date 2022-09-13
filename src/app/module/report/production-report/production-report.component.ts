@@ -11,11 +11,11 @@ export class ProductionReportComponent implements OnInit {
   loadReportList!:any[];
   unLoadReportList!:any[];
   rawProductionReportList!:any[];
-  saleReportList!:any[];
+  deliveryReportList!:any[];
   rawProductionExportList!:any[];
   loadExportList!:any[];
   unloadExportList!:any[];
-  salesExportList!:any[];
+  deliveryExportList!:any[];
   constructor(
     private reportService: ReportService,
     private reportExportService:ReportExportService
@@ -24,18 +24,18 @@ export class ProductionReportComponent implements OnInit {
     this.loadReportList=[];
     this.unLoadReportList=[];
     this.rawProductionReportList=[];
-    this.saleReportList=[];
+    this.deliveryReportList=[];
     this.rawProductionExportList = [];
     this.loadExportList=[];
     this.unloadExportList=[];
-    this.salesExportList=[];
+    this.deliveryExportList=[];
   }
 
   ngOnInit(): void {
     this.fetchLoadReport();
     this.fetchUnloadReport();
     this.fetchRawProductionReport();
-    this.fetchSaleReport();
+    this.fetchDeliveryReport();
   }
 
   fetchLoadReport(){
@@ -49,6 +49,7 @@ export class ProductionReportComponent implements OnInit {
           let model = {
             SN: index,
             Quantity: elem.quantity,
+            
             LoadingDate: this.applyFilter(elem.createdAt)
           }
           this.loadExportList.push(model);
@@ -107,25 +108,26 @@ export class ProductionReportComponent implements OnInit {
       }
     })
   }
-  fetchSaleReport(){
-    this.reportService.fetchSaleReport().subscribe({
+  fetchDeliveryReport(){
+    this.reportService.fetchDeliveryReport().subscribe({
       next:(res)=>{
         console.log(res.body);
-        this.saleReportList = res.body;
+        this.deliveryReportList = res.body;
         let index = 0;
-        this.saleReportList.map((elem)=>{
+        this.deliveryReportList.map((elem)=>{
           index++;
           let model = {
             SN: index,
-            InvoiceNo: elem.invoice.invoiceNo,
+            DONo: elem.invoice.doNo,
+            Category: elem.brick.categoryName,
             Quantity: elem.deliverableQuantity,
             Date: this.applyFilter(elem.updatedAt)
           }
-          this.salesExportList.push(model);
+          this.deliveryExportList.push(model);
         })
         },
       error:(err)=>{
-        this.saleReportList = [];
+        this.deliveryReportList = [];
         console.log(err);
       }
     })
@@ -146,6 +148,6 @@ export class ProductionReportComponent implements OnInit {
     this.reportExportService.exportAsExcelFile(this.unloadExportList, 'Raw_Production_Report');
   }
   exportSalesReport(){
-    this.reportExportService.exportAsExcelFile(this.salesExportList, 'Raw_Production_Report');
+    this.reportExportService.exportAsExcelFile(this.deliveryExportList, 'Raw_Production_Report');
   }
 }

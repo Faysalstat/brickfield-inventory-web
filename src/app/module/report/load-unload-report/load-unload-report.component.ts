@@ -58,6 +58,7 @@ export class LoadUnloadReportComponent implements OnInit {
           let model = {
             SN: index,
             Type: elem.type,
+            Category: elem.categoryName,
             Quantity: elem.quantity,
             Date: this.applyFilter(elem.productionDate)
           }

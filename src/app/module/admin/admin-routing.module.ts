@@ -4,6 +4,7 @@ import { AppAuthGuard } from 'src/app/app-auth.guard';
 import { CashHandoverReportComponent } from '../report/cash-handover-report/cash-handover-report.component';
 import { IncomeExpenseComponent } from '../report/income-expense/income-expense.component';
 import { ProductionReportComponent } from '../report/production-report/production-report.component';
+import { SalesReportComponent } from '../report/sales-report/sales-report.component';
 import { SordarRecordReportComponent } from '../report/sordar-record-report/sordar-record-report.component';
 import { TransactionReportComponent } from '../report/transaction-report/transaction-report.component';
 import { AdminComponent } from './admin.component';
@@ -33,7 +34,8 @@ const routes: Routes = [{
           {path:"production-report", component: ProductionReportComponent},
           // {path:"transaction-report", component: TransactionReportComponent},
           {path:"cash-handover-report",component: CashHandoverReportComponent},
-          {path:"sordar-report",component: SordarRecordReportComponent}
+          {path:"sordar-report",component: SordarRecordReportComponent},
+          {path:"sales-report",component: SalesReportComponent}
         ]},
         
         {path: 'employees', component: EmployeesComponent},

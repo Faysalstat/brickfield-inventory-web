@@ -46,6 +46,8 @@ export class MakeInvoiceComponent implements OnInit {
   isApprovalNeeded: boolean = true;
   isCustomerExist:boolean = false;
   errMsg!:string;
+  deleteMessage:string = '';
+  username!:any;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -83,6 +85,7 @@ export class MakeInvoiceComponent implements OnInit {
     this.fetchBricks();
     this.fetchDrivers();
     this.fetchVehicles();
+    this.username  = localStorage.getItem("username");
   }
 
   prepareForm(formData: any) {
@@ -235,6 +238,9 @@ export class MakeInvoiceComponent implements OnInit {
       this.selectedBrick.pricePerPiece * this.orderItem.quantity;
   }
   addOrder() {
+    if(!this.orderItem.brickId || !this.orderItem.quantity){
+      return;
+    }
     if (this.isEdit) {
       const params: Map<string, any> = new Map();
       this.orderItem.invoiceId = this.invoiceIssueForm.get('id')?.value;
@@ -280,6 +286,7 @@ export class MakeInvoiceComponent implements OnInit {
           this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
         },
         complete: () => {
+          this.deleteMessage = "Order Deleted from this invoice";
           this.updateInvoice();
         },
       });
@@ -406,7 +413,7 @@ export class MakeInvoiceComponent implements OnInit {
       this.userService.deleteSchedule(params).subscribe({
         next: (data) => {
           console.log(data);
-          window.alert('Schedule deleted');
+          this.userService.showMessage("SUCCESS!","Schedule Deleted","OK",2000);
           this.schedules.splice(index, 1);
           this.calculateScheduleTotal();
         },
@@ -415,6 +422,7 @@ export class MakeInvoiceComponent implements OnInit {
           this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
         },
         complete: () => {
+          this.deleteMessage = "Schedule Deleted from this invoice";
           this.updateInvoice();
         },
       });
@@ -502,12 +510,12 @@ export class MakeInvoiceComponent implements OnInit {
     invoice.orders = this.orders;
     invoice.scheduleOrders = this.schedules;
     invoice.approvalStatus = 'PENDING';
-    invoice.issuedBy = 'manager';
+    invoice.issuedBy = this.username;
     if(this.isApprovalNeeded){
       let approvalModel: ApprovalModel = new ApprovalModel();
       approvalModel.payload = JSON.stringify(invoice);
       // todo add user
-      approvalModel.createdBy = 'Manager';
+      approvalModel.createdBy =this.username;
       approvalModel.taskType = Tasks.CREATE_INVOICE;
       params.set('approval', approvalModel);
       console.log(invoice);
@@ -581,14 +589,14 @@ export class MakeInvoiceComponent implements OnInit {
       scheduleOrders : this.newSchedules,
       isEdit : this.isEdit,
       customer: this.customer,
-      approvalStatus:"APPROVED"
-
+      approvalStatus:"APPROVED",
+      deleteMessage : this.deleteMessage
     };
     if(this.isApprovalNeeded || this.isEdit){
       let approvalModel: ApprovalModel = new ApprovalModel();
       approvalModel.payload = JSON.stringify(invoiceUpdateModel);
       // todo add user
-      approvalModel.createdBy = 'Manager';
+      approvalModel.createdBy = this.username;
       approvalModel.taskType = Tasks.UPDATE_INVOICE;
       approvalModel.invoiceId = invoiceUpdateModel.id;
       params.set('approval', approvalModel);

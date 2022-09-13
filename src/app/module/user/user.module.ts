@@ -25,6 +25,7 @@ import { ListSupplyInvoiceComponent } from './list-supply-invoice/list-supply-in
 import { ProfileComponent } from './profile/profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { EditSupplyInvoiceComponent } from './edit-supply-invoice/edit-supply-invoice.component';
+import { AdminModule } from '../admin/admin.module';
 
 
 
@@ -58,7 +59,8 @@ import { EditSupplyInvoiceComponent } from './edit-supply-invoice/edit-supply-in
     ReactiveFormsModule,
     CompsModule,
     MaterialModule,
-    ReportModule
+    ReportModule,
+    AdminModule
   ],
   exports:[SordarListComponent]
 })

@@ -52,6 +52,7 @@ import { ConfigurationsComponent } from './configurations/configurations.compone
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-  ]
+  ],
+  exports:[PaySordarComponent]
 })
 export class AdminModule { }

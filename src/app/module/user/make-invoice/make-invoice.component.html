@@ -100,7 +100,7 @@
 
                 <div class="col-md-12">
                     <button style="margin: 10px; float: left;" (click)="addOrder()" mat-raised-button color="warn">যোগ
-                        করুন:</button>
+                        করুন</button>
                 </div>
             </div>
             <div class="row">
@@ -218,6 +218,7 @@
                         <thead>
                             <tr>
                                 <th>SN</th>
+                                <th>ইটের ধরন</th>
                                 <th>পরিমান</th>
                                 <th>ট্রিপ লাগবে</th>
                                 <th>পরিবহন খরচ</th>
@@ -236,9 +237,10 @@
                             </tr>
                             <tr *ngFor="let delivery of schedules; index as i">
                                 <td>{{i+1}}</td>
+                                <td>{{delivery?.brick?.category}}</td>
                                 <td>{{delivery?.deliverableQuantity}}</td>
                                 <td>{{delivery?.tripNeeded}}</td>
-                                <td>{{delivery?.transportCost}}</td>
+                                <td>{{delivery?.transportCost || 0}} BDT</td>
                                 <td>
                                     {{delivery?.driver?.person?.personName}} (Mob:
                                     {{delivery?.driver?.person?.contactNo}})

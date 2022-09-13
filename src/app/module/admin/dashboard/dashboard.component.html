@@ -7,29 +7,32 @@
       <hr>
       <div class="row mt-4">
          <div class="col-md-12">
-            <mat-card>
+            <mat-card >
                <h1>Bricks Reserve</h1>
                <hr>
-               <table class="table table-striped" style="overflow-x:auto;">
-                  <thead>
-                     <tr>
-                        <th *ngFor="let brick of bricks">{{brick?.category}}</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td *ngFor="let brick of bricks">{{brick?.quantity}}</td>
-                     </tr>
-                  </tbody>
-                  <tfoot>
-                     <tr>
-                        <th>Total:</th>
-                        <td>{{totalBrick}}</td>
-                        <th>Total Stock Value:</th>
-                        <td>{{totalStockValue}} BDT</td>
-                     </tr>
-                  </tfoot>
-               </table>
+               <div style="overflow-x:auto;">
+                  <table class="table table-striped" >
+                     <thead>
+                        <tr>
+                           <th *ngFor="let brick of bricks">{{brick?.category}}</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td *ngFor="let brick of bricks">{{brick?.quantity}}</td>
+                        </tr>
+                     </tbody>
+                     <tfoot>
+                        <tr>
+                           <th>Total:</th>
+                           <td>{{totalBrick}}</td>
+                           <th>Total Stock Value:</th>
+                           <td>{{totalStockValue}} BDT</td>
+                        </tr>
+                     </tfoot>
+                  </table>
+               </div>
+
             </mat-card>
          </div>
       </div>
