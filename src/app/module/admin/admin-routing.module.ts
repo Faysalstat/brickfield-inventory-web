@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppAuthGuard } from 'src/app/app-auth.guard';
 import { CashHandoverReportComponent } from '../report/cash-handover-report/cash-handover-report.component';
+import { DeliveryReportComponent } from '../report/delivery-report/delivery-report.component';
 import { IncomeExpenseComponent } from '../report/income-expense/income-expense.component';
 import { ProductionReportComponent } from '../report/production-report/production-report.component';
 import { SalesReportComponent } from '../report/sales-report/sales-report.component';
@@ -35,7 +36,8 @@ const routes: Routes = [{
           // {path:"transaction-report", component: TransactionReportComponent},
           {path:"cash-handover-report",component: CashHandoverReportComponent},
           {path:"sordar-report",component: SordarRecordReportComponent},
-          {path:"sales-report",component: SalesReportComponent}
+          {path:"sales-report",component: SalesReportComponent},
+          {path:"delivery-report",component: DeliveryReportComponent}
         ]},
         
         {path: 'employees', component: EmployeesComponent},

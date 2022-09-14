@@ -31,8 +31,8 @@ export class SordarListComponent implements OnInit {
     this.userService.fetchAllSordars().subscribe({
       next: (data) => {
         console.log(data.body);
-        this.sordarList = data.body.data;
-        this.length = data.body.length;
+        this.sordarList = data.body;
+        // this.length = data.body.length;
       },
       error:(err)=>{
         console.log(err.message);

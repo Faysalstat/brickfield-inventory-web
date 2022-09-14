@@ -32,7 +32,7 @@ export class DriverListComponent implements OnInit {
     this.userService.fetchAllDrivers(params).subscribe({
       next: (data) => {
         console.log(data.body);
-        this.driverList = data.body;
+        this.driverList = data.body.data;
       },
       error: (err) => {
         console.log(err.message);

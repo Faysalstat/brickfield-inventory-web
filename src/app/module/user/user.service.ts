@@ -93,8 +93,13 @@ export class UserService {
     params = params.append('toDate',queryParams.get('query').toDate);
     return this.http.get(Urls.FETCH_ALL_SCHEDULES_BY_STATUS,{params:params});
   }
-  public fetchAllSchedulesByDate(): Observable<any> {
-    return this.http.get(Urls.FETCH_ALL_SCHEDULES_BY_DATE);
+  public fetchAllSchedulesByDate(queryParams: Map<string, any>): Observable<any> {
+    let params = new HttpParams();
+    
+    params = params.append('fromDate',queryParams.get('fromDate'));
+    params = params.append('toDate',queryParams.get('toDate'));
+    params = params.append('status',queryParams.get('status'));
+    return this.http.get(Urls.FETCH_ALL_SCHEDULES_BY_DATE,{params:params});
   }
 
   public fetchAllCustomer(queryParams: Map<string, any>): Observable<any> {

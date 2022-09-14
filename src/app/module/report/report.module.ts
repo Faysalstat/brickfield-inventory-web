@@ -9,11 +9,12 @@ import { CashHandoverReportComponent } from './cash-handover-report/cash-handove
 import { SordarRecordReportComponent } from './sordar-record-report/sordar-record-report.component';
 import { LoadUnloadReportComponent } from './load-unload-report/load-unload-report.component';
 import { SalesReportComponent } from './sales-report/sales-report.component';
+import { DeliveryReportComponent } from './delivery-report/delivery-report.component';
 
 const components = [IncomeExpenseComponent,ProductionReportComponent,TransactionReportComponent,SordarRecordReportComponent];
 
 @NgModule({
-  declarations: [components, CashHandoverReportComponent, SordarRecordReportComponent, LoadUnloadReportComponent, SalesReportComponent],
+  declarations: [components, CashHandoverReportComponent, SordarRecordReportComponent, LoadUnloadReportComponent, SalesReportComponent, DeliveryReportComponent],
   imports: [CommonModule,MaterialModule,FormsModule],
   exports: [components],
 })
