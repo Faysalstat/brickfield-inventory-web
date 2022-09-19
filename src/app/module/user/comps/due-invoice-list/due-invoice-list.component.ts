@@ -35,6 +35,7 @@ export class DueInvoiceListComponent implements OnInit {
     this.fetchDueAmountInvoiceList();
   }
   fetchDueAmountInvoiceList(){
+    this.dueInvoiceExportList =[];
     const params: Map<string, any> = new Map();
     this.queryBody.offset = this.offset;
     this.queryBody.limit = this.pageSize;

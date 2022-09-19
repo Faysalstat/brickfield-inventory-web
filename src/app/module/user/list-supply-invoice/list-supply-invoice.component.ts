@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Account, Customer, InvoiceQueryBody, Person, Supplyer, SupplyQuery } from '../../model';
+import { ReportExportService } from '../../report-export.service';
 import { UserService } from '../user.service';
 
 @Component({
@@ -12,12 +13,13 @@ import { UserService } from '../user.service';
 export class ListSupplyInvoiceComponent implements OnInit {
 
   invoiceList!:any;
+  invoiceExportList!:any[];
   customer!:Customer;
   offset:number = 0;
   limit = 5;
   length = 100;
   pageSize = 10;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageSizeOptions: number[] = [5, 10, 25, 100, 500, 1000];
   queryBody!:SupplyQuery;
   contactNo!:string;
   statusList!:any[];
@@ -30,9 +32,10 @@ export class ListSupplyInvoiceComponent implements OnInit {
   constructor(
     private route: Router,
     private userService:UserService,
-    private snackBar: MatSnackBar
+    private reportExportService: ReportExportService
     ) {
     this.invoiceList = [];
+    this.invoiceExportList = [];
     this.queryBody = new SupplyQuery();
     this.statusList = [
       {label:"Select Delivery Status", value:null},
@@ -73,6 +76,7 @@ export class ListSupplyInvoiceComponent implements OnInit {
   }
 
   fetchAllInvoices(){
+    this.invoiceExportList = [];
     const params: Map<string, any> = new Map();
     this.queryBody.offset = this.offset;
     this.queryBody.limit = this.pageSize;
@@ -83,6 +87,22 @@ export class ListSupplyInvoiceComponent implements OnInit {
         this.invoiceList = res.body.data;
         this.length = res.body.length;
         this.queryBody = new SupplyQuery();
+        let index = 0;
+        this.invoiceList.map((elem:any)=>{
+          index++;
+          let model = {
+            SN: index,
+            Supplyer: elem.supplyer.person.personName,
+            Contact: elem.supplyer.person.contactNo,
+            Product: elem.productName,
+            Quantity: elem.quantityType,
+            TotalPrice: elem.totalAmountToPay,
+            Advance:  elem.advancePayment,
+            Due: elem.duePayment,
+            Rebate: elem.rebate
+          }
+        this.invoiceExportList.push(model);
+        })
       },
       error:(err)=>{
         console.log(err.message);
@@ -97,26 +117,16 @@ export class ListSupplyInvoiceComponent implements OnInit {
   editInvoice(invoice:any){
     this.route.navigate(["/home/edit-supply-invoice",invoice.id]);
   }
-  nextPage() {
-    // this.tnxIndex+=
-    this.offset += 5;
-    this.fetchAllInvoices();
-  }
-  previousPage() {
-    if (this.offset > 5) {
-      this.offset = this.limit + 5;
-      
-    } else if((this.offset-5)>=0) {
-      this.offset = this.limit - 5;
-    }
-    else{
-      return
-    }
-    this.fetchAllInvoices();
-  }
   pageChange(event:any){
     this.pageSize = event.pageSize;
     this.offset = this.pageSize * event.pageIndex;
+    this.fetchAllInvoices();
+  }
+  export(){
+    this.reportExportService.exportAsExcelFile(this.invoiceExportList,"Supply_Report");
+  }
+  refresh(){
+    this.queryBody = new SupplyQuery();
     this.fetchAllInvoices();
   }
 }

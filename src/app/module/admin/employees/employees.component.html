@@ -1,85 +1,82 @@
-<mat-card>
-    <mat-tab-group class="mt-4">
-        <mat-tab label="SORDAR">
-            <mat-card class="mt-5">
-                <mat-card *ngIf="isEdit">
+<mat-tab-group class="mt-4">
+    <mat-tab label="SORDAR">
+        <mat-card class="mt-5">
+            <mat-card *ngIf="isEdit">
+                <div class="row">
                     <h2>Update Sordar</h2>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <mat-form-field class="input-field" appearance="outline">
-                                <mat-label>Contact No:</mat-label>
-                                <input type="text" [ngModelOptions]="{standalone:true}"
-                                    [(ngModel)]="sordar.person.contactNo" disabled="true" placeholder="Contact"
-                                    matInput>
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-4">
-                            <mat-form-field class="input-field" appearance="outline">
-                                <mat-label>Name:</mat-label>
-                                <input type="text" [ngModelOptions]="{standalone:true}"
-                                    [(ngModel)]="sordar.person.personName" placeholder="Sordar Name" matInput>
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-4">
-                            <mat-form-field class="input-field" appearance="outline">
-                                <mat-label>Contract Amount:</mat-label>
-                                <input type="text" [ngModelOptions]="{standalone:true}"
-                                    [(ngModel)]="sordar.contactAmount" placeholder="Amount Contacted" matInput>
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-4">
-                            <mat-form-field class="input-field" appearance="outline">
-                                <mat-label>Contract Quantity:</mat-label>
-                                <input type="text" [ngModelOptions]="{standalone:true}"
-                                    [(ngModel)]="sordar.contactQuantity" placeholder="Contract Quantity" matInput>
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-4">
-                            <button type="submit" style="margin-top: 40px; float: left;" (click)="updateSordar()"
-                                mat-raised-button color="primary">Update</button>
-                        </div>
+                    <div class="col-md-4">
+                        <mat-form-field class="input-field" appearance="outline">
+                            <mat-label>Contact No:</mat-label>
+                            <input type="text" [ngModelOptions]="{standalone:true}"
+                                [(ngModel)]="sordar.person.contactNo" disabled="true" placeholder="Contact" matInput>
+                        </mat-form-field>
                     </div>
-                </mat-card>
-                <mat-card class="mt-3">
-                    <h1>Sordars List</h1>
-                    <div style="overflow-x:auto;">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Contact No</th>
-                                    <th>Address</th>
-                                    <th>Type</th>
-                                    <th>Contacted Amount </th>
-                                    <th>Contacted Quantity</th>
-                                    <th>Amount Paid</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let sordar of sordarList; index as i">
-                                    <td>{{sordar.id}}</td>
-                                    <td>{{sordar?.person?.personName}}</td>
-                                    <td>{{sordar?.person?.contactNo}}</td>
-                                    <td>{{sordar?.person?.personAddress}}</td>
-                                    <td>{{sordar?.category}}</td>
-                                    <td style="color:crimson ;">{{sordar?.contactAmount}}</td>
-                                    <td style="color:crimson ;">{{sordar?.contactQuantity}}</td>
-                                    <td style="color:crimson ;">{{sordar?.account?.balance}}</td>
-                                    <td>
-                                        <button type="submit" style="float: left;" (click)="edit(i)" mat-raised-button
-                                            color="primary">EDIT</button>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="col-md-4">
+                        <mat-form-field class="input-field" appearance="outline">
+                            <mat-label>Name:</mat-label>
+                            <input type="text" [ngModelOptions]="{standalone:true}"
+                                [(ngModel)]="sordar.person.personName" placeholder="Sordar Name" matInput>
+                        </mat-form-field>
                     </div>
+                    <div class="col-md-4">
+                        <mat-form-field class="input-field" appearance="outline">
+                            <mat-label>Contract Amount:</mat-label>
+                            <input type="text" [ngModelOptions]="{standalone:true}" [(ngModel)]="sordar.contactAmount"
+                                placeholder="Amount Contacted" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field class="input-field" appearance="outline">
+                            <mat-label>Contract Quantity:</mat-label>
+                            <input type="text" [ngModelOptions]="{standalone:true}" [(ngModel)]="sordar.contactQuantity"
+                                placeholder="Contract Quantity" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" style="margin-top: 40px; float: left;" (click)="updateSordar()"
+                            mat-raised-button color="primary">Update</button>
+                    </div>
+                </div>
+            </mat-card>
+            <mat-card class="mt-3">
+                <h1>Sordars List</h1>
+                <div style="overflow-x:auto;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Contact No</th>
+                                <th>Address</th>
+                                <th>Type</th>
+                                <th>Contacted Amount </th>
+                                <th>Contacted Quantity</th>
+                                <th>Amount Paid</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let sordar of sordarList; index as i">
+                                <td>{{sordar.id}}</td>
+                                <td>{{sordar?.person?.personName}}</td>
+                                <td>{{sordar?.person?.contactNo}}</td>
+                                <td>{{sordar?.person?.personAddress}}</td>
+                                <td>{{sordar?.category}}</td>
+                                <td style="color:crimson ;">{{sordar?.contactAmount}}</td>
+                                <td style="color:crimson ;">{{sordar?.contactQuantity}}</td>
+                                <td style="color:crimson ;">{{sordar?.account?.balance}}</td>
+                                <td>
+                                    <button type="submit" style="float: left;" (click)="edit(i)" mat-raised-button
+                                        color="primary">EDIT</button>
 
-                </mat-card>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
             </mat-card>
-        </mat-tab>
-    </mat-tab-group>
-</mat-card>
+
+        </mat-card>
+    </mat-tab>
+</mat-tab-group>

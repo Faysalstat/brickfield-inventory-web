@@ -24,6 +24,7 @@ export class AddSordarComponent implements OnInit {
         { label: '১নং অটো মিল', value: '১নং অটো মিল' },
         { label: '২নং অটো মিল', value: '২নং অটো মিল' },
         { label: 'লোড-আনলোড', value: 'লোড-আনলোড' },
+        { label: 'আগুন মিস্ত্রি', value: 'আগুন মিস্ত্রি' },
         
       ];
      }

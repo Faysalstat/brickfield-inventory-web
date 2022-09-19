@@ -12,8 +12,9 @@
             <div class="col-md-4">
                 <mat-form-field class="input-field" appearance="outline">
                     <mat-label>সর্দারের ধরন:</mat-label>
-                    <input type="text" [ngModelOptions]="{standalone:true}" [(ngModel)]="category"
-                        placeholder="Category" disabled="true" matInput>
+                    <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="category" (selectionChange)="onChnageSordar()">
+                        <mat-option *ngFor="let category of categories" [value]="category.value">{{category.label}}</mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
             <div class="col-md-4">

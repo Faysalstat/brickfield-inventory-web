@@ -12,6 +12,7 @@ export class PaySordarComponent implements OnInit {
   @Output() payrollEvent = new EventEmitter<string>();
   selectedSordar: Sordar = new Sordar();
   sordars!: Sordar[];
+  categories!:any[];
   tnxDate!:Date;
   amount!:number;
   remarks!:string;
@@ -19,7 +20,17 @@ export class PaySordarComponent implements OnInit {
   constructor(
     private userService: UserService,
     private adminService:AdminService
-  ) { }
+  ) { 
+    this.categories = [
+      { label: 'Select mill name', value: '' },
+      { label: '১নং পাগ মিল', value: '১নং পাগ মিল' },
+      { label: '১নং অটো মিল', value: '১নং অটো মিল' },
+      { label: '২নং অটো মিল', value: '২নং অটো মিল' },
+      { label: 'লোড-আনলোড', value: 'লোড-আনলোড' },
+      { label: 'আগুন মিস্ত্রি', value: 'আগুন মিস্ত্রি' },
+      
+    ];
+  }
 
   ngOnInit(): void {
     this.fetchSordarList();

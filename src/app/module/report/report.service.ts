@@ -30,6 +30,7 @@ export class ReportService {
     params = params.append('offset',queryParams.get('query').offset);
     params = params.append('category',queryParams.get('query').category);
     params = params.append('sordar',queryParams.get('query').sordarId);
+    params = params.append('roundNo',queryParams.get('query').roundNo);
     return this.http.get(Urls.FETCH_ALL_SORDARS_PRODUCTION_REPORT, { params: params });
   }
 

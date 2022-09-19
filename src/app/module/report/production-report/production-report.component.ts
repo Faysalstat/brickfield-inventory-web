@@ -39,6 +39,7 @@ export class ProductionReportComponent implements OnInit {
   }
 
   fetchLoadReport(){
+    this.loadExportList = [];
     this.reportService.fetchLoadReport().subscribe({
       next:(res)=>{
         console.log(res.body);
@@ -62,6 +63,7 @@ export class ProductionReportComponent implements OnInit {
     })
   }
   fetchUnloadReport(){
+    this.unloadExportList = [];
     this.reportService.fetchUnloadReport().subscribe({
       next:(res)=>{
         console.log(res.body);
@@ -85,6 +87,7 @@ export class ProductionReportComponent implements OnInit {
     })
   }
   fetchRawProductionReport(){
+    this.rawProductionExportList =[];
     this.reportService.fetchRawPRoductionReport().subscribe({
       next:(res)=>{
         console.log(res.body);
@@ -109,6 +112,7 @@ export class ProductionReportComponent implements OnInit {
     })
   }
   fetchDeliveryReport(){
+    this.deliveryExportList = [];
     this.reportService.fetchDeliveryReport().subscribe({
       next:(res)=>{
         console.log(res.body);

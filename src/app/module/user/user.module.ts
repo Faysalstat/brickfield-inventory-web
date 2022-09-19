@@ -62,6 +62,6 @@ import { AdminModule } from '../admin/admin.module';
     ReportModule,
     AdminModule
   ],
-  exports:[SordarListComponent]
+  exports:[SordarListComponent,ListSupplyInvoiceComponent]
 })
 export class UserModule { }

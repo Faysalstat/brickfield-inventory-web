@@ -48,6 +48,7 @@ export class SalesReportComponent implements OnInit {
         this.orderList = res.body.data;
         this.length = res.body.length;
         let index = 0;
+        this.orderExportList = [];
         this.orderList.map((elem)=>{
           index++;
           let model = {

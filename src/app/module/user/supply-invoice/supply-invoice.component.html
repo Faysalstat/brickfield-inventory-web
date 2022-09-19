@@ -279,7 +279,7 @@
           <div class="col-md-3">
             <mat-form-field class="input-field" appearance="outline">
               <mat-label>রিবেট</mat-label>
-              <input type="number" pInputText [ngModelOptions]="{standalone:true}"
+              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (change)="calculateDueAmount()"
                 [(ngModel)]="supplyInvoice.rebate" placeholder="00" matInput>
             </mat-form-field>
           </div>
@@ -287,7 +287,7 @@
             <mat-form-field class="input-field" appearance="outline">
               <mat-label>বাকি বাবদ</mat-label>
               <input type="number" pInputText [ngModelOptions]="{standalone:true}"
-                [(ngModel)]="supplyInvoice.duePayment" placeholder="00" matInput>
+                [(ngModel)]="supplyInvoice.duePayment" placeholder="00" matInput [disabled]="true">
             </mat-form-field>
           </div>
           <div class="col-md-12">

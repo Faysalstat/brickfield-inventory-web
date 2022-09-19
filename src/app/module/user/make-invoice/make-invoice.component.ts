@@ -624,5 +624,6 @@ export class MakeInvoiceComponent implements OnInit {
   onChnageOrder(){
     this.scheduleItem.deliverableQuantity = this.selectedOrder.quantity;
     this.scheduleItem.brickId = this.selectedOrder.brick.id;
+    this.scheduleItem.brick = this.selectedOrder.brick;
   }
 }

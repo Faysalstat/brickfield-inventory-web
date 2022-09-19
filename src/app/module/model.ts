@@ -274,15 +274,15 @@ export class PaginatorModel{
 export class InvoiceQueryBody{
   limit:number = 0;
   offset:number = 0;
-  createdFrom!:Date;
-  createdTo!:Date;
+  fromDate: string ='';
+  toDate:string='';
+  isDue:boolean = false;
   invoiceNo:string = "";
   deliveryStatus:string = "";
   customerId:number=0;
   supplyerId:number=0;
   contactNo:string = "";
   doNo:string = '';
-  isDue:boolean = false;
 
 }
 export class Expense{
