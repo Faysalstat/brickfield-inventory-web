@@ -1,37 +1,33 @@
-<mat-card>
-    <mat-card class="mt-3">
-        <div class="row">
-            <h2>Cash Payment:</h2>
-            <div class="col-md-4">
-                <mat-form-field appearance="outline" class="input-field">
-                    <mat-label>Select Expense Type</mat-label>
-                    <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedType">
-                        <mat-option *ngFor="let type of types" [value]="type.value">{{type?.label}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="col-md-4">
-                <mat-form-field appearance="outline" class="input-field">
-                    <mat-label>Select Category</mat-label>
-                    <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedCategory">
-                        <mat-option *ngFor="let category of expenseCatgories" [value]="category.value">{{category?.label}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="col-md-4">
-                <mat-form-field class="input-field" appearance="outline">
-                    <mat-label>Name Of Expense:</mat-label>
-                    <input type="text" [ngModelOptions]="{standalone:true}" [(ngModel)]="expenseName"
-                        placeholder="Name Of Expense" matInput>
-                </mat-form-field>
-            </div>
-            
-            <div class="col-md-12">
-                <button type="submit" style="margin-top: 40px; float: left;" (click)="submit()" mat-raised-button
-                    color="primary">Submit</button>
-            </div>
-        </div>
-    </mat-card>
-</mat-card>
+<div class="row">
+    <h2>Add Expense Category:</h2>
+    <div class="col-md-4">
+        <mat-form-field appearance="outline" class="input-field">
+            <mat-label>Select Expense Type</mat-label>
+            <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedType">
+                <mat-option *ngFor="let type of types" [value]="type.value">{{type?.label}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-md-4">
+        <mat-form-field appearance="outline" class="input-field">
+            <mat-label>Select Category</mat-label>
+            <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedCategory">
+                <mat-option *ngFor="let category of expenseCatgories" [value]="category.value">{{category?.label}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-md-4">
+        <mat-form-field class="input-field" appearance="outline">
+            <mat-label>Name Of Expense:</mat-label>
+            <input type="text" [ngModelOptions]="{standalone:true}" [(ngModel)]="expenseName"
+                placeholder="Name Of Expense" matInput>
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-12">
+        <button type="submit" style="margin-top: 40px; float: left;" (click)="submit()" mat-raised-button
+            color="primary">Submit</button>
+    </div>
+</div>

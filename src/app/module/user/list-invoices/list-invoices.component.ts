@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Customer, InvoiceDomain, InvoiceQueryBody } from '../../model';
+import { ReportExportService } from '../../report/report-export.service';
 import { UserService } from '../user.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { UserService } from '../user.service';
 })
 export class ListInvoicesComponent implements OnInit {
  
-  invoiceList!:any;
+  invoiceList!:any[];
+  invoiceExportList!:any[];
   customer!:Customer;
   
   queryBody!:InvoiceQueryBody;
@@ -20,16 +22,23 @@ export class ListInvoicesComponent implements OnInit {
   limit = 5;
   length = 100;
   pageSize = 10;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageSizeOptions: number[] = [5, 10, 25, 100, 500, 1000];
+  dueList:any[];
   constructor(
     private route: Router,
-    private userService:UserService) {
+    private userService:UserService,
+    private reportExportService: ReportExportService) {
     this.invoiceList = [];
     this.queryBody = new InvoiceQueryBody();
     this.statusList = [
       {label:"Delivered", value:"DELIVERED"},
-      {label:"Pending", value:"PENDING"}
+      {label:"Pending", value:"PENDING"},
+      {label:"Schedule Pending", value:"SCHEDULE_PENDING"}
       
+    ]
+    this.dueList = [
+      {label:"Find All", value:false},
+      {label:"Due", value:true}
     ]
    }
   ngOnInit(): void {
@@ -58,6 +67,7 @@ export class ListInvoicesComponent implements OnInit {
   }
 
   fetchAllInvoices(){
+    this.invoiceExportList = [];
     const params: Map<string, any> = new Map();
     this.queryBody.offset = this.offset;
     this.queryBody.limit = this.pageSize;
@@ -67,6 +77,24 @@ export class ListInvoicesComponent implements OnInit {
         console.log(res);
         this.invoiceList = res.body.data;
         this.length = res.body.length;
+        let index = 0;
+        this.invoiceList.map((elem:any)=>{
+          let model = {
+            Invoice_No : elem.invoiceNo,
+            DO_NO : elem.doNo,
+            Customer : elem.customer.person.personName,
+            ContactNo: elem.customer.person.contactNo,
+            Address :elem.customer.person.personAddress,
+            Quantity :elem.totalQuantity,
+            Price :elem.totalBill,
+            Advance : elem.advancePayment,
+            Due : elem.duePament,
+            Rebate : elem.rebate,
+            Delivery_Status :elem.deliveryStatus,
+            Date: elem.purchaseDate
+          }
+          this.invoiceExportList.push(model);
+        })
       },
       error:(err)=>{
         console.log(err.message);
@@ -99,12 +127,15 @@ export class ListInvoicesComponent implements OnInit {
     this.fetchAllInvoices();
   }
   pageChange(event:any){
-    console.log(this.length);
-    console.log(this.pageSize);
-    console.log("event fired " + event.pageIndex);
     this.pageSize = event.pageSize;
     this.offset = this.pageSize * event.pageIndex;
     this.fetchAllInvoices();
   }
- 
+  refresh(){
+    this.queryBody = new InvoiceQueryBody();
+    this.fetchAllInvoices();
+  }
+  export(){
+    this.reportExportService.exportAsExcelFile(this.invoiceExportList,"Invoice_Report");
+  }
 }

@@ -1,14 +1,33 @@
 <mat-card>
     <div class="row">
-      <div class="md-col-12">
-  
+      <div class="col-md-3">
+        <mat-form-field class="input-field" appearance="fill">
+          <mat-label>ডি.ও. নং:</mat-label>
+          <input pInputText [ngModelOptions]="{standalone:true}"
+           [(ngModel)]="queryBody.doNo" (change)="fetchAllSchedules()"
+            placeholder="D.O. No" matInput>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field class="input-field" appearance="fill">
+          <mat-label>Delivery Status</mat-label>
+          <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="fetchAllSchedules()" [(ngModel)]="queryBody.deliveryStatus">
+            <mat-option *ngFor="let status of statusList" [value]="status.value">{{status?.label}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <button style="margin-top:10px ;" mat-raised-button color="warn"  (click)="refresh()" >
+          Refresh
+          <mat-icon>refresh</mat-icon>
+        </button>
       </div>
       <div class="md-col-12" style="overflow-x:auto;">
         <table class="table" style="text-align:center ;">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Invoice No</th>
+              <th scope="col">ডি.ও. নং</th>
               <th scope="col">পরিমান</th>
               <th scope="col">শিডিউল</th>
               <th scope="col">ড্রাইভার</th>
@@ -26,7 +45,7 @@
             </tr>
             <tr *ngFor="let schedule of scheduleList; index as i">
               <th scope="row">{{i+1}}</th>
-              <td>{{schedule?.invoice.id}}</td>
+              <td>{{schedule?.invoice.doNo}}</td>
               <td>{{schedule?.deliverableQuantity}}</td>
               <td>{{applyFilter(schedule?.scheduledDate)}}</td>
               <td>{{schedule?.driver?.person?.personName +" ("+schedule?.driver?.person?.contactNo+")" }}</td>

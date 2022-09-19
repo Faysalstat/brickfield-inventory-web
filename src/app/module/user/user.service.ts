@@ -66,6 +66,7 @@ export class UserService {
   public fetchAllDrivers(queryParams: Map<string, any>): Observable<any> {
     let params = new HttpParams();
     params = params.append('offset',queryParams.get('offset'));
+    params = params.append('limit',queryParams.get('limit'));
     return this.http.get(Urls.FETCH_ALL_DRIVERS,{params:params});
   }
   public fetchAllSordars(): Observable<any> {
@@ -74,19 +75,37 @@ export class UserService {
   public fetchAllProducts(): Observable<any> {
     return this.http.get(Urls.FETCH_ALL_PRODUCTS);
   }
+  public fetchAllOrders(queryParams: Map<string, any>): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('offset',queryParams.get('query').offset);
+    params = params.append('limit',queryParams.get('query').limit);
+    params = params.append('brickId',queryParams.get('query').brickId);
+    params = params.append('doNo',queryParams.get('query').doNo);
+    return this.http.get(Urls.FETCH_ALL_ORDERS,{params:params});
+  }
   public fetchAllSchedulesByStatus(queryParams: Map<string, any>): Observable<any> {
     let params = new HttpParams();
     params = params.append('offset',queryParams.get('query').offset);
     params = params.append('limit',queryParams.get('query').limit);
+    params = params.append('deliveryStatus',queryParams.get('query').deliveryStatus);
+    params = params.append('doNo',queryParams.get('query').doNo);
+    params = params.append('fromDate',queryParams.get('query').fromDate);
+    params = params.append('toDate',queryParams.get('query').toDate);
     return this.http.get(Urls.FETCH_ALL_SCHEDULES_BY_STATUS,{params:params});
   }
-  public fetchAllSchedulesByDate(): Observable<any> {
-    return this.http.get(Urls.FETCH_ALL_SCHEDULES_BY_DATE);
+  public fetchAllSchedulesByDate(queryParams: Map<string, any>): Observable<any> {
+    let params = new HttpParams();
+    
+    params = params.append('fromDate',queryParams.get('fromDate'));
+    params = params.append('toDate',queryParams.get('toDate'));
+    params = params.append('status',queryParams.get('status'));
+    return this.http.get(Urls.FETCH_ALL_SCHEDULES_BY_DATE,{params:params});
   }
 
   public fetchAllCustomer(queryParams: Map<string, any>): Observable<any> {
     let params = new HttpParams();
     params = params.append('offset',queryParams.get('offset'));
+    params = params.append('limit',queryParams.get('limit'));
     return this.http.get(Urls.FETCH_ALL_CUSTOMER,{params:params});
   }
   public fetchPaymentDueList(): Observable<any> {
@@ -95,6 +114,7 @@ export class UserService {
   public fetchAllSupplyers(queryParams: Map<string, any>): Observable<any> {
     let params = new HttpParams();
     params = params.append('offset',queryParams.get('offset'));
+    params = params.append('limit',queryParams.get('limit'));
     return this.http.get(Urls.FETCH_ALL_SUPPLYER,{params:params});
   }
   public fetchAllPendingInvoice(): Observable<any> {
@@ -109,6 +129,8 @@ export class UserService {
     params = params.append('invoiceNo',queryParams.get('query').invoiceNo);
     params = params.append('doNo',queryParams.get('query').doNo);
     params = params.append('isDue',queryParams.get('query').isDue);
+    params = params.append('fromDate',queryParams.get('query').fromDate);
+    params = params.append('toDate',queryParams.get('query').toDate);
     params = params.append('deliveryStatus',queryParams.get('query').deliveryStatus);
     return this.http.get(Urls.FETCH_ALL_INVOICE,{params:params});
   }
@@ -278,8 +300,8 @@ export class UserService {
   
   // Delete
   public deleteCustomer(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('customer'));
-    return this.http.post(Urls.DELETE_CUSTOMER, queryParams.get('customer'));
+    console.log(queryParams.get('client'));
+    return this.http.post(Urls.DELETE_CUSTOMER, queryParams.get('client'));
   }
   public deleteDriver(queryParams: Map<string, any>): Observable<any> {
     console.log(queryParams.get('driver'));

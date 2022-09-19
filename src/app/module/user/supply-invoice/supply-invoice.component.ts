@@ -95,10 +95,11 @@ export class SupplyInvoiceComponent implements OnInit {
   fetchDrivers() {
     const params: Map<string, any> = new Map();
     params.set('offset', 0);
+    params.set('limit', 100);
     this.userService.fetchAllDrivers(params).subscribe({
       next: (data) => {
         console.log(data.body);
-        this.drivers = data.body;
+        this.drivers = data.body.data;
       },
       error:(err)=>{
         console.log(err.message);
@@ -127,6 +128,8 @@ export class SupplyInvoiceComponent implements OnInit {
         } else {
           this.needSupplyer = true;
           this.notFoundMessage = '*Supplyer Not Found. Please Add Suppler';
+          this.person.personAddress = "";
+          this.person.personName = '';
           return;
         }
       },
@@ -219,6 +222,7 @@ export class SupplyInvoiceComponent implements OnInit {
     this.supplyInvoice.pricePerCFT * this.supplyInvoice.actualCftQuantity;
     this.supplyInvoice.totalPrice = this.supplyInvoice.actualCFTPrice;
     this.supplyInvoice.totalAmountToPay = this.supplyInvoice.totalPrice + this.supplyInvoice.transportCost;
+    this.supplyInvoice.duePayment = this.supplyInvoice.totalAmountToPay - this.supplyInvoice.advancePayment - this.supplyInvoice.rebate;
   }
   calculateTransportCost(){
     this.supplyInvoice.transportCost = this.supplyInvoice.numberOfTrips * this.transportCostPerTrip;
@@ -226,6 +230,7 @@ export class SupplyInvoiceComponent implements OnInit {
   }
   calculateTotalAmountToPay(){
     this.supplyInvoice.totalAmountToPay = this.supplyInvoice.totalPrice + this.supplyInvoice.transportCost;
+    this.supplyInvoice.duePayment = this.supplyInvoice.totalAmountToPay - this.supplyInvoice.advancePayment - this.supplyInvoice.rebate;
   }
   onChnageVehicle() {
     // this.supplyInvoice.vehicleCategoryId = this.scheduleItem.vehicleCategory.id;
@@ -235,7 +240,7 @@ export class SupplyInvoiceComponent implements OnInit {
     this.supplyInvoice.totalAmountToPay = this.supplyInvoice.totalPrice;
   }
   calculateDueAmount(){
-    this.supplyInvoice.duePayment = this.supplyInvoice.totalAmountToPay - this.supplyInvoice.advancePayment; 
+    this.supplyInvoice.duePayment = this.supplyInvoice.totalAmountToPay - this.supplyInvoice.advancePayment - this.supplyInvoice.rebate;
   }
 
   submitInvoice() {
@@ -244,8 +249,8 @@ export class SupplyInvoiceComponent implements OnInit {
       this.userService.showMessage("ERROR!","Invalid Form, ADD SUPPLYER","OK",2000);
       return;
     }
-    if(!this.selectedProduct || this.selectedType){
-      this.userService.showMessage("ERROR!","Invalid Form!","OK",2000);
+    if(!this.selectedProduct || !this.selectedType || this.selectedType==0){
+      this.userService.showMessage("ERROR!","Invalid Form! Select Product and Type","OK",2000);
       return;
     }
     let supplyInvoiceModel:any = this.supplyInvoice;
@@ -253,6 +258,15 @@ export class SupplyInvoiceComponent implements OnInit {
     supplyInvoiceModel.driver = this.selectedDriver;
     supplyInvoiceModel.productName = this.selectedProduct.productName;
     supplyInvoiceModel.deliveryType = this.selectedType;
+    if(this.selectedType == 1){
+      supplyInvoiceModel.quantityType = this.supplyInvoice.numberOfTrips + " গাড়ি";
+    }
+    if(this.selectedType == 2){
+      supplyInvoiceModel.quantityType = this.supplyInvoice.actualCftQuantity + " CFT";
+    }
+    if(this.selectedType == 3){
+      supplyInvoiceModel.quantityType = this.supplyInvoice.totalTonQuantity + " TON";
+    }
     const params: Map<string, any> = new Map();
     let approvalModel: ApprovalModel = new ApprovalModel();
     approvalModel.payload = JSON.stringify(supplyInvoiceModel);

@@ -22,18 +22,26 @@
                 </mat-select>
             </mat-form-field>
         </div>
+        <div class="col-md-3 col-sm-3">
+            <mat-form-field appearance="outline" class="input-field">
+                <mat-label>Round</mat-label>
+                <input placeholder="Round No" type="number" (change)="fetchReport()" [ngModelOptions]="{standalone:true}"
+                [(ngModel)]="slectedRound" matInput>
+            </mat-form-field>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <button mat-raised-button (click)="export()" color="warn">Export</button>
+            <button mat-raised-button (click)="export()" color="warn"><mat-icon>output</mat-icon>Export</button>
         </div>
         <hr class="mt-2">
-        <div class="col-md-12">
+        <div class="col-md-12" style="overflow-x:auto;">
             <table class="table table-stripe mt-4">
                 <thead>
                     <th style="width:10%;">SN</th>
-                    <th style="width:20%;">Sordar Name</th>
-                    <th style="width:20%;">Category</th>
+                    <th style="width:10%;">Sordar Name</th>
+                    <th style="width:10%;">Category</th>
+                    <th style="width:20%;">Round</th>
                     <th style="width:10%;">Quantity</th>
                     <th style="width:10%;">Prod. Date</th>
                 </thead>
@@ -47,6 +55,7 @@
                         <td>{{i+offset+1}}</td>
                         <td>{{record?.sordar?.person?.personName}}</td>
                         <td>{{record?.category}}</td>
+                        <td>{{record?.roundNo}}</td>
                         <td>{{record?.quantity}}</td>
                         <td>{{record?.date}}</td>
                     </tr>

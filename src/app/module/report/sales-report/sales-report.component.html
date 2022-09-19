@@ -1,0 +1,59 @@
+<mat-card>
+    <div class="row">
+        <div class="col-md-3">
+            <mat-form-field class="input-field" appearance="outline">
+              <mat-label>D.O No</mat-label>
+              <input placeholder="Invoice No" pInputText (change)="fetchSalesReport()" [ngModelOptions]="{standalone:true}"
+                [(ngModel)]="queryBody.doNo" matInput>
+            </mat-form-field>
+          </div>
+        <div class="col-md-3">
+            <mat-form-field appearance="outline" class="input-field">
+                <mat-label>Brick Category</mat-label>
+                <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="fetchSalesReport()"
+                    [(ngModel)]="queryBody.brickId">
+                    <mat-option *ngFor="let brick of bricks" [value]="brick.id">
+                        {{brick.category}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-12 mt-3">
+            <button mat-raised-button (click)="exportSalesReport()" color="warn"><mat-icon>output</mat-icon>Export</button>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-stripe mt-4">
+                <thead>
+                    <th>SN</th>
+                    <th>DO No</th>
+                    <th>Customer Name</th>
+                    <th>Category</th>
+                    <th>Quantity Ordered</th>
+                    <th>Purchase Date</th>
+                </thead>
+                <tbody>
+                    <tr *ngIf="orderList.length==0">
+                        <td style="font-weight:bold ; ">
+                            No Transaction Found!!
+                        </td>
+                    </tr>
+                    <tr *ngFor="let data of orderList; index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{data?.invoice?.doNo}}</td>
+                        <td>{{data?.invoice?.customer?.person?.personName}}</td>
+                        <td>{{data.brick.category}}</td>
+                        <td>{{data.quantity}}</td>
+                        <td>{{applyFilter(data.invoice.purchaseDate)}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12">
+            <div style="float:right ;font-size: 16px;">
+              <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                (page)="pageChange($event)" aria-label="Select page">
+              </mat-paginator>
+            </div>
+          </div>
+    </div>
+</mat-card>

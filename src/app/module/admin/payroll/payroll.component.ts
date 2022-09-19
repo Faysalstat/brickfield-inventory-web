@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AdminService } from '../admin.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { AdminService } from '../admin.service';
   styleUrls: ['./payroll.component.css']
 })
 export class PayrollComponent implements OnInit {
+  @Output() payrollEvent = new EventEmitter<string>();
   payTo!:string;
   payingAmount!:number;
   remarks!:string;

@@ -12,8 +12,11 @@ import { UserService } from '../user.service';
 export class CustomerListComponent implements OnInit {
   customerList: Customer[] = [];
   // MatPaginator Inputs
-  limit = 10;
-  offset = 0;
+  offset:number = 0;
+  limit = 5;
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
   tnxIndex:number = 0;
   constructor(private userService: UserService, private route: Router) {}
 
@@ -25,10 +28,12 @@ export class CustomerListComponent implements OnInit {
   fetchCustomers() {
     const params: Map<string, any> = new Map();
     params.set('offset', this.offset);
+    params.set('limit', this.pageSize);
     this.userService.fetchAllCustomer(params).subscribe({
       next: (res) => {
         console.log(res.body);
-        this.customerList = res.body;
+        this.customerList = res.body.data;
+        this.length = res.body.length;
       },
       error: (err) => {
         console.log(err.message);
@@ -59,17 +64,9 @@ export class CustomerListComponent implements OnInit {
   updateList(event:any){
     this.fetchCustomers();
   }
-  nextPage() {
-    // this.tnxIndex+=
-    this.offset += 20;
+  pageChange(event:any){
+    this.pageSize = event.pageSize;
+    this.offset = this.pageSize * event.pageIndex;
     this.fetchCustomers();
-  }
-  previousPage() {
-    if (this.offset > 20) {
-      this.offset -= 20;
-      this.fetchCustomers();
-    } else {
-      return;
-    }
   }
 }

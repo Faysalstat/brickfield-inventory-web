@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UserService } from '../../user/user.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { UserService } from '../../user/user.service';
   styleUrls: ['./office-deposit.component.css']
 })
 export class OfficeDepositComponent implements OnInit {
+  @Output() depositEvent = new EventEmitter<string>();
   depositAmount!:number;
   depositType!:string;
   depositFrom!:string;
@@ -19,6 +20,7 @@ export class OfficeDepositComponent implements OnInit {
     this.types=[
       {label:"Hand Over", value:"HANDOVER"},
       {label:"Loan", value:"LOAN"},
+      {label:"Bank", value:"BANK"},
       {label:"Other", value:"OTHER"}
     ]
   }

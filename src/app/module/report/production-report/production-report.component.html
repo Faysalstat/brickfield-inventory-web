@@ -3,7 +3,7 @@
         <mat-tab label="RAW PRODUCTION">
             <div class="row">
                 <div class="col-md-12 mt-3">
-                    <button mat-raised-button (click)="exportRawProduction()" color="warn">Export</button>
+                    <button mat-raised-button (click)="exportRawProduction()" color="warn"><mat-icon>output</mat-icon>Export</button>
                 </div>
                 <div class="col-md-12">
                     <table class="table table-stripe mt-4">
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </mat-tab>
-        <mat-tab label="LOAD REPORT">
+        <!-- <mat-tab label="LOAD REPORT">
             <div class="row">
                 <div class="col-md-12 mt-3">
                     <button mat-raised-button (click)="exportLoadReport()" color="warn">Export</button>
@@ -60,67 +60,9 @@
                 </div>
             </div>
             
-        </mat-tab>
-        <mat-tab label="UNLOAD REPORT">
-            <div class="row">
-                <div class="col-md-12 mt-3">
-                    <button mat-raised-button (click)="exportUnloadReport()" color="warn">Export</button>
-                </div>
-                <div class="col-md-12">
-                    <table class="table table-stripe mt-4">
-                        <thead>
-                            <th>SN</th>
-                            <th>Category</th>
-                            <th>Quantity</th>
-                            <th>Date</th>
-                        </thead>
-                        <tbody>
-                            <tr *ngIf="unLoadReportList.length==0">
-                                <td style="font-weight:bold ; ">
-                                    No Transaction Found!!
-                                </td>
-                            </tr>
-                            <tr *ngFor="let data of unLoadReportList; index as i">
-                                <td>{{i+1}}</td>
-                                <td>{{data.categoryName}}</td>
-                                <td>{{data.quantity}}</td>
-                                <td>{{applyFilter(data.createdAt)}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-           </div>
-        </mat-tab>
-        <mat-tab label="SALE REPORT">
-            <div class="row">
-                <div class="col-md-12 mt-3">
-                    <button mat-raised-button (click)="exportSalesReport()" color="warn">Export</button>
-                </div>
-                <div class="col-md-12">
-            <table class="table table-stripe mt-4">
-                <thead>
-                    <th>SN</th>
-                    <th>Invoice No</th>
-                    <th>Quantity</th>
-                    <th>Date</th>
-                </thead>
-                <tbody>
-                    <tr *ngIf="saleReportList.length==0">
-                        <td style="font-weight:bold ; ">
-                            No Transaction Found!!
-                        </td>
-                    </tr>
-                    <tr *ngFor="let data of saleReportList; index as i">
-                        <td>{{i+1}}</td>
-                        <td>{{data.invoice.invoiceNo}}</td>
-                        <!-- <td>{{data.brick.category}}</td> -->
-                        <td>{{data.deliverableQuantity}}</td>
-                        <td>{{applyFilter(data.updatedAt)}}</td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
-            </div>
+        </mat-tab> -->
+        <mat-tab label="LOAD UNLOAD REPORT">
+            <app-load-unload-report></app-load-unload-report>
         </mat-tab>
     </mat-tab-group>
 </mat-card>

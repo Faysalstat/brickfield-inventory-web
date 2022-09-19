@@ -22,11 +22,15 @@ export class ReportService {
   public fetchSaleReport(): Observable<any> {
     return this.http.get(Urls.FETCH_SALE_REPORT);
   }
+  public fetchDeliveryReport(): Observable<any> {
+    return this.http.get(Urls.FETCH_DELIVERY_REPORT);
+  }
   public fetchSordarProductionReport(queryParams: Map<string, any>): Observable<any> {
     let params = new HttpParams();
     params = params.append('offset',queryParams.get('query').offset);
     params = params.append('category',queryParams.get('query').category);
     params = params.append('sordar',queryParams.get('query').sordarId);
+    params = params.append('roundNo',queryParams.get('query').roundNo);
     return this.http.get(Urls.FETCH_ALL_SORDARS_PRODUCTION_REPORT, { params: params });
   }
 

@@ -18,6 +18,7 @@ export class DepositManagementComponent implements OnInit {
     this.types=[
       {label:"Hand Over", value:"HANDOVER"},
       {label:"Loan", value:"LOAN"},
+      {label:"Bank", value:"BANK"},
       {label:"Other", value:"OTHER"}
     ]
   }

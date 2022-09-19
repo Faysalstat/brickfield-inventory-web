@@ -1,3 +1,9 @@
+@import url('https://fonts.maateen.me/bangla/font.css');
+.bangla-font{
+  font-family: 'Bangla', Arial, sans-serif !important;
+  font-weight: bold;
+  font-size: 25px;
+}
 :host {
   display: flex;
   flex-direction: column;

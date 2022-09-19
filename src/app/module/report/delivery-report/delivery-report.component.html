@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-md-3">
+        <mat-form-field appearance="outline">
+            <mat-label>From Date</mat-label>
+            <input matInput [matDatepicker]="fromDatePicker" (dateInput)="fetchScheduleList()"
+                [ngModelOptions]="{standalone:true}" [(ngModel)]="fromDate">
+            <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromDatePicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="col-md-3">
+        <mat-form-field appearance="outline">
+            <mat-label>To Date</mat-label>
+            <input matInput [matDatepicker]="toDatePicker" (dateInput)="fetchScheduleList()"
+                [ngModelOptions]="{standalone:true}" [(ngModel)]="toDate">
+            <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #toDatePicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="col-md-3">
+        <mat-form-field appearance="outline" class="input-field">
+            <mat-label>Status</mat-label>
+            <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="fetchScheduleList()"
+                [(ngModel)]="selectedType">
+                <mat-option *ngFor="let type of types" [value]="type.value">
+                    {{type?.label}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-md-12 mt-3">
+        <button mat-raised-button (click)="export()" color="warn"><mat-icon>output</mat-icon>Export</button>
+    </div>
+    <div class="md-col-12 mt-3" style="overflow-x:auto;">
+        <table class="table" style="text-align:center ;">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">D.O No</th>
+                    <th scope="col">ইটের ধরন</th>
+                    <th scope="col">পরিমান</th>
+                    <th scope="col">শিডিউল</th>
+                    <th scope="col">ড্রাইভার</th>
+                    <th scope="col">গাড়ির ধরন</th>
+                    <th scope="col">ট্রিপ লাগবে</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">ঠিকানা</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let schedule of scheduleList; index as i">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{schedule?.invoice.doNo}}</td>
+                    <td>{{schedule?.brick?.category}}</td>
+                    <td>{{schedule?.deliverableQuantity}}</td>
+                    <td>{{applyFilter(schedule?.scheduledDate)}}</td>
+                    <td>{{schedule?.driver?.person?.personName +" ("+schedule?.driver?.person?.contactNo+")" }}</td>
+                    <td>{{schedule?.vehicleCategory?.categoryName}}</td>
+                    <td>{{schedule?.tripNeeded}}</td>
+                    <td [style.color]="schedule?.deliveryStatus=='DELIVERED'?'#29d10f':'red'">
+                        {{schedule?.deliveryStatus}}</td>
+                        <td>{{schedule?.deliveryLocation}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

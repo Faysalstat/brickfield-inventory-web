@@ -1,5 +1,5 @@
 <mat-card class="mt-5" style="padding:50px ;">
-  <app-add-supplyer (supplyerAddedEvent)="updateList($event)"></app-add-supplyer>
+  <!-- <app-add-supplyer (supplyerAddedEvent)="updateList($event)"></app-add-supplyer> -->
     <h1>Supplyer List</h1>
     <table class="table table-striped">
       <thead>
@@ -20,30 +20,24 @@
           <td>{{supplyer?.person?.personAddress}}</td>
           <td style="color:crimson ;">{{supplyer?.account?.amountToPay}}</td>
           <td>
-            <button mat-mini-fab (click)="edit(supplyer)" color="primary">
+            <!-- <button mat-mini-fab (click)="edit(supplyer)" color="primary">
               <mat-icon>menu</mat-icon>
-            </button>
-            <span style="margin-right: 5px;"> </span>
+            </button> -->
+            <!-- <span style="margin-right: 5px;"> </span> -->
             <button mat-mini-fab (click)="deletecustomer(supplyer)" color="warn">
               <mat-icon>delete</mat-icon>
             </button>
           </td>
         </tr>
       </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="5"></td>
-          <td>
-            <div  style="float:right ;font-size: 16px;">
-              <button mat-icon-button color="primary" (click)="previousPage()">
-                <mat-icon>fast_rewind</mat-icon>
-              </button>
-              <button mat-icon-button color="primary" (click)="nextPage()">
-                <mat-icon>fast_forward</mat-icon>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tfoot>
     </table>
+      <div class="row">
+        <div class="col-md-12">
+          <div style="float:right ;font-size: 16px;">
+            <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+              (page)="pageChange($event)" aria-label="Select page">
+            </mat-paginator>
+          </div>
+        </div>
+      </div>
 </mat-card>

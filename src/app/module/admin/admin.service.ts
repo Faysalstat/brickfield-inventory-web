@@ -59,6 +59,11 @@ export class AdminService {
     console.log(queryParams.get("sordar"))
     return this.http.post(Urls.UPDATE_SORDAR,queryParams.get("sordar"));
   }
+  public fetchAppConfiguration(queryParams: Map<string, any>): Observable<any>{
+    let params = new HttpParams();
+    params = params.append('configName',queryParams.get('configName'));
+    return this.http.get(Urls.FETCH_APP_CONFIG,{params:params});
+  }
 
   public fetchAllTask(queryParams: Map<string, any>): Observable<any>{
     let params = new HttpParams();

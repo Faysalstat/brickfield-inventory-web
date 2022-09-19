@@ -39,12 +39,14 @@ export class AddDriverComponent implements OnInit {
     if(this.driverForm.invalid || this.disable){
       return;
     }
-    const driver = {
-      personId: this.person.id,
-      personName:this.driverForm.get('name')?.value,
-      contactNo:this.driverForm.get('contactNo')?.value,
-      personAddress:this.driverForm.get('address')?.value,
-      clientType:"DRIVER"
+    let driver:any = {};
+    driver.personName = this.driverForm.get('name')?.value;
+    driver.contactNo = this.driverForm.get('contactNo')?.value;
+    driver.personAddress = this.driverForm.get('address')?.value;
+    driver.clientType = "DRIVER";
+    
+    if(this.person){
+      driver.personId = this.person.id;
     }
     params.set("driver",driver);
     this.userService.addDriver(params).subscribe({

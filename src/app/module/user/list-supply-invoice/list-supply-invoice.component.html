@@ -3,7 +3,7 @@
       <div class="col-md-2">
         <mat-form-field appearance="outline" class="input-field">
           <mat-label> সাপ্লাই প্রোডাক্ট : </mat-label>
-          <mat-select [ngModelOptions]="{standalone:true}"
+          <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="fetchAllInvoices()"
             [(ngModel)]="queryBody.productName">
             <mat-option *ngFor="let product of productList" [value]="product.value">{{product?.label}}</mat-option>
           </mat-select>
@@ -11,15 +11,15 @@
       </div>
       <div class="col-md-2">
         <mat-form-field class="input-field" appearance="outline">
-          <mat-label>Contact No</mat-label>
-          <input  pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="queryBody.contactNo"
+          <mat-label>মোবাইল নং:</mat-label>
+          <input  pInputText [ngModelOptions]="{standalone:true}" (change)="fetchAllInvoices()" [(ngModel)]="queryBody.contactNo"
             placeholder="Contact" matInput>
         </mat-form-field>
       </div>
       <div class="col-md-3">
         <mat-form-field appearance="outline">
             <mat-label>From Date</mat-label>
-            <input matInput [matDatepicker]="fromDatePicker"
+            <input matInput [matDatepicker]="fromDatePicker" (dateInput)="fetchAllInvoices()"
                 [ngModelOptions]="{standalone:true}" [(ngModel)]="queryBody.fromDate">
             <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
             <mat-datepicker #fromDatePicker></mat-datepicker>
@@ -28,7 +28,7 @@
     <div class="col-md-3">
         <mat-form-field appearance="outline">
             <mat-label>To Date</mat-label>
-            <input matInput [matDatepicker]="toDatePicker"
+            <input matInput [matDatepicker]="toDatePicker" (dateInput)="fetchAllInvoices()"
                 [ngModelOptions]="{standalone:true}" [(ngModel)]="queryBody.toDate">
             <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
             <mat-datepicker #toDatePicker></mat-datepicker>
@@ -37,15 +37,19 @@
     <div class="col-md-2">
       <mat-form-field appearance="outline" class="input-field">
         <mat-label>Select Due Type: </mat-label>
-        <mat-select [ngModelOptions]="{standalone:true}"
+        <mat-select [ngModelOptions]="{standalone:true}" (selectionChange)="fetchAllInvoices()"
           [(ngModel)]="queryBody.isDue">
           <mat-option *ngFor="let due of dueList" [value]="due.value">{{due?.label}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
       <div class="col-md-2">
-        <button style="margin: 10px; float: left;" (click)="fetchAllInvoices()" mat-raised-button
-          color="warn">Search</button>
+        <button style="margin: 10px; float: left;" (click)="refresh()" mat-raised-button
+          color="warn"> <mat-icon>refresh</mat-icon> Refresh</button>
+      </div>
+      <div class="col-md-2">
+        <button style="margin: 10px; float: left;" (click)="export()" mat-raised-button
+          color="warn"> <mat-icon>output</mat-icon> Export</button>
       </div>
     </div>
     <div class="row">
@@ -58,8 +62,8 @@
               <th scope="col">Supplyer</th>
               <th scope="col">Contact</th>
               <th scope="col">Product</th>
-              <!-- <th scope="col">Quantity</th>
-              <th scope="col">Quantity type</th> -->
+              <th scope="col">Quantity</th>
+              <!-- <th scope="col">Quantity type</th> -->
               <th scope="col">Total Price</th>
               <th scope="col">Advance</th>
               <th scope="col">Due</th>
@@ -75,6 +79,7 @@
               <td>{{invoice.supplyer.person.contactNo}}</td>
               <!-- <td>{{invoice.customer.person.personAddress}}</td> -->
               <td>{{invoice.productName}}</td>
+              <td>{{invoice.quantityType}}</td>
               <td>{{invoice.totalAmountToPay}}</td>
               <td>{{invoice.advancePayment}}</td>
               <td>{{invoice.duePayment}}</td>

@@ -72,6 +72,9 @@
         </tbody>
       </table>
     </div>
+    <div *ngIf="invoice?.deleteMessage !=''" class="col-md-12 mt-5">
+        <h3 style="color:red">*{{invoice?.deleteMessage}}</h3>
+    </div>
     <div class="col-md-12 mt-5" style="border:1px solid blacknn ;border-radius:2px ;">
       <h2>Order Details</h2>
       <hr style="background-color:black ;">
@@ -252,7 +255,7 @@
       <!-- <button style="margin: 10px; float: right;"  mat-raised-button color="accent" (click)="approveInvoice('CORRECTION')">Correction</button> -->
     </div>
     <div *ngIf="isSupply" class="col-md-12">
-      <button style="margin: 10px; float: right;"  mat-raised-button color="warn" (click)="approveInvoice('DECLINE')">Decline</button>
+      <button style="margin: 10px; float: right;"  mat-raised-button color="warn" (click)="approveSupplyInvoice('DECLINE')">Decline</button>
       <button style="margin: 10px; float: right;"  mat-raised-button color="primary" (click)="approveSupplyInvoice('APPROVED')">Approve</button>
     </div>
   </div>

@@ -24,6 +24,7 @@ export class AddSordarComponent implements OnInit {
         { label: '১নং অটো মিল', value: '১নং অটো মিল' },
         { label: '২নং অটো মিল', value: '২নং অটো মিল' },
         { label: 'লোড-আনলোড', value: 'লোড-আনলোড' },
+        { label: 'আগুন মিস্ত্রি', value: 'আগুন মিস্ত্রি' },
         
       ];
      }
@@ -50,14 +51,16 @@ export class AddSordarComponent implements OnInit {
     if(this.sordarForm.invalid || this.disable){
       return;
     }
-    const sordar = {
-      personId: this.person.id,
-      personName:this.sordarForm.get('name')?.value,
-      contactNo:this.sordarForm.get('contactNo')?.value,
-      personAddress:this.sordarForm.get('address')?.value,
-      category:this.sordarForm.get('category')?.value,
-      clientType:"SORDAR"
+    let sordar:any = {};
+    sordar.personName = this.sordarForm.get('name')?.value;
+    sordar.contactNo = this.sordarForm.get('contactNo')?.value;
+    sordar.personAddress = this.sordarForm.get('address')?.value;
+    sordar.category = this.sordarForm.get('category')?.value;
+    sordar.clientType = "SORDAR";
+    if(this.person){
+      sordar.personId = this.person.id;
     }
+    
     params.set("sordar",sordar);
     this.userService.addSordar(params).subscribe({
       next:(res)=>{

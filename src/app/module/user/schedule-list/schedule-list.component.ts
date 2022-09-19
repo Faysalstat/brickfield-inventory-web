@@ -19,12 +19,17 @@ export class ScheduleListComponent implements OnInit {
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   queryBody!:ScheduleQuery;
+  statusList!:any[];
   constructor(
     private route: Router,
     private userService:UserService) {
     this.scheduleList = [];
     this.statusColor = "#02c22f";
     this.queryBody = new ScheduleQuery();
+    this.statusList = [
+      {label:"Pending",value:"PENDING"},
+      {label:"Delivered",value:"DELIVERED"}
+    ]
    }
   ngOnInit(): void {
     this.fetchAllSchedules();
@@ -70,6 +75,10 @@ export class ScheduleListComponent implements OnInit {
   pageChange(event:any){
     this.pageSize = event.pageSize;
     this.offset = this.pageSize * event.pageIndex;
+    this.fetchAllSchedules();
+  }
+  refresh(){
+    this.queryBody = new ScheduleQuery();
     this.fetchAllSchedules();
   }
 }

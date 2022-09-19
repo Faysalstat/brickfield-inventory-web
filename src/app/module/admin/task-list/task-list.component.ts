@@ -61,5 +61,8 @@ export class TaskListComponent implements OnInit {
     this.offset = this.pageSize * event.pageIndex;
     this.fetchAllTaskList();
   }
+  refresh(){
+    
+  }
 
 }

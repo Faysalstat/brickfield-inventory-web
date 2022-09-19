@@ -1,10 +1,10 @@
 <div class="container">
   <!-- <mat-card> -->
-  <h2>সাপ্লাই ইনভয়েস তৈরী করুন </h2>
+  <h2 class="bangla-font">সাপ্লাই ইনভয়েস তৈরী করুন </h2>
   <div class="row">
     <div class="col-md-12">
       <mat-card>
-        <h2>সাপ্লায়ারের বিবরণ:</h2>
+        <h2 class="bangla-font">সাপ্লায়ারের বিবরণ:</h2>
         <div class="row">
           <div class="col-md-3">
             <mat-form-field class="input-field" appearance="outline">
@@ -60,7 +60,7 @@
     </div>
     <div *ngIf="isCC" class="col-md-12 mt-5">
       <mat-card>
-        <h2>গাড়ি চু্ক্তি</h2>
+        <h2 class="bangla-font">গাড়ি চু্ক্তি</h2>
         <div class="row">
           <div class="col-md-3">
             <mat-form-field appearance="outline" class="input-field">
@@ -208,7 +208,7 @@
     </div> -->
     <div  class="col-md-12">
       <mat-card  class="mt-4">
-        <h2>পরিবহন</h2>
+        <h2 class="bangla-font">পরিবহন</h2>
         <div class="row">
           <div class="col-md-3">
             <mat-form-field appearance="outline" class="input-field">
@@ -246,7 +246,7 @@
       </mat-card>
 
       <mat-card class="mt-4">
-        <h2>Sumamry</h2>
+        <h2 class="bangla-font">সামারি:</h2>
         <div class="row">
           <div class="col-md-3">
             <mat-form-field class="input-field" appearance="outline">
@@ -279,7 +279,7 @@
           <div class="col-md-3">
             <mat-form-field class="input-field" appearance="outline">
               <mat-label>রিবেট</mat-label>
-              <input type="number" pInputText [ngModelOptions]="{standalone:true}"
+              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (change)="calculateDueAmount()"
                 [(ngModel)]="supplyInvoice.rebate" placeholder="00" matInput>
             </mat-form-field>
           </div>
@@ -287,7 +287,7 @@
             <mat-form-field class="input-field" appearance="outline">
               <mat-label>বাকি বাবদ</mat-label>
               <input type="number" pInputText [ngModelOptions]="{standalone:true}"
-                [(ngModel)]="supplyInvoice.duePayment" placeholder="00" matInput>
+                [(ngModel)]="supplyInvoice.duePayment" placeholder="00" matInput [disabled]="true">
             </mat-form-field>
           </div>
           <div class="col-md-12">

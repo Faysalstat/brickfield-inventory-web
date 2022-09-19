@@ -16,6 +16,7 @@ export class SordarRecordReportComponent implements OnInit {
   exportData!:any[];
   queryBody:any;
   selectedSordar:string = ''; 
+  slectedRound: number = 0 ;
   selectedCategory:string = '';
   sordars!:Sordar[];
   categories!:any[];
@@ -63,6 +64,7 @@ export class SordarRecordReportComponent implements OnInit {
     const params: Map<string, any> = new Map();
     this.queryBody.sordarId = this.selectedSordar
     this.queryBody.category = this.selectedCategory;
+    this.queryBody.roundNo = this.slectedRound;
     params.set('query',this.queryBody)
     console.log();
     this.reportService.fetchSordarProductionReport(params).subscribe({
@@ -71,6 +73,7 @@ export class SordarRecordReportComponent implements OnInit {
         console.log(datares);
         this.recordList = datares.body;
         let index = 0;
+        this.exportData =[];
         this.recordList.map((elem)=>{
           index++;
           let sorProdRec = {

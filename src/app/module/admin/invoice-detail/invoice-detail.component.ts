@@ -138,10 +138,11 @@ export class InvoiceDetailComponent implements OnInit {
         },
       });
     }else{
-      let model = {
-        taskId: this.taskId,
-        invoiceId: this.invoice.id,
-        comment:this.comment
+      let model:any = {}
+      model.taskId = this.taskId;
+      model.comment = this.comment;
+      if(this.invoice){
+        model.invoiceId = this.invoice.id
       }
       params.set('model', model);
       this.adminService.declineTask(params).subscribe({
@@ -172,12 +173,10 @@ export class InvoiceDetailComponent implements OnInit {
       params.set('supplyInvoice', this.supplyInvoice);
       this.adminService.approveSupplyTask(params).subscribe({
         next: (data) => {
-          console.log(data);
           this.userService.showMessage("SUCCESS!","Approval Done","OK",2000);
           this.router.navigate(['/admin/task-list']);
         },
         error: (err) => {
-          console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
         },
       });
@@ -185,12 +184,10 @@ export class InvoiceDetailComponent implements OnInit {
       params.set('taskId', this.taskId);
       this.adminService.declineTask(params).subscribe({
         next: (data) => {
-          console.log(data);
           this.userService.showMessage("SUCCESS!","Task Declied","OK",2000);
           this.router.navigate(['/admin/task-list']);
         },
         error: (err) => {
-          console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
         },
       });

@@ -20,6 +20,7 @@ import { AddExpenseCategoryComponent } from './add-expense-category/add-expense-
 import { DashboardSummaryComponent } from './dashboard-summary/dashboard-summary.component';
 import { OfficeDepositComponent } from './office-deposit/office-deposit.component';
 import { EmployeesComponent } from './employees/employees.component';
+import { ConfigurationsComponent } from './configurations/configurations.component';
 
 
 
@@ -42,6 +43,7 @@ import { EmployeesComponent } from './employees/employees.component';
     DashboardSummaryComponent,
     OfficeDepositComponent,
     EmployeesComponent,
+    ConfigurationsComponent,
     
   ],
   imports: [
@@ -50,6 +52,7 @@ import { EmployeesComponent } from './employees/employees.component';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-  ]
+  ],
+  exports:[PaySordarComponent]
 })
 export class AdminModule { }

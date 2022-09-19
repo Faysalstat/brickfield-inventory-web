@@ -9,6 +9,7 @@
           <th>Contact No</th>
           <th>Address</th>
           <th>Amount To Pay</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -18,22 +19,21 @@
           <td>{{driver?.person?.contactNo}}</td>
           <td>{{driver?.person?.personAddress}}</td>
           <td style="color:crimson ;">{{driver?.account?.amountToPay}}</td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="4"></td>
           <td>
-            <div  style="float:right ;font-size: 16px;">
-              <button mat-icon-button color="primary" (click)="previousPage()">
-                <mat-icon>fast_rewind</mat-icon>
-              </button>
-              <button mat-icon-button color="primary" (click)="nextPage()">
-                <mat-icon>fast_forward</mat-icon>
-              </button>
-            </div>
+            <button mat-icon-button color="warn" (click)="deleteDriver(driver)" aria-label="Delete Sordar">
+              <mat-icon>delete</mat-icon>
+            </button>
           </td>
         </tr>
-      </tfoot>
+      </tbody>
     </table>
+    <!-- <div class="row">
+      <div class="col-md-12">
+        <div style="float:right ;font-size: 16px;">
+          <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+            (page)="pageChange($event)" aria-label="Select page">
+          </mat-paginator>
+        </div>
+      </div>
+    </div> -->
 </mat-card>

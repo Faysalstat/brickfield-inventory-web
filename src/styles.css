@@ -12,3 +12,9 @@ input.mat-input-element{
 ::ng-deep .mat-snack-bar-container {
     margin-top: 100px !important;
 }
+@import url('https://fonts.maateen.me/bangla/font.css');
+.bangla-font{
+  font-family: 'Bangla', Arial, sans-serif !important;
+  font-weight: bold;
+  font-size: 25px;
+}
