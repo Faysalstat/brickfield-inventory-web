@@ -10,13 +10,14 @@ import { SordarRecordReportComponent } from './sordar-record-report/sordar-recor
 import { LoadUnloadReportComponent } from './load-unload-report/load-unload-report.component';
 import { SalesReportComponent } from './sales-report/sales-report.component';
 import { DeliveryReportComponent } from './delivery-report/delivery-report.component';
+import { EscavateReportComponent } from './escavate-report/escavate-report.component';
 
 const components = [IncomeExpenseComponent,ProductionReportComponent,TransactionReportComponent,
   SordarRecordReportComponent, CashHandoverReportComponent, SordarRecordReportComponent, LoadUnloadReportComponent,
   SalesReportComponent, DeliveryReportComponent];
 
 @NgModule({
-  declarations: [components],
+  declarations: [components, EscavateReportComponent],
   imports: [CommonModule,MaterialModule,FormsModule],
   exports: [components],
 })

@@ -40,7 +40,7 @@ export class TransactionReportComponent implements OnInit {
     this.selectedCategory = null;
     this.selectedReason = null;
     this.selectedType = null;
-    this.selectedGlType = "FACTORY_GL";
+    
     this.fromDate = null;
     this.toDate = null;
     this.tnxListForReport = [];
@@ -51,7 +51,8 @@ export class TransactionReportComponent implements OnInit {
       {label:'মজুরি',value:"মজুরি"},
       {label:'খরচ',value:"খরচ"},
       {label:'বিল',value:"বিল"},
-      {label:'Hand Over',value:"HAND_OVER"},
+      {label:'জমা',value:"জমা"},
+      {label:'মালিকের জমা',value:"HAND_OVER"},
       {label:'Salary',value:"SALARY"}
     ];
     this.expenseReasons = [{label:'Select Category',value:null}];
@@ -80,6 +81,12 @@ export class TransactionReportComponent implements OnInit {
   ngOnInit(): void {
     this.fetchAllTransByPage();
     this.fetchExpenseReasons(null);
+    let userRole = sessionStorage.getItem("userRole");
+    if(userRole == 'MANAGER'){
+      this.selectedGlType = "FACTORY_GL";
+    }else{
+      this.selectedGlType = "OFFICE_GL";
+    }
   }
   fetchExpenseReasons(category:any){
     this.userService.fetchExpenseReasons(category).subscribe({

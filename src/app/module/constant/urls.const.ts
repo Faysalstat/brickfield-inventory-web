@@ -1,5 +1,5 @@
-// const BASE_URL = "https://vatasolution.me/api";
-const BASE_URL = "http://localhost:3000/api";
+const BASE_URL = "https://vatasolution.me/api";
+// const BASE_URL = "http://localhost:3000/api";
 
 export const Urls = {
     USER_SIGN_IN: BASE_URL + "/auth/signin",
@@ -92,6 +92,7 @@ export const Urls = {
     FETCH_DELIVERY_REPORT : BASE_URL+"/stock/getdeliveryreport",
     FETCH_INCOME_EXPENSE_REPOST : BASE_URL + "/transaction/get-income-expense-summary",
     FETCH_ALL_SORDARS_PRODUCTION_REPORT : BASE_URL + "/sordar/getproductionreport",
+    FETCH_ESCAVATE_REGISTRY_REPORT : BASE_URL + "/expense/getescavateregistryreport",
     FETCH_TOTAL_REBATE: BASE_URL+ "/invoice/gettotalrebate",
     FETCH_APP_CONFIG: BASE_URL + "/config/getconfigbyname",
     

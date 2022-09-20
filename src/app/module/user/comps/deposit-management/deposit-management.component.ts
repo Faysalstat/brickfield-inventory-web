@@ -16,9 +16,9 @@ export class DepositManagementComponent implements OnInit {
     private userService :UserService
   ) { 
     this.types=[
-      {label:"Hand Over", value:"HANDOVER"},
-      {label:"Loan", value:"LOAN"},
-      {label:"Bank", value:"BANK"},
+      {label:"মালিকের জমা", value:"মালিকের জমা"},
+      {label:"লোন", value:"লোন"},
+      {label:"ব্যাংক", value:"ব্যাংক"},
       {label:"Other", value:"OTHER"}
     ]
   }
@@ -51,7 +51,7 @@ export class DepositManagementComponent implements OnInit {
         this.depositAmount = 0;
         this.depositFrom = "";
         this.depositDate = new Date();
-        this.depositType = "HANDOVER";
+        this.depositType = "মালিকের জমা";
         this.remark = "";
       },
       error:(err)=>{

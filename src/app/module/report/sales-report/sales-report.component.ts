@@ -42,7 +42,6 @@ export class SalesReportComponent implements OnInit {
     this.queryBody.offset = this.offset;
     this.queryBody.limit = this.pageSize;
     params.set('query', this.queryBody);
-    params.set('query',this.queryBody)
     this.userService.fetchAllOrders(params).subscribe({
       next:(res)=>{
         this.orderList = res.body.data;
@@ -57,6 +56,7 @@ export class SalesReportComponent implements OnInit {
             Customer:elem.invoice.customer.person.personName,
             Category:elem.brick.category,
             QuantityOrdered:elem.quantity,
+            Price: elem.totalPrice,
             PurchaseDate:this.applyFilter(elem.invoice.purchaseDate)
           }
           this.orderExportList.push(model);

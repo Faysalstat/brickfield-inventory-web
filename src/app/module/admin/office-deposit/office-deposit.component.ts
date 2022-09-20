@@ -18,7 +18,7 @@ export class OfficeDepositComponent implements OnInit {
     private userService :UserService
   ) { 
     this.types=[
-      {label:"Hand Over", value:"HANDOVER"},
+      {label:"Director Investment", value:"DIRECTOR_INVESTMENT"},
       {label:"Loan", value:"LOAN"},
       {label:"Bank", value:"BANK"},
       {label:"Other", value:"OTHER"}

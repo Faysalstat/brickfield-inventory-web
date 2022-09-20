@@ -276,7 +276,6 @@ export class MakeInvoiceComponent implements OnInit {
       this.userService.deleteOrder(params).subscribe({
         next: (data) => {
           console.log(data);
-          window.alert('Order deleted');
           this.orders.splice(index, 1);
           this.calculateOrderTotal();
           this.userService.showMessage("SUCCESS!","Order Deleted","OK",2000);
@@ -286,14 +285,12 @@ export class MakeInvoiceComponent implements OnInit {
           this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
         },
         complete: () => {
-          this.deleteMessage = "Order Deleted from this invoice";
+          this.deleteMessage = "Order Cancelled from this invoice";
           this.updateInvoice();
         },
       });
     } else {
       this.orders.splice(index, 1);
-      console.log('===deleted====');
-      console.log(this.orders);
       this.calculateOrderTotal();
     }
   }
@@ -301,8 +298,10 @@ export class MakeInvoiceComponent implements OnInit {
     let totalPrice = 0;
     let totalQuantity = 0;
     this.orders.forEach((order) => {
-      totalPrice = totalPrice + order.totalPrice;
-      totalQuantity = totalQuantity + order.quantity;
+      if(order.state=='OPEN'){
+        totalPrice = totalPrice + order.totalPrice;
+        totalQuantity = totalQuantity + order.quantity;
+      }
     });
     this.invoiceIssueForm.get('totalPrice')?.setValue(totalPrice);
     this.invoiceIssueForm.get('totalQuantity')?.setValue(totalQuantity);

@@ -33,7 +33,14 @@ export class ReportService {
     params = params.append('roundNo',queryParams.get('query').roundNo);
     return this.http.get(Urls.FETCH_ALL_SORDARS_PRODUCTION_REPORT, { params: params });
   }
-
+  public fetchEscavateRegistryReport(queryParams: Map<string, any>): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('offset',queryParams.get('query').offset);
+    params = params.append('limit',queryParams.get('query').limit);
+    params = params.append('fromDate',queryParams.get('query').fromDate);
+    params = params.append('toDate',queryParams.get('query').toDate);
+    return this.http.get(Urls.FETCH_ESCAVATE_REGISTRY_REPORT, { params: params });
+  }
   public showMessage(title:string,msg:string,close:string,timer:number){
     return Swal.fire({
       title: title,

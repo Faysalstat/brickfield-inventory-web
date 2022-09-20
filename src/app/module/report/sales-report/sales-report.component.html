@@ -29,6 +29,7 @@
                     <th>Customer Name</th>
                     <th>Category</th>
                     <th>Quantity Ordered</th>
+                    <th>Order Price</th>
                     <th>Purchase Date</th>
                 </thead>
                 <tbody>
@@ -43,6 +44,7 @@
                         <td>{{data?.invoice?.customer?.person?.personName}}</td>
                         <td>{{data.brick.category}}</td>
                         <td>{{data.quantity}}</td>
+                        <td>{{data.totalPrice}}</td>
                         <td>{{applyFilter(data.invoice.purchaseDate)}}</td>
                     </tr>
                 </tbody>

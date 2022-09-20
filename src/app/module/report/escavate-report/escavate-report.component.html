@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-md-3">
+        <mat-form-field appearance="outline">
+            <mat-label>From Date</mat-label>
+            <input matInput [matDatepicker]="fromDatePicker" (dateInput)="fetchEscavateRegistry()"
+                [ngModelOptions]="{standalone:true}" [(ngModel)]="fromDate">
+            <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromDatePicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="col-md-3">
+        <mat-form-field appearance="outline">
+            <mat-label>To Date</mat-label>
+            <input matInput [matDatepicker]="toDatePicker" (dateInput)="fetchEscavateRegistry()"
+                [ngModelOptions]="{standalone:true}" [(ngModel)]="toDate">
+            <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #toDatePicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="col-md-12 mt-3">
+        <button mat-raised-button (click)="exportReport()" color="warn"><mat-icon>output</mat-icon>Export</button>
+    </div>
+    <div class="col-md-12">
+        <table class="table table-stripe mt-4">
+            <thead>
+                <th>SN</th>
+                <th>Date</th>
+                <th>Product Name</th>
+                <th>Total Hour</th>
+                <th>Hourly Cost</th>
+                <th>Total Cost</th>
+                <th>Driver</th>
+            </thead>
+            <tbody>
+                <tr *ngIf="escavateRegestryList.length==0">
+                    <td style="font-weight:bold ; ">
+                        No Transaction Found!!
+                    </td>
+                </tr>
+                <tr *ngFor="let data of escavateRegestryList; index as i">
+                    <td>{{i+1}}</td>
+                    <td>{{applyFilter(data.createdAt)}}</td>
+                    <td>{{data?.productName}}</td>
+                    <td>{{data.totalHour}}</td>
+                    <td>{{data.costPerHour}}</td>
+                    <td>{{data.totalAmountToPay}}</td>
+                    <td>{{data?.driver.person.personName}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

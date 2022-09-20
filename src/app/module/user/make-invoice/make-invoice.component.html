@@ -112,6 +112,7 @@
                                 <th>ইটের ধরন</th>
                                 <th>পরিমান</th>
                                 <th>মোট মূল্য</th>
+                                <th>State</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -126,6 +127,7 @@
                                 <td>{{order?.brick?.category}}</td>
                                 <td>{{order?.quantity}}</td>
                                 <td>{{order?.totalPrice}}</td>
+                                <td style="font-weight:bold ;" [style.color]="order.state=='OPEN'?'green':'red'">{{order?.state}}</td>
                                 <td>
                                     <!-- <button mat-icon-button color="primary" (click)="editOrder(i)">
                                         <mat-icon>open_in_new</mat-icon>
@@ -248,12 +250,8 @@
                                 <td>{{delivery?.vehicleCategory?.categoryName}}</td>
                                 <td>{{applyFilter(delivery?.scheduledDate)}}</td>
                                 <td>{{delivery?.deliveryStatus}}</td>
-
                                 <td>
-                                    <!-- <button mat-icon-button color="primary" (click)="editDelivery(i)">
-                                        <mat-icon>open_in_new</mat-icon>
-                                    </button> -->
-                                    <button mat-icon-button color="warn" (click)="deleteDelivery(i)">
+                                    <button mat-icon-button [disabled]="delivery.deliveryStatus=='DELIVERED'" color="warn" (click)="deleteDelivery(i)">
                                         <mat-icon>delete</mat-icon>
                                     </button>
                                 </td>

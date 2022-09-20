@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppAuthGuard } from 'src/app/app-auth.guard';
 import { CashHandoverReportComponent } from '../report/cash-handover-report/cash-handover-report.component';
 import { DeliveryReportComponent } from '../report/delivery-report/delivery-report.component';
+import { EscavateReportComponent } from '../report/escavate-report/escavate-report.component';
 import { ProductionReportComponent } from '../report/production-report/production-report.component';
 import { SalesReportComponent } from '../report/sales-report/sales-report.component';
 import { SordarRecordReportComponent } from '../report/sordar-record-report/sordar-record-report.component';
@@ -38,7 +39,9 @@ const routes: Routes = [{
           {path:"sordar-report",component: SordarRecordReportComponent},
           {path:"sales-report",component: SalesReportComponent},
           {path:"delivery-report",component: DeliveryReportComponent},
-          {path:"supply-report",component: ListSupplyInvoiceComponent}
+          {path:"escavate-report",component: EscavateReportComponent},
+          {path:"supply-report",component: ListSupplyInvoiceComponent},
+
         ]},
         
         {path: 'employees', component: EmployeesComponent},
