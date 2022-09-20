@@ -4,7 +4,7 @@
             <div class="col-md-4">
                 <mat-form-field class="input-field" appearance="outline">
                     <mat-label>সর্দারের নাম :</mat-label>
-                    <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedSordar" (selectionChange)="onChnageSordar()">
+                    <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedSordar">
                         <mat-option *ngFor="let sordar of sordars" [value]="sordar">{{sordar?.person?.personName}}</mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -12,7 +12,7 @@
             <div class="col-md-4">
                 <mat-form-field class="input-field" appearance="outline">
                     <mat-label>সর্দারের ধরন:</mat-label>
-                    <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="category" (selectionChange)="onChnageSordar()">
+                    <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="category">
                         <mat-option *ngFor="let category of categories" [value]="category.value">{{category.label}}</mat-option>
                     </mat-select>
                 </mat-form-field>

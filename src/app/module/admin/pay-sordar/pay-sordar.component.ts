@@ -26,7 +26,8 @@ export class PaySordarComponent implements OnInit {
       { label: '১নং পাগ মিল', value: '১নং পাগ মিল' },
       { label: '১নং অটো মিল', value: '১নং অটো মিল' },
       { label: '২নং অটো মিল', value: '২নং অটো মিল' },
-      { label: 'লোড-আনলোড', value: 'লোড-আনলোড' },
+      { label: 'লোড', value: 'লোড' },
+      { label: 'আনলোড', value: 'আনলোড' },
       { label: 'আগুন মিস্ত্রি', value: 'আগুন মিস্ত্রি' },
       
     ];
@@ -36,7 +37,7 @@ export class PaySordarComponent implements OnInit {
     this.fetchSordarList();
   }
   onChnageSordar(){
-    this.category = this.selectedSordar.category;
+    // this.category = this.selectedSordar.category;
   }
   fetchSordarList(){
     this.userService.fetchAllSordars().subscribe({
@@ -52,7 +53,7 @@ export class PaySordarComponent implements OnInit {
   }
   submit(){
     let expenseModel = {
-      expenseReason: this.selectedSordar.category + ' সরদার',
+      expenseReason: this.category + ' সরদার',
       category: 'মজুরি',
       amount: this.amount,
       receivedBy: this.selectedSordar.person.personName,
