@@ -55,15 +55,15 @@
           </tr>
           <tr>
             <td>Paid</td>
-            <td  style="text-align:right ;">{{invoice?.advancePayment}} BDT</td>
+            <td  style="text-align:right ;">{{invoice?.advancePayment || 0}} BDT</td>
           </tr>
           <tr>
             <td>Rebate</td>
-            <td  style="text-align:right ;">{{invoice?.rebate}} BDT</td>
+            <td  style="text-align:right ;">{{invoice?.rebate || 0}} BDT</td>
           </tr>
           <tr *ngIf="isEdit">
             <td>New Payment</td>
-            <td  style="text-align:right ;">{{invoice?.newPayment}} BDT</td>
+            <td  style="text-align:right;font-weight: bold;color: forestgreen;">{{invoice?.newPayment || 0}} BDT</td>
           </tr>
           <tr>
             <td>Due Payment</td>
@@ -86,6 +86,7 @@
             <th>Price Rate</th>
             <th>Quantity</th>
             <th>Total Price</th>
+            <th>State</th>
           </tr>
         </thead>
         <tbody>
@@ -95,6 +96,7 @@
             <td>{{order?.brick?.pricePerPiece}}</td>
             <td>{{order?.quantity}}</td>
             <td>{{order?.totalPrice}}</td>
+            <td style="font-weight:bold ;" [style.color]="order.state=='OPEN'?'green':'red'">{{order?.state}}</td>
           </tr>
         </tbody>
       </table>

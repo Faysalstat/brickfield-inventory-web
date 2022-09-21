@@ -298,7 +298,7 @@ export class MakeInvoiceComponent implements OnInit {
     let totalPrice = 0;
     let totalQuantity = 0;
     this.orders.forEach((order) => {
-      if(order.state=='OPEN'){
+      if(order.state!='CANCELLED'){
         totalPrice = totalPrice + order.totalPrice;
         totalQuantity = totalQuantity + order.quantity;
       }
@@ -406,7 +406,7 @@ export class MakeInvoiceComponent implements OnInit {
   editDelivery(index: any) {}
   // need to activate 
   deleteDelivery(index: any) {
-    if (this.isEdit) {
+    if (this.isEdit && this.schedules[index].id) {
       const params: Map<string, any> = new Map();
       params.set('schedule', this.schedules[index]);
       this.userService.deleteSchedule(params).subscribe({

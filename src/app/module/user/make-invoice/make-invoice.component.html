@@ -233,7 +233,7 @@
                         </thead>
                         <tbody>
                             <tr *ngIf="schedules.length==0">
-                                <td colspan="9" style="font-weight:bold ; ">
+                                <td colspan="10" style="font-weight:bold ; ">
                                     No Schedule Created!!
                                 </td>
                             </tr>
@@ -251,7 +251,7 @@
                                 <td>{{applyFilter(delivery?.scheduledDate)}}</td>
                                 <td>{{delivery?.deliveryStatus}}</td>
                                 <td>
-                                    <button mat-icon-button [disabled]="delivery.deliveryStatus=='DELIVERED'" color="warn" (click)="deleteDelivery(i)">
+                                    <button mat-icon-button [disabled]="delivery.deliveryStatus =='DELIVERED'" color="warn" (click)="deleteDelivery(i)">
                                         <mat-icon>delete</mat-icon>
                                     </button>
                                 </td>

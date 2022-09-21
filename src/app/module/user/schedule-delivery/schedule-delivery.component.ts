@@ -22,6 +22,8 @@ export class ScheduleDeliveryComponent implements OnInit {
   delivery!: any;
   isPaymentDue: boolean= false;
   transportCostCustomerPayable: boolean = true;
+  maxValue:number = 0;
+  isValid: boolean = true;
   constructor(
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
@@ -42,6 +44,7 @@ export class ScheduleDeliveryComponent implements OnInit {
         next: (res) => {
           console.log(res);
           this.delivery = res.body;
+          this.maxValue = this.delivery.deliverableQuantity;
           this.fetchCustomerById(res.body.invoice.customerId);
           this.fetchBrickById(res.body.brickId);
           if(this.delivery?.invoice?.duePament >0){
@@ -70,6 +73,10 @@ export class ScheduleDeliveryComponent implements OnInit {
   }
   doDelivery(){
     console.log(this.delivery);
+    if(!this.isValid){
+      this.userService.showMessage("ERROR!","Maximum Value Exceed","OK",1000);
+      return;
+    }
     this.delivery.transportCostCustomerPayable = this.transportCostCustomerPayable;
     const params: Map<string, any> = new Map();
     params.set("schedule", this.delivery);
@@ -109,5 +116,13 @@ export class ScheduleDeliveryComponent implements OnInit {
         this.userService.showMessage("ERROR!","Brick Find Operation Failed" + err.message,"OK",2000);
       }
     })
+  }
+  checkValidation(){
+    if(this.delivery.deliverableQuantity > this.maxValue){
+      this.isValid = false;
+      this.userService.showMessage("ERROR!","Maximum Value Exceed","OK",1000);
+    }else{
+      this.isValid = true;
+    }
   }
 }

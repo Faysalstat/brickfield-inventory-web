@@ -175,7 +175,7 @@ export class OrderModel {
   totalPrice!: number;
   brickId!: number;
   brick!: Brick;
-  state!:string;
+  state:string = "PENDING";
 }
 
 export interface PeriodicInvoiceElement {
