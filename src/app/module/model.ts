@@ -291,6 +291,7 @@ export class Expense{
   expenseAmount!:number;
   refference!:string;
   payTo!:string;
+  tnxDate:Date = new Date();
 }
 export class EscavatorExpenseModel{
   productName!:string;

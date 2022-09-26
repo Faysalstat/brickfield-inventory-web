@@ -1,7 +1,7 @@
 <mat-card class="mt-3">
     <div class="row">
         <h2>খরচের হিসাব:</h2>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <mat-form-field appearance="outline" class="input-field">
                 <mat-label>খরচের ধরন:</mat-label>
                 <mat-select [ngModelOptions]="{standalone:true}" [(ngModel)]="selectedExpense">
@@ -9,16 +9,25 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <mat-form-field class="input-field" appearance="outline">
                 <mat-label>প্রাপক:</mat-label>
                 <input  [ngModelOptions]="{standalone:true}"  [(ngModel)]="selectedExpense.payTo" placeholder="Client Name" matInput>
             </mat-form-field>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <mat-form-field class="input-field" appearance="outline">
                 <mat-label>টাকার পরিমান:</mat-label>
                 <input type="number" [ngModelOptions]="{standalone:true}"  [(ngModel)]="selectedExpense.expenseAmount" placeholder="Amount" matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field appearance="outline">
+                <mat-label>তারিখ:</mat-label>
+                <input matInput [matDatepicker]="rawpicker" [max]="maxDate" [ngModelOptions]="{standalone:true}"
+                    [(ngModel)]="tnxDate">
+                <mat-datepicker-toggle matSuffix [for]="rawpicker"></mat-datepicker-toggle>
+                <mat-datepicker #rawpicker></mat-datepicker>
             </mat-form-field>
         </div>
        

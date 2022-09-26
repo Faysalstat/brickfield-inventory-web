@@ -11,13 +11,15 @@ import { UserService } from '../../user.service';
 export class CashExpenseComponent implements OnInit {
   expenseCategories!:Expense[];
   selectedExpense!:Expense;
-
+  maxDate: Date = new Date();
+  tnxDate: Date = new Date();
 
   constructor(
     private userService:UserService,
     private snackBar: MatSnackBar
   ) {
     this.selectedExpense = new Expense();
+    this.selectedExpense.tnxDate = new Date()
    }
 
   ngOnInit(): void {
@@ -37,13 +39,15 @@ export class CashExpenseComponent implements OnInit {
   }
 
   submit(){
+    this.selectedExpense.tnxDate = this.tnxDate;
     const params:Map<string,any> = new Map();
     params.set("expense",this.selectedExpense);
     this.userService.doExpense(params).subscribe({
       next:(data)=>{
         console.log(data);
         this.selectedExpense = new Expense();
-        // window.location.reload();
+        this.tnxDate = new Date();
+        this.userService.showMessage("Success!","Transaction Completed","OK",2000);
       },
       error:(err)=>{
         this.userService.showMessage("ERROR!","Operation Failed","OK",2000);
