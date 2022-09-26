@@ -58,7 +58,7 @@ export class TransactionReportComponent implements OnInit {
       {label:'বিল',value:"বিল"},
       {label:'জমা',value:"জমা"},
       {label:'মালিকের জমা',value:"HAND_OVER"},
-      {label:'Salary',value:"SALARY"}
+      {label:'বেতন',value:"SALARY"}
     ];
     this.expenseReasons = [{label:'Select Category',value:null}];
     this.transactionTypes=[
