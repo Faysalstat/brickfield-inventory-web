@@ -34,7 +34,7 @@
                         </tr>
                         <tr>
                             <td>গাড়ির ধরন</td>
-                            <td> {{supplyInvoice?.vehicleCategoryName?.categoryName}}</td>
+                            <td> {{supplyInvoice?.vehicleCategoryName}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -45,25 +45,25 @@
                         <tr>
                             <td colspan="2" style="text-align:center;font-weight: bolder">Transaction Details</td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="isCC">
                             <td>পরিমান</td>
-                            <td> {{supplyInvoice.numberOfTrips||0}} গাড়ি </td>
+                            <td> {{supplyInvoice?.numberOfTrips||0}} গাড়ি </td>
                         </tr>
                         <tr *ngIf="isCC">
                             <td>গাড়ি প্রতি ক্রয় মূল্য</td>
-                            <td> {{supplyInvoice.pricePerTrip}} টাকা </td>
+                            <td> {{supplyInvoice?.pricePerTrip}} টাকা </td>
                         </tr>
                         <tr *ngIf="isCC">
                             <td> মোট ক্রয় মূল্য</td>
-                            <td> {{supplyInvoice.totalPrice}} টাকা </td>
+                            <td> {{supplyInvoice?.totalPrice}} টাকা </td>
                         </tr>
                         <tr *ngIf="isCFT">
                             <td>পরিমান</td>
-                            <td> {{supplyInvoice.cftQuantity}} CFT </td>
+                            <td> {{supplyInvoice?.cftQuantity}} CFT </td>
                         </tr>
                         <tr *ngIf="isTON">
                             <td>পরিমান</td>
-                            <td> {{supplyInvoice.totalQuantity}} TON </td>
+                            <td> {{supplyInvoice?.totalQuantity}} TON </td>
                         </tr>
                         <tr *ngIf="isTON">
                             <td>TON প্রতি ক্রয় মূল্য</td>

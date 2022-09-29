@@ -48,7 +48,7 @@
             </mat-form-field>
           </div>
           <div class="col-md-6" *ngIf="needSupplyer">
-            <button type="button" style="margin-top:42px ;" class="btn btn-primary" (click)="addSupplyer()">
+            <button style="margin-top:42px ;" mat-raised-button color="warn" (click)="addSupplyer()">
               Add Supplyer
             </button>
           </div>
@@ -251,7 +251,7 @@
           <div class="col-md-3">
             <mat-form-field class="input-field" appearance="outline">
               <mat-label>ক্রয় বাবদ</mat-label>
-              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (change)="calculateTotalAmountToPay()"
+              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (keyup) ="calculateTotalAmountToPay()"
                 [(ngModel)]="supplyInvoice.totalPrice" placeholder="00" matInput>
             </mat-form-field>
           </div>
@@ -265,21 +265,21 @@
           <div class="col-md-3">
             <mat-form-field class="input-field" appearance="outline">
               <mat-label>মোট খরচ</mat-label>
-              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (change)="calculateDueAmount()"
+              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (keyup)="calculateDueAmount()"
                 [(ngModel)]="supplyInvoice.totalAmountToPay" placeholder="00" matInput>
             </mat-form-field>
           </div>
           <div class="col-md-3">
             <mat-form-field class="input-field" appearance="outline">
               <mat-label>পরিশোধ</mat-label>
-              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (change)="calculateDueAmount()"
+              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (keyup)="calculateDueAmount()"
                 [(ngModel)]="supplyInvoice.advancePayment" placeholder="00" matInput>
             </mat-form-field>
           </div>
           <div class="col-md-3">
             <mat-form-field class="input-field" appearance="outline">
               <mat-label>রিবেট</mat-label>
-              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (change)="calculateDueAmount()"
+              <input type="number" pInputText [ngModelOptions]="{standalone:true}" (keyup)="calculateDueAmount()"
                 [(ngModel)]="supplyInvoice.rebate" placeholder="00" matInput>
             </mat-form-field>
           </div>

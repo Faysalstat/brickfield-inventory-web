@@ -199,7 +199,7 @@ export class ScheduleDeliveryModel {
   deliverableQuantity!: number;
   scheduledDate!: string;
   tripNeeded!: number;
-  transportCost!: number;
+  transportCost: number = 0;
   vehicleCategory!:VehicleCategory;
   vehicleCategoryId!: number;
   deliveryStatus!:string;

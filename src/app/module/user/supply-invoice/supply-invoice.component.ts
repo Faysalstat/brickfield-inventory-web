@@ -160,6 +160,7 @@ export class SupplyInvoiceComponent implements OnInit {
         this.supplyer = res.body;
         this.notFoundMessage = '';
         this.needSupplyer = false;
+        this.userService.showMessage("SUCCESS!","Supplyer Created","OK",1000);
 
       },
       error:(err)=>{
@@ -302,6 +303,7 @@ export class SupplyInvoiceComponent implements OnInit {
 
   calculateSummary(){
     this.supplyInvoice.totalAmountToPay = this.supplyInvoice.totalPrice + this.supplyInvoice.transportCost;
+    this.supplyInvoice.duePayment = this.supplyInvoice.totalAmountToPay - this.supplyInvoice.advancePayment - this.supplyInvoice.rebate;
   }
   calculateTonTotal(){
     this.supplyInvoice.totalTonCost =  this.supplyInvoice.totalTonQuantity*this.supplyInvoice.costPerTon;

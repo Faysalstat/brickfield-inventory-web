@@ -1,5 +1,6 @@
 // const BASE_URL = "https://vatasolution.me/api";
-const BASE_URL = "http://localhost:3000/api";
+// const BASE_URL = "http://localhost:3000/api";
+const BASE_URL = "http://demo.vatasolution.me/api";
 
 export const Urls = {
     USER_SIGN_IN: BASE_URL + "/auth/signin",
