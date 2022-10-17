@@ -31,6 +31,11 @@
                         matInput></textarea>
                 </mat-form-field>
             </div>
+            <div *ngIf="isSubmitted" class="col-md-12 ">
+                <div class="modal-loader">
+                    <mat-spinner color="accent" style="margin:80px auto;" diameter="200"></mat-spinner>
+                </div>
+            </div>
             <div class="col-md-12">
                 <button type="submit" style="margin-top: 40px; float: left;" (click)="submit()" mat-raised-button
                     color="primary">Submit</button>

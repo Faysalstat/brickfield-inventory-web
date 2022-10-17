@@ -11,6 +11,7 @@ import { AdminService } from '../admin.service';
 export class HandoverDetailsComponent implements OnInit {
   taskId!:number;
   handoverDetails!:any;
+  isSubmitted: boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
@@ -35,15 +36,18 @@ export class HandoverDetailsComponent implements OnInit {
     });
   }
   approveInvoice(event: any){
+    this.isSubmitted = true;
     this.handoverDetails.taskId = this.taskId;
     const params: Map<string, any> = new Map();
     params.set('handover', this.handoverDetails);
     this.adminService.approveHandOverTask(params).subscribe({
       next: (data) => {
+        this.isSubmitted = false;
         this.userService.showMessage("SUCCESS!","Payment Complete","OK",2000);
         this.router.navigate(['/admin/task-list']);
       },
       error: (err) => {
+        this.isSubmitted = false;
         console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed","OK",2000)}
     })

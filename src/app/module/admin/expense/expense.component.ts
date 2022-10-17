@@ -15,6 +15,7 @@ export class ExpenseComponent implements OnInit {
   receivedBy!:string;
   remarks!:string;
   selectedExpense!:any;
+  isSubmitted: boolean = false;
   constructor(
     private userService: UserService,
     private adminService:AdminService
@@ -39,6 +40,7 @@ export class ExpenseComponent implements OnInit {
   }
 
   submit(){
+    this.isSubmitted = true;
     let expenseModel = {
         expenseReason: this.selectedExpense.expenseName,
         category: this.selectedExpense.categoryName,
@@ -50,6 +52,7 @@ export class ExpenseComponent implements OnInit {
     params.set("expense",expenseModel);
     this.adminService.doOfficeExpense(params).subscribe({
       next:(data)=>{
+        this.isSubmitted = false;
         console.log(data);
         this.selectedExpense = null;
         this.amount = 0;
@@ -60,6 +63,7 @@ export class ExpenseComponent implements OnInit {
         this.userService.showMessage("Success!","Payment Complete","OK",2000);
       },
       error:(err)=>{
+        this.isSubmitted = false;
         console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }

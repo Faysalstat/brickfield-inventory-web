@@ -141,6 +141,11 @@
                 <button style="margin-top:30px; float: right;" mat-raised-button color="primary"
                     (click)="updateSupplyInvoice()">Submit</button>
             </div>
+            <div *ngIf="isSubmitted" class="col-md-12 ">
+                <div class="modal-loader">
+                    <mat-spinner color="accent" style="margin:80px auto;" diameter="200"></mat-spinner>
+                </div>
+            </div>
         </div>
     </mat-card>
 </div>

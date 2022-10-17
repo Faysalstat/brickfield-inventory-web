@@ -47,6 +47,7 @@ export class SupplyInvoiceComponent implements OnInit {
   costAmount:number = 0;
   totalCostAmount:number = 0;
   isApprovalNeeded:boolean = false;
+  isSubmitted:boolean = false;
   constructor(
     
     private userService: UserService,
@@ -245,6 +246,7 @@ export class SupplyInvoiceComponent implements OnInit {
   }
 
   submitInvoice() {
+    
     console.log(this.supplyInvoice);
     if(!this.supplyer){
       this.userService.showMessage("ERROR!","Invalid Form, ADD SUPPLYER","OK",2000);
@@ -279,14 +281,17 @@ export class SupplyInvoiceComponent implements OnInit {
   }
 
   sendToApproval(params: any) {
+    this.isSubmitted =true;
     this.userService.createApproval(params).subscribe({
       next: (res) => {
         console.log(res);
+        this.isSubmitted =false;
         this.userService.showMessage("Success!","Item Sent For Approval","OK",2000);
         this.router.navigate(['/home/supply-list']);
       },
       error:(err)=>{
         console.log(err.message);
+        this.isSubmitted =false;
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete: () => {},

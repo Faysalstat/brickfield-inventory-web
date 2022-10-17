@@ -48,6 +48,7 @@ export class MakeInvoiceComponent implements OnInit {
   errMsg!:string;
   deleteMessage:string = '';
   username!:any;
+  isSubmitted:boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -483,6 +484,7 @@ export class MakeInvoiceComponent implements OnInit {
     return isValid;
   }
   submitInvoice() {
+    
     console.log(this.orders);
     const params: Map<string, any> = new Map();
     if(!this.isCustomerExist){
@@ -529,14 +531,17 @@ export class MakeInvoiceComponent implements OnInit {
     
   }
   sendToApproval(params: any) {
+    this.isSubmitted =true;
     this.userService.createApproval(params).subscribe({
       next: (res) => {
         console.log(res);
+        this.isSubmitted =false;
         this.userService.showMessage("Success!","Item sent For approval","OK",2000);
         this.router.navigate(['/home/invoice-list']);
       },
       error:(err)=>{
         console.log(err.message);
+        this.isSubmitted =false;
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete: () => {},
@@ -544,13 +549,16 @@ export class MakeInvoiceComponent implements OnInit {
   }
 
   createInvoice(params: any) {
+    this.isSubmitted =true;
     this.userService.createInvoice(params).subscribe({
       next: (res) => {
         console.log(res);
+        this.isSubmitted =false;
         this.router.navigate(['/home/invoice-list']);
       },
       error: (err) => {
         console.log(err.message);
+        this.isSubmitted =false;
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete: () => {},

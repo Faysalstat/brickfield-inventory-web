@@ -13,20 +13,22 @@ import { AdminService } from '../admin.service';
 export class InvoiceDetailComponent implements OnInit {
   invoice!: any;
   supplyInvoice!: any;
-  taskId!:number;
+  taskId!: number;
   person!: Person;
   account!: Account;
   customer!: Customer;
   supplyer!: Supplyer;
   driverPerson!: Person;
-  deliveryType!:string;
+  deliveryType!: string;
   isEdit: boolean = false;
   isSupply: boolean = false;
   isCC: boolean = false;
   isCFT: boolean = false;
   isECL: boolean = false;
-  isTON:boolean = false;
+  isTON: boolean = false;
+  isSubmitted: boolean = false;
   comment!: string;
+  isLoading: boolean = false;
   // orders!
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -45,34 +47,34 @@ export class InvoiceDetailComponent implements OnInit {
       console.log(parameter);
       this.adminService.fetchTaskById(id).subscribe({
         next: (res) => {
-          if(res.body.taskType==Tasks.CREATE_SUPPLY){
+          if (res.body.taskType == Tasks.CREATE_SUPPLY) {
             this.supplyInvoice = res.body;
             console.log(this.supplyInvoice);
-            if(this.supplyInvoice.deliveryType == 1){
+            if (this.supplyInvoice.deliveryType == 1) {
               this.isCC = true;
               this.deliveryType = 'গাড়ি চু্ক্তি';
             }
-            if(this.supplyInvoice.deliveryType == 2){
+            if (this.supplyInvoice.deliveryType == 2) {
               this.isCFT = true;
               this.deliveryType = 'CFT';
             }
-            if(this.supplyInvoice.deliveryType == 3){
+            if (this.supplyInvoice.deliveryType == 3) {
               this.isTON = true;
               this.deliveryType = 'TON';
             }
-            if(this.supplyInvoice.deliveryType == 4){
+            if (this.supplyInvoice.deliveryType == 4) {
               this.isECL = true;
               this.deliveryType = 'এসকেভেটর';
             }
             this.isSupply = true;
             this.comment = this.supplyInvoice.comment;
             this.fetchSupplyerById(this.supplyInvoice.supplyer.id);
-          }else{
+          } else {
             this.isSupply = false;
             this.invoice = res.body;
-            if(res.body.taskType==Tasks.UPDATE_INVOICE){
+            if (res.body.taskType == Tasks.UPDATE_INVOICE) {
               this.isEdit = true;
-            }else{
+            } else {
               this.isEdit = false;
             }
             this.comment = this.invoice.comment;
@@ -82,7 +84,12 @@ export class InvoiceDetailComponent implements OnInit {
         },
         error: (err) => {
           console.log(err.message);
-          this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
+          this.userService.showMessage(
+            'ERROR!',
+            'Operation Failed' + err.message,
+            'OK',
+            2000
+          );
         },
       });
     });
@@ -96,30 +103,48 @@ export class InvoiceDetailComponent implements OnInit {
       },
       error: (err) => {
         console.log(err.message);
-        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
+        this.userService.showMessage(
+          'ERROR!',
+          'Operation Failed' + err.message,
+          'OK',
+          2000
+        );
       },
     });
   }
-  fetchSupplyerById(id: any){
+  fetchSupplyerById(id: any) {
     this.userService.fetchSupplyerById(id).subscribe({
       next: (res) => {
         this.supplyInvoice.supplyer = res.body;
         this.person = this.supplyInvoice.supplyer.person;
         console.log(res);
       },
-      error:(err)=>{
+      error: (err) => {
         console.log(err.message);
-        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
-      }
+        this.userService.showMessage(
+          'ERROR!',
+          'Operation Failed' + err.message,
+          'OK',
+          2000
+        );
+      },
     });
   }
   applyFilter(date: any) {
     let newDate = new Date(date);
-    return (newDate.getDate()) +"/"+(newDate.getMonth()+1) + '/' + newDate.getFullYear();
+    return (
+      newDate.getDate() +
+      '/' +
+      (newDate.getMonth() + 1) +
+      '/' +
+      newDate.getFullYear()
+    );
   }
   approveInvoice(event: any) {
+    this.isSubmitted = true;
+    this.isLoading = true;
     const params: Map<string, any> = new Map();
-    if(event=="APPROVED" || event== "CORRECTION"){
+    if (event == 'APPROVED' || event == 'CORRECTION') {
       console.log(event);
       this.invoice.approvalStatus = event;
       this.invoice.taskId = this.taskId;
@@ -129,20 +154,34 @@ export class InvoiceDetailComponent implements OnInit {
       this.adminService.approveSaleTask(params).subscribe({
         next: (data) => {
           console.log(data);
-        this.userService.showMessage("Success!","Approval Done!","OK",2000);
+          this.isSubmitted = false;
+          this.isLoading = false;
+          this.userService.showMessage(
+            'Success!',
+            'Approval Done!',
+            'OK',
+            2000
+          );
           this.router.navigate(['/admin/task-list']);
         },
         error: (err) => {
           console.log(err.message);
-        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
+          this.isSubmitted = false;
+          this.isLoading = false;
+          this.userService.showMessage(
+            'ERROR!',
+            'Operation Failed' + err.message,
+            'OK',
+            2000
+          );
         },
       });
-    }else{
-      let model:any = {}
+    } else {
+      let model: any = {};
       model.taskId = this.taskId;
       model.comment = this.comment;
-      if(this.invoice){
-        model.invoiceId = this.invoice.id
+      if (this.invoice) {
+        model.invoiceId = this.invoice.id;
       }
       params.set('model', model);
       this.adminService.declineTask(params).subscribe({
@@ -152,46 +191,62 @@ export class InvoiceDetailComponent implements OnInit {
         },
         error: (err) => {
           console.log(err.message);
-        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
+          this.userService.showMessage(
+            'ERROR!',
+            'Operation Failed' + err.message,
+            'OK',
+            2000
+          );
         },
       });
     }
-    
   }
 
-  approveSupplyInvoice (event: any) {
+  approveSupplyInvoice(event: any) {
+    this.isSubmitted = true;
     const params: Map<string, any> = new Map();
-    if(event=="APPROVED"){
+    if (event == 'APPROVED') {
       console.log(event);
       this.supplyInvoice.approvalStatus = event;
       this.supplyInvoice.taskId = this.taskId;
       this.supplyInvoice.isEdit = this.isEdit;
       this.supplyInvoice.comment = this.comment;
-      if(this.isTON){
+      if (this.isTON) {
         this.supplyInvoice.totalQuantity = this.supplyInvoice.totalTonQuantity;
       }
       params.set('supplyInvoice', this.supplyInvoice);
       this.adminService.approveSupplyTask(params).subscribe({
         next: (data) => {
-          this.userService.showMessage("SUCCESS!","Approval Done","OK",2000);
+          this.isSubmitted = false;
+          this.userService.showMessage('SUCCESS!', 'Approval Done', 'OK', 2000);
           this.router.navigate(['/admin/task-list']);
         },
         error: (err) => {
-        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
+          this.isSubmitted = false;
+          this.userService.showMessage(
+            'ERROR!',
+            'Operation Failed' + err.message,
+            'OK',
+            2000
+          );
         },
       });
-    }else{
+    } else {
       params.set('taskId', this.taskId);
       this.adminService.declineTask(params).subscribe({
         next: (data) => {
-          this.userService.showMessage("SUCCESS!","Task Declied","OK",2000);
+          this.userService.showMessage('SUCCESS!', 'Task Declied', 'OK', 2000);
           this.router.navigate(['/admin/task-list']);
         },
         error: (err) => {
-        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
+          this.userService.showMessage(
+            'ERROR!',
+            'Operation Failed' + err.message,
+            'OK',
+            2000
+          );
         },
       });
     }
-    
   }
 }

@@ -22,6 +22,7 @@ export class EditSupplyInvoiceComponent implements OnInit {
   rebate: number = 0;
   newDue: number = 0;
   comment!: string;
+  isSubmitted:boolean =false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
@@ -70,6 +71,7 @@ export class EditSupplyInvoiceComponent implements OnInit {
     this.newDue = this.supplyInvoice.duePayment - this.newPayment - this.rebate;
   }
   updateSupplyInvoice() {
+    this.isSubmitted =true;
     const params: Map<string, any> = new Map();
     // this.supplyInvoice.comment = this.comment;
     this.supplyInvoice.newPayment = this.newPayment;
@@ -78,10 +80,12 @@ export class EditSupplyInvoiceComponent implements OnInit {
     this.userService.updateSupplyInvoice(params).subscribe({
       next: (data) => {
         console.log(data);
+        this.isSubmitted =false;
         this.userService.showMessage("Success!","Payment Successfull!!","OK",2000);
         this.router.navigate(['/home/supply-list']);
       },
       error: (err) => {
+        this.isSubmitted =false;
         console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },

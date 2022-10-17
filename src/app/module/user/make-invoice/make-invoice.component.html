@@ -341,6 +341,11 @@
                     <button style="margin: 10px; float: right;" mat-raised-button color="primary"
                         (click)="submitInvoice()">সাবমিট</button>
                 </div>
+                <div *ngIf="isSubmitted" class="col-md-12 ">
+                    <div class="modal-loader">
+                        <mat-spinner color="accent" style="margin:80px auto;" diameter="200"></mat-spinner>
+                    </div>
+                </div>
                 <div *ngIf="isEdit" class="col-md-12">
                     <button style="margin: 10px; float: right;" mat-raised-button color="primary"
                         [disabled]="status=='PENDING'" (click)="updateInvoice()">সাবমিট</button>
