@@ -41,6 +41,7 @@ export class EditSupplyInvoiceComponent implements OnInit {
     });
   }
   fetchSupplyInvoiceById(id: any) {
+    this.isSubmitted =true;
     this.userService.fetchSupplyInvoiceById(id).subscribe({
       next: (data) => {
         console.log(data.body);
@@ -65,6 +66,9 @@ export class EditSupplyInvoiceComponent implements OnInit {
         console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
+      complete:()=>{
+        this.isSubmitted = false;
+      }
     });
   }
   calculateDue(){

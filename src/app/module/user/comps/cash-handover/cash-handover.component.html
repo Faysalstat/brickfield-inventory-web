@@ -4,29 +4,38 @@
         <div class="col-md-4">
             <mat-form-field class="input-field" appearance="outline">
                 <mat-label>ব্যালান্স:</mat-label>
-                <input type="number" [ngModelOptions]="{standalone:true}"  [(ngModel)]="balance"  [disabled]="true"
-                placeholder="Balance" matInput>
+                <input type="number" [ngModelOptions]="{standalone:true}" [(ngModel)]="balance" [disabled]="true"
+                    placeholder="Balance" matInput>
             </mat-form-field>
         </div>
         <div class="col-md-4">
             <mat-form-field class="input-field" appearance="outline">
                 <mat-label>পরিমান:</mat-label>
-                <input type="number" [ngModelOptions]="{standalone:true}"  [(ngModel)]="amount" placeholder="Amount" matInput>
+                <input type="number" [ngModelOptions]="{standalone:true}" [(ngModel)]="amount" placeholder="Amount"
+                    matInput>
             </mat-form-field>
         </div>
         <div class="col-md-4">
-                <button mat-raised-button (click)="fetchGlBalance()" color="warn">
-                    <mat-icon>refresh</mat-icon>Refresh Balance</button>
+            <button mat-raised-button (click)="fetchGlBalance()" color="warn">
+                <mat-icon>refresh</mat-icon>Refresh Balance
+            </button>
         </div>
-       
+
         <div class="col-md-6">
             <mat-form-field class="input-field" appearance="outline">
                 <mat-label>মন্তব্য:</mat-label>
-                    <textarea type="text"  pInputText [ngModelOptions]="{standalone:true}"  [(ngModel)]="remarks" matInput></textarea>
-                </mat-form-field>
+                <textarea type="text" pInputText [ngModelOptions]="{standalone:true}" [(ngModel)]="remarks"
+                    matInput></textarea>
+            </mat-form-field>
         </div>
         <div class="col-md-6">
-            <button type="submit" style="margin-top: 40px; float: left;" (click)="sendForApproval()"  mat-raised-button color="primary">Submit</button>
+            <button type="submit" style="margin-top: 40px; float: left;" (click)="sendForApproval()" mat-raised-button
+                color="primary">Submit</button>
+        </div>
+        <div *ngIf="isSubmitted" class="col-md-12 ">
+            <div class="modal-loader">
+                <mat-spinner color="accent" style="margin:80px auto;" diameter="200"></mat-spinner>
+            </div>
         </div>
     </div>
 </mat-card>

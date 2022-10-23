@@ -12,6 +12,7 @@ export class EscavatorPaymentComponent implements OnInit {
   driverList!:Driver[];
   excavatorCostModel:EscavatorExpenseModel = new EscavatorExpenseModel();
   productList!:any[];
+  isSubmitted:boolean = false;
   constructor(
     private userService:UserService
   ) { }
@@ -40,6 +41,7 @@ export class EscavatorPaymentComponent implements OnInit {
    this.excavatorCostModel.totalBill = this.excavatorCostModel.hourlyRate * this.excavatorCostModel.totalHour;  
   }
   submit(){
+    this.isSubmitted = true;
     let excavatorModel = {
       productName:this.excavatorCostModel.productName,
       driver: this.excavatorCostModel.driver,
@@ -58,11 +60,13 @@ export class EscavatorPaymentComponent implements OnInit {
   params.set("escavator",excavatorModel);
   this.userService.payEscavatorBill(params).subscribe({
     next:(resData)=>{
+      this.isSubmitted = false;
       console.log(resData)
       this.userService.showMessage("Successs!","Operation Success","OK",2000);
       this.excavatorCostModel = new EscavatorExpenseModel();
     },
     error:(err)=>{
+      this.isSubmitted = false;
       console.log(err.message);
       this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
     }
@@ -72,13 +76,16 @@ export class EscavatorPaymentComponent implements OnInit {
     this.excavatorCostModel.duePayment = this.excavatorCostModel.totalBill - this.excavatorCostModel.advancePayment;
   }
   fetchProductList() {
+    this.isSubmitted = true;
     this.userService.fetchAllProducts().subscribe({
       next: (data) => {
+        this.isSubmitted = false;
         console.log(data);
         this.productList = data.body;
         
       },
       error:(err)=>{
+        this.isSubmitted = false;
         console.log(err.message);
       this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }

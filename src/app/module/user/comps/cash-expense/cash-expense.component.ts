@@ -13,7 +13,7 @@ export class CashExpenseComponent implements OnInit {
   selectedExpense!:Expense;
   maxDate: Date = new Date();
   tnxDate: Date = new Date();
-
+  isSubmitted: boolean = false;
   constructor(
     private userService:UserService,
     private snackBar: MatSnackBar
@@ -39,17 +39,20 @@ export class CashExpenseComponent implements OnInit {
   }
 
   submit(){
+    this.isSubmitted = true;
     this.selectedExpense.tnxDate = this.tnxDate;
     const params:Map<string,any> = new Map();
     params.set("expense",this.selectedExpense);
     this.userService.doExpense(params).subscribe({
       next:(data)=>{
+        this.isSubmitted = false;
         console.log(data);
         this.selectedExpense = new Expense();
         this.tnxDate = new Date();
         this.userService.showMessage("Success!","Transaction Completed","OK",2000);
       },
       error:(err)=>{
+        this.isSubmitted = false;
         this.userService.showMessage("ERROR!","Operation Failed","OK",2000);
       }
     })

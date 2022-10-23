@@ -12,6 +12,7 @@ export class CashHandoverComponent implements OnInit {
   amount: number = 0;
   remarks!: string;
   balance!: number;
+  isSubmitted:boolean = false;
   constructor(
     private userService: UserService,
     private snackBar: MatSnackBar
@@ -35,6 +36,7 @@ export class CashHandoverComponent implements OnInit {
     });
   }
   sendForApproval() {
+    this.isSubmitted = true;
     const params: Map<string, any> = new Map();
     let today = this.applyFilter();
     let approvalModel: ApprovalModel = new ApprovalModel();
@@ -49,12 +51,14 @@ export class CashHandoverComponent implements OnInit {
     console.log(approvalModel);
     this.userService.createApproval(params).subscribe({
       next: (res) => {
+        this.isSubmitted = false;
         console.log(res);
         this.userService.showMessage("SUCCESS!","Send for Approval","OK",2000)
         this.amount = 0;
         this.remarks = '';
       },
       error: (err) => {
+        this.isSubmitted = false;
         console.log(err.message);
         this.userService.showMessage('ERROR!', 'Operation Failed', 'OK', 2000);
       },

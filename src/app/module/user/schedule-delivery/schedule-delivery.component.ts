@@ -24,6 +24,7 @@ export class ScheduleDeliveryComponent implements OnInit {
   transportCostCustomerPayable: boolean = true;
   maxValue:number = 0;
   isValid: boolean = true;
+  isSubmitted: boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
@@ -72,6 +73,7 @@ export class ScheduleDeliveryComponent implements OnInit {
     );
   }
   doDelivery(){
+    this.isSubmitted = true;
     console.log(this.delivery);
     if(!this.isValid){
       this.userService.showMessage("ERROR!","Maximum Value Exceed","OK",1000);
@@ -90,6 +92,7 @@ export class ScheduleDeliveryComponent implements OnInit {
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete:()=>{
+        this.isSubmitted = false;
         console.log("done");
       }
     })

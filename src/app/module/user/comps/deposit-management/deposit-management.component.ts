@@ -12,6 +12,7 @@ export class DepositManagementComponent implements OnInit {
   depositDate:Date = new Date();
   remark!:String;
   types:any[];
+  isSubmitted:boolean = false;
   constructor(
     private userService :UserService
   ) { 
@@ -33,6 +34,7 @@ export class DepositManagementComponent implements OnInit {
   }
   submit(){
     const params: Map<string, any> = new Map();
+    this.isSubmitted = true;
     let depositModel = {
       depositAmount: this.depositAmount,
       depositFrom: this.depositFrom,
@@ -40,13 +42,14 @@ export class DepositManagementComponent implements OnInit {
       depositType: this.depositType,
       remark:this.remark,
       accountType:"FACTORY_GL",
-      reason:"Deposit To Factory GL",
+      reason:this.depositType,
       payTo:"FACTORY GL",
       issuedBy: "MANAGER"
     }
     params.set('deposit', depositModel);
     this.userService.doDepositToFactoryGL(params).subscribe({
       next:(data)=>{
+        this.isSubmitted = false;
         console.log(data.body);
         this.depositAmount = 0;
         this.depositFrom = "";
@@ -55,6 +58,7 @@ export class DepositManagementComponent implements OnInit {
         this.remark = "";
       },
       error:(err)=>{
+        this.isSubmitted = false;
         console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }

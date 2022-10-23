@@ -42,7 +42,7 @@ export class OfficeDepositComponent implements OnInit {
       depositType: this.depositType,
       remark:this.remark,
       accountType:"OFFICE_GL",
-      reason:"Deposit To OFFICE GL",
+      reason:this.depositType,
       payTo:"OFFICE GL",
       issuedBy: "ADMIN"
     }

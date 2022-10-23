@@ -37,6 +37,7 @@ export class StockManagementComponent implements OnInit {
   selectedLoadType!:any;
   totalSordarLoad!:number;
   roundNo!:number;
+  isSubmitted:boolean = false;
   constructor(
     private userService:UserService
   ) {
@@ -63,6 +64,7 @@ export class StockManagementComponent implements OnInit {
     this.fetchLoadUnloadReport();
   }
   fetchBricks() {
+    this.isSubmitted = true;
     this.userService.fetchBricks().subscribe({
       next: (res) => {
         console.log(res);
@@ -83,10 +85,14 @@ export class StockManagementComponent implements OnInit {
         console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
+      complete:()=>{
+        this.isSubmitted = false;
+      }
     });
   }
 
   fetchRawStock(){
+    this.isSubmitted= true;
     this.userService.fetchRawBricks().subscribe({
       next: (res) => {
         console.log(res);
@@ -99,9 +105,13 @@ export class StockManagementComponent implements OnInit {
         console.log(err.message);
         this.userService.showMessage("ERROR!","Raw Stock Fetching Operation Failed" + err.message,"OK",2000);
       },
+      complete:()=>{
+        this.isSubmitted = false;
+      }
     });
   }
   fetchRawStockReport(){
+    this.isSubmitted = true;
     this.userService.fetchRawStockReport().subscribe({
       next: (res)=>{
         console.log(res.body);
@@ -112,9 +122,13 @@ export class StockManagementComponent implements OnInit {
         console.log(err.message);
         this.userService.showMessage("ERROR!","Raw Stock Report FEtching Operation Failed" + err.message,"OK",2000);
       },
+      complete:()=>{
+        this.isSubmitted = false;
+      }
     })
   }
   fetchLoadUnloadReport(){
+    this.isSubmitted = true;
     this.userService.fetchLoadUnloadReport().subscribe({
       next: (res)=>{
         console.log(res.body);
@@ -126,10 +140,13 @@ export class StockManagementComponent implements OnInit {
         console.log(err.message);
         this.userService.showMessage("ERROR!","Load Unload Report Fetching Operation Failed" + err.message,"OK",2000);
       },
+      complete:()=>{
+        this.isSubmitted = false;
+      }
     })
   }
   addRawProduction() {
-    
+    this.isSubmitted = true;
     // this.dailyProductionList.push(this.selectedBrickProduction);
     console.log(" data submitted ")
     if(!this.selectedBrickProduction || !this.selectedSordar){
@@ -150,6 +167,7 @@ export class StockManagementComponent implements OnInit {
       complete:()=>{
         this.fetchRawStock();
         this.fetchRawStockReport();
+        this.isSubmitted = false;
       }
     })
     this.selectedBrickProduction = new RawBrickProduction();
@@ -158,6 +176,7 @@ export class StockManagementComponent implements OnInit {
   }
 
   loadRawProduction(){
+    this.isSubmitted = true;
     let rawLoadModel = {
       category : "RAW_BRICK",
       quantity : this.latestLoadQuantity,
@@ -181,11 +200,15 @@ export class StockManagementComponent implements OnInit {
         console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
+      complete:()=>{
+        this.isSubmitted = false;
+      }
     })
     
   }
 
   deleteRawProduction(production:RawBrickProduction ) {
+    this.isSubmitted = true;
     const params: Map<string, any> = new Map();
     params.set('deleteload',production);
     this.userService.deleteLoadProductionItem(params).subscribe({
@@ -196,6 +219,9 @@ export class StockManagementComponent implements OnInit {
         console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
+      complete:()=>{
+        this.isSubmitted = false;
+      }
     })
   }
 
@@ -208,6 +234,7 @@ export class StockManagementComponent implements OnInit {
 
   }
   addUnloadBricks(i:number){
+    this.isSubmitted = true;
     console.log(this.bricks);
     let unloadModel = this.bricks[i];
     unloadModel.type = "UNLOAD";
@@ -225,6 +252,7 @@ export class StockManagementComponent implements OnInit {
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete:()=>{
+        this.isSubmitted = false;
         this.fetchBricks();
         this.fetchLoadUnloadReport();
       }
@@ -250,6 +278,7 @@ export class StockManagementComponent implements OnInit {
     })
   }
   addSordarRecord(){
+    this.isSubmitted = true;
     let record = {
       sordarId: this.selectedLoadSordar.id,
       category: this.selectedLoadType,
@@ -270,6 +299,9 @@ export class StockManagementComponent implements OnInit {
       error:(err)=>{
         console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
+      },
+      complete:()=>{
+        this.isSubmitted = false;
       }
     })
   }

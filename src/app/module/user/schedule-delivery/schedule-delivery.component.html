@@ -95,6 +95,11 @@
             </mat-form-field>
         </div>
         
+        <div *ngIf="isSubmitted" class="col-md-12 ">
+            <div class="modal-loader">
+                <mat-spinner color="accent" style="margin:80px auto;" diameter="200"></mat-spinner>
+            </div>
+        </div>
         <div class="col-md-12">
             <button style="float:right; margin-top: 10px;" mat-raised-button 
             (click)="doDelivery()" color="accent">Deliver</button>
