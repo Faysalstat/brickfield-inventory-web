@@ -1,7 +1,7 @@
 // const BASE_URL = "https://vatasolution.me/api"; 
-// const BASE_URL = "http://localhost:3000/api";
+const BASE_URL = "http://localhost:3000/api";
 // const BASE_URL = "https://demo.vatasolution.me/api";
-const BASE_URL = "https://btbbricks.xyz/api";
+// const BASE_URL = "https://btbbricks.xyz/api";
 
 
 export const Urls = {
@@ -16,6 +16,7 @@ export const Urls = {
     DELETE_SCHEDULE : BASE_URL+ "/schedule/delete",
     UPDATE_USER: BASE_URL+"/user/updateuser",
     UPDATE_SORDAR : BASE_URL + "/sordar/updatesordar", 
+    
     // UPDATE_PASSWORD : BASE_URL +"/user/updateuser",
     UNLOAD_PRODUCTION: BASE_URL+"/stock/unloadproduction",
     LOAD_PRODUCTION: BASE_URL+"/stock/loadproduction",
@@ -24,6 +25,8 @@ export const Urls = {
     UPDATE_SUPPLY_INVOICE : BASE_URL + "/supply/update",
     APPROVE_INVOICE : BASE_URL + "/invoice/approve",
     UPDATE_BALANCE : BASE_URL + "/person/updatebalance",
+    UPDATE_PERSON : BASE_URL + "/person/updateperson", 
+    FETCH_PERSON_BY_CONTACT_ID : BASE_URL + "/person/getpersonbycontact", 
     GET_USER_BY_ID: BASE_URL + "/updateUserStatus",
 
     // CREATE 

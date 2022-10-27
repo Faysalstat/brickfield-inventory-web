@@ -59,6 +59,11 @@ export class AdminService {
     console.log(queryParams.get("sordar"))
     return this.http.post(Urls.UPDATE_SORDAR,queryParams.get("sordar"));
   }
+
+  public updatePerson(queryParams: Map<string,any>): Observable<any>{
+    console.log(queryParams.get("person"))
+    return this.http.post(Urls.UPDATE_PERSON,queryParams.get("person"));
+  }
   public fetchAppConfiguration(queryParams: Map<string, any>): Observable<any>{
     let params = new HttpParams();
     params = params.append('configName',queryParams.get('configName'));
@@ -95,6 +100,11 @@ export class AdminService {
   }
   public fetchTotalRebate(): Observable<any> {
     return this.http.get(Urls.FETCH_TOTAL_REBATE);
+  }
+  public fetchPersonByContactNo(contactNo:any): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('contactNo',contactNo);
+    return this.http.get(Urls.FETCH_PERSON_BY_CONTACT_ID,{params:params});
   }
   public showMessage(title:string,msg:string,close:string,timer:number){
     return Swal.fire({

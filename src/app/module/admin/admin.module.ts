@@ -21,6 +21,7 @@ import { DashboardSummaryComponent } from './dashboard-summary/dashboard-summary
 import { OfficeDepositComponent } from './office-deposit/office-deposit.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { ConfigurationsComponent } from './configurations/configurations.component';
+import { EditPersonComponent } from './edit-person/edit-person.component';
 
 
 
@@ -44,6 +45,7 @@ import { ConfigurationsComponent } from './configurations/configurations.compone
     OfficeDepositComponent,
     EmployeesComponent,
     ConfigurationsComponent,
+    EditPersonComponent,
     
   ],
   imports: [
