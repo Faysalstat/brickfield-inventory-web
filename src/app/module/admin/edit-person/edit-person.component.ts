@@ -10,7 +10,7 @@ import { AdminService } from '../admin.service';
 export class EditPersonComponent implements OnInit {
   person: Person = new Person();
   constructor(private adminService: AdminService) {}
-
+  isEditable:boolean = false;
   ngOnInit(): void {}
 
   searchPersonByContactNo() {
@@ -19,11 +19,10 @@ export class EditPersonComponent implements OnInit {
         if(res.body){
           this.adminService.showMessage("SUCCESS!!","Person Found","OK",500);
           this.person = res.body;
+          this.isEditable = true;
         }else{
           this.adminService.showMessage("FAILED!!","Person Not Found","OK",500);
         }
-        
-        
       },
       error: (err) => {
         console.log(err);
@@ -38,6 +37,7 @@ export class EditPersonComponent implements OnInit {
         console.log(res.body);
         this.person = new Person();
         this.adminService.showMessage("SUCCESS!!","Person Details Updated","OK",500);
+        this.isEditable = false;
       },
       error:(err)=>{
         this.adminService.showMessage("ERROR!!","Person Details update Failed","OK",500);

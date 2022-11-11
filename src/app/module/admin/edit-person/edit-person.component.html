@@ -3,7 +3,7 @@
     <div class="col-md-6">
         <mat-form-field class="input-field" appearance="outline" >
             <mat-label>Contact No:</mat-label>
-            <input   (change)="searchPersonByContactNo()" pInputText 
+            <input   (change)="searchPersonByContactNo()" pInputText  [disabled]="isEditable"
             [ngModelOptions]="{standalone:true}" 
             [(ngModel)]="person.contactNo" placeholder="Contact No." matInput>
         </mat-form-field>

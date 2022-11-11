@@ -1,6 +1,6 @@
-// const BASE_URL = "https://vatasolution.me/api"; 
-const BASE_URL = "http://localhost:3000/api";
-// const BASE_URL = "https://demo.vatasolution.me/api";
+const BASE_URL = "https://vatasolution.me/api"; 
+// const BASE_URL = "http://localhost:3000/api";
+// const BASE_URL = "https://demo.vatasolution.me/aypi";
 // const BASE_URL = "https://btbbricks.xyz/api";
 
 
