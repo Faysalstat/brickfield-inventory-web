@@ -40,8 +40,6 @@ export class AppAuthGuard implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    // throw new Error('Method not implemented.');
-    console.log(localStorage.getItem('token'));
     const idToken = localStorage.getItem('token');
     return this.verifyAdmin(idToken);
   }
@@ -53,7 +51,6 @@ export class AppAuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    console.log(localStorage.getItem('token'));
     const idToken = localStorage.getItem('token');
     return this.verify(idToken);
   }

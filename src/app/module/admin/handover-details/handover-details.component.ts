@@ -39,18 +39,48 @@ export class HandoverDetailsComponent implements OnInit {
     this.isSubmitted = true;
     this.handoverDetails.taskId = this.taskId;
     const params: Map<string, any> = new Map();
-    params.set('handover', this.handoverDetails);
-    this.adminService.approveHandOverTask(params).subscribe({
-      next: (data) => {
-        this.isSubmitted = false;
-        this.userService.showMessage("SUCCESS!","Payment Complete","OK",2000);
-        this.router.navigate(['/admin/task-list']);
-      },
-      error: (err) => {
-        this.isSubmitted = false;
-        console.log(err.message);
-        this.userService.showMessage("ERROR!","Operation Failed","OK",2000)}
-    })
+    
+    if (event == 'APPROVED') {
+      params.set('handover', this.handoverDetails);
+      this.adminService.approveHandOverTask(params).subscribe({
+        next: (data) => {
+          this.isSubmitted = false;
+          this.userService.showMessage("SUCCESS!","Payment Complete","OK",2000);
+          this.router.navigate(['/admin/task-list']);
+        },
+        error: (err) => {
+          this.isSubmitted = false;
+          console.log(err.message);
+          this.userService.showMessage("ERROR!","Operation Failed","OK",2000)}
+      })
+    }else{
+      let model: any = {};
+      model.taskId = this.taskId;
+      params.set('model', model);
+      this.adminService.declineTask(params).subscribe({
+        next: (data) => {
+          console.log(data);
+          this.userService.showMessage(
+            'SUCCESS!',
+            'Operation Successfull',
+            'OK',
+            2000
+          );
+          this.router.navigate(['/admin/task-list']);
+        },
+        error: (err) => {
+          console.log(err.message);
+          this.userService.showMessage(
+            'ERROR!',
+            'Operation Failed' + err.message,
+            'OK',
+            2000
+          );
+        },
+      });
+
+    }
+
 
   }
 }

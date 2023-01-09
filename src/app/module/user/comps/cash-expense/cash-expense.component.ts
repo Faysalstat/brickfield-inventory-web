@@ -39,6 +39,12 @@ export class CashExpenseComponent implements OnInit {
   }
 
   submit(){
+    if(!this.selectedExpense.categoryName 
+      || !this.selectedExpense.expenseAmount
+      || !this.selectedExpense.expenseName
+      ){
+        return;
+      }
     this.isSubmitted = true;
     this.selectedExpense.tnxDate = this.tnxDate;
     const params:Map<string,any> = new Map();

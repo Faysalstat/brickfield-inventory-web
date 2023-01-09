@@ -315,7 +315,7 @@ export class MakeInvoiceComponent implements OnInit {
     this.scheduleItem.vehicleCategoryId = this.scheduleItem.vehicleCategory.id;
   }
   addSchedule() {
-    if (!this.scheduleItem.vehicleCategory || !this.scheduleItem.driver) {
+    if (!this.scheduleItem.brickId || !this.scheduleItem.vehicleCategory || !this.scheduleItem.driver) {
       return;
     }
     

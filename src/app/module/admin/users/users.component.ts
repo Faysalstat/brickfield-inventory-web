@@ -55,7 +55,6 @@ export class UsersComponent implements OnInit {
           this.userForm.get('name')?.disable();
           this.userForm.get('address')?.disable();
           this.message = "* This contact already exists in database! "
-
         }
         else{
           this.userForm.get('name')?.enable();
