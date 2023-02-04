@@ -99,7 +99,7 @@ export class CashPaymentComponent implements OnInit {
     });
   }
   payCash(){
-    if(this.cashReceivedAmount==0){
+    if(!this.cashReceivedAmount || this.cashReceivedAmount==0){
       return;
     }else{
       let cashReceiveObj = {

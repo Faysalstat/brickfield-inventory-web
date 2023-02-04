@@ -40,11 +40,15 @@ export class ExpenseComponent implements OnInit {
   }
 
   submit(){
+    if(!this.amount || this.amount == 0 || !this.selectedExpense){
+      this.adminService.showMessage("INVALID FORM","Input All field","OK",400);
+      return;
+    }
     this.isSubmitted = true;
     let expenseModel = {
         expenseReason: this.selectedExpense.expenseName,
         category: this.selectedExpense.categoryName,
-        amount: this.amount,
+        amount: this.amount || 0,
         receivedBy: this.receivedBy,
         remarks: this.remarks,
     }
