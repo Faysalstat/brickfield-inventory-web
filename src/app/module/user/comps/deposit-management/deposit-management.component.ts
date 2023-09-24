@@ -3,36 +3,42 @@ import { UserService } from '../../user.service';
 @Component({
   selector: 'app-deposit-management',
   templateUrl: './deposit-management.component.html',
-  styleUrls: ['./deposit-management.component.css']
+  styleUrls: ['./deposit-management.component.css'],
 })
 export class DepositManagementComponent implements OnInit {
-  depositAmount!:number;
-  depositType!:string;
-  depositFrom!:string;
-  depositDate:Date = new Date();
-  remark!:String;
-  types:any[];
-  isSubmitted:boolean = false;
-  constructor(
-    private userService :UserService
-  ) { 
-    this.types=[
-      {label:"মালিকের জমা", value:"মালিকের জমা"},
-      {label:"লোন", value:"লোন"},
-      {label:"ব্যাংক", value:"ব্যাংক"},
-      {label:"Other", value:"OTHER"}
-    ]
+  depositAmount!: number;
+  depositType!: string;
+  depositFrom!: string;
+  depositDate: Date = new Date();
+  remark!: String;
+  types: any[];
+  isSubmitted: boolean = false;
+  constructor(private userService: UserService) {
+    this.types = [
+      { label: 'মালিকের জমা', value: 'মালিকের জমা' },
+      { label: 'লোন', value: 'লোন' },
+      { label: 'ব্যাংক', value: 'ব্যাংক' },
+      { label: 'Other', value: 'OTHER' },
+    ];
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   applyFilter(date: any) {
     let newDate = new Date(date);
     return (
-      (newDate.getDate()) +"/"+(newDate.getMonth()+1) + '/' + newDate.getFullYear()
+      newDate.getDate() +
+      '/' +
+      (newDate.getMonth() + 1) +
+      '/' +
+      newDate.getFullYear()
     );
   }
-  submit(){
+  submit() {
+    
+    if ((!this.depositAmount && this.depositAmount == 0) || !this.depositType) {
+      this.userService.showMessage('ERROR!', 'Invalid Form', 'OK', 1000);
+      return;
+    }
     const params: Map<string, any> = new Map();
     this.isSubmitted = true;
     let depositModel = {
@@ -40,29 +46,33 @@ export class DepositManagementComponent implements OnInit {
       depositFrom: this.depositFrom,
       depositDate: this.depositDate,
       depositType: this.depositType,
-      remark:this.remark,
-      accountType:"FACTORY_GL",
-      reason:this.depositType,
-      payTo:"FACTORY GL",
-      issuedBy: "MANAGER"
-    }
+      remark: this.remark,
+      accountType: 'FACTORY_GL',
+      reason: this.depositType,
+      payTo: 'FACTORY GL',
+      issuedBy: 'MANAGER',
+    };
     params.set('deposit', depositModel);
     this.userService.doDepositToFactoryGL(params).subscribe({
-      next:(data)=>{
+      next: (data) => {
         this.isSubmitted = false;
         console.log(data.body);
         this.depositAmount = 0;
-        this.depositFrom = "";
+        this.depositFrom = '';
         this.depositDate = new Date();
-        this.depositType = "মালিকের জমা";
-        this.remark = "";
+        this.depositType = 'মালিকের জমা';
+        this.remark = '';
       },
-      error:(err)=>{
+      error: (err) => {
         this.isSubmitted = false;
         console.log(err.message);
-        this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
-      }
-    })
-
+        this.userService.showMessage(
+          'ERROR!',
+          'Operation Failed' + err.message,
+          'OK',
+          2000
+        );
+      },
+    });
   }
 }

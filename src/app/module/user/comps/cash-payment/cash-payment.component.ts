@@ -100,6 +100,7 @@ export class CashPaymentComponent implements OnInit {
   }
   payCash(){
     if(!this.cashReceivedAmount || this.cashReceivedAmount==0){
+      this.userService.showMessage("ERROR","Invalid Form","CLOSE",1000);
       return;
     }else{
       let cashReceiveObj = {

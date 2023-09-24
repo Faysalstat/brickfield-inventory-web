@@ -53,7 +53,8 @@ export class CashReceiveComponent implements OnInit {
     });
   }
   receiveCash(){
-    if(this.cashReceivedAmount==0){
+    if(!this.cashReceivedAmount && this.cashReceivedAmount==0){
+      this.userService.showMessage("ERROR","Invalid Form","CLOSE",1000);
       return;
     }else{
       let cashReceiveObj = {
@@ -70,7 +71,7 @@ export class CashReceiveComponent implements OnInit {
           this.updated = false;
         },
         error:(err)=>{
-          this.userService.showMessage("ERROR!","Operation Failed","OK",2000);
+          this.userService.showMessage("ERROR!","Operation Failed "+err.message,"OK",2000);
         },
       })
 

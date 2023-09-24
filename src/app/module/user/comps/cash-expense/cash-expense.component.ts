@@ -43,6 +43,7 @@ export class CashExpenseComponent implements OnInit {
       || !this.selectedExpense.expenseAmount
       || !this.selectedExpense.expenseName
       ){
+        this.userService.showMessage("ERROR","Invalid Form","CLOSE",1000);
         return;
       }
     this.isSubmitted = true;
