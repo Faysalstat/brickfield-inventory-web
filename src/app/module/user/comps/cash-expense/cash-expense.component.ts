@@ -9,8 +9,10 @@ import { UserService } from '../../user.service';
   styleUrls: ['./cash-expense.component.css']
 })
 export class CashExpenseComponent implements OnInit {
-  expenseCategories!:Expense[];
+  expenseCategories!:any[];
+  filteredExpenseCategoriesOptions!:any;
   selectedExpense!:Expense;
+  expenseName:string = "";
   maxDate: Date = new Date();
   tnxDate: Date = new Date();
   isSubmitted: boolean = false;
@@ -30,6 +32,7 @@ export class CashExpenseComponent implements OnInit {
       next:(data)=>{
         if(data){
           this.expenseCategories = data.body;
+          this.filteredExpenseCategoriesOptions = data.body;
         }
       },
       error:(err)=>{
@@ -37,7 +40,24 @@ export class CashExpenseComponent implements OnInit {
       }
     })
   }
-
+  onExpenseNameInput(event: any) {
+    if (event.target.value == '') {
+      this.filteredExpenseCategoriesOptions = this.expenseCategories;
+    } else {
+      this.filteredExpenseCategoriesOptions = this._filterSupplier(event.target.value);
+    }
+  }
+  private _filterSupplier(name: string): string[] {
+    const filterValue = name.toLowerCase();
+    return this.expenseCategories.filter((expense:any) =>
+    expense.expenseName.toLowerCase().includes(filterValue)
+    );
+  }
+  onExpenseSelected(event:any){
+    console.log(event);
+    this.expenseName = event.option.value.expenseName;
+    this.selectedExpense = event.option.value;
+  }
   submit(){
     if(!this.selectedExpense.categoryName 
       || !this.selectedExpense.expenseAmount
@@ -55,6 +75,7 @@ export class CashExpenseComponent implements OnInit {
         this.isSubmitted = false;
         console.log(data);
         this.selectedExpense = new Expense();
+        this.expenseName = "";
         this.tnxDate = new Date();
         this.userService.showMessage("Success!","Transaction Completed","OK",2000);
       },

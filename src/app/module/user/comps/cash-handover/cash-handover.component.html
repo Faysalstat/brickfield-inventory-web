@@ -1,21 +1,30 @@
 <mat-card class="mt-3">
     <h2 class="bangla-font">মালিকের নিকট ক্যাশ হস্তান্তর:</h2>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <mat-form-field class="input-field" appearance="outline">
                 <mat-label>ব্যালান্স:</mat-label>
                 <input type="number" [ngModelOptions]="{standalone:true}" [(ngModel)]="balance" [disabled]="true"
                     placeholder="Balance" matInput>
             </mat-form-field>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <mat-form-field class="input-field" appearance="outline">
                 <mat-label>পরিমান:</mat-label>
                 <input type="number" [ngModelOptions]="{standalone:true}" [(ngModel)]="amount" placeholder="Amount"
                     matInput>
             </mat-form-field>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
+            <mat-form-field appearance="outline">
+                <mat-label>তারিখ:</mat-label>
+                <input matInput [matDatepicker]="rawpicker" [ngModelOptions]="{standalone:true}"
+                    [(ngModel)]="tnxDate">
+                <mat-datepicker-toggle matSuffix [for]="rawpicker"></mat-datepicker-toggle>
+                <mat-datepicker #rawpicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
             <button mat-raised-button (click)="fetchGlBalance()" color="warn">
                 <mat-icon>refresh</mat-icon>Refresh Balance
             </button>

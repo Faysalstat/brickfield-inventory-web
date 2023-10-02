@@ -16,6 +16,10 @@ export class ExpenseComponent implements OnInit {
   remarks!:string;
   selectedExpense!:any;
   isSubmitted: boolean = false;
+  expenseCategories!:any[];
+  filteredExpenseCategoriesOptions!:any;
+  expenseName:string = "";
+  issueDate:Date = new Date();
   constructor(
     private userService: UserService,
     private adminService:AdminService
@@ -29,6 +33,8 @@ export class ExpenseComponent implements OnInit {
       next:(data)=>{
         if(data){
           this.expenseTypes = data.body;
+          this.expenseCategories = data.body;
+          this.filteredExpenseCategoriesOptions = data.body;
           console.log(data.body);
         }
       },
@@ -38,7 +44,24 @@ export class ExpenseComponent implements OnInit {
       }
     })
   }
-
+  onExpenseNameInput(event: any) {
+    if (event.target.value == '') {
+      this.filteredExpenseCategoriesOptions = this.expenseCategories;
+    } else {
+      this.filteredExpenseCategoriesOptions = this._filterSupplier(event.target.value);
+    }
+  }
+  private _filterSupplier(name: string): string[] {
+    const filterValue = name.toLowerCase();
+    return this.expenseCategories.filter((expense:any) =>
+    expense.expenseName.toLowerCase().includes(filterValue)
+    );
+  }
+  onExpenseSelected(event:any){
+    console.log(event);
+    this.expenseName = event.option.value.expenseName;
+    this.selectedExpense = event.option.value;
+  }
   submit(){
     if(!this.amount || this.amount == 0 || !this.selectedExpense){
       this.adminService.showMessage("INVALID FORM","Input All field","OK",400);
@@ -51,6 +74,7 @@ export class ExpenseComponent implements OnInit {
         amount: this.amount || 0,
         receivedBy: this.receivedBy,
         remarks: this.remarks,
+        tnxDate:this.issueDate
     }
     const params:Map<string,any> = new Map();
     params.set("expense",expenseModel);
@@ -62,6 +86,7 @@ export class ExpenseComponent implements OnInit {
         this.amount = 0;
         this.receivedBy = "";
         this.remarks ="";
+        this.expenseName = "";
         this.expenseEvent.emit("Balance Changed");
         
         this.userService.showMessage("Success!","Payment Complete","OK",2000);

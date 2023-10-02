@@ -12,6 +12,7 @@ export class CashHandoverComponent implements OnInit {
   amount: number = 0;
   remarks!: string;
   balance!: number;
+  tnxDate:Date = new Date();
   isSubmitted:boolean = false;
   constructor(
     private userService: UserService,
@@ -38,12 +39,11 @@ export class CashHandoverComponent implements OnInit {
   sendForApproval() {
     this.isSubmitted = true;
     const params: Map<string, any> = new Map();
-    let today = this.applyFilter();
     let approvalModel: ApprovalModel = new ApprovalModel();
     approvalModel.payload = JSON.stringify({
       amount: this.amount,
       remarks: this.remarks,
-      tnxDate: today,
+      tnxDate: this.tnxDate,
     });
     approvalModel.createdBy = 'Manager';
     approvalModel.taskType = Tasks.CASH_HANDOVER;
@@ -65,8 +65,8 @@ export class CashHandoverComponent implements OnInit {
       complete: () => {},
     });
   }
-  applyFilter() {
-    let newDate = new Date();
+  applyFilter(newDate:any) {
+    // let newDate = new Date();
     return (
       newDate.getDate() +
       '/' +
