@@ -53,6 +53,15 @@
                 <input [ngModelOptions]="{standalone:true}" [(ngModel)]="excavatorCostModel.duePayment" placeholder="Advance" matInput>
             </mat-form-field>
         </div>
+        <div class="col-md-3">
+            <mat-form-field appearance="outline">
+                <mat-label>তারিখ:</mat-label>
+                <input matInput [matDatepicker]="rawpicker" [ngModelOptions]="{standalone:true}"
+                    [(ngModel)]="excavatorCostModel.tnxDate">
+                <mat-datepicker-toggle matSuffix [for]="rawpicker"></mat-datepicker-toggle>
+                <mat-datepicker #rawpicker></mat-datepicker>
+            </mat-form-field>
+        </div>
         <div class="col-md-6">
             <mat-form-field class="input-field" appearance="outline">
                 <mat-label>মন্তব্য:</mat-label>

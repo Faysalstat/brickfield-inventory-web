@@ -305,6 +305,7 @@ export class EscavatorExpenseModel{
   deliveryType!:number;
   advancePayment!:number;
   duePayment!:number;
+  tnxDate: Date = new Date();
 }
 // export class ExpenseCategory{
 //   {label:'ভাড়া',value:"VARA"},

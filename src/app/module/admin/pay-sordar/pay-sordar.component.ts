@@ -13,7 +13,7 @@ export class PaySordarComponent implements OnInit {
   selectedSordar: Sordar = new Sordar();
   sordars!: Sordar[];
   categories!:any[];
-  tnxDate!:Date;
+  tnxDate:Date = new Date();
   amount!:number;
   remarks!:string;
   category!:string;
@@ -58,7 +58,8 @@ export class PaySordarComponent implements OnInit {
       amount: this.amount,
       receivedBy: this.selectedSordar.person.personName,
       remarks: this.remarks,
-      sordarAccId: this.selectedSordar.account.id
+      sordarAccId: this.selectedSordar.account.id,
+      tnxDate:this.tnxDate
     };
     const params: Map<string, any> = new Map();
     params.set('payment', expenseModel);

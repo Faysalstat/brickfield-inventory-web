@@ -54,7 +54,7 @@ export class EscavatorPaymentComponent implements OnInit {
       deliveryType: 4,
       advancePayment:this.excavatorCostModel.advancePayment,
       duePayment:this.excavatorCostModel.duePayment,
-
+      tnxDate:this.excavatorCostModel.tnxDate
     } 
   const params:Map<string,any> = new Map();
   params.set("escavator",excavatorModel);
