@@ -49,6 +49,7 @@ export class MakeInvoiceComponent implements OnInit {
   deleteMessage:string = '';
   username!:any;
   isSubmitted:boolean = false;
+  tnxDate:Date = new Date();
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -512,6 +513,7 @@ export class MakeInvoiceComponent implements OnInit {
     invoice.scheduleOrders = this.schedules;
     invoice.approvalStatus = 'PENDING';
     invoice.issuedBy = this.username;
+    invoice.tnxDate = this.tnxDate;
     if(this.isApprovalNeeded){
       let approvalModel: ApprovalModel = new ApprovalModel();
       approvalModel.payload = JSON.stringify(invoice);
