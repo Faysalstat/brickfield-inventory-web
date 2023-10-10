@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-md-2">
+        <button style="margin: 10px; float: left;" (click)="export()" mat-raised-button color="warn">
+            <mat-icon>output</mat-icon> Export</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <hr class="mt-2">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Sn</th>
+                    <th>TNX Date</th>
+                    <th>TNX Type</th>
+                    <th>Amount</th>
+                    <th>Comment</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="accountHistory.length==0">
+                    <th style="text-align: center;" colspan="6">No Transaction</th>
+                </tr>
+                <tr *ngFor="let history of accountHistory; index as i">
+                    <td>{{i+1}}</td>
+                    <td>{{history?.tnxDate}}</td>
+                    <td>{{history?.tnxType}}</td>
+                    <td>{{history?.tnxAmount}} BDT</td>
+                    <td>{{history?.remark}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

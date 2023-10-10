@@ -246,6 +246,8 @@ export class UserService {
     return this.http.get(Urls.FETCH_ESCAVATOR_DUE_LIST,{ params: params });
   }
 
+
+
   
   
   // UPDATE
@@ -322,5 +324,9 @@ export class UserService {
     return this.http.get(Urls.FETCH_REGISTER_SUMMARY);
   }
 
-  
+  public fetchPaymentHistory(invoiceId:any): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('invoiceId',invoiceId);
+    return this.http.get(Urls.GET_PAYMENT_HISTORY,{ params: params });
+  }
 }

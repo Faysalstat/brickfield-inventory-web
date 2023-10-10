@@ -1,6 +1,6 @@
 // const BASE_URL = "https://vatasolution.me/api"; 
-// const BASE_URL = "http://localhost:3000/api";
-const BASE_URL = "https://btbbricks.com/api";
+const BASE_URL = "http://localhost:3000/api";
+// const BASE_URL = "https://btbbricks.com/api";
 
 
 export const Urls = {
@@ -30,6 +30,7 @@ export const Urls = {
 
     // CREATE 
     CREATE_INVOICE : BASE_URL + "/invoice/create",
+    GET_PAYMENT_HISTORY: BASE_URL + "/invoice/getpaymenthistory",
     CREATE_SUPPLY_INVOICE : BASE_URL + "/supply/create",
     CREATE_SCHEDULE_DELIVERY: BASE_URL + "/schedule/create",
     SET_DELIVERY: BASE_URL + "/schedule/setdelivery",

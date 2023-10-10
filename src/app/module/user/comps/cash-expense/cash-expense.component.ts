@@ -54,7 +54,6 @@ export class CashExpenseComponent implements OnInit {
     );
   }
   onExpenseSelected(event:any){
-    console.log(event);
     this.expenseName = event.option.value.expenseName;
     this.selectedExpense = event.option.value;
   }
@@ -73,15 +72,14 @@ export class CashExpenseComponent implements OnInit {
     this.userService.doExpense(params).subscribe({
       next:(data)=>{
         this.isSubmitted = false;
-        console.log(data);
         this.selectedExpense = new Expense();
         this.expenseName = "";
-        this.tnxDate = new Date();
+        // this.tnxDate = new Date();
         this.userService.showMessage("Success!","Transaction Completed","OK",2000);
       },
       error:(err)=>{
         this.isSubmitted = false;
-        this.userService.showMessage("ERROR!","Operation Failed","OK",2000);
+        this.userService.showMessage("ERROR!","Operation Failed . Error:"+err.message,"OK",2000);
       }
     })
   }

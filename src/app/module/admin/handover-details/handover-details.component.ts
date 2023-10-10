@@ -83,4 +83,15 @@ export class HandoverDetailsComponent implements OnInit {
 
 
   }
+
+  applyFilter(date: any) {
+    let newDate = new Date(date);
+    return (
+      newDate.getDate() +
+      '/' +
+      (newDate.getMonth() + 1) +
+      '/' +
+      newDate.getFullYear()
+    );
+  }
 }

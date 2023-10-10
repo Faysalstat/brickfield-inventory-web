@@ -50,6 +50,7 @@ export class MakeInvoiceComponent implements OnInit {
   username!:any;
   isSubmitted:boolean = false;
   tnxDate:Date = new Date();
+  showAccountHistory: boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -599,7 +600,8 @@ export class MakeInvoiceComponent implements OnInit {
       isEdit : this.isEdit,
       customer: this.customer,
       approvalStatus:"APPROVED",
-      deleteMessage : this.deleteMessage
+      deleteMessage : this.deleteMessage,
+      tnxDate:this.tnxDate
     };
     if(this.isApprovalNeeded || this.isEdit){
       let approvalModel: ApprovalModel = new ApprovalModel();
