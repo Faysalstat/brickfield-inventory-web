@@ -329,4 +329,8 @@ export class UserService {
     params = params.append('invoiceId',invoiceId);
     return this.http.get(Urls.GET_PAYMENT_HISTORY,{ params: params });
   }
+
+  public deliverAllFromInvoice(invoiceId:any): Observable<any> {
+    return this.http.post(Urls.DELIEVR_ALL,{ invoiceId: invoiceId });
+  }
 }

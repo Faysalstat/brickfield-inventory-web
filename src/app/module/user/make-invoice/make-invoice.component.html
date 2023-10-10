@@ -31,8 +31,9 @@
                         <div class="col-md-6">
                             <mat-form-field class="input-field" appearance="outline">
                                 <mat-label>মোবাইল নাম্বার</mat-label>
-                                <input (change)="searchCustomer()" pInputText [ngModelOptions]="{standalone:true}" [disabled]="isEdit"
-                                    [(ngModel)]="person.contactNo" placeholder="মোবাইল নাম্বার" matInput>
+                                <input (change)="searchCustomer()" pInputText [ngModelOptions]="{standalone:true}"
+                                    [disabled]="isEdit" [(ngModel)]="person.contactNo" placeholder="মোবাইল নাম্বার"
+                                    matInput>
                             </mat-form-field>
                         </div>
                         <div class="col-md-6">
@@ -136,7 +137,8 @@
                                 <td>{{order?.brick?.category}}</td>
                                 <td>{{order?.quantity}}</td>
                                 <td>{{order?.totalPrice}}</td>
-                                <td style="font-weight:bold ;" [style.color]="order.state=='OPEN'?'green':'red'">{{order?.state}}</td>
+                                <td style="font-weight:bold ;" [style.color]="order.state=='OPEN'?'green':'red'">
+                                    {{order?.state}}</td>
                                 <td>
                                     <!-- <button mat-icon-button color="primary" (click)="editOrder(i)">
                                         <mat-icon>open_in_new</mat-icon>
@@ -153,7 +155,17 @@
         </mat-card>
         <mat-card class="mt-5">
             <div class="row">
-                <h2 class="bangla-font">ডেলিভারি শিডিউল</h2>
+                <div class="col-md-12">
+                    <h2 class="bangla-font">ডেলিভারি শিডিউল
+                        <span style="float:right ;">
+                            <button mat-raised-button (click)="deliverAll()" color="accent">DELIVER
+                                ALL</button>
+                        </span>
+                    </h2>
+                    <div class="input-field">
+
+                    </div>
+                </div>
                 <div class="col-md-3">
                     <mat-form-field appearance="outline" class="input-field">
                         <mat-label>অর্ডার</mat-label>
@@ -171,7 +183,7 @@
                             [(ngModel)]="scheduleItem.deliverableQuantity" placeholder="Delivarable Quantity" matInput>
                     </mat-form-field>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <mat-form-field class="input-field" appearance="outline">
                         <mat-label>ট্রিপ লাগবে:</mat-label>
                         <input type="number" pInputText [ngModelOptions]="{standalone:true}"
@@ -221,6 +233,7 @@
                     </mat-checkbox>
                 </div> -->
                 <div class="col-md-12">
+
                     <button style="float:left ; margin-top: 10px;" mat-raised-button (click)="addSchedule()"
                         color="accent">যোগ করুন</button>
                 </div>
@@ -260,7 +273,8 @@
                                 <td>{{applyFilter(delivery?.scheduledDate)}}</td>
                                 <td>{{delivery?.deliveryStatus}}</td>
                                 <td>
-                                    <button mat-icon-button [disabled]="delivery.deliveryStatus =='DELIVERED'" color="warn" (click)="deleteDelivery(i)">
+                                    <button mat-icon-button [disabled]="delivery.deliveryStatus =='DELIVERED'"
+                                        color="warn" (click)="deleteDelivery(i)">
                                         <mat-icon>delete</mat-icon>
                                     </button>
                                 </td>

@@ -637,4 +637,15 @@ export class MakeInvoiceComponent implements OnInit {
     this.scheduleItem.brickId = this.selectedOrder.brick.id;
     this.scheduleItem.brick = this.selectedOrder.brick;
   }
+  deliverAll(){
+    this.userService.deliverAllFromInvoice(this.invoiceId).subscribe({
+      next:(res)=>{
+        console.log(res.body);
+        this.userService.showMessage("SUCCESS",res.message,"CLOSE",1000);
+      },
+      error:(err)=>{
+        this.userService.showMessage("ERROR",err.message,"CLOSE",2000);
+      }
+    })
+  }
 }

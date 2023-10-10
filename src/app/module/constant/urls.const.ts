@@ -34,6 +34,7 @@ export const Urls = {
     CREATE_SUPPLY_INVOICE : BASE_URL + "/supply/create",
     CREATE_SCHEDULE_DELIVERY: BASE_URL + "/schedule/create",
     SET_DELIVERY: BASE_URL + "/schedule/setdelivery",
+    DELIEVR_ALL: BASE_URL + "/schedule/deliver-all",
     CREATE_ORDER : BASE_URL + "/order/create",
     SEND_TO_APPROVAL : BASE_URL + "/approval/create",
     CREATE_CUSTOMER: BASE_URL + "/customer/addcustomer",
