@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
   fetchBricks() {
     this.userService.fetchBricks().subscribe({
       next: (res) => {
-        console.log(res);
+        //console.log(res);
         if (res.body) {
           this.bricks = res.body;
           this.bricks.map((brick)=>{
@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
         }
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Successfull" + err.message,"OK",2000);
       }
     });

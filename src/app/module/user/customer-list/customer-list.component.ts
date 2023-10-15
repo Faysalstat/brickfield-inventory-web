@@ -31,12 +31,12 @@ export class CustomerListComponent implements OnInit {
     params.set('limit', this.pageSize);
     this.userService.fetchAllCustomer(params).subscribe({
       next: (res) => {
-        console.log(res.body);
+        //console.log(res.body);
         this.customerList = res.body.data;
         this.length = res.body.length;
       },
       error: (err) => {
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Customer Fetching Failed" + err.message,"OK",2000);
       },
       complete: () => {},
@@ -52,10 +52,10 @@ export class CustomerListComponent implements OnInit {
     params.set('customer', custoemr);
     this.userService.deleteCustomer(params).subscribe({
       next: (res) => {
-        console.log(res);
+        //console.log(res);
       },
       error: (err) => {
-        console.log(err.message);
+        //console.log(err.message);
       this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete: () => {},

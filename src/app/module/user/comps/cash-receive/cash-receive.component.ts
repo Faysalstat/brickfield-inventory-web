@@ -28,7 +28,7 @@ export class CashReceiveComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.invoiceId);
+    //console.log(this.invoiceId);
   }
   onAmountAdded(){
     this.updated = true;

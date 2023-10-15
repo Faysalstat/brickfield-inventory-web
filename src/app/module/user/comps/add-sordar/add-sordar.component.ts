@@ -48,7 +48,7 @@ export class AddSordarComponent implements OnInit {
   submit() {
     
     const params:Map<string,any> = new Map();
-    console.log(this.sordarForm.controls);
+    //console.log(this.sordarForm.controls);
     if(this.sordarForm.invalid || this.disable){
       return;
     }
@@ -65,7 +65,7 @@ export class AddSordarComponent implements OnInit {
     params.set("sordar",sordar);
     this.userService.addSordar(params).subscribe({
       next:(res)=>{
-        console.log(res);
+        //console.log(res);
         this.sordarAddedEvent.emit("Hello from parent");
         this.userService.showMessage("SUCCESS!","Sordar Added","OK",2000);
         this.sordarForm.reset();
@@ -78,7 +78,7 @@ export class AddSordarComponent implements OnInit {
     })
   }
   searchsordar(){
-    console.log("Change Detected");
+    //console.log("Change Detected");
     this.userService.getCustomerByContactNo(this.sordarForm.get('contactNo')?.value).subscribe({
       next:(res)=>{
         if(res.body){
@@ -103,7 +103,7 @@ export class AddSordarComponent implements OnInit {
         }
       },
       error:(err)=>{
-        console.log(err);
+        //console.log(err);
         this.userService.showMessage("ERROR!","Not Found","OK",2000);
         
       },

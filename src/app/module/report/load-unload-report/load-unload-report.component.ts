@@ -50,7 +50,7 @@ export class LoadUnloadReportComponent implements OnInit {
     this.adminService.fetchLoadUnloadHistory(params).subscribe({
       next:(res)=>{
         this.loadUnloadHistoryList = res.body;
-        console.log(res);
+        //console.log(res);
         let index = 0;
         this.loadUnloadExportList = [];
         this.loadUnloadHistoryList.map((elem)=>{
@@ -66,7 +66,7 @@ export class LoadUnloadReportComponent implements OnInit {
         })
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Successfull" + err.message,"OK",2000);
       }
     })

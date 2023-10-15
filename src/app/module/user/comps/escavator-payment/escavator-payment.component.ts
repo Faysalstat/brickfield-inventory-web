@@ -28,11 +28,11 @@ export class EscavatorPaymentComponent implements OnInit {
     params.set('limit', 100);
     this.userService.fetchAllDrivers(params).subscribe({
       next: (data) => {
-        console.log(data.body);
+        //console.log(data.body);
         this.driverList = data.body.data;
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     });
@@ -61,13 +61,13 @@ export class EscavatorPaymentComponent implements OnInit {
   this.userService.payEscavatorBill(params).subscribe({
     next:(resData)=>{
       this.isSubmitted = false;
-      console.log(resData)
+      //console.log(resData)
       this.userService.showMessage("Successs!","Operation Success","OK",2000);
       this.excavatorCostModel = new EscavatorExpenseModel();
     },
     error:(err)=>{
       this.isSubmitted = false;
-      console.log(err.message);
+      //console.log(err.message);
       this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
     }
   })
@@ -80,13 +80,13 @@ export class EscavatorPaymentComponent implements OnInit {
     this.userService.fetchAllProducts().subscribe({
       next: (data) => {
         this.isSubmitted = false;
-        console.log(data);
+        //console.log(data);
         this.productList = data.body;
         
       },
       error:(err)=>{
         this.isSubmitted = false;
-        console.log(err.message);
+        //console.log(err.message);
       this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     });

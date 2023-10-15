@@ -22,7 +22,7 @@ export class RegisterSummaryComponent implements OnInit {
   fetcRegistryReport(){
     this.userService.getRegistryReport().subscribe({
       next:(res)=>{
-        console.log(res);
+        //console.log(res);
         if(!res.body.totalIncome){
           this.summary.totalIncome = 0;
         }else{
@@ -46,7 +46,7 @@ export class RegisterSummaryComponent implements OnInit {
         
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
       this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
     })

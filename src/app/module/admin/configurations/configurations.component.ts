@@ -30,8 +30,8 @@ export class ConfigurationsComponent implements OnInit {
     let date = new Date(this.startingDate);
     let dateOffset = (24*60*60*1000);
     date.setTime(date.getTime() - dateOffset);
-    console.log("Month "+ date.getMonth());
-    console.log("Day "+ date.getDate());
+    //console.log("Month "+ date.getMonth());
+    //console.log("Day "+ date.getDate());
     let startDate =
       date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (date.getDate());
     let configBody = {

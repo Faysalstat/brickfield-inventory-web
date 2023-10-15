@@ -93,7 +93,7 @@ export class TransactionReportComponent implements OnInit {
     this.userService.fetchExpenseReasons(category).subscribe({
       next:(data)=>{
         if(data){
-          console.log(data.body);
+          //console.log(data.body);
           data.body.map((elem:any)=>{
             this.expenseReasons.push({label:elem.transactionReason,value:elem.transactionReason});
           })
@@ -115,11 +115,11 @@ export class TransactionReportComponent implements OnInit {
     // params.set('limit', 5);
     // params.set('offset', this.offset);
     params.set('query',this.queryBody)
-    console.log(this.queryBody);
+    //console.log(this.queryBody);
     this.userService.fetchAllTransByPage(params).subscribe({
       next: (datares) => {
         // this.expenseReasons = [];
-        console.log(datares);
+        //console.log(datares);
         this.tnxList = datares.body.data;
         this.tnxList.forEach(elem=>{
           let item = {
@@ -138,13 +138,13 @@ export class TransactionReportComponent implements OnInit {
           this.totalReversedAmount += elem.reversedAmount;
           // if(iscatChange){
           //   this.expenseReasons.push({label:elem.transactionReason,value:elem.transactionReason});
-          //   console.log(this.expenseReasons);
+          //   //console.log(this.expenseReasons);
           // }
           
         });
       },
       error:(err)=>{
-        console.log(err);
+        //console.log(err);
         this.tnxList = [];
       }
     });
@@ -172,7 +172,7 @@ export class TransactionReportComponent implements OnInit {
   }
   onChnageReason(){
     this.queryBody.reason = this.selectedReason;
-    console.log(this.selectedReason);
+    //console.log(this.selectedReason);
     this.fetchAllTransByPage();
   }
   onChnageType(){

@@ -157,15 +157,20 @@
             <div class="row">
                 <div class="col-md-12">
                     <h2 class="bangla-font">ডেলিভারি শিডিউল
-                        <span style="float:right ;">
+                        <span *ngIf="isEdit && (deliveryStatus!='DELIVERED')" style="float:right ;">
                             <button mat-raised-button (click)="deliverAll()" color="accent">DELIVER
                                 ALL</button>
                         </span>
                     </h2>
-                    <div class="input-field">
-
-                    </div>
                 </div>
+                <div *ngIf="!isEdit" class="col-md-12" style="margin:10px;">
+                    <mat-checkbox  (change)="onChangeDeliveryType()" [ngModelOptions]="{standalone:true}" [(ngModel)]="isDeliveryNow">
+                        {{deliveryType}}
+                    </mat-checkbox>
+                </div>
+            </div>
+            <div *ngIf="!isDeliveryNow" class="row">
+                
                 <div class="col-md-3">
                     <mat-form-field appearance="outline" class="input-field">
                         <mat-label>অর্ডার</mat-label>
@@ -227,14 +232,8 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
-                <!-- <div class="col-md-4">
-                    <mat-checkbox class="mt-5" [(ngModel)]="transportCostCustomerPayable">
-                        পরিবহন খরচ কাস্টমার পরিশোধ করবে
-                    </mat-checkbox>
-                </div> -->
                 <div class="col-md-12">
-
-                    <button style="float:left ; margin-top: 10px;" mat-raised-button (click)="addSchedule()"
+                    <button style="float:left ; margin-top: 10px;"  mat-raised-button (click)="addSchedule()"
                         color="accent">যোগ করুন</button>
                 </div>
                 <div class="col-md-12 mt-5" style="overflow-x:auto;">
@@ -287,17 +286,7 @@
         <mat-card class="mt-5">
             <div class="row">
                 <h2 class="bangla-font">ইনভয়েস সামারি:</h2>
-                <!-- <div class="col-md-12">
-                    <div class="col-md-4">
-                        <mat-checkbox class="mt-5" [(ngModel)]="transportCostCustomerPayable">
-                            পরিবহন খরচ কাস্টমার পরিশোধ করবে
-                        </mat-checkbox>
-                    </div>
-                    <div class="col-md-4">
-                        <button style="float:left ; margin-top: 10px;" mat-raised-button (click)="calculateBill()"
-                        color="accent">Calculate Summary</button>
-                </div> -->
-                <!-- </div> -->
+             
                 <div class="col-md-3">
                     <!-- <h3>Total Quantity</h3> -->
                     <mat-form-field class="input-field" appearance="outline">
@@ -383,7 +372,7 @@
                         [disabled]="status=='PENDING'" (click)="updateInvoice()">সাবমিট</button>
                 </div>
             </div>
-            <div *ngIf="!showAccountHistory" class="col-md-12">
+            <div *ngIf="!showAccountHistory && isEdit" class="col-md-12">
                 <button mat-raised-button (click)="showAccountHistory=true" color="primary" style="width: 100%;">Show
                     Account History</button>
             </div>

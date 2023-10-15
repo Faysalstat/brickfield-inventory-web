@@ -48,7 +48,7 @@ export class AddSupplyerComponent implements OnInit {
   fetchProducts(){
     this.userService.fetchAllProducts().subscribe({
       next:(data)=>{
-        console.log(data);
+        //console.log(data);
         this.products =data.body;
       },
       error:(err)=>{
@@ -58,7 +58,7 @@ export class AddSupplyerComponent implements OnInit {
   }
   submit() {
     const params:Map<string,any> = new Map();
-    console.log(this.supplyerForm.controls);
+    //console.log(this.supplyerForm.controls);
     if(this.supplyerForm.invalid || this.disable){
       return;
     }
@@ -75,7 +75,7 @@ export class AddSupplyerComponent implements OnInit {
     params.set("supplyer",supplyer);
     this.userService.addSupplyer(params).subscribe({
       next:(res)=>{
-        console.log(res);
+        //console.log(res);
         this.supplyerAddedEvent.emit(res.body);
         this.supplyerForm.reset();
       },
@@ -88,10 +88,10 @@ export class AddSupplyerComponent implements OnInit {
 
 
   searchSupplyer(){
-    console.log("Change Detected");
+    //console.log("Change Detected");
     this.userService.getCustomerByContactNo(this.supplyerForm.get('contactNo')?.value).subscribe({
       next:(res)=>{
-        console.log(res.body);
+        //console.log(res.body);
         if(res.body){
           this.message= "This person is in our database";
           this.person = res.body;
@@ -127,7 +127,7 @@ export class AddSupplyerComponent implements OnInit {
         }
       },
       error:(err)=>{
-        console.log(err);
+        //console.log(err);
         this.userService.showMessage("ERROR!","Supplyer Not Found","OK",2000);
         
       },

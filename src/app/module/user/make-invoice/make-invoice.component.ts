@@ -51,6 +51,9 @@ export class MakeInvoiceComponent implements OnInit {
   isSubmitted:boolean = false;
   tnxDate:Date = new Date();
   showAccountHistory: boolean = false;
+  isDeliveryNow!:boolean;
+  deliveryType = "ইন্সট্যান্ট ডেলিভারি";
+  deliveryStatus = "PENDING";
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -69,18 +72,18 @@ export class MakeInvoiceComponent implements OnInit {
     this.date = new Date();
     this.scheduleOrders = [];
     this.drivers = [];
+    this.isDeliveryNow = true;
     this.prepareForm(null);
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((parameter) => {
       let id = parameter['id'];
-      console.log(parameter);
       if (id) {
         this.isEdit = true;
         this.isCustomerExist = true;
         this.invoiceId = id;
-        this.fetchInvoiceById(id);
+        this.fetchInvoiceById(this.invoiceId);
       } else {
         this.isEdit = false;
       }
@@ -196,7 +199,6 @@ export class MakeInvoiceComponent implements OnInit {
       },
       error:(err)=>{
         this.isCustomerExist = false;
-        console.log(err.message);
         this.userService.showMessage("ERROR!","Customer Found Failed" + err.message,"OK",2000);
       },
       complete: () => {},
@@ -225,14 +227,12 @@ export class MakeInvoiceComponent implements OnInit {
 
       },
       error:(err)=>{
-        console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete: ()=>{}
     })
   }
   onChnageBrick() {
-    console.log(this.selectedBrick);
     this.orderItem.brickId = this.selectedBrick.id;
     this.orderItem.brick = this.selectedBrick;
   }
@@ -260,13 +260,11 @@ export class MakeInvoiceComponent implements OnInit {
   fetchBricks() {
     this.userService.fetchBricks().subscribe({
       next: (res) => {
-        console.log(res);
         if (res.body) {
           this.bricks = res.body;
         }
       },
       error:(err)=>{
-        console.log(err.message);
         this.userService.showMessage("ERROR!","Brick Fetching Failed" + err.message,"OK",2000);
       },
     });
@@ -278,13 +276,11 @@ export class MakeInvoiceComponent implements OnInit {
       params.set('order', this.orders[index]);
       this.userService.deleteOrder(params).subscribe({
         next: (data) => {
-          console.log(data);
           this.orders.splice(index, 1);
           this.calculateOrderTotal();
           this.userService.showMessage("SUCCESS!","Order Deleted","OK",2000);
         },
         error:(err)=>{
-          console.log(err.message);
           this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
         },
         complete: () => {
@@ -356,7 +352,7 @@ export class MakeInvoiceComponent implements OnInit {
     this.userService.fetchInvoiceById(id).subscribe({
       next: (res) => {
         if (res.body) {
-          console.log(res);
+          this.deliveryStatus = res.body.deliveryStatus;
           this.invoiceIssueForm.get('id')?.setValue(res.body.id);
           this.customer = res.body.customer;
           this.person = res.body.customer.person;
@@ -371,6 +367,9 @@ export class MakeInvoiceComponent implements OnInit {
           this.orders = res.body.orders;
           
           this.schedules = res.body.scheduleOrders;
+          if(this.schedules.length!=0){
+            this.isDeliveryNow = false;
+          }
           this.ordersForDeliveryList= this.orders;
           this.paidAmount = res.body.advancePayment;
           this.status = res.body.approvalStatus;
@@ -401,7 +400,7 @@ export class MakeInvoiceComponent implements OnInit {
         }
       },
       error:(err)=>{
-        console.log(err.message);
+        
         this.userService.showMessage("ERROR!","Invoice Fetching Operation Failed" + err.message,"OK",2000);
       },
     });
@@ -414,13 +413,12 @@ export class MakeInvoiceComponent implements OnInit {
       params.set('schedule', this.schedules[index]);
       this.userService.deleteSchedule(params).subscribe({
         next: (data) => {
-          console.log(data);
           this.userService.showMessage("SUCCESS!","Schedule Deleted","OK",2000);
           this.schedules.splice(index, 1);
           this.calculateScheduleTotal();
         },
         error:(err)=>{
-          console.log(err.message);
+          
           this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
         },
         complete: () => {
@@ -430,18 +428,15 @@ export class MakeInvoiceComponent implements OnInit {
       });
     } else {
       this.schedules.splice(index, 1);
-      console.log('===deleted====');
-      console.log(this.schedules);
     }
   }
   fetchVehicles() {
     this.userService.fetchTransportCategories().subscribe({
       next: (data) => {
-        console.log(data.body);
         this.vehicles = data.body;
       },
       error:(err)=>{
-        console.log(err.message);
+        
         this.userService.showMessage("ERROR!","VEhicle fetching Operation Failed" + err.message,"OK",2000);
       },
     });
@@ -452,11 +447,10 @@ export class MakeInvoiceComponent implements OnInit {
     params.set('limit', 100);
     this.userService.fetchAllDrivers(params).subscribe({
       next: (data) => {
-        console.log(data.body);
         this.drivers = data.body.data;
       },
       error:(err)=>{
-        console.log(err.message);
+        
         this.userService.showMessage("ERROR!","Driver fetching Operation Failed" + err.message,"OK",2000);
       },
     });
@@ -486,8 +480,6 @@ export class MakeInvoiceComponent implements OnInit {
     return isValid;
   }
   submitInvoice() {
-    
-    console.log(this.orders);
     const params: Map<string, any> = new Map();
     if(!this.isCustomerExist){
       this.userService.showMessage("WARNING!","Please Add Customer","OK",10000);
@@ -503,7 +495,6 @@ export class MakeInvoiceComponent implements OnInit {
       this.userService.showMessage("WARNING!","Schedule Quantity is Greater Than Order Quantity","OK",10000);
       return;
     }
-    console.log(this.invoiceIssueForm.value);
     if (this.invoiceIssueForm.invalid) {
       this.userService.showMessage("WARNING!","Invalid Form","OK",10000);
       return;
@@ -515,6 +506,7 @@ export class MakeInvoiceComponent implements OnInit {
     invoice.approvalStatus = 'PENDING';
     invoice.issuedBy = this.username;
     invoice.tnxDate = this.tnxDate;
+    invoice.isDeliveryNow = this.isDeliveryNow;
     if(this.isApprovalNeeded){
       let approvalModel: ApprovalModel = new ApprovalModel();
       approvalModel.payload = JSON.stringify(invoice);
@@ -522,7 +514,6 @@ export class MakeInvoiceComponent implements OnInit {
       approvalModel.createdBy =this.username;
       approvalModel.taskType = Tasks.CREATE_INVOICE;
       params.set('approval', approvalModel);
-      console.log(invoice);
       this.sendToApproval(params);
     }else{
       invoice.isEdit = false;
@@ -537,13 +528,13 @@ export class MakeInvoiceComponent implements OnInit {
     this.isSubmitted =true;
     this.userService.createApproval(params).subscribe({
       next: (res) => {
-        console.log(res);
+        
         this.isSubmitted =false;
         this.userService.showMessage("Success!","Item sent For approval","OK",2000);
         this.router.navigate(['/home/invoice-list']);
       },
       error:(err)=>{
-        console.log(err.message);
+        
         this.isSubmitted =false;
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
@@ -555,12 +546,12 @@ export class MakeInvoiceComponent implements OnInit {
     this.isSubmitted =true;
     this.userService.createInvoice(params).subscribe({
       next: (res) => {
-        console.log(res);
+        
         this.isSubmitted =false;
         this.router.navigate(['/home/invoice-list']);
       },
       error: (err) => {
-        console.log(err.message);
+        
         this.isSubmitted =false;
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
@@ -640,12 +631,19 @@ export class MakeInvoiceComponent implements OnInit {
   deliverAll(){
     this.userService.deliverAllFromInvoice(this.invoiceId).subscribe({
       next:(res)=>{
-        console.log(res.body);
         this.userService.showMessage("SUCCESS",res.message,"CLOSE",1000);
+        this.fetchInvoiceById(this.invoiceId);
       },
       error:(err)=>{
         this.userService.showMessage("ERROR",err.message,"CLOSE",2000);
       }
     })
+  }
+  onChangeDeliveryType(){
+    if(this.isDeliveryNow){
+      this.deliveryType = "ইন্সট্যান্ট ডেলিভারি";
+    }else{
+      this.deliveryType = "শিডিউল ডেলিভারি";
+    }
   }
 }

@@ -32,7 +32,7 @@ export class EditSupplyInvoiceComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((parameter) => {
       let id = parameter['id'];
-      console.log(parameter);
+      //console.log(parameter);
       if (id) {
         this.isEdit = true;
         this.invoiceId = id;
@@ -44,7 +44,7 @@ export class EditSupplyInvoiceComponent implements OnInit {
     this.isSubmitted =true;
     this.userService.fetchSupplyInvoiceById(id).subscribe({
       next: (data) => {
-        console.log(data.body);
+        //console.log(data.body);
         this.supplyInvoice = data.body;
         this.person = this.supplyInvoice.supplyer.person;
         if (this.supplyInvoice.deliveryType == 1) {
@@ -63,7 +63,7 @@ export class EditSupplyInvoiceComponent implements OnInit {
         this.newDue = this.supplyInvoice.duePayment;
       },
       error: (err) => {
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete:()=>{
@@ -83,14 +83,14 @@ export class EditSupplyInvoiceComponent implements OnInit {
     params.set('supplyInvoice', this.supplyInvoice);
     this.userService.updateSupplyInvoice(params).subscribe({
       next: (data) => {
-        console.log(data);
+        //console.log(data);
         this.isSubmitted =false;
         this.userService.showMessage("Success!","Payment Successfull!!","OK",2000);
         this.router.navigate(['/home/supply-list']);
       },
       error: (err) => {
         this.isSubmitted =false;
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
     });

@@ -41,7 +41,7 @@ export class AddExpenseCategoryComponent implements OnInit {
     params.set('category', category);
     this.adminService.addExpenseCategory(params).subscribe({
       next: (data) => {
-        console.log(data);
+        //console.log(data);
         this.selectedType = '';
         this.selectedCategory = '';
         this.expenseName = '';

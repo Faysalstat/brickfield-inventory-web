@@ -50,11 +50,11 @@ export class SordarRecordReportComponent implements OnInit {
     this.userService.fetchAllSordars().subscribe({
       next:(res)=>{
         this.sordars = res.body;
-        console.log(res);
+        //console.log(res);
         
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
       this.userService.showMessage("ERROR!","Sordars Fetching Failed" + err.message,"OK",2000);
       }
     })
@@ -66,11 +66,11 @@ export class SordarRecordReportComponent implements OnInit {
     this.queryBody.category = this.selectedCategory;
     this.queryBody.roundNo = this.slectedRound;
     params.set('query',this.queryBody)
-    console.log();
+    //console.log();
     this.reportService.fetchSordarProductionReport(params).subscribe({
       next: (datares) => {
         // this.expenseReasons = [];
-        console.log(datares);
+        //console.log(datares);
         this.recordList = datares.body;
         let index = 0;
         this.exportData =[];
@@ -90,7 +90,7 @@ export class SordarRecordReportComponent implements OnInit {
         this.selectedCategory ='';
       },
       error:(err)=>{
-        console.log(err);
+        //console.log(err);
         this.recordList = [];
       }
     });

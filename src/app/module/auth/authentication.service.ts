@@ -11,7 +11,7 @@ export class AuthenticationService {
   constructor(private http:HttpClient) { }
 
   public signIn(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("user"));
+    //console.log(queryParams.get("user"));
     return this.http.post(Urls.USER_SIGN_IN,queryParams.get("user"));
   }
   public signOut(queryParams: Map<string,any>): Observable<any>{

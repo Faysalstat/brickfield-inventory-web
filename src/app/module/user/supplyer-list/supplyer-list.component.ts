@@ -30,12 +30,12 @@ export class SupplyerListComponent implements OnInit {
     params.set('limit', this.pageSize);
     this.userService.fetchAllSupplyers(params).subscribe({
       next: (data) => {
-        console.log(data);
+        //console.log(data);
         this.supplyersList = data.body.data;
         this.length = data.body.length
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
     });
@@ -51,7 +51,7 @@ export class SupplyerListComponent implements OnInit {
     params.set('customer', supplyer);
     // this.userService.deleteCustomer(params).subscribe({
     //   next: (res) => {
-    //     console.log(res);
+    //     //console.log(res);
     //   },
     //   error: (err) => {},
     //   complete: () => {},

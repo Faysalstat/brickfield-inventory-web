@@ -42,7 +42,7 @@ export class ProductionReportComponent implements OnInit {
     this.loadExportList = [];
     this.reportService.fetchLoadReport().subscribe({
       next:(res)=>{
-        console.log(res.body);
+        //console.log(res.body);
         this.loadReportList = res.body;
         let index = 0;
         this.loadReportList.map((elem)=>{
@@ -58,7 +58,7 @@ export class ProductionReportComponent implements OnInit {
       },
       error:(err)=>{
         this.loadReportList=[];
-        console.log(err);
+        //console.log(err);
       }
     })
   }
@@ -66,7 +66,7 @@ export class ProductionReportComponent implements OnInit {
     this.unloadExportList = [];
     this.reportService.fetchUnloadReport().subscribe({
       next:(res)=>{
-        console.log(res.body);
+        //console.log(res.body);
         this.unLoadReportList = res.body;
         let index = 0;
         this.unLoadReportList.map((elem)=>{
@@ -82,7 +82,7 @@ export class ProductionReportComponent implements OnInit {
       },
       error:(err)=>{
         this.unLoadReportList = [];
-        console.log(err);
+        //console.log(err);
       }
     })
   }
@@ -90,7 +90,7 @@ export class ProductionReportComponent implements OnInit {
     this.rawProductionExportList =[];
     this.reportService.fetchRawPRoductionReport().subscribe({
       next:(res)=>{
-        console.log(res.body);
+        //console.log(res.body);
         this.rawProductionReportList = res.body;
         let index = 0;
         this.rawProductionReportList.map((elem)=>{
@@ -107,7 +107,7 @@ export class ProductionReportComponent implements OnInit {
       },
       error:(err)=>{
         this.rawProductionReportList = [];
-        console.log(err);
+        //console.log(err);
       }
     })
   }
@@ -115,7 +115,7 @@ export class ProductionReportComponent implements OnInit {
     this.deliveryExportList = [];
     this.reportService.fetchDeliveryReport().subscribe({
       next:(res)=>{
-        console.log(res.body);
+        //console.log(res.body);
         this.deliveryReportList = res.body;
         let index = 0;
         this.deliveryReportList.map((elem)=>{
@@ -132,7 +132,7 @@ export class ProductionReportComponent implements OnInit {
         },
       error:(err)=>{
         this.deliveryReportList = [];
-        console.log(err);
+        //console.log(err);
       }
     })
   }

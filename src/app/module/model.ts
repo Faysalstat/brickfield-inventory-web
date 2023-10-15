@@ -92,6 +92,7 @@ export class InvoiceIssueModel {
   scheduleOrders!: ScheduleDeliveryModel[];
   isEdit!:boolean;
   tnxDate!:Date;
+  isDeliveryNow!:boolean;
 }
 
 export class InvoiceDomain{

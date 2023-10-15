@@ -74,10 +74,10 @@ export class TransactionListComponent implements OnInit {
     // params.set('limit', 5);
     // params.set('offset', this.offset);
     params.set('query',this.queryBody)
-    console.log();
+    //console.log();
     this.userService.fetchAllTransByPage(params).subscribe({
       next: (datares) => {
-        console.log(datares);
+        //console.log(datares);
         this.tnxList = datares.body.data;
         this.tnxList.forEach(elem=>{
           let item = {
@@ -97,7 +97,7 @@ export class TransactionListComponent implements OnInit {
         });
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Transaction Fetching Failed" + err.message,"OK",2000);
         this.tnxList = [];
       }

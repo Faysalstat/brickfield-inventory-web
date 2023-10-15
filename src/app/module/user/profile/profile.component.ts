@@ -19,11 +19,11 @@ export class ProfileComponent implements OnInit {
     let userId = localStorage.getItem('userId');
     this.userService.getUserById(userId).subscribe({
       next:(userRes)=>{
-        console.log(userRes);
+        //console.log(userRes);
         this.userProfile = userRes.body;
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
 
       }
@@ -39,12 +39,12 @@ export class ProfileComponent implements OnInit {
     params.set('user', userModel);
     this.userService.changePassword(params).subscribe({
       next:(data)=>{
-        console.log(data.body);
+        //console.log(data.body);
         window.location.reload();
 
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
         window.location.reload();
       }

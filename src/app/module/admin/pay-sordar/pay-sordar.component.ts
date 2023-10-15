@@ -43,10 +43,10 @@ export class PaySordarComponent implements OnInit {
     this.userService.fetchAllSordars().subscribe({
       next:(res)=>{
         this.sordars = res.body;
-        console.log(res);
+        //console.log(res);
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })
@@ -65,14 +65,14 @@ export class PaySordarComponent implements OnInit {
     params.set('payment', expenseModel);
     this.adminService.doSordarPayment(params).subscribe({
       next:(data)=>{
-        console.log(data.body);
+        //console.log(data.body);
         this.selectedSordar = new Sordar();
         this.amount = 0;
         this.remarks = "";
         this.userService.showMessage("SUCCEESS!","Payment Complete","OK",2000);
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })

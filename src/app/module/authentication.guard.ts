@@ -20,7 +20,7 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild{
   ) {}
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     // throw new Error('Method not implemented.');
-    console.log(localStorage.getItem("token"));
+    //console.log(localStorage.getItem("token"));
     const idToken = localStorage.getItem("token");
     return this.verify(idToken);
   }
@@ -33,7 +33,7 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild{
     | boolean
     | UrlTree {
     // let authenticated = false;
-    console.log(localStorage.getItem("token"));
+    //console.log(localStorage.getItem("token"));
     const idToken = localStorage.getItem("token");
     return this.verify(idToken);
     // .subscribe({
@@ -68,9 +68,9 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild{
     }
     let authenticated = await this.authService.isLoggedIn(token);
     if (authenticated.body && authenticated.body.userRole=="ADMIN") {
-          console.log("Welcome to admin panel");
+          //console.log("Welcome to admin panel");
         }else{
-          console.log("You are not permited to admin panel");
+          //console.log("You are not permited to admin panel");
           this.router.navigate(['auth']);
         }
     return authenticated.body;

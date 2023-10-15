@@ -57,7 +57,7 @@ export class ListSupplyInvoiceComponent implements OnInit {
   fetchProductList() {
     this.userService.fetchAllProducts().subscribe({
       next: (data) => {
-        console.log(data);
+        //console.log(data);
 
         this.productList = [{label:"Select Product",value:""}];
         data.body.map((elem:any)=>{
@@ -66,7 +66,7 @@ export class ListSupplyInvoiceComponent implements OnInit {
 
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Product List Fetching Operation Failed" + err.message,"OK",2000);
       },
     });
@@ -83,7 +83,7 @@ export class ListSupplyInvoiceComponent implements OnInit {
     params.set('query', this.queryBody);
     this.userService.fetchAllSupplyInvoice(params).subscribe({
       next:(res)=>{
-        console.log(res);
+        //console.log(res);
         this.invoiceList = res.body.data;
         this.length = res.body.length;
         this.queryBody = new SupplyQuery();
@@ -105,7 +105,7 @@ export class ListSupplyInvoiceComponent implements OnInit {
         })
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Supplyer Fetching Failed" + err.message,"OK",2000);
       },
       complete: ()=>{}

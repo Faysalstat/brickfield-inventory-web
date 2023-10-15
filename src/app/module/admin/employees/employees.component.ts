@@ -26,11 +26,11 @@ export class EmployeesComponent implements OnInit {
   fetchSordarsList() {
     this.userService.fetchAllSordars().subscribe({
       next: (data) => {
-        console.log(data.body);
+        //console.log(data.body);
         this.sordarList = data.body;
       },
       error: (err) => {
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage(
           'ERROR!',
           'Sordar Fetching Operation Failed' + err.message,
@@ -42,7 +42,7 @@ export class EmployeesComponent implements OnInit {
     });
   }
   updateList($event: any) {
-    console.log('Sordar added. List updated');
+    //console.log('Sordar added. List updated');
     this.fetchSordarsList();
   }
   deleteDriver(sordar: any) {
@@ -50,10 +50,10 @@ export class EmployeesComponent implements OnInit {
     params.set('customer', sordar);
     this.userService.deleteCustomer(params).subscribe({
       next: (res) => {
-        console.log(res);
+        //console.log(res);
       },
       error: (err) => {
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage(
           'ERROR!',
           'Operation Failed' + err.message,
@@ -73,12 +73,12 @@ export class EmployeesComponent implements OnInit {
     params.set('sordar', this.sordar);
     this.adminService.updateSordar(params).subscribe({
       next:(res)=>{
-        console.log(res.body);
+        //console.log(res.body);
         this.sordar = new Sordar();
         this.isEdit = false;
       },
       error:(err)=>{
-        console.log(err);
+        //console.log(err);
       }
 
     })

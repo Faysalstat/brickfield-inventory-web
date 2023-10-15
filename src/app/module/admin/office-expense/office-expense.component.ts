@@ -23,17 +23,17 @@ export class OfficeExpenseComponent implements OnInit {
   fetchGlBalance(){
     this.userService.fetchGLAccountBalance("OFFICE_GL").subscribe({
       next:(accRes)=>{
-        console.log(accRes);
+        //console.log(accRes);
         this.balance = accRes.body.balance;
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })
   }
   updateBalance(event:any){
-    console.log("Balance Changed");
+    //console.log("Balance Changed");
     this.fetchGlBalance();
   }
   submit(){

@@ -33,7 +33,7 @@ export class DuePaymentListComponent implements OnInit {
         }
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed!! err: " + err.message,"OK",2000);
       }
     })

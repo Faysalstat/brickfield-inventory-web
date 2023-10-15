@@ -25,7 +25,7 @@ export class ApprovalListComponent implements OnInit {
   fetchAllInvoices(){
     this.userService.fetchAllPendingInvoice().subscribe({
       next:(res)=>{
-        console.log(res);
+        //console.log(res);
         this.invoiceList = res.body;
       },
       error:(err)=>{

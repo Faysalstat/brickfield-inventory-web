@@ -38,12 +38,12 @@ export class TaskListComponent implements OnInit {
     params.set('query', this.queryBody);
     this.adminService.fetchAllTask(params).subscribe({
       next:(data)=>{
-        console.log(data)
+        //console.log(data)
         this.taskList = data.body.data;
         this.length = data.body.length;
       },
       error:(err)=> {
-        console.log(err.message);
+        //console.log(err.message);
         this.adminService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })

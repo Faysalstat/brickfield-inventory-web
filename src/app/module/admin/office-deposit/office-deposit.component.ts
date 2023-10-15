@@ -49,7 +49,7 @@ export class OfficeDepositComponent implements OnInit {
     params.set('deposit', depositModel);
     this.userService.doDepositToFactoryGL(params).subscribe({
       next:(data)=>{
-        console.log(data.body);
+        //console.log(data.body);
         this.depositAmount = 0;
         this.depositFrom = "";
         this.depositDate = new Date();
@@ -58,7 +58,7 @@ export class OfficeDepositComponent implements OnInit {
         this.userService.showMessage("SUCCESS!","Deposit Complete","OK",2000);
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })

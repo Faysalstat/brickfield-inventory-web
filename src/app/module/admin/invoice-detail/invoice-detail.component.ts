@@ -44,12 +44,12 @@ export class InvoiceDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe((parameter) => {
       let id = parameter['id'];
       this.taskId = id;
-      console.log(parameter);
+      //console.log(parameter);
       this.adminService.fetchTaskById(id).subscribe({
         next: (res) => {
           if (res.body.taskType == Tasks.CREATE_SUPPLY) {
             this.supplyInvoice = res.body;
-            console.log(this.supplyInvoice);
+            //console.log(this.supplyInvoice);
             if (this.supplyInvoice.deliveryType == 1) {
               this.isCC = true;
               this.deliveryType = 'গাড়ি চু্ক্তি';
@@ -80,10 +80,10 @@ export class InvoiceDetailComponent implements OnInit {
             this.comment = this.invoice.comment;
             this.fetchCustomerById(this.invoice.customerId);
           }
-          console.log(res);
+          //console.log(res);
         },
         error: (err) => {
-          console.log(err.message);
+          //console.log(err.message);
           this.userService.showMessage(
             'ERROR!',
             'Operation Failed' + err.message,
@@ -99,10 +99,10 @@ export class InvoiceDetailComponent implements OnInit {
       next: (res) => {
         this.invoice.customer = res.body;
         this.person = this.invoice.customer.person;
-        console.log(res);
+        //console.log(res);
       },
       error: (err) => {
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage(
           'ERROR!',
           'Operation Failed' + err.message,
@@ -117,10 +117,10 @@ export class InvoiceDetailComponent implements OnInit {
       next: (res) => {
         this.supplyInvoice.supplyer = res.body;
         this.person = this.supplyInvoice.supplyer.person;
-        console.log(res);
+        //console.log(res);
       },
       error: (err) => {
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage(
           'ERROR!',
           'Operation Failed' + err.message,
@@ -145,7 +145,7 @@ export class InvoiceDetailComponent implements OnInit {
     this.isLoading = true;
     const params: Map<string, any> = new Map();
     if (event == 'APPROVED' || event == 'CORRECTION') {
-      console.log(event);
+      //console.log(event);
       this.invoice.approvalStatus = event;
       this.invoice.taskId = this.taskId;
       this.invoice.isEdit = this.isEdit;
@@ -153,7 +153,7 @@ export class InvoiceDetailComponent implements OnInit {
       params.set('invoice', this.invoice);
       this.adminService.approveSaleTask(params).subscribe({
         next: (data) => {
-          console.log(data);
+          //console.log(data);
           this.isSubmitted = false;
           this.isLoading = false;
           this.userService.showMessage(
@@ -165,7 +165,7 @@ export class InvoiceDetailComponent implements OnInit {
           this.router.navigate(['/admin/task-list']);
         },
         error: (err) => {
-          console.log(err.message);
+          //console.log(err.message);
           this.isSubmitted = false;
           this.isLoading = false;
           this.userService.showMessage(
@@ -186,11 +186,11 @@ export class InvoiceDetailComponent implements OnInit {
       params.set('model', model);
       this.adminService.declineTask(params).subscribe({
         next: (data) => {
-          console.log(data);
+          //console.log(data);
           this.router.navigate(['/admin/task-list']);
         },
         error: (err) => {
-          console.log(err.message);
+          //console.log(err.message);
           this.userService.showMessage(
             'ERROR!',
             'Operation Failed' + err.message,
@@ -206,7 +206,7 @@ export class InvoiceDetailComponent implements OnInit {
     this.isSubmitted = true;
     const params: Map<string, any> = new Map();
     if (event == 'APPROVED') {
-      console.log(event);
+      //console.log(event);
       this.supplyInvoice.approvalStatus = event;
       this.supplyInvoice.taskId = this.taskId;
       this.supplyInvoice.isEdit = this.isEdit;

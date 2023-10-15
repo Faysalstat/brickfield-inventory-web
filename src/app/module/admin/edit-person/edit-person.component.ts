@@ -25,7 +25,7 @@ export class EditPersonComponent implements OnInit {
         }
       },
       error: (err) => {
-        console.log(err);
+        //console.log(err);
       },
     });
   }
@@ -34,7 +34,7 @@ export class EditPersonComponent implements OnInit {
     params.set('person', this.person);
     this.adminService.updatePerson(params).subscribe({
       next: (res) => {
-        console.log(res.body);
+        //console.log(res.body);
         this.person = new Person();
         this.adminService.showMessage("SUCCESS!!","Person Details Updated","OK",500);
         this.isEditable = false;

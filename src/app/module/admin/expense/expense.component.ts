@@ -35,11 +35,11 @@ export class ExpenseComponent implements OnInit {
           this.expenseTypes = data.body;
           this.expenseCategories = data.body;
           this.filteredExpenseCategoriesOptions = data.body;
-          console.log(data.body);
+          //console.log(data.body);
         }
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })
@@ -58,7 +58,7 @@ export class ExpenseComponent implements OnInit {
     );
   }
   onExpenseSelected(event:any){
-    console.log(event);
+    //console.log(event);
     this.expenseName = event.option.value.expenseName;
     this.selectedExpense = event.option.value;
   }
@@ -81,7 +81,7 @@ export class ExpenseComponent implements OnInit {
     this.adminService.doOfficeExpense(params).subscribe({
       next:(data)=>{
         this.isSubmitted = false;
-        console.log(data);
+        //console.log(data);
         this.selectedExpense = null;
         this.amount = 0;
         this.receivedBy = "";
@@ -93,7 +93,7 @@ export class ExpenseComponent implements OnInit {
       },
       error:(err)=>{
         this.isSubmitted = false;
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })

@@ -67,7 +67,7 @@ export class StockManagementComponent implements OnInit {
     this.isSubmitted = true;
     this.userService.fetchBricks().subscribe({
       next: (res) => {
-        console.log(res);
+        //console.log(res);
         
         if (res.body) {
           this.totalBricks = 0;
@@ -82,7 +82,7 @@ export class StockManagementComponent implements OnInit {
         }
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete:()=>{
@@ -95,14 +95,14 @@ export class StockManagementComponent implements OnInit {
     this.isSubmitted= true;
     this.userService.fetchRawBricks().subscribe({
       next: (res) => {
-        console.log(res);
+        //console.log(res);
         if (res.body) {
           this.dailyProductionList = res.body;
           this.calculateTotalRawProduction();
         }
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Raw Stock Fetching Operation Failed" + err.message,"OK",2000);
       },
       complete:()=>{
@@ -114,12 +114,12 @@ export class StockManagementComponent implements OnInit {
     this.isSubmitted = true;
     this.userService.fetchRawStockReport().subscribe({
       next: (res)=>{
-        console.log(res.body);
+        //console.log(res.body);
         this.rawProductionReport = res.body;
 
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Raw Stock Report FEtching Operation Failed" + err.message,"OK",2000);
       },
       complete:()=>{
@@ -131,13 +131,13 @@ export class StockManagementComponent implements OnInit {
     this.isSubmitted = true;
     this.userService.fetchLoadUnloadReport().subscribe({
       next: (res)=>{
-        console.log(res.body);
+        //console.log(res.body);
         this.loadUnloadReport = res.body;
         this.loadedReserve = this.loadUnloadReport.loadStock - this.loadUnloadReport.unloadStock;
 
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Load Unload Report Fetching Operation Failed" + err.message,"OK",2000);
       },
       complete:()=>{
@@ -148,7 +148,7 @@ export class StockManagementComponent implements OnInit {
   addRawProduction() {
     this.isSubmitted = true;
     // this.dailyProductionList.push(this.selectedBrickProduction);
-    console.log(" data submitted ")
+    //console.log(" data submitted ")
     if(!this.selectedBrickProduction || !this.selectedSordar){
       this.userService.showMessage("ERROR!","Invalid Form","OK",2000);
       return
@@ -161,7 +161,7 @@ export class StockManagementComponent implements OnInit {
         this.dailyProductionList  = data.body;
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete:()=>{
@@ -184,20 +184,20 @@ export class StockManagementComponent implements OnInit {
       productionDate: this.loadingDate,
       type: "LOAD"
     }
-    console.log(rawLoadModel);
+    //console.log(rawLoadModel);
     const params: Map<string, any> = new Map();
     params.set("load",rawLoadModel);
 
     this.userService.LoadProduction(params).subscribe({
       next:(loadRes)=>{
-        console.log(loadRes);
+        //console.log(loadRes);
         this.latestLoadQuantity=0;
         this.loadingDate= new Date();
         this.fetchRawStockReport();
         this.fetchLoadUnloadReport();
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete:()=>{
@@ -216,7 +216,7 @@ export class StockManagementComponent implements OnInit {
         window.alert("item deleted");
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete:()=>{
@@ -235,20 +235,20 @@ export class StockManagementComponent implements OnInit {
   }
   addUnloadBricks(i:number){
     this.isSubmitted = true;
-    console.log(this.bricks);
+    //console.log(this.bricks);
     let unloadModel = this.bricks[i];
     unloadModel.type = "UNLOAD";
-    console.log(unloadModel);
+    //console.log(unloadModel);
     const params: Map<string, any> = new Map();
     params.set("unload",unloadModel);
 
     this.userService.UnloadProduction(params).subscribe({
       next:(res)=>{
-        console.log(res);
+        //console.log(res);
         this.userService.showMessage("Success!","Brick Uploaded","OK",2000);
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete:()=>{
@@ -269,10 +269,10 @@ export class StockManagementComponent implements OnInit {
     this.userService.fetchAllSordars().subscribe({
       next:(res)=>{
         this.sordars = res.body;
-        console.log(res);
+        //console.log(res);
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Sordar Fetching Operation Failed" + err.message,"OK",2000);
       }
     })
@@ -290,14 +290,14 @@ export class StockManagementComponent implements OnInit {
     params.set("record",record);
     this.userService.addSordarRecord(params).subscribe({
       next:(res)=>{
-        console.log(res);
+        //console.log(res);
         this.selectedLoadSordar = new Sordar();
         this.selectedLoadType = '';
         this.sordarloadingDate = new Date();
         this.totalSordarLoad = 0
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete:()=>{

@@ -35,7 +35,7 @@ export class AddDriverComponent implements OnInit {
   submit() {
     
     const params:Map<string,any> = new Map();
-    console.log(this.driverForm.controls);
+    //console.log(this.driverForm.controls);
     if(this.driverForm.invalid || this.disable){
       return;
     }
@@ -51,7 +51,7 @@ export class AddDriverComponent implements OnInit {
     params.set("driver",driver);
     this.userService.addDriver(params).subscribe({
       next:(res)=>{
-        console.log(res);
+        //console.log(res);
         this.driverAddedEvent.emit("Hello from parent");
         this.driverForm.reset();
         this.message = "";
@@ -63,7 +63,7 @@ export class AddDriverComponent implements OnInit {
     })
   }
   searchDriver(){
-    console.log("Change Detected");
+    //console.log("Change Detected");
     this.userService.getCustomerByContactNo(this.driverForm.get('contactNo')?.value).subscribe({
       next:(res)=>{
         if(res.body){
@@ -88,7 +88,7 @@ export class AddDriverComponent implements OnInit {
         }
       },
       error:(err)=>{
-        console.log(err);
+        //console.log(err);
         this.userService.showMessage("ERROR!","Driver Fetching Failed","OK",2000);
         
       },

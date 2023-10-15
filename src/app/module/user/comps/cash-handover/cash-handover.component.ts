@@ -48,18 +48,18 @@ export class CashHandoverComponent implements OnInit {
     approvalModel.createdBy = 'Manager';
     approvalModel.taskType = Tasks.CASH_HANDOVER;
     params.set('approval', approvalModel);
-    console.log(approvalModel);
+    //console.log(approvalModel);
     this.userService.createApproval(params).subscribe({
       next: (res) => {
         this.isSubmitted = false;
-        console.log(res);
+        //console.log(res);
         this.userService.showMessage("SUCCESS!","Send for Approval","OK",2000)
         this.amount = 0;
         this.remarks = '';
       },
       error: (err) => {
         this.isSubmitted = false;
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage('ERROR!', 'Operation Failed', 'OK', 2000);
       },
       complete: () => {},
@@ -76,6 +76,6 @@ export class CashHandoverComponent implements OnInit {
     );
   }
   updateBalance(event: any) {
-    console.log('Balance Updated By Expense');
+    //console.log('Balance Updated By Expense');
   }
 }

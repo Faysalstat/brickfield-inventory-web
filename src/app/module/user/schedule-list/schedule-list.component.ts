@@ -48,12 +48,12 @@ export class ScheduleListComponent implements OnInit {
     params.set('query', this.queryBody);
     this.userService.fetchAllSchedulesByStatus(params).subscribe({
       next:(res)=>{
-        console.log(res);
+        //console.log(res);
         this.scheduleList = res.body.data;
         this.length = res.body.length;
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Schedule Fetching Operation Failed" + err.message,"OK",2000);
       },
       complete: ()=>{}

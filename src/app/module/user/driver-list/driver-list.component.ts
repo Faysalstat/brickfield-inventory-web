@@ -31,18 +31,18 @@ export class DriverListComponent implements OnInit {
     params.set('limit', this.pageSize);
     this.userService.fetchAllDrivers(params).subscribe({
       next: (data) => {
-        console.log(data.body);
+        //console.log(data.body);
         this.driverList = data.body.data;
       },
       error: (err) => {
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Driver Fetching Failed" + err.message,"OK",2000);
       },
       complete: () => {},
     });
   }
   updateList($event:any){
-    console.log("Driver added. List updated");
+    //console.log("Driver added. List updated");
     this.fetchDriversList();
   }
   deleteDriver(driver: any) {
@@ -51,12 +51,12 @@ export class DriverListComponent implements OnInit {
     params.set('client', driver);
     this.userService.deleteCustomer(params).subscribe({
       next: (res) => {
-        console.log(res);
+        //console.log(res);
         this.fetchDriversList();
         this.userService.showMessage("SUCCESS!","Driver Deleted","OK",2000);
       },
       error: (err) => {
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete: () => {},

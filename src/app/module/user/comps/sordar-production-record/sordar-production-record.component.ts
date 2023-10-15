@@ -24,10 +24,10 @@ export class SordarProductionRecordComponent implements OnInit {
     this.userService.fetchAllSordars().subscribe({
       next:(res)=>{
         this.sordars = res.body;
-        console.log(res);
+        //console.log(res);
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
       this.userService.showMessage("ERROR!","Sordars Fetching Failed" + err.message,"OK",2000);
       }
     })

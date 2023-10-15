@@ -56,7 +56,7 @@ export class DepositManagementComponent implements OnInit {
     this.userService.doDepositToFactoryGL(params).subscribe({
       next: (data) => {
         this.isSubmitted = false;
-        console.log(data.body);
+        //console.log(data.body);
         this.depositAmount = 0;
         this.depositFrom = '';
         this.depositDate = new Date();
@@ -65,7 +65,7 @@ export class DepositManagementComponent implements OnInit {
       },
       error: (err) => {
         this.isSubmitted = false;
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage(
           'ERROR!',
           'Operation Failed' + err.message,

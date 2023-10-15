@@ -32,10 +32,10 @@ export class CashPaymentComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((parameter) => {
       let id = parameter['id'];
-      console.log(parameter);
+      //console.log(parameter);
       this.userService.getAccountById(id).subscribe({
         next: (res) => {
-          console.log(res);
+          //console.log(res);
           this.account = res.body;
           if(res.body.customer){
             this.personTitle = "Customer";
@@ -92,7 +92,7 @@ export class CashPaymentComponent implements OnInit {
         }
       },
       error: (err) => {
-        console.log(err);
+        //console.log(err);
         this.userService.showMessage("ERROR!","Customer Not Found","OK",2000);
       },
       complete: () => {},
@@ -119,7 +119,7 @@ export class CashPaymentComponent implements OnInit {
           this.route.navigate(["/home/cash-payment-due-list"]);
         },
         error:(err)=>{
-          console.log(err);
+          //console.log(err);
           this.userService.showMessage("ERROR!","Operation Failed","OK",2000);
         }
       })

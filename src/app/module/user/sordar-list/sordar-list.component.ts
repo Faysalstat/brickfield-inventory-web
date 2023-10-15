@@ -30,19 +30,19 @@ export class SordarListComponent implements OnInit {
     // params.set('limit', this.pageSize);
     this.userService.fetchAllSordars().subscribe({
       next: (data) => {
-        console.log(data.body);
+        //console.log(data.body);
         this.sordarList = data.body;
         // this.length = data.body.length;
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Sordar Fetching Operation Failed" + err.message,"OK",2000);
       },
       complete: () => {},
     });
   }
   updateList($event:any){
-    console.log("Sordar added. List updated");
+    //console.log("Sordar added. List updated");
     this.fetchSordarsList();
   }
   deleteSordar(sordar: any) {
@@ -51,12 +51,12 @@ export class SordarListComponent implements OnInit {
     params.set('client', sordar);
     this.userService.deleteCustomer(params).subscribe({
       next: (res) => {
-        console.log(res);
+        //console.log(res);
         this.fetchSordarsList();
         this.userService.showMessage("SUCCESS!","Sordar Deleted","OK",2000);
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete: () => {},

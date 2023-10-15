@@ -41,11 +41,11 @@ export class PendingSchedulesComponent implements OnInit {
     params.set('toDate',this.toDate)
     this.userService.fetchAllSchedulesByDate(params).subscribe({
       next: (res) => {
-        console.log(res);
+        //console.log(res);
         this.scheduleList = res.body;
       },
       error: (err) => {
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete: () => {},

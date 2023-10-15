@@ -24,7 +24,7 @@ export class CustomerPaymentHistoryComponent implements OnInit {
   fetchAccountHistory(){
     this.userService.fetchPaymentHistory(this.invoiceId).subscribe({
       next:(res)=>{
-        console.log(res);
+        //console.log(res);
         if(res.isSuccess){
           this.accountHistory = res.body;
           this.accountHistoryExportable = [];

@@ -40,10 +40,10 @@ export class ScheduleDeliveryComponent implements OnInit {
   fetchScheduleById() {
     this.activatedRoute.params.subscribe((parameter) => {
       let id = parameter['id'];
-      console.log(parameter);
+      //console.log(parameter);
       this.userService.fetchScheduleById(id).subscribe({
         next: (res) => {
-          console.log(res);
+          //console.log(res);
           this.delivery = res.body;
           this.maxValue = this.delivery.deliverableQuantity;
           this.fetchCustomerById(res.body.invoice.customerId);
@@ -55,7 +55,7 @@ export class ScheduleDeliveryComponent implements OnInit {
           }
         },
         error:(err)=>{
-          console.log(err.message);
+          //console.log(err.message);
         this.userService.showMessage("ERROR!","Schedule Fetching Operation Failed" + err.message,"OK",2000);
         },
       });
@@ -74,7 +74,7 @@ export class ScheduleDeliveryComponent implements OnInit {
   }
   doDelivery(){
     this.isSubmitted = true;
-    console.log(this.delivery);
+    //console.log(this.delivery);
     if(!this.isValid){
       this.userService.showMessage("ERROR!","Maximum Value Exceed","OK",1000);
       return;
@@ -84,16 +84,16 @@ export class ScheduleDeliveryComponent implements OnInit {
     params.set("schedule", this.delivery);
     this.userService.setDelivery(params).subscribe({
       next:(res)=>{
-        console.log(res);
+        //console.log(res);
         this.router.navigate(['/home/schedule-list']);
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete:()=>{
         this.isSubmitted = false;
-        console.log("done");
+        //console.log("done");
       }
     })
   }
@@ -104,7 +104,7 @@ export class ScheduleDeliveryComponent implements OnInit {
         this.delivery.deliveryLocation = this.customer.person.personAddress;
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!"," Customer Find Operation Failed" + err.message,"OK",2000);
       }
     })
@@ -115,7 +115,7 @@ export class ScheduleDeliveryComponent implements OnInit {
         this.brick = res.body;
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Brick Find Operation Failed" + err.message,"OK",2000);
       }
     })

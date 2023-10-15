@@ -99,23 +99,23 @@ export class SupplyInvoiceComponent implements OnInit {
     params.set('limit', 100);
     this.userService.fetchAllDrivers(params).subscribe({
       next: (data) => {
-        console.log(data.body);
+        //console.log(data.body);
         this.drivers = data.body.data;
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Driver Fetching Operation Failed" + err.message,"OK",2000);
       },
     });
   }
 
   searchSupplyer() {
-    console.log('Change Detected');
+    //console.log('Change Detected');
     this.userService.getCustomerByContactNo(this.person.contactNo).subscribe({
       next: (res) => {
         if (res.body) {
           this.person = res.body;
-          console.log(res.body);
+          //console.log(res.body);
           if(res.body.supplyer){
             this.supplyer = res.body.supplyer;
             this.notFoundMessage = '';
@@ -135,7 +135,7 @@ export class SupplyInvoiceComponent implements OnInit {
         }
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Supplyer Searching Operation Failed" + err.message,"OK",2000);
       },
       complete: () => {},
@@ -165,7 +165,7 @@ export class SupplyInvoiceComponent implements OnInit {
 
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.notFoundMessage = '*Supplyer Not Found. Please Add Suppler';
         this.needSupplyer = true;
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
@@ -176,11 +176,11 @@ export class SupplyInvoiceComponent implements OnInit {
   fetchProductList() {
     this.userService.fetchAllProducts().subscribe({
       next: (data) => {
-        console.log(data);
+        //console.log(data);
         this.productList = data.body;
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Product List Fetching Operation Failed" + err.message,"OK",2000);
       },
     });
@@ -188,11 +188,11 @@ export class SupplyInvoiceComponent implements OnInit {
   fetchVehicles() {
     this.userService.fetchTransportCategories().subscribe({
       next: (data) => {
-        console.log(data.body);
+        //console.log(data.body);
         this.vehicles = data.body;
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Vehicle Fetching Operation Failed" + err.message,"OK",2000);
       },
     });
@@ -247,7 +247,7 @@ export class SupplyInvoiceComponent implements OnInit {
 
   submitInvoice() {
     
-    console.log(this.supplyInvoice);
+    //console.log(this.supplyInvoice);
     if(!this.supplyer){
       this.userService.showMessage("ERROR!","Invalid Form, ADD SUPPLYER","OK",2000);
       return;
@@ -284,13 +284,13 @@ export class SupplyInvoiceComponent implements OnInit {
     this.isSubmitted =true;
     this.userService.createApproval(params).subscribe({
       next: (res) => {
-        console.log(res);
+        //console.log(res);
         this.isSubmitted =false;
         this.userService.showMessage("Success!","Item Sent For Approval","OK",2000);
         this.router.navigate(['/home/supply-list']);
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.isSubmitted =false;
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
@@ -299,7 +299,7 @@ export class SupplyInvoiceComponent implements OnInit {
   }
 
   uodateContact(data: any) {
-    console.log('suppler added', data);
+    //console.log('suppler added', data);
     this.person = data.person;
     this.account = data.account;
     this.supplyer = data;

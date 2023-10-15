@@ -34,7 +34,7 @@ export class AddPersonComponent implements OnInit {
   }
   submit() {
     const params:Map<string,any> = new Map();
-    console.log(this.customerForm.controls);
+    //console.log(this.customerForm.controls);
     if(this.customerForm.invalid || this.disable){
       return;
     }
@@ -50,7 +50,7 @@ export class AddPersonComponent implements OnInit {
     params.set("customer",customer);
     this.userService.addCustomer(params).subscribe({
       next:(res)=>{
-        console.log(res);
+        //console.log(res);
         this.customerAddedEvent.emit("Hello from parent");
         this.customerForm.reset();
 
@@ -62,10 +62,10 @@ export class AddPersonComponent implements OnInit {
     })
   }
   searchCustomer(){
-    console.log("Change Detected");
+    //console.log("Change Detected");
     this.userService.getCustomerByContactNo(this.customerForm.get('contactNo')?.value).subscribe({
       next:(res)=>{
-        console.log(res.body);
+        //console.log(res.body);
         if(res.body){
           this.message= "This person is in our database";
           this.customerForm.get('id')?.setValue(res.body?.id);
@@ -91,7 +91,7 @@ export class AddPersonComponent implements OnInit {
         }
       },
       error:(err)=>{
-        console.log(err);
+        //console.log(err);
         this.userService.showMessage("ERROR!","Not Found","OK",2000);
         
       },

@@ -59,7 +59,7 @@ export class ListInvoicesComponent implements OnInit {
         }
       },
       error: (err) => {
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       },
       complete: () => {},
@@ -74,7 +74,7 @@ export class ListInvoicesComponent implements OnInit {
     params.set('query', this.queryBody);
     this.userService.fetchAllInvoice(params).subscribe({
       next:(res)=>{
-        console.log(res);
+        //console.log(res);
         this.invoiceList = res.body.data;
         this.length = res.body.length;
         let index = 0;
@@ -97,7 +97,7 @@ export class ListInvoicesComponent implements OnInit {
         })
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Invoice Fetching Failed" + err.message,"OK",2000);
       },
       complete: ()=>{}

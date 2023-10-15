@@ -27,11 +27,11 @@ export class DashboardSummaryComponent implements OnInit {
   fetchFactoryBalance(){
     this.userService.fetchGLAccountBalance("FACTORY_GL").subscribe({
       next:(data)=>{
-        console.log(data.body);
+        //console.log(data.body);
         this.factoryBalance = data.body.balance;
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })
@@ -39,11 +39,11 @@ export class DashboardSummaryComponent implements OnInit {
   fetchOfficeBalance(){
     this.userService.fetchGLAccountBalance("OFFICE_GL").subscribe({
       next:(data)=>{
-        console.log(data.body);
+        //console.log(data.body);
         this.officeBalance = data.body.balance;
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })
@@ -51,11 +51,11 @@ export class DashboardSummaryComponent implements OnInit {
   fetchIncomeExpenseSummary(){
     this.adminService.getIncomeExpenseSummary().subscribe({
       next:(data)=>{
-        console.log(data);
+        //console.log(data);
         this.summary = data.body;
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })
@@ -67,7 +67,7 @@ export class DashboardSummaryComponent implements OnInit {
         this.totalRebateGiven = res.body.totalRebateGiven;
       },
       error:(err)=>{
-        console.log(err.message);
+        //console.log(err.message);
         this.userService.showMessage("ERROR!","Operation Failed" + err.message,"OK",2000);
       }
     })

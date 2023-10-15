@@ -38,11 +38,11 @@ export class SignInComponent implements OnInit {
       username: this.loginForm.get('username')?.value,
       password: this.loginForm.get('password')?.value,
     };
-    console.log(user);
+    //console.log(user);
     params.set("user",user);
     this.authService.signIn(params).subscribe({
       next:(res)=>{
-        console.log(res);
+        //console.log(res);
         localStorage.setItem('token', res.body.token);
         localStorage.setItem('userId', res.body.userid);
         localStorage.setItem('username', res.body.username);

@@ -18,47 +18,47 @@ export class UserService {
       });
   }
   public addCustomer(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('customer'));
+    //console.log(queryParams.get('customer'));
     return this.http.post(Urls.CREATE_CUSTOMER, queryParams.get('customer'));
   }
 
   public addDriver(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('driver'));
+    //console.log(queryParams.get('driver'));
     return this.http.post(Urls.CREATE_DRIVER, queryParams.get('driver'));
   }
   public addSordar(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('sordar'));
+    //console.log(queryParams.get('sordar'));
     return this.http.post(Urls.CREATE_SORDAR, queryParams.get('sordar'));
   }
   public addRawStock(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('rawbrick'));
+    //console.log(queryParams.get('rawbrick'));
     return this.http.post(Urls.CREATE_RAW_STOCK, queryParams.get('rawbrick'));
   }
   public addSupplyer(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('supplyer'));
+    //console.log(queryParams.get('supplyer'));
     return this.http.post(Urls.CREATE_SUPPLYER, queryParams.get('supplyer'));
   }
   public setDelivery(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('schedule'));
+    //console.log(queryParams.get('schedule'));
     return this.http.post(Urls.SET_DELIVERY, queryParams.get('schedule'));
   }
   public createInvoice(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('invoice'));
+    //console.log(queryParams.get('invoice'));
     return this.http.post(Urls.CREATE_INVOICE, queryParams.get('invoice'));
   }
   public createScheduleOrder(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('schedules'));
+    //console.log(queryParams.get('schedules'));
     return this.http.post(
       Urls.CREATE_SCHEDULE_DELIVERY,
       queryParams.get('schedules')
     );
   }
   public createOrder(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('orders'));
+    //console.log(queryParams.get('orders'));
     return this.http.post(Urls.CREATE_ORDER, queryParams.get('orders'));
   }
   public createApproval(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('approval'));
+    //console.log(queryParams.get('approval'));
     return this.http.post(Urls.SEND_TO_APPROVAL, queryParams.get('approval'));
   }
 
@@ -252,15 +252,15 @@ export class UserService {
   
   // UPDATE
   public updateInvoice(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('invoice'));
+    //console.log(queryParams.get('invoice'));
     return this.http.post(Urls.UPDATE_INVOICE, queryParams.get('invoice'));
   }
   public updateSupplyInvoice(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('supplyInvoice'));
+    //console.log(queryParams.get('supplyInvoice'));
     return this.http.post(Urls.UPDATE_SUPPLY_INVOICE, queryParams.get('supplyInvoice'));
   }
   public updateAccount(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('account'));
+    //console.log(queryParams.get('account'));
     return this.http.post(Urls.UPDATE_BALANCE, queryParams.get('account'));
   }
   public changePassword(queryParams: Map<string, any>): Observable<any> {
@@ -269,52 +269,52 @@ export class UserService {
   }
 
   public UnloadProduction(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('unload'));
+    //console.log(queryParams.get('unload'));
     return this.http.post(Urls.UNLOAD_PRODUCTION, queryParams.get('unload'));
   }
   public LoadProduction(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('load'));
+    //console.log(queryParams.get('load'));
     return this.http.post(Urls.LOAD_PRODUCTION, queryParams.get('load'));
   }
   public deleteLoadProductionItem(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('deleteload'));
+    //console.log(queryParams.get('deleteload'));
     return this.http.post(Urls.DELETE_LOAD_PRODUCTION, queryParams.get('deleteload'));
   }
 
   public doExpense(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('expense'));
+    //console.log(queryParams.get('expense'));
     return this.http.post(Urls.DO_EXPENSE, queryParams.get('expense'));
   }
 
   public doDepositToFactoryGL(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('deposit'));
+    //console.log(queryParams.get('deposit'));
     return this.http.post(Urls.DO_DEPOSIT, queryParams.get('deposit'));
   }
   
   public payEscavatorBill(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('escavator'));
+    //console.log(queryParams.get('escavator'));
     return this.http.post(Urls.PAY_ESCAVATOR, queryParams.get('escavator'));
   }
   public addSordarRecord(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('record'));
+    //console.log(queryParams.get('record'));
     return this.http.post(Urls.ADD_SORDAR_RECORD, queryParams.get('record'));
   }
   
   // Delete
   public deleteCustomer(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('client'));
+    //console.log(queryParams.get('client'));
     return this.http.post(Urls.DELETE_CUSTOMER, queryParams.get('client'));
   }
   public deleteDriver(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('driver'));
+    //console.log(queryParams.get('driver'));
     return this.http.post(Urls.DELETE_CUSTOMER, queryParams.get('driver'));
   }
   public deleteOrder(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('order'));
+    //console.log(queryParams.get('order'));
     return this.http.post(Urls.DELETE_ORDER, queryParams.get('order'));
   }
   public deleteSchedule(queryParams: Map<string, any>): Observable<any> {
-    console.log(queryParams.get('schedule'));
+    //console.log(queryParams.get('schedule'));
     return this.http.post(Urls.DELETE_SCHEDULE, queryParams.get('schedule'));
   }
 

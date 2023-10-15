@@ -26,10 +26,10 @@ export class HandoverDetailsComponent implements OnInit {
     this.activatedRoute.params.subscribe((parameter) => {
       let id = parameter['id'];
       this.taskId = id;
-      console.log(parameter);
+      //console.log(parameter);
       this.adminService.fetchTaskById(id).subscribe({
         next: (res) => {
-          console.log(res);
+          //console.log(res);
           this.handoverDetails = res.body;
         },
       });
@@ -50,7 +50,7 @@ export class HandoverDetailsComponent implements OnInit {
         },
         error: (err) => {
           this.isSubmitted = false;
-          console.log(err.message);
+          //console.log(err.message);
           this.userService.showMessage("ERROR!","Operation Failed","OK",2000)}
       })
     }else{
@@ -59,7 +59,7 @@ export class HandoverDetailsComponent implements OnInit {
       params.set('model', model);
       this.adminService.declineTask(params).subscribe({
         next: (data) => {
-          console.log(data);
+          //console.log(data);
           this.userService.showMessage(
             'SUCCESS!',
             'Operation Successfull',
@@ -69,7 +69,7 @@ export class HandoverDetailsComponent implements OnInit {
           this.router.navigate(['/admin/task-list']);
         },
         error: (err) => {
-          console.log(err.message);
+          //console.log(err.message);
           this.userService.showMessage(
             'ERROR!',
             'Operation Failed' + err.message,

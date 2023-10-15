@@ -14,54 +14,54 @@ export class AdminService {
 
 
   public approveSaleTask(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("invoice"))
+    //console.log(queryParams.get("invoice"))
     return this.http.post(Urls.CREATE_INVOICE,queryParams.get("invoice"));
   }
   public paySalary(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("salary"))
+    //console.log(queryParams.get("salary"))
     return this.http.post(Urls.PAY_SALARY,queryParams.get("salary"));
   }
   public doOfficeExpense(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("expense"))
+    //console.log(queryParams.get("expense"))
     return this.http.post(Urls.OFFICE_EXPENSE,queryParams.get("expense"));
   }
   public addExpenseCategory(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("category"))
+    //console.log(queryParams.get("category"))
     return this.http.post(Urls.ADD_EXPENSE_CATEORY,queryParams.get("category"));
   }
   public doSordarPayment(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("payment"))
+    //console.log(queryParams.get("payment"))
     return this.http.post(Urls.SORDAR_PAYMENT,queryParams.get("payment"));
   }
   public approveHandOverTask(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("handover"))
+    //console.log(queryParams.get("handover"))
     return this.http.post(Urls.PAY_OWNER,queryParams.get("handover"));
   }
   public approveSupplyTask(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("supplyInvoice"))
+    //console.log(queryParams.get("supplyInvoice"))
     return this.http.post(Urls.CREATE_SUPPLY_INVOICE,queryParams.get("supplyInvoice"));
   }
 
   public declineTask(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("model"))
+    //console.log(queryParams.get("model"))
     return this.http.post(Urls.DECLINE_TASK,queryParams.get("model"));
   }
 
   public addUser(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("user"))
+    //console.log(queryParams.get("user"))
     return this.http.post(Urls.CREATE_USER,queryParams.get("user"));
   }
   public addAppConfig(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("config"))
+    //console.log(queryParams.get("config"))
     return this.http.post(Urls.CREATE_APP_CONFIG,queryParams.get("config"));
   }
   public updateSordar(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("sordar"))
+    //console.log(queryParams.get("sordar"))
     return this.http.post(Urls.UPDATE_SORDAR,queryParams.get("sordar"));
   }
 
   public updatePerson(queryParams: Map<string,any>): Observable<any>{
-    console.log(queryParams.get("person"))
+    //console.log(queryParams.get("person"))
     return this.http.post(Urls.UPDATE_PERSON,queryParams.get("person"));
   }
   public fetchAppConfiguration(queryParams: Map<string, any>): Observable<any>{
