@@ -1,6 +1,6 @@
 // const BASE_URL = "https://vatasolution.me/api"; 
-const BASE_URL = "http://localhost:3000/api";
-// const BASE_URL = "https://qa.btbbricks.com/api";
+// const BASE_URL = "http://localhost:3000/api";
+const BASE_URL = "https://qa.btbbricks.com/api";
 
 
 export const Urls = {

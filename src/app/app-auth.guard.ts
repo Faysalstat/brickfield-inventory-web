@@ -73,7 +73,6 @@ export class AppAuthGuard implements CanActivate {
       //console.log('Welcome to admin panel');
     } else if (authenticated.body.userRole == 'MANAGER') {
       //console.log('Welcome to manager panel');
-      this.router.navigate(['home']);
     } else {
       //console.log('You are not permited to admin panel');
       this.router.navigate(['auth']);

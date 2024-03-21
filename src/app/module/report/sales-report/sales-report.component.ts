@@ -75,6 +75,7 @@ export class SalesReportComponent implements OnInit {
     this.reportExportService.exportAsExcelFile(this.orderExportList, 'Sales_Report');
   }
   applyFilter(date: any) {
+    console.log(date);
     let newDate = new Date(date);
     return (
       (newDate.getDate()) +"/"+(newDate.getMonth()+1) + '/' + newDate.getFullYear()

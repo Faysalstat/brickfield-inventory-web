@@ -42,20 +42,23 @@ export class SignInComponent implements OnInit {
     params.set("user",user);
     this.authService.signIn(params).subscribe({
       next:(res)=>{
-        //console.log(res);
-        localStorage.setItem('token', res.body.token);
-        localStorage.setItem('userId', res.body.userid);
-        localStorage.setItem('username', res.body.username);
-        sessionStorage.setItem('userRole',res.body.userRole)
-        if(res.body.userRole== "MANAGER"){
-          this.router.navigate(["/home"]);
-        }else if(res.body.userRole== "ADMIN"){
-          this.router.navigate(["/admin"]);
+        console.log(res);
+        if(res.isSuccess){
+          localStorage.setItem('token', res.body.token);
+          localStorage.setItem('userId', res.body.userid);
+          localStorage.setItem('username', res.body.username);
+          sessionStorage.setItem('userRole',res.body.userRole)
+          if(res.body.userRole== "MANAGER"){
+            this.router.navigate(["/home"]);
+          }else if(res.body.userRole== "ADMIN"){
+            this.router.navigate(["/admin"]);
+          }
+        }else{
+          this.userService.showMessage("ERROR!","Authentication Failed. " + res.message,"OK",2000);
         }
-        
       },
       error:(err)=>{
-        this.userService.showMessage("ERROR!","Authentication Failed" + err.message,"OK",2000);
+        this.userService.showMessage("ERROR!","Authentication Failed. " + err.message,"OK",2000);
       },
       complete: ()=>{}
     })
